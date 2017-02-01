@@ -364,6 +364,67 @@ CREATE TABLE IF NOT EXISTS `tcc`.`promocaos` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+ALTER TABLE `tcc`.`promocaos` 
+DROP FOREIGN KEY `fk_promocaos_restaurantes1`;
+
+ALTER TABLE `tcc`.`classificacaos` 
+CHANGE COLUMN `comentario` `comentario` VARCHAR(250) NULL DEFAULT NULL COMMENT '' ;
+
+ALTER TABLE `tcc`.`enderecos` 
+CHANGE COLUMN `rua` `rua` VARCHAR(100) NULL DEFAULT NULL COMMENT '' ,
+CHANGE COLUMN `numero` `numero` INT(11) NULL DEFAULT NULL COMMENT '' ,
+CHANGE COLUMN `bairro` `bairro` VARCHAR(60) NULL DEFAULT NULL COMMENT '' ,
+CHANGE COLUMN `cep` `cep` VARCHAR(15) NULL DEFAULT NULL COMMENT '' ,
+CHANGE COLUMN `tipo` `tipo` INT(11) NULL DEFAULT NULL COMMENT '' ;
+
+ALTER TABLE `tcc`.`promocaos` 
+DROP COLUMN `tipo`,
+DROP COLUMN `restaurante_id`,
+CHANGE COLUMN `data_ini` `data_ini` DATE NULL DEFAULT NULL COMMENT '' ,
+CHANGE COLUMN `data_fim` `data_fim` DATE NULL DEFAULT NULL COMMENT '' ,
+CHANGE COLUMN `desconto` `desconto` INT(11) NULL DEFAULT NULL COMMENT '' ,
+ADD COLUMN `restaurante_id` INT(11) NOT NULL COMMENT '' AFTER `desconto`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`produto_id`, `restaurante_id`)  COMMENT '',
+ADD INDEX `fk_promocaos_restaurantes1_idx` (`restaurante_id` ASC)  COMMENT '',
+DROP INDEX `fk_promocaos_restaurantes1_idx` ;
+
+ALTER TABLE `tcc`.`restaurantes` 
+ADD COLUMN `franqueado_id` INT(11) NOT NULL COMMENT '' AFTER `gerente_id`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`id`, `gerente_id`, `franqueado_id`)  COMMENT '',
+ADD INDEX `fk_restaurantes_franqueados1_idx` (`franqueado_id` ASC)  COMMENT '';
+
+ALTER TABLE `tcc`.`sugestaos` 
+CHANGE COLUMN `nome_restaurante` `nome_restaurante` VARCHAR(120) NOT NULL COMMENT '' ,
+CHANGE COLUMN `mensagem` `mensagem` TEXT NULL DEFAULT NULL COMMENT '' ;
+
+CREATE TABLE IF NOT EXISTS `tcc`.`franqueados` (
+  `id` INT(11) NOT NULL COMMENT '',
+  `nome` VARCHAR(200) NULL DEFAULT NULL COMMENT '',
+  `email` VARCHAR(80) NULL DEFAULT NULL COMMENT '',
+  `senha` VARCHAR(128) NULL DEFAULT NULL COMMENT '',
+  `telefone1` VARCHAR(45) NULL DEFAULT NULL COMMENT '',
+  `telefone2` VARCHAR(45) NULL DEFAULT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+ALTER TABLE `tcc`.`promocaos` 
+ADD CONSTRAINT `fk_promocaos_restaurantes1`
+  FOREIGN KEY (`restaurante_id`)
+  REFERENCES `tcc`.`restaurantes` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `tcc`.`restaurantes` 
+ADD CONSTRAINT `fk_restaurantes_franqueados1`
+  FOREIGN KEY (`franqueado_id`)
+  REFERENCES `tcc`.`franqueados` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
