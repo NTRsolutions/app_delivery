@@ -17,11 +17,15 @@
 		echo $this->fetch('script');
 
     echo $this->Html->css('bootstrap.css');
+    echo $this->Html->css('style.css');
+
+    echo $this->Html->script('jquery.min.js');
+    echo $this->Html->script('bootstrap.min.js');
 	?>
 
-  	<!-- Latest compiled and minified JavaScript -->
+  	<!-- Latest compiled and minified JavaScript
   	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-  	<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  	<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -30,7 +34,7 @@
     <![endif]-->
 
     <style type="text/css">
-    	body{ padding: 0px 0px; }
+    	body { padding: 50px 0px; }
     </style>
 
   </head>
