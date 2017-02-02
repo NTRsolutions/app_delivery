@@ -23,7 +23,7 @@ GRANT ALL PRIVILEGES ON bd_deliverall.* TO 'bd_deliverall'@'localhost';
 -- Table `bd_deliverall`.`admins`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`admins` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `login` VARCHAR(100) NOT NULL,
   `senha` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`))
@@ -58,7 +58,7 @@ ENGINE = InnoDB;
 -- Table `bd_deliverall`.`clientes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`clientes` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(80) NOT NULL,
   `email` VARCHAR(80) NOT NULL,
   `senha` VARCHAR(200) NOT NULL,
@@ -71,7 +71,7 @@ ENGINE = InnoDB;
 -- Table `bd_deliverall`.`gerentes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`gerentes` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(80) NOT NULL,
   `email` VARCHAR(80) NOT NULL,
   `senha` VARCHAR(200) NOT NULL,
@@ -108,7 +108,7 @@ ENGINE = InnoDB;
 -- Table `bd_deliverall`.`atendentes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`atendentes` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(80) NOT NULL,
   `email` VARCHAR(80) NOT NULL,
   `senha` VARCHAR(200) NOT NULL,
@@ -126,7 +126,7 @@ ENGINE = InnoDB;
 -- Table `bd_deliverall`.`produtos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`produtos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(200) NOT NULL,
   `tipo` INT NULL,
   `descricao` VARCHAR(150) NULL,
@@ -147,7 +147,7 @@ ENGINE = InnoDB;
 -- Table `bd_deliverall`.`sugestaos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`sugestaos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome_restaurante` VARCHAR(45) NOT NULL,
   `mensagem` VARCHAR(255) NULL,
   `tel_restaurante` VARCHAR(45) NULL,
@@ -165,7 +165,7 @@ ENGINE = InnoDB;
 -- Table `bd_deliverall`.`pedidos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`pedidos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `total` DOUBLE NOT NULL,
   `status` INT NOT NULL,
   `data` DATE NOT NULL,
@@ -183,7 +183,7 @@ ENGINE = InnoDB;
 -- Table `bd_deliverall`.`enderecos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`enderecos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `rua` VARCHAR(100) NOT NULL,
   `numero` INT NOT NULL,
   `bairro` VARCHAR(60) NOT NULL,
@@ -204,7 +204,7 @@ ENGINE = InnoDB;
 -- Table `bd_deliverall`.`classificacaos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`classificacaos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nota` DOUBLE NOT NULL,
   `comentario` VARCHAR(120) NULL,
   `restaurante_id` INT NOT NULL,
@@ -228,7 +228,7 @@ ENGINE = InnoDB;
 -- Table `bd_deliverall`.`complementos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`complementos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `tipo` INT NOT NULL,
   `descricao` VARCHAR(80) NOT NULL,
@@ -343,13 +343,14 @@ ENGINE = InnoDB;
 -- Table `bd_deliverall`.`promocaos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`promocaos` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `restaurante_id` INT NOT NULL,
   `produto_id` INT NOT NULL,
   `data_ini` DATE NOT NULL,
   `data_fim` DATE NOT NULL,
   `desconto` INT NOT NULL,
   `tipo` INT NOT NULL,
-  PRIMARY KEY (`restaurante_id`, `produto_id`),
+  PRIMARY KEY (`id`, `restaurante_id`, `produto_id`),
   INDEX `fk_promocaos_produtos1_idx` (`produto_id` ASC),
   INDEX `fk_promocaos_restaurantes1_idx` (`restaurante_id` ASC),
   CONSTRAINT `fk_promocaos_restaurantes1`
@@ -385,7 +386,7 @@ CHANGE COLUMN `data_fim` `data_fim` DATE NULL DEFAULT NULL COMMENT '' ,
 CHANGE COLUMN `desconto` `desconto` INT(11) NULL DEFAULT NULL COMMENT '' ,
 ADD COLUMN `restaurante_id` INT(11) NOT NULL COMMENT '' AFTER `desconto`,
 DROP PRIMARY KEY,
-ADD PRIMARY KEY (`produto_id`, `restaurante_id`)  COMMENT '',
+ADD PRIMARY KEY (`id`, `produto_id`, `restaurante_id`)  COMMENT '',
 ADD INDEX `fk_promocaos_restaurantes1_idx` (`restaurante_id` ASC)  COMMENT '',
 DROP INDEX `fk_promocaos_restaurantes1_idx` ;
 
@@ -400,7 +401,7 @@ CHANGE COLUMN `nome_restaurante` `nome_restaurante` VARCHAR(120) NOT NULL COMMEN
 CHANGE COLUMN `mensagem` `mensagem` TEXT NULL DEFAULT NULL COMMENT '' ;
 
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`franqueados` (
-  `id` INT(11) NOT NULL COMMENT '',
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(200) NULL DEFAULT NULL COMMENT '',
   `email` VARCHAR(80) NULL DEFAULT NULL COMMENT '',
   `senha` VARCHAR(128) NULL DEFAULT NULL COMMENT '',
