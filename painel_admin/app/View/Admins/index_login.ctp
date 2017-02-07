@@ -16,7 +16,7 @@
     <br>
     <?php 
     	echo $this->Html->link(__('Esqueceu a senha?'), 
-              array('controller' => 'homes', 'action' => 'index'), 
+              array('action' => 'recuperar_senha'), 
               array('escape' => false));
     ?>
   </form>

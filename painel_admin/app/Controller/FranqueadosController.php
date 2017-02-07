@@ -105,7 +105,8 @@ class FranqueadosController extends AppController {
 	}
 
 	public function home() {
-
+		$this->Franqueado->recursive = 0;
+		$this->set('franqueados', $this->Paginator->paginate());
 	}
 
 	public function recuperar_senha() {
@@ -113,11 +114,55 @@ class FranqueadosController extends AppController {
 	}
 
 	public function altera_senha() {
-		
+		$franqueado = $this->Session->read('Franqueado');
+	    $franqueado = $this->Franqueado->findById($franqueado['0']['Franqueado']['id']); 
+		$this->set('franqueado', $franqueado);
+	}
+
+	public function altera(){
+		$franqueado = $this->Session->read('Franqueado');
+		$franqueado = $this->Franqueado->findById($franqueado['0']['Franqueado']['id']);
+		$this->set('franqueado', $franqueado);
+
+		if (!empty($this->data))  {
+
+			if((md5($this->data['Franqueado']['old_password']) == $franqueado['Franqueado']['senha'])) {
+
+				if ($this->data['Franqueado']['new_password'] == $this->data['Franqueado']['confirm_password']){
+
+					$data = array('id' => $franqueado['Franqueado']['id'], 'senha' => md5($this->data['Franqueado']['new_password']));
+
+					if ($this->Franqueado->save($data)){
+
+						$this->Session->setFlash(__('Senha alterada com sucesso.'), 'default', array('class' => 'alert alert-success'));
+						//erro aki. reiniciar sessão, sei lá
+						$this->redirect(array('action' => 'edit', $franqueado['Franqueado']['id']));
+						exit();
+					}
+					else{
+						$this->Session->setFlash(__('Ocorreu um problema, e não foi possível alterar a sua senha. Tente novamente mais tarde.'), 'default', array('class'=>'alert alert-danger'));
+						$this->redirect(array('action' => 'edit', $franqueado['Franqueado']['id']));
+						exit();
+					}
+				}
+				else{
+					$this->Session->setFlash(__('A confirmação da nova senha está incorreta!'), 'default', array('class'=>'alert alert-danger'));
+					$this->redirect(array('action' => 'altera_senha', $franqueado['Franqueado']['id']));
+					exit();
+				}
+			}
+			else{
+				$this->Session->setFlash('A senha atual informada está incorreta!', 'default', array('class'=>'alert alert-danger'));
+				$this->redirect(array('action' => 'altera_senha', $franqueado['Franqueado']['id']));
+				exit();
+			}
+		} 
 	}
 
 	public function meu_perfil() {
-		
+		$franqueado = $this->Session->read('Franqueado');
+	    $franqueado = $this->Franqueado->findById($franqueado['0']['Franqueado']['id']); 
+		$this->set('franqueado', $franqueado);
 	}	
 
 	public function relatorios() {

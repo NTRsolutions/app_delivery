@@ -109,7 +109,8 @@ class AtendentesController extends AppController {
 	}
 
 	public function home() {
-
+		$this->Atendente->recursive = 0;
+		$this->set('atendentes', $this->Paginator->paginate());
 	}
 
 	public function recuperar_senha() {
@@ -117,10 +118,54 @@ class AtendentesController extends AppController {
 	}
 
 	public function altera_senha() {
-		
+		$atendente = $this->Session->read('Atendente');
+	    $atendente = $this->Atendente->findById($atendente['0']['Atendente']['id']); 
+		$this->set('atendente', $atendente);
+	}
+
+	public function altera(){
+		$atendente = $this->Session->read('Atendente');
+		$atendente = $this->Atendente->findById($atendente['0']['Atendente']['id']);
+		$this->set('atendente', $atendente);
+
+		if (!empty($this->data))  {
+
+			if((md5($this->data['Atendente']['old_password']) == $atendente['Atendente']['senha'])) {
+
+				if ($this->data['Atendente']['new_password'] == $this->data['Atendente']['confirm_password']){
+
+					$data = array('id' => $atendente['Atendente']['id'], 'senha' => md5($this->data['Atendente']['new_password']));
+
+					if ($this->Atendente->save($data)){
+
+						$this->Session->setFlash(__('Senha alterada com sucesso.'), 'default', array('class' => 'alert alert-success'));
+						//erro aki. reiniciar sessão, sei lá
+						$this->redirect(array('action' => 'edit', $atendente['Atendente']['id']));
+						exit();
+					}
+					else{
+						$this->Session->setFlash(__('Ocorreu um problema, e não foi possível alterar a sua senha. Tente novamente mais tarde.'), 'default', array('class'=>'alert alert-danger'));
+						$this->redirect(array('action' => 'edit', $atendente['Atendente']['id']));
+						exit();
+					}
+				}
+				else{
+					$this->Session->setFlash(__('A confirmação da nova senha está incorreta!'), 'default', array('class'=>'alert alert-danger'));
+					$this->redirect(array('action' => 'altera_senha', $atendente['Atendente']['id']));
+					exit();
+				}
+			}
+			else{
+				$this->Session->setFlash('A senha atual informada está incorreta!', 'default', array('class'=>'alert alert-danger'));
+				$this->redirect(array('action' => 'altera_senha', $atendente['Atendente']['id']));
+				exit();
+			}
+		} 
 	}
 
 	public function meu_perfil() {
-		
-	}
+		$atendente = $this->Session->read('Atendente');
+	    $atendente = $this->Atendente->findById($atendente['0']['Atendente']['id']); 
+		$this->set('atendente', $atendente);
+	}	
 }

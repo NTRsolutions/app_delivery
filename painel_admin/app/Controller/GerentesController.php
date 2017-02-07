@@ -105,7 +105,8 @@ class GerentesController extends AppController {
 	}
 
 	public function home() {
-
+		$this->Gerente->recursive = 0;
+		$this->set('gerentes', $this->Paginator->paginate());
 	}
 
 	public function recuperar_senha() {
@@ -113,11 +114,55 @@ class GerentesController extends AppController {
 	}
 
 	public function altera_senha() {
-		
+		$gerente = $this->Session->read('Gerente');
+	    $gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']); 
+		$this->set('gerente', $gerente);
+	}
+
+	public function altera(){
+		$gerente = $this->Session->read('Gerente');
+		$gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']);
+		$this->set('gerente', $gerente);
+
+		if (!empty($this->data))  {
+
+			if((md5($this->data['Gerente']['old_password']) == $gerente['Gerente']['senha'])) {
+
+				if ($this->data['Gerente']['new_password'] == $this->data['Gerente']['confirm_password']){
+
+					$data = array('id' => $gerente['Gerente']['id'], 'senha' => md5($this->data['Gerente']['new_password']));
+
+					if ($this->Gerente->save($data)){
+
+						$this->Session->setFlash(__('Senha alterada com sucesso.'), 'default', array('class' => 'alert alert-success'));
+						//erro aki. reiniciar sessão, sei lá
+						$this->redirect(array('action' => 'edit', $gerente['Gerente']['id']));
+						exit();
+					}
+					else{
+						$this->Session->setFlash(__('Ocorreu um problema, e não foi possível alterar a sua senha. Tente novamente mais tarde.'), 'default', array('class'=>'alert alert-danger'));
+						$this->redirect(array('action' => 'edit', $gerente['Gerente']['id']));
+						exit();
+					}
+				}
+				else{
+					$this->Session->setFlash(__('A confirmação da nova senha está incorreta!'), 'default', array('class'=>'alert alert-danger'));
+					$this->redirect(array('action' => 'altera_senha', $gerente['Gerente']['id']));
+					exit();
+				}
+			}
+			else{
+				$this->Session->setFlash('A senha atual informada está incorreta!', 'default', array('class'=>'alert alert-danger'));
+				$this->redirect(array('action' => 'altera_senha', $gerente['Gerente']['id']));
+				exit();
+			}
+		} 
 	}
 
 	public function meu_perfil() {
-		
+		$gerente = $this->Session->read('Gerente');
+	    $gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']); 
+		$this->set('gerente', $gerente);
 	}
 
 	public function meu_restaurante() {
