@@ -103,4 +103,24 @@ class FranqueadosController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+	public function home() {
+
+	}
+
+	public function recuperar_senha() {
+		
+	}
+
+	public function altera_senha() {
+		
+	}
+
+	public function meu_perfil() {
+		
+	}	
+
+	public function relatorios() {
+		
+	}
 }
