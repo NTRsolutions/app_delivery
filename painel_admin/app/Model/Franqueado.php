@@ -7,7 +7,6 @@ App::uses('AppModel', 'Model');
  */
 class Franqueado extends AppModel {
 
-
 	// The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
@@ -18,6 +17,19 @@ class Franqueado extends AppModel {
 	public $hasMany = array(
 		'Restaurante' => array(
 			'className' => 'Restaurante',
+			'foreignKey' => 'franqueado_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'FranqueadoEndereco' => array(
+			'className' => 'FranqueadoEndereco',
 			'foreignKey' => 'franqueado_id',
 			'dependent' => false,
 			'conditions' => '',

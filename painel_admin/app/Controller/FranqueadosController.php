@@ -48,11 +48,32 @@ class FranqueadosController extends AppController {
  * @return void
  */
 	public function add() {
+		$this->loadModel('Endereco');
+		$this->loadModel('FranqueadoEndereco');
+
+		$options = array('fields' => 'Cidade.nome');
+		$this->set('cidades', $this->Endereco->Cidade->find('list', $options));
+
 		if ($this->request->is('post')) {
 			$this->Franqueado->create();
-			if ($this->Franqueado->save($this->request->data)) {
-				$this->Session->setFlash(__('The franqueado has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+			if ($this->Franqueado->save($this->request->data['Franqueado'])) {
+				$id_franq = $this->Franqueado->getLastInsertId();
+
+				$this->Endereco->create();
+				if ($this->Endereco->save($this->request->data['Endereco'])) {
+					$id_end = $this->Endereco->getLastInsertId();
+
+					$franq_end = array('endereco_id' => $id_end, 'franqueado_id' => $id_franq);
+					$this->FranqueadoEndereco->create();
+					if ($this->FranqueadoEndereco->save($franq_end)) {
+						$this->Session->setFlash(__('The franqueado has been saved.'), 'default', array('class' => 'alert alert-success'));
+						return $this->redirect(array('action' => 'index'));
+					} else {
+						$this->Session->setFlash(__('The franqueado could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+					}			
+				} else {
+					$this->Session->setFlash(__('The franqueado could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+				}
 			} else {
 				$this->Session->setFlash(__('The franqueado could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
@@ -70,8 +91,14 @@ class FranqueadosController extends AppController {
 		if (!$this->Franqueado->exists($id)) {
 			throw new NotFoundException(__('Invalid franqueado'));
 		}
+
+		$this->loadModel('Endereco');
+
+		$options = array('fields' => 'Cidade.nome');
+		$this->set('cidades', $this->Endereco->Cidade->find('list', $options));
+
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Franqueado->save($this->request->data)) {
+			if ($this->Franqueado->save($this->request->data['Franqueado']) /*&& $this->Endereco->save($this->request->data['Endereco'])*/) {
 				$this->Session->setFlash(__('The franqueado has been saved.'), 'default', array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -80,6 +107,9 @@ class FranqueadosController extends AppController {
 		} else {
 			$options = array('conditions' => array('Franqueado.' . $this->Franqueado->primaryKey => $id));
 			$this->request->data = $this->Franqueado->find('first', $options);
+
+			//$endereco = $this->Endereco->findById($this->request->data['FranqueadoEndereco']['0']['endereco_id']);
+			//$this->request->data = array_merge($this->request->data, $endereco);
 		}
 	}
 

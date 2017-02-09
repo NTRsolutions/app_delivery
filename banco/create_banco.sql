@@ -426,6 +426,27 @@ ADD CONSTRAINT `fk_restaurantes_franqueados1`
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
+CREATE TABLE IF NOT EXISTS `bd_deliverall`.`franqueado_enderecos` (
+  `endereco_id` INT(11) NOT NULL COMMENT '',
+  `franqueado_id` INT(11) NOT NULL COMMENT '',
+  PRIMARY KEY (`endereco_id`, `franqueado_id`)  COMMENT '',
+  INDEX `fk_clientes_has_enderecos_enderecos1_idx` (`endereco_id` ASC)  COMMENT '',
+  INDEX `fk_franqueado_enderecos_franqueados1_idx` (`franqueado_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_clientes_has_enderecos_enderecos10`
+    FOREIGN KEY (`endereco_id`)
+    REFERENCES `bd_deliverall`.`enderecos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_franqueado_enderecos_franqueados1`
+    FOREIGN KEY (`franqueado_id`)
+    REFERENCES `bd_deliverall`.`franqueados` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

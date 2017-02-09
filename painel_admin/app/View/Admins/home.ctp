@@ -21,7 +21,7 @@
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Pedidos'), array('action' => 'add'), array('escape' => false)); ?></li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Restaurantes'), array('action' => 'add'), array('escape' => false)); ?></li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Gerentes'), array('action' => 'add'), array('escape' => false)); ?></li>
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Franqueados'), array('action' => 'add'), array('escape' => false)); ?></li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Franqueados'), array('controller' => 'franqueados', 'action' => 'index'), array('escape' => false)); ?></li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Sugestões'), array('action' => 'add'), array('escape' => false)); ?></li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Avaliações'), array('action' => 'add'), array('escape' => false)); ?></li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Gerar boletos'), array('action' => 'add'), array('escape' => false)); ?></li>

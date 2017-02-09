@@ -48,18 +48,43 @@ class RestaurantesController extends AppController {
  * @return void
  */
 	public function add() {
+		$this->loadModel('Endereco');
+		$this->loadModel('RestauranteEndereco');
+
+		$options = array('fields' => 'Gerente.nome');
+		$gerentes = $this->Restaurante->Gerente->find('list', $options);
+
+		$options = array('fields' => 'Franqueado.nome');
+		$franqueados = $this->Restaurante->Franqueado->find('list', $options);
+		$this->set(compact('gerentes', 'franqueados'));
+
+		$options = array('fields' => 'Cidade.nome');
+		$this->set('cidades', $this->Endereco->Cidade->find('list', $options));
+		
 		if ($this->request->is('post')) {
 			$this->Restaurante->create();
-			if ($this->Restaurante->save($this->request->data)) {
-				$this->Session->setFlash(__('The restaurante has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+			if ($this->Restaurante->save($this->request->data['Restaurante'])) {
+				$id_rest = $this->Restaurante->getLastInsertId();
+
+				$this->Endereco->create();
+				if ($this->Endereco->save($this->request->data['Endereco'])) {
+					$id_end = $this->Endereco->getLastInsertId();
+
+					$rest_end = array('endereco_id' => $id_end, 'restaurante_id' => $id_rest);
+					$this->RestauranteEndereco->create();
+					if ($this->RestauranteEndereco->save($rest_end)) {
+						$this->Session->setFlash(__('The restaurante has been saved.'), 'default', array('class' => 'alert alert-success'));
+						return $this->redirect(array('action' => 'index'));
+					} else {
+						$this->Session->setFlash(__('The restaurante could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+					}			
+				} else {
+					$this->Session->setFlash(__('The restaurante could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+				}
 			} else {
 				$this->Session->setFlash(__('The restaurante could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$gerentes = $this->Restaurante->Gerente->find('list');
-		$franqueados = $this->Restaurante->Franqueado->find('list');
-		$this->set(compact('gerentes', 'franqueados'));
 	}
 
 /**

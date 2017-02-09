@@ -17,26 +17,6 @@
 					<div class="panel-heading"><?php echo __('Actions'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-
-																<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('List Restaurantes'), array('action' => 'index'), array('escape' => false)); ?></li>
-									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('List Gerentes'), array('controller' => 'gerentes', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Gerente'), array('controller' => 'gerentes', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('List Franqueados'), array('controller' => 'franqueados', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Franqueado'), array('controller' => 'franqueados', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('List Atendentes'), array('controller' => 'atendentes', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Atendente'), array('controller' => 'atendentes', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('List Classificacaos'), array('controller' => 'classificacaos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Classificacao'), array('controller' => 'classificacaos', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('List Culinarias'), array('controller' => 'culinarias', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Culinaria'), array('controller' => 'culinarias', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('List Pagamentos'), array('controller' => 'pagamentos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Pagamento'), array('controller' => 'pagamentos', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('List Produtos'), array('controller' => 'produtos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Produto'), array('controller' => 'produtos', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('List Promocaos'), array('controller' => 'promocaos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Promocao'), array('controller' => 'promocaos', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('List Restaurante Enderecos'), array('controller' => 'restaurante_enderecos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Restaurante Endereco'), array('controller' => 'restaurante_enderecos', 'action' => 'add'), array('escape' => false)); ?> </li>
 							</ul>
 						</div>
 					</div>
@@ -46,43 +26,65 @@
 			<?php echo $this->Form->create('Restaurante', array('role' => 'form')); ?>
 
 				<div class="form-group">
-					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
+					<?php echo $this->Form->input('Restaurante.nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('cnpj', array('class' => 'form-control', 'placeholder' => 'Cnpj'));?>
+					<?php echo $this->Form->input('Restaurante.cnpj', array('class' => 'form-control', 'placeholder' => 'Cnpj'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
+					<?php echo $this->Form->input('Restaurante.email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('descricao', array('class' => 'form-control', 'placeholder' => 'Descricao'));?>
+					<?php echo $this->Form->input('Restaurante.descricao', array('class' => 'form-control', 'placeholder' => 'Descricao'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('foto', array('class' => 'form-control', 'placeholder' => 'Foto'));?>
+					<?php echo $this->Form->input('Restaurante.foto', array('class' => 'form-control', 'placeholder' => 'Foto'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('horario_abre', array('class' => 'form-control', 'placeholder' => 'Horario Abre'));?>
+					<?php echo $this->Form->input('Restaurante.horario_abre', array('class' => 'form-control', 'placeholder' => 'Horario Abre'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('horario_fecha', array('class' => 'form-control', 'placeholder' => 'Horario Fecha'));?>
+					<?php echo $this->Form->input('Restaurante.horario_fecha', array('class' => 'form-control', 'placeholder' => 'Horario Fecha'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('tempo_mercado', array('class' => 'form-control', 'placeholder' => 'Tempo Mercado'));?>
+					<?php echo $this->Form->input('Restaurante.tempo_mercado', array('class' => 'form-control', 'placeholder' => 'Tempo Mercado'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('valor_min', array('class' => 'form-control', 'placeholder' => 'Valor Min'));?>
+					<?php echo $this->Form->input('Restaurante.valor_min', array('class' => 'form-control', 'placeholder' => 'Valor Min'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone1'));?>
+					<?php echo $this->Form->input('Restaurante.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone1'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone2'));?>
+					<?php echo $this->Form->input('Restaurante.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone2'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('gerente_id', array('class' => 'form-control', 'placeholder' => 'Gerente Id'));?>
+					<?php echo $this->Form->input('Restaurante.gerente_id', array('class' => 'form-control', 'empty' => 'Selecione o gerente'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('franqueado_id', array('class' => 'form-control', 'placeholder' => 'Franqueado Id'));?>
+					<?php echo $this->Form->input('Restaurante.franqueado_id', array('class' => 'form-control', 'placeholder' => 'Franqueado Id'));?>
+				</div>
+
+				<div class="form-group">
+					<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua'));?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->Form->input('Endereco.numero', array('class' => 'form-control', 'placeholder' => 'Numero'));?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->Form->input('Endereco.bairro', array('class' => 'form-control', 'placeholder' => 'Bairro'));?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento'));?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep'));?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->Form->input('Endereco.tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->Form->input('Endereco.cidade_id', array('class' => 'form-control', 'empty' => 'Selecione a cidade', 'options' => $cidades));?>
 				</div>
 				<div class="form-group">
 					<?php echo $this->Form->submit(__('Submit'), array('class' => 'btn btn-default')); ?>

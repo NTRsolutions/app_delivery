@@ -24,4 +24,46 @@ class Endereco extends AppModel {
 			'order' => ''
 		)
 	);
+
+	public $hasMany = array(
+		'RestauranteEndereco' => array(
+			'className' => 'RestauranteEndereco',
+			'foreignKey' => 'endereco_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'FranqueadoEndereco' => array(
+			'className' => 'FranqueadoEndereco',
+			'foreignKey' => 'endereco_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'ClienteEndereco' => array(
+			'className' => 'ClienteEndereco',
+			'foreignKey' => 'endereco_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
 }

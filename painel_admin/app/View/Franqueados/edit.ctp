@@ -33,20 +33,21 @@
 		<div class="col-md-9">
 			<?php echo $this->Form->create('Franqueado', array('role' => 'form')); ?>
 
-				<?php echo $this->Form->input('id', array('class' => 'form-control', 'placeholder' => 'Id'));?>
+				<?php echo $this->Form->input('Franqueado.id', array('class' => 'form-control', 'placeholder' => 'Id'));?>
 				
 				<div class="form-group">
-					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
+					<?php echo $this->Form->input('Franqueado.nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
+					<?php echo $this->Form->input('Franqueado.email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone1'));?>
+					<?php echo $this->Form->input('Franqueado.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone1'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone2'));?>
+					<?php echo $this->Form->input('Franqueado.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone2'));?>
 				</div>
+
 				<div class="form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
