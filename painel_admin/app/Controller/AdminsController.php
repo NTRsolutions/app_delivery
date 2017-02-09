@@ -35,7 +35,19 @@ class AdminsController extends AppController {
 
 
     public function home() {
-		
+
+        $this->loadModel('Franqueado');
+        $this->loadModel('Endereco');
+        $this->loadModel('FranqueadoEndereco');
+        $this->loadModel('Cidade');
+        $this->loadModel('Estado');
+
+        $this->set('franqs', $this->Franqueado->find('all'));
+        $this->set('ends', $this->Endereco->find('all'));
+        $this->set('franqEnds', $this->FranqueadoEndereco->find('all'));
+        $this->set('cidades', $this->Cidade->find('all'));
+        $this->set('estados', $this->Estado->find('all'));
+
 	}
 
 	public function index_login() {
@@ -287,7 +299,6 @@ class AdminsController extends AppController {
                     if ($this->Aluno->save($data)){
 
                         $this->Session->setFlash('Senha alterada com sucesso!', 'alert-box', array('class'=>'alert-success'));
-                        //erro aki. reiniciar sessão, sei lá
                         $this->redirect(array('action' => 'editar'));
                         exit();
                     }

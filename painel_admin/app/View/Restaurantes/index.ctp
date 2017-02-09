@@ -18,25 +18,25 @@
 					<div class="panel-heading"><?php echo __('Actions'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Restaurante'), array('action' => 'add'), array('escape' => false)); ?></li>
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;List'.__('Gerentes'), array('controller' => 'gerentes', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New'.__('Gerente'), array('controller' => 'gerentes', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;List'.__('Franqueados'), array('controller' => 'franqueados', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New'.__('Franqueado'), array('controller' => 'franqueados', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;List'.__('Atendentes'), array('controller' => 'atendentes', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New'.__('Atendente'), array('controller' => 'atendentes', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;List'.__('Classificacaos'), array('controller' => 'classificacaos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New'.__('Classificacao'), array('controller' => 'classificacaos', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;List'.__('Culinarias'), array('controller' => 'culinarias', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New'.__('Culinaria'), array('controller' => 'culinarias', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;List'.__('Pagamentos'), array('controller' => 'pagamentos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New'.__('Pagamento'), array('controller' => 'pagamentos', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;List'.__('Produtos'), array('controller' => 'produtos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New'.__('Produto'), array('controller' => 'produtos', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;List'.__('Promocaos'), array('controller' => 'promocaos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New'.__('Promocao'), array('controller' => 'promocaos', 'action' => 'add'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;List'.__('Restaurante Enderecos'), array('controller' => 'restaurante_enderecos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New'.__('Restaurante Endereco'), array('controller' => 'restaurante_enderecos', 'action' => 'add'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Novo Restaurante'), array('action' => 'add'), array('escape' => false)); ?></li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Listar'.__('Gerentes'), array('controller' => 'gerentes', 'action' => 'index'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo'.__('Gerente'), array('controller' => 'gerentes', 'action' => 'add'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Listar'.__('Franqueados'), array('controller' => 'franqueados', 'action' => 'index'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo'.__('Franqueado'), array('controller' => 'franqueados', 'action' => 'add'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Listar'.__('Atendentes'), array('controller' => 'atendentes', 'action' => 'index'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo'.__('Atendente'), array('controller' => 'atendentes', 'action' => 'add'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Listar'.__('Classificacaos'), array('controller' => 'classificacaos', 'action' => 'index'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo'.__('Classificacao'), array('controller' => 'classificacaos', 'action' => 'add'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Listar'.__('Culinarias'), array('controller' => 'culinarias', 'action' => 'index'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo'.__('Culinaria'), array('controller' => 'culinarias', 'action' => 'add'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Listar'.__('Pagamentos'), array('controller' => 'pagamentos', 'action' => 'index'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo'.__('Pagamento'), array('controller' => 'pagamentos', 'action' => 'add'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Listar'.__('Produtos'), array('controller' => 'produtos', 'action' => 'index'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo'.__('Produto'), array('controller' => 'produtos', 'action' => 'add'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Listar'.__('Promocaos'), array('controller' => 'promocaos', 'action' => 'index'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo'.__('Promocao'), array('controller' => 'promocaos', 'action' => 'add'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Listar'.__('Restaurante Enderecos'), array('controller' => 'restaurante_enderecos', 'action' => 'index'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo'.__('Restaurante Endereco'), array('controller' => 'restaurante_enderecos', 'action' => 'add'), array('escape' => false)); ?> </li>
 							</ul>
 						</div><!-- end body -->
 				</div><!-- end panel -->
@@ -47,7 +47,6 @@
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>
 					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('id'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('cnpj'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
@@ -67,7 +66,6 @@
 				<tbody>
 				<?php foreach ($restaurantes as $restaurante): ?>
 					<tr>
-						<td nowrap><?php echo h($restaurante['Restaurante']['id']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($restaurante['Restaurante']['nome']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($restaurante['Restaurante']['cnpj']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($restaurante['Restaurante']['email']); ?>&nbsp;</td>
@@ -80,11 +78,11 @@
 						<td nowrap><?php echo h($restaurante['Restaurante']['telefone1']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($restaurante['Restaurante']['telefone2']); ?>&nbsp;</td>
 								<td>
-			<?php echo $this->Html->link($restaurante['Gerente']['id'], array('controller' => 'gerentes', 'action' => 'view', $restaurante['Gerente']['id'])); ?>
-		</td>
+									<?php echo $this->Html->link($restaurante['Gerente']['id'], array('controller' => 'gerentes', 'action' => 'view', $restaurante['Gerente']['id'])); ?>
+								</td>
 								<td>
-			<?php echo $this->Html->link($restaurante['Franqueado']['id'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
-		</td>
+									<?php echo $this->Html->link($restaurante['Franqueado']['id'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
+								</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $restaurante['Restaurante']['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $restaurante['Restaurante']['id']), array('escape' => false)); ?>

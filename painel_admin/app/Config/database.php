@@ -74,7 +74,7 @@ class DATABASE_CONFIG {
 		'password' => '@senha_bd_deliverall',
 		'database' => 'bd_deliverall',
 		'prefix' => '',
-		//'encoding' => 'utf8',
+		'encoding' => 'utf8',
 	);
 
 	public $test = array(

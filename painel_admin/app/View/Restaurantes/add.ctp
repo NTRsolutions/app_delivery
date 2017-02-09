@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
-				<h1><?php echo __('Add Restaurante'); ?></h1>
+				<h1><?php echo __('Adicionar Restaurante'); ?></h1>
 			</div>
 		</div>
 	</div>
@@ -14,7 +14,7 @@
 		<div class="col-md-3">
 			<div class="actions">
 				<div class="panel panel-default">
-					<div class="panel-heading"><?php echo __('Actions'); ?></div>
+					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
 							</ul>
@@ -87,7 +87,7 @@
 					<?php echo $this->Form->input('Endereco.cidade_id', array('class' => 'form-control', 'empty' => 'Selecione a cidade', 'options' => $cidades));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->submit(__('Submit'), array('class' => 'btn btn-default')); ?>
+					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primery')); ?>
 				</div>
 
 			<?php echo $this->Form->end() ?>
