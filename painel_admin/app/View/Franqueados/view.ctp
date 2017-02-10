@@ -15,7 +15,7 @@
 					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-list"></span>&nbsp&nbsp;Home'), array('controller' => 'admins', 'action' => 'home'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-home"></span>&nbsp&nbsp;Home'), array('controller' => 'admins', 'action' => 'home'), array('escape' => false)); ?> </li>
 								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>&nbsp&nbsp;Editar Franqueado'), array('action' => 'edit', $franqueado['Franqueado']['id']), array('escape' => false)); ?> </li>
 								<li><?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Excluir Franqueado'), array('action' => 'delete', $franqueado['Franqueado']['id']), array('escape' => false), __('Tem certeza que desaja excluir: %s?', $franqueado['Franqueado']['nome'])); ?> </li>
 							</ul>
@@ -48,10 +48,11 @@
 							&nbsp;
 						</td>
 					</tr>
+					<?php if(isset($franqueado['Franqueado']['telefone2'])) { ?>
 					<tr>
 						<th><?php echo __('Telefone2'); ?></th>
 						<td>
-							<?php echo h($franqueado['Franqueado']['telefone2']); ?>
+							<?php echo h($franqueado['Franqueado']['telefone2']); } ?>
 							&nbsp;
 						</td>
 					</tr>
@@ -76,10 +77,10 @@
 
 <div class="related row">
 	<div class="col-md-12">
-	<h3><?php echo __('Restaurantes Relacionados'); ?></h3>
+	<h3><?php echo __('Restaurantes Relacionados'); ?></h3><br>
 	<div class="actions">
 		<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Restaurante'), array('controller' => 'restaurantes', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
-	</div>
+	</div><br>
 	<?php if (!empty($franqueado['Restaurante'])): ?>
 	<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 	<thead>

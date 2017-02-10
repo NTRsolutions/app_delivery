@@ -4,16 +4,16 @@
 		<div class="col-md-12">
 			<div class="page-header">
 				<ul class="breadcrumb" id="bread">
-						<?php
-						if($this->Session->check('Admin')){
-							echo '<li><a href="../../admins/home">Início</a></li>
-				    				<li class="active">Editar</li>';
-						} else {
-							echo '<li><a href="../../franqueados/home">Início</a></li>
-				    				<li><a href="../../franqueados/meu_perfil/'.$franq['0']['Franqueado']['id'].'">Meu Perfil</a></li>
-				    				<li class="active">Editar</li>';
-						}
-						?>				    
+					<?php
+					if($this->Session->check('Admin')){
+						echo '<li><a href="../../admins/home">Início</a></li>
+			    				<li class="active">Editar</li>';
+					} else {
+						echo '<li><a href="../../franqueados/home">Início</a></li>
+			    				<li><a href="../../franqueados/meu_perfil/">Meu Perfil</a></li>
+			    				<li class="active">Editar</li>';
+					}
+					?>				    
 				</ul>
 				<h1><?php echo __('Editar Franqueado'); ?></h1>
 			</div>
@@ -29,7 +29,7 @@
 							<ul class="nav nav-pills nav-stacked">
 								<?php
 									if($this->Session->check('Admin')){
-										echo '<li>'.$this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('controller' => 'admins', 'action' => 'home'), array('escape' => false)).'</li>';
+										echo '<li>'.$this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'view', $this->Form->value('Franqueado.id')), array('escape' => false)).'</li>';
 									} else {
 										echo '<li>'.$this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'home'), array('escape' => false)).'</li>';
 										echo '<li>'. $this->Html->link('<span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;'.__('Alterar senha'), array('action' => 'altera_senha', $this->Form->value('Franqueado.id')), array('escape' => false)).'</li>';

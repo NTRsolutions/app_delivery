@@ -3,6 +3,10 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
+				<ul class="breadcrumb" id="bread">
+				    <li><a href="../franqueados/home">Início</a></li>
+				    <li class="active">Relatórios</li>
+				</ul>
 				<h1><?php echo __('Relatórios'); ?></h1>
 			</div>
 		</div><!-- end col md 12 -->

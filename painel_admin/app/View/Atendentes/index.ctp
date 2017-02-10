@@ -4,7 +4,7 @@
 		<div class="col-md-12">
 			<div class="page-header">
 				<ul class="breadcrumb" id="bread">
-			    <li><a href="../gerentes/home">Início</a></li>
+			    <li><a href="gerentes/home">Início</a></li>
 			    <li class="active">Atendentes</li>
 				</ul>
 				<h1><?php echo __('Atendentes'); ?></h1>

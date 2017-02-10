@@ -4,7 +4,7 @@
 		<div class="col-md-12">
 			<div class="page-header">
 				<ul class="breadcrumb" id="bread">
-			    <li><a href="../gerentes/home">Início</a></li>
+			    <li><a href="gerentes/home">Início</a></li>
 			    <li class="active">Produtos</li>
 				</ul>
 				<h1><?php echo __('Produtos'); ?></h1>
@@ -19,7 +19,7 @@
 		<div class="col-md-3">
 			<div class="actions">
 				<div class="panel panel-default">
-					<div class="panel-heading"><?php echo __('Actions'); ?></div>
+					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;'.__('Meu perfil'), array('controller' => 'gerentes', 'action' => 'meu_perfil'), array('escape' => false)); ?></li>

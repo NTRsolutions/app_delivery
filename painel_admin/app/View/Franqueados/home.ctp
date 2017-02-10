@@ -10,7 +10,7 @@
 			</div>
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
-
+	<?php //debug($this->Session->read());?>
 	<div class="row">
 
 		<div class="col-md-3">

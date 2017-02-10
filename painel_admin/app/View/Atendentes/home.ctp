@@ -20,6 +20,7 @@
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;'.__('Meu perfil'), array('action' => 'meu_perfil'), array('escape' => false)); ?></li>
+								<li class="active"><?php echo $this->Html->link('<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;'.__('Pedidos'), array('controller' => 'atendentes', 'action' => 'home'), array('escape' => false)); ?></li>
 							</ul>
 						</div><!-- end body -->
 				</div><!-- end panel -->

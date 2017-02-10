@@ -35,8 +35,12 @@
 		<div class="col-md-9"> 
 
 	   	   	<b>Nome:</b> <?php echo $franqueado['Franqueado']['nome'] ?> <br /><br />
-	        <b>Email:</b> <?php echo $franqueado['Franqueado']['email'] ?> <br /><br />
-		      
+	        <b>Email:</b> <?php echo $franqueado['Franqueado']['email'] ?> <br /><br />  
+	      	<b>Telefone 1:</b> <?php echo $franqueado['Franqueado']['telefone1'] ?> <br /><br />
+	      	<?php if(isset($franqueado['Franqueado']['telefone2'])) { ?>
+	      			<b>Telefone 2:</b> <?php echo $franqueado['Franqueado']['telefone2'] . '<br /><br />';
+	      		  } ?> 
+
 		    <?php 
 				echo $this->Html->link('Editar Dados', 
 					array('action' => 'edit', $franqueado['Franqueado']['id']),

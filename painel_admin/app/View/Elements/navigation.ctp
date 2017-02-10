@@ -16,7 +16,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><?php
-              if ($this->Session->read('Admin')) {
+              if ($this->Session->read('Admin') || $this->Session->read('Franqueado') || $this->Session->read('Gerente') || $this->Session->read('Atendente')) {
                 echo $this->Html->link(__(
                   '<span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;Sair'), 
                   array('controller' => 'admins', 'action' => 'logout'), 
