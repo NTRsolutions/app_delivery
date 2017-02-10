@@ -446,6 +446,35 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci
 
+CREATE TABLE IF NOT EXISTS `bd_deliverall`.`produto_complementos` (
+  `qtd` INT(11) NOT NULL COMMENT '',
+  `pedido_id` INT(11) NOT NULL COMMENT '',
+  `produto_id` INT(11) NOT NULL COMMENT '',
+  `complemento_id` INT(11) NOT NULL COMMENT '',
+  PRIMARY KEY (`pedido_id`, `produto_id`, `complemento_id`)  COMMENT '',
+  INDEX `fk_produto_complementos_produtos1_idx` (`produto_id` ASC)  COMMENT '',
+  INDEX `fk_produto_complementos_complementos1_idx` (`complemento_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_produto_complementos_pedidos1`
+    FOREIGN KEY (`pedido_id`)
+    REFERENCES `bd_deliverall`.`pedidos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_produto_complementos_produtos1`
+    FOREIGN KEY (`produto_id`)
+    REFERENCES `bd_deliverall`.`produtos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_produto_complementos_complementos1`
+    FOREIGN KEY (`complemento_id`)
+    REFERENCES `bd_deliverall`.`complementos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci
+
+ALTER TABLE `bd_deliverall`.`promocaos` 
+CHANGE COLUMN `produto_id` `produto_id` INT(11) NOT NULL COMMENT '' AFTER `desconto`
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
