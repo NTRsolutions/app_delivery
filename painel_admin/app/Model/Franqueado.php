@@ -18,26 +18,26 @@ class Franqueado extends AppModel {
 		'Restaurante' => array(
 			'className' => 'Restaurante',
 			'foreignKey' => 'franqueado_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
-			'exclusive' => '',
+			'exclusive' => true,
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
 		'FranqueadoEndereco' => array(
 			'className' => 'FranqueadoEndereco',
 			'foreignKey' => 'franqueado_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
-			'exclusive' => '',
+			'exclusive' => true,
 			'finderQuery' => '',
 			'counterQuery' => ''
 		)

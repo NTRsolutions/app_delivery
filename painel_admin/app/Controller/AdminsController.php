@@ -54,6 +54,10 @@ class AdminsController extends AppController {
 		
 	}
 
+    public function gera_boleto() {
+        
+    }
+
 	public function login() {
 		if (!empty($this->data['Admin']['login']) and
         	!empty($this->data['Admin']['senha'])) {
@@ -105,22 +109,22 @@ class AdminsController extends AppController {
     		case 1:
     			$this->Session->write('Admin', $user);
         		$this->set('admin', $user);
-        		$this->redirect(array('controller' => 'admins', 'action' => 'home', $user['0']['Admin']['id']));
+        		$this->redirect(array('controller' => 'admins', 'action' => 'home'));
     			break;
     		case 2:
     			$this->Session->write('Franqueado', $user);
         		$this->set('admin', $user);
-        		$this->redirect(array('controller' => 'franqueados', 'action' => 'home', $user['0']['Franqueado']['id']));
+        		$this->redirect(array('controller' => 'franqueados', 'action' => 'home'));
     			break;
     		case 3:
     			$this->Session->write('Gerente', $user);
         		$this->set('admin', $user);
-        		$this->redirect(array('controller' => 'gerentes', 'action' => 'home', $user['0']['Gerente']['id']));
+        		$this->redirect(array('controller' => 'gerentes', 'action' => 'home'));
     			break;
     		case 4:
     			$this->Session->write('Atendente', $user);
         		$this->set('admin', $user);
-        		$this->redirect(array('controller' => 'atendentes', 'action' => 'home', $user['0']['Atendente']['id']));
+        		$this->redirect(array('controller' => 'atendentes', 'action' => 'home'));
     			break;
     		default:
     			$this->Session->setFlash(__('Login e/ou senha inválidos!'), 'default', 

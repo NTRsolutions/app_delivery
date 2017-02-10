@@ -39,7 +39,23 @@ class FranqueadosController extends AppController {
 			throw new NotFoundException(__('Invalid franqueado'));
 		}
 		$options = array('conditions' => array('Franqueado.' . $this->Franqueado->primaryKey => $id));
-		$this->set('franqueado', $this->Franqueado->find('first', $options));
+		$franq = $this->Franqueado->find('first', $options);
+		$this->set('franqueado', $franq);
+
+		$ends = array();
+		$this->loadModel('Endereco');
+		$this->loadModel('Estado');
+		foreach ($franq['FranqueadoEndereco'] as $franq_end) {
+			$options = array(
+				'conditions' => array(
+					'Endereco.id' => $franq_end['endereco_id']
+				),
+				'recursive' => 2
+			);
+
+			array_push($ends, $this->Endereco->find('first', $options));
+		}
+		$this->set('ends', $ends);
 	}
 
 /**
@@ -67,7 +83,8 @@ class FranqueadosController extends AppController {
 					$this->FranqueadoEndereco->create();
 					if ($this->FranqueadoEndereco->save($franq_end)) {
 						$this->Session->setFlash(__('The franqueado has been saved.'), 'default', array('class' => 'alert alert-success'));
-						return $this->redirect(array('action' => 'index'));
+
+						return $this->redirect(array('controller' => 'admins', 'action' => 'home'));	
 					} else {
 						$this->Session->setFlash(__('The franqueado could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 					}			
@@ -100,7 +117,10 @@ class FranqueadosController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Franqueado->save($this->request->data['Franqueado']) /*&& $this->Endereco->save($this->request->data['Endereco'])*/) {
 				$this->Session->setFlash(__('The franqueado has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+				if ($this->Session->check('Admin')) {
+					return $this->redirect(array('controller' => 'admins', 'action' => 'home'));	
+				}
+				return $this->redirect(array('action' => 'meu_perfil', $id));
 			} else {
 				$this->Session->setFlash(__('The franqueado could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
@@ -131,7 +151,10 @@ class FranqueadosController extends AppController {
 		} else {
 			$this->Session->setFlash(__('The franqueado could not be deleted. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 		}
-		return $this->redirect(array('action' => 'index'));
+		if ($this->Session->check('Admin')) {
+			return $this->redirect(array('controller' => 'admins', 'action' => 'home'));	
+		}
+		return $this->redirect(array('controller' => 'admins', 'action' => 'index_login'));
 	}
 
 	public function home() {

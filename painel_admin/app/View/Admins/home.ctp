@@ -18,7 +18,7 @@
 							<ul class="nav nav-pills nav-stacked">
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;'.__('Pedidos'), array('controller' => 'pedidos', 'action' => 'index'), array('escape' => false)); ?></li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;'.__('Restaurantes'), array('controller' => 'restaurantes', 'action' => 'index'), array('escape' => false)); ?></li>
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;'.__('Franqueados'), array('controller' => 'franqueados', 'action' => 'index'), array('escape' => false)); ?></li>
+								<li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Franqueados</a></li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;'.__('Gerentes'), array('controller' => 'gerentes', 'action' => 'index'), array('escape' => false)); ?></li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.__('Sugestões'), array('controller' => 'sugestaos', 'action' => 'index'), array('escape' => false)); ?></li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-star-empty"></span>&nbsp;&nbsp;'.__('Avaliações'), array('controller' => 'classificacaos', 'action' => 'index'), array('escape' => false)); ?></li>
@@ -37,21 +37,22 @@
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>
 					<tr>
+						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('telefone1'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('telefone2'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('endereços'); ?></th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
 				<tbody>
 				<?php foreach ($franqs as $f): ?>
 					<tr>
+						<td nowrap><?php echo h($f['Franqueado']['nome']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($f['Franqueado']['email']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($f['Franqueado']['telefone1']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($f['Franqueado']['telefone2']); ?>&nbsp;</td>
 
-						<?php foreach ($franqEnds as $fe): 
+						<?php /*foreach ($franqEnds as $fe): 
 
 							if($fe['FranqueadoEndereco']['franqueado_id'] == $f['Franqueado']['id']) {
 
@@ -75,7 +76,7 @@
 									}
 								endforeach;
 							} 
-						endforeach; ?>
+						endforeach; */?>
 
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('controller' => 'franqueados', 'action' => 'view', $f['Franqueado']['id']), array('escape' => false)); ?>
