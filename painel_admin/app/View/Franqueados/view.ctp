@@ -15,7 +15,7 @@
 					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-home"></span>&nbsp&nbsp;Home'), array('controller' => 'admins', 'action' => 'home'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-home"></span>&nbsp&nbsp;Início'), array('controller' => 'admins', 'action' => 'home'), array('escape' => false)); ?> </li>
 								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>&nbsp&nbsp;Editar Franqueado'), array('action' => 'edit', $franqueado['Franqueado']['id']), array('escape' => false)); ?> </li>
 								<li><?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Excluir Franqueado'), array('action' => 'delete', $franqueado['Franqueado']['id']), array('escape' => false), __('Tem certeza que desaja excluir: %s?', $franqueado['Franqueado']['nome'])); ?> </li>
 							</ul>
@@ -57,13 +57,9 @@
 						</td>
 					</tr>
 					<tr>
-						<th><?php echo __('Endereços'); ?></th>
+						<th><?php echo __('Endereço'); ?></th>
 						<td>
-							<?php 
-								foreach($ends as $e):
-									echo 'Rua ' . $e['Endereco']['rua'] . ', ' . $e['Endereco']['numero'] . ', ' . $e['Endereco']['bairro'] . ', ' . $e['Endereco']['complemento'] . ' - ' . $e['Endereco']['cep'] . ', ' . $e['Cidade']['nome'] . ', ' . $e['Cidade']['Estado']['nome']. '<br><br>';
-								endforeach;
-							?>
+							<?php echo 'Rua ' . $ends['0']['Endereco']['rua'] . ', ' . $ends['0']['Endereco']['numero'] . ', ' . $ends['0']['Endereco']['bairro'] . ', ' . $ends['0']['Endereco']['complemento'] . ' - ' . $ends['0']['Endereco']['cep'] . ', ' . $ends['0']['Cidade']['nome'] . ', ' . $ends['0']['Cidade']['Estado']['nome']; ?>
 							&nbsp;
 						</td>
 					</tr>
@@ -77,7 +73,7 @@
 
 <div class="related row">
 	<div class="col-md-12">
-	<h3><?php echo __('Restaurantes Relacionados'); ?></h3><br>
+	<br><h3><?php echo __('Restaurantes Relacionados'); ?></h3>
 	<div class="actions">
 		<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Restaurante'), array('controller' => 'restaurantes', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
 	</div><br>

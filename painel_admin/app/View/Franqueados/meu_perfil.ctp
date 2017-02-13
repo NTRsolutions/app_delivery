@@ -36,11 +36,13 @@
 
 	   	   	<b>Nome:</b> <?php echo $franqueado['Franqueado']['nome'] ?> <br /><br />
 	        <b>Email:</b> <?php echo $franqueado['Franqueado']['email'] ?> <br /><br />  
-	      	<b>Telefone 1:</b> <?php echo $franqueado['Franqueado']['telefone1'] ?> <br /><br />
+			<b>Telefone 1:</b> <?php echo $franqueado['Franqueado']['telefone1'] ?> <br /><br />
 	      	<?php if(isset($franqueado['Franqueado']['telefone2'])) { ?>
 	      			<b>Telefone 2:</b> <?php echo $franqueado['Franqueado']['telefone2'] . '<br /><br />';
-	      		  } ?> 
-
+	      		  } 
+	      	?> 
+	      	<b>Endereço:</b>  <?php echo 'Rua ' . $ends['0']['Endereco']['rua'] . ', ' . $ends['0']['Endereco']['numero'] . ', ' . $ends['0']['Endereco']['bairro'] . ', ' . $ends['0']['Endereco']['complemento'] . ' - ' . $ends['0']['Endereco']['cep'] . ', ' . $ends['0']['Cidade']['nome'] . ', ' . $ends['0']['Cidade']['Estado']['nome']. '<br><br>'; ?>
+			
 		    <?php 
 				echo $this->Html->link('Editar Dados', 
 					array('action' => 'edit', $franqueado['Franqueado']['id']),

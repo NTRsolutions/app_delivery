@@ -31,3 +31,21 @@
 /* ------------------------
 	fim css navbar
  ------------------------ */
+
+/* ------------------------
+	Outros
+------------------------ */
+
+ .jumb {
+ 	padding-top: 20px;
+ 	padding-bottom: 20px;
+ }
+
+ .container-fluid .jumb {
+ 	padding-right: 40px;
+ 	padding-left: 40px;
+ }
+
+/* ------------------------
+	Fim Outros
+------------------------ */

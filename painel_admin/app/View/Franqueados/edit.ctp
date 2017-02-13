@@ -31,7 +31,7 @@
 									if($this->Session->check('Admin')){
 										echo '<li>'.$this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'view', $this->Form->value('Franqueado.id')), array('escape' => false)).'</li>';
 									} else {
-										echo '<li>'.$this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'home'), array('escape' => false)).'</li>';
+										echo '<li>'.$this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'meu_perfil', $this->Form->value('Franqueado.id')), array('escape' => false)).'</li>';
 										echo '<li>'. $this->Html->link('<span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;'.__('Alterar senha'), array('action' => 'altera_senha', $this->Form->value('Franqueado.id')), array('escape' => false)).'</li>';
 									}
 									?>
@@ -58,6 +58,34 @@
 				<div class="form-group">
 					<?php echo $this->Form->input('Franqueado.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone2'));?>
 				</div>
+
+				<?php if ($this->Session->check('Franqueado')) {
+
+					echo $this->Form->input('Endereco.id', array('class' => 'form-control')); ?>
+				
+					<div class="form-group">
+						<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua'));?>
+					</div>
+					<div class="form-group">
+						<?php echo $this->Form->input('Endereco.numero', array('class' => 'form-control', 'placeholder' => 'Número'));?>
+					</div>
+					<div class="form-group">
+						<?php echo $this->Form->input('Endereco.bairro', array('class' => 'form-control', 'placeholder' => 'Bairro'));?>
+					</div>
+					<div class="form-group">
+						<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento'));?>
+					</div>
+					<div class="form-group">
+						<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'CEP'));?>
+					</div>
+					<div class="form-group">
+						<?php echo $this->Form->input('Endereco.tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
+					</div>
+					<div class="form-group">
+						<?php echo $this->Form->input('Endereco.cidade_id', array('class' => 'form-control'));?>
+					</div>
+
+				<?php } ?>
 
 				<div class="form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>

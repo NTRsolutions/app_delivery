@@ -115,7 +115,7 @@ class FranqueadosController extends AppController {
 		$this->set('cidades', $this->Endereco->Cidade->find('list', $options));
 
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Franqueado->save($this->request->data['Franqueado']) /*&& $this->Endereco->save($this->request->data['Endereco'])*/) {
+			if ($this->Franqueado->save($this->request->data['Franqueado']) && $this->Endereco->save($this->request->data['Endereco'])) {
 				$this->Session->setFlash(__('The franqueado has been saved.'), 'default', array('class' => 'alert alert-success'));
 				if ($this->Session->check('Admin')) {
 					return $this->redirect(array('controller' => 'admins', 'action' => 'home'));	
@@ -128,8 +128,8 @@ class FranqueadosController extends AppController {
 			$options = array('conditions' => array('Franqueado.' . $this->Franqueado->primaryKey => $id));
 			$this->request->data = $this->Franqueado->find('first', $options);
 
-			//$endereco = $this->Endereco->findById($this->request->data['FranqueadoEndereco']['0']['endereco_id']);
-			//$this->request->data = array_merge($this->request->data, $endereco);
+			$endereco = $this->Endereco->findById($this->request->data['FranqueadoEndereco']['0']['endereco_id']);
+			$this->request->data = array_merge($this->request->data, $endereco);
 		}
 	}
 
@@ -213,9 +213,25 @@ class FranqueadosController extends AppController {
 	}
 
 	public function meu_perfil() {
+		
 		$franqueado = $this->Session->read('Franqueado');
 	    $franqueado = $this->Franqueado->findById($franqueado['0']['Franqueado']['id']); 
 		$this->set('franqueado', $franqueado);
+
+		$ends = array();
+		$this->loadModel('Endereco');
+		$this->loadModel('Estado');
+		foreach ($franqueado['FranqueadoEndereco'] as $franq_end) {
+			$options = array(
+				'conditions' => array(
+					'Endereco.id' => $franq_end['endereco_id']
+				),
+				'recursive' => 2
+			);
+
+			array_push($ends, $this->Endereco->find('first', $options));
+		}
+		$this->set('ends', $ends);
 	}	
 
 	public function relatorios() {
