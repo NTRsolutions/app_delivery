@@ -7,7 +7,7 @@
 			    <li><a href="../gerentes/home">Início</a></li>
 			    <li class="active">Meu Restaurante</li>
 				</ul> 
-				<h1><?php echo __('Admins'); ?></h1>
+				<h1><?php echo __('Meu Restaurante'); ?></h1>
 			</div>
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
@@ -37,48 +37,64 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<thead>
-					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('id'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('login'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('senha'); ?></th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php foreach ($admins as $admin): ?>
-					<tr>
-						<td nowrap><?php echo h($admin['Admin']['id']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($admin['Admin']['login']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($admin['Admin']['senha']); ?>&nbsp;</td>
-						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $admin['Admin']['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $admin['Admin']['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $admin['Admin']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $admin['Admin']['id'])); ?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-				</tbody>
-			</table>
 
-			<p>
-				<small><?php echo $this->Paginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?></small>
-			</p>
+			<div class="col-md-3">
 
-			<?php
-			$params = $this->Paginator->params();
-			if ($params['pageCount'] > 1) {
-			?>
-			<ul class="pagination pagination-sm">
-				<?php
-					echo $this->Paginator->prev('&larr; Previous', array('class' => 'prev','tag' => 'li','escape' => false), '<a onclick="return false;">&larr; Previous</a>', array('class' => 'prev disabled','tag' => 'li','escape' => false));
-					echo $this->Paginator->numbers(array('separator' => '','tag' => 'li','currentClass' => 'active','currentTag' => 'a'));
-					echo $this->Paginator->next('Next &rarr;', array('class' => 'next','tag' => 'li','escape' => false), '<a onclick="return false;">Next &rarr;</a>', array('class' => 'next disabled','tag' => 'li','escape' => false));
+				<?php 
+					if (!is_null($rest['0']['Restaurante']['foto'])) {									
+						echo '<div class="foto_view">';
+						echo $this->Html->image($rest['0']['Restaurante']['foto'], array('class' => 'img-responsive img_view')); 
+						echo $this->Form->postLink('<span class="btn btn-danger btn-xs" role="button">Excluir foto</span>', array('controller' => 'restaurantes', 'action' => 'delete_foto', $rest['0']['Restaurante']['id']), array('escape' => false), __('Deseja apagar a foto?')); 
+						echo '</div>';
+					}
 				?>
-			</ul>
-			<?php } ?>
 
+			</div>
+
+			<div class="col-md-4">
+
+				<div class="related row">
+
+					<legend>Dados do restaurante:</legend>
+
+					<div class="actions">
+						<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Editar Restaurante'), array('controller' => 'restaurantes', 'action' => 'edit', $rest['0']['Restaurante']['id']), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
+					</div><br>
+						
+					<?php if (!empty($gerente['Restaurante'])): ?>
+						
+						<?php echo __('<b>Nome:</b> ') . $rest['0']['Restaurante']['nome'];?> <br /><br />
+						<?php echo __('<b>CNPJ:</b> ') . $rest['0']['Restaurante']['cnpj']; ?> <br /><br />
+						<?php echo __('<b>Email:</b> ') . $rest['0']['Restaurante']['email']; ?> <br /><br />
+						<?php echo __('<b>Descrição:</b> ') . $rest['0']['Restaurante']['descricao']; ?> <br /><br />
+						<?php echo __('<b>Horário de funcionamento:</b> ') . $rest['0']['Restaurante']['horario_abre'] . ' às ' . $rest['0']['Restaurante']['horario_fecha'] ?> <br /><br />
+						<?php echo __('<b>Tempo de mercado:</b> ') . $rest['0']['Restaurante']['tempo_mercado'] . ' anos'; ?> <br /><br />
+						<?php echo __('<b>Valor mínimo de produtos:</b> ') . 'R$ ' . $rest['0']['Restaurante']['valor_min']; ?> <br /><br />
+						<?php echo __('<b>Telefone1:</b> ') . $rest['0']['Restaurante']['telefone1']; ?> <br /><br />
+						<?php echo __('<b>Telefone2:</b> ') . $rest['0']['Restaurante']['telefone2']; ?> <br /><br />
+						<?php echo __('<b>Franqueado:</b> ') . $rest['0']['Franqueado']['nome']; ?> <br /><br />
+		
+					<?php endif; ?>
+				</div>
+			</div>
+
+			<div class="col-md-5">
+
+				<legend>Endereços:</legend>
+
+				<div class="actions">
+						<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Endereço'), array('controller' => 'enderecos', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
+					</div><br>
+
+				<?php foreach ($ends as $e):
+
+					echo 'Rua ' . $e['Endereco']['rua'] . ', ' . $e['Endereco']['numero'] . ', ' . $e['Endereco']['bairro'] . ', ' . $e['Endereco']['complemento'] . ' - ' . $e['Endereco']['cep'] . ', ' . $e['Cidade']['nome'] . ', ' . $e['Cidade']['Estado']['nome'] . '<br><br>'; 
+
+					echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>&nbsp;Editar'), array('controller' => 'enderecos', 'action' => 'edit', $e['Endereco']['id']), array('escape' => false)) . '&nbsp;&nbsp;'; 
+					echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>&nbsp;Excluir'), array('controller' => 'enderecos', 'action' => 'delete', $e['Endereco']['id']), array('escape' => false), __('Você realmente deseja excluir este endereço?')) . '<br><hr>'; 
+					
+				endforeach; ?>	
+			</div>	
 		</div> <!-- end col md 9 -->
 	</div><!-- end row -->
 

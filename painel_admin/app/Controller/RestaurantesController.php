@@ -134,4 +134,13 @@ class RestaurantesController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+	public function delete_foto($id = null, $idCity = null) {
+		$this->Restaurante->id = $id;
+		if (!$this->Restaurante->exists()) {
+			throw new NotFoundException(__('Invalid restaurante'));
+		}
+		$this->Restaurante->updateAll(array('foto' => null), array('Restaurante.id' => $id));
+		return $this->redirect(array('controller' => 'gerentes', 'action' => 'meu_restaurante'));
+	}
 }

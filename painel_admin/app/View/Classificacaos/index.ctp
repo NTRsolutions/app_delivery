@@ -69,10 +69,10 @@
 
 				<div class="jumbotron jumb">
 
-					<?php echo $c['Cliente']['nome'] . ' escreveu:' ?> <br /> <?php echo 'Nota: <b>' . $c['Classificacao']['nota'] . '</b>' ?> <br /><br />
+					<?php echo $c['Cliente']['nome'] . ' escreveu:' ?> <br /> <?php echo 'Nota: <b>' . $c['Classificacao']['nota'] . '</b>' ?> <br />
 
 					<?php if($this->Session->check('Admin')) {
-						echo '<b>' . $c['Restaurante']['nome'] . '</b>'; 
+						echo '<br /><b>' . $c['Restaurante']['nome'] . '</b>'; 
 					} ?>
 
 			        <?php echo '<h4>' . $c['Classificacao']['comentario'] . '</h4>' ?>

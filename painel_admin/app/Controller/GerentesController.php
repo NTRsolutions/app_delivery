@@ -166,7 +166,37 @@ class GerentesController extends AppController {
 	}
 
 	public function meu_restaurante() {
-		
+		$gerente = $this->Session->read('Gerente');
+	    $gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']); 
+		$this->set('gerente', $gerente);
+
+		$rest = array();
+		$this->loadModel('Restaurante');
+		foreach ($gerente['Restaurante'] as $geRest) {
+			$options = array(
+				'conditions' => array(
+					'Gerente.id' => $geRest['gerente_id']
+				),
+				'recursive' => 2
+			);
+
+			array_push($rest, $this->Restaurante->find('first', $options));
+		}
+		$this->set('rest', $rest);
+
+		$ends = array();
+		$this->loadModel('Endereco');
+		foreach ($rest['0']['RestauranteEndereco'] as $rest_end) {
+			$options = array(
+				'conditions' => array(
+					'Endereco.id' => $rest_end['endereco_id']
+				),
+				'recursive' => 2
+			);
+
+			array_push($ends, $this->Endereco->find('first', $options));
+		}
+		$this->set('ends', $ends);
 	}	
 
 	public function relatorios() {
