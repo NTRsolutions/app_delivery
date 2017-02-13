@@ -105,8 +105,10 @@ class GerentesController extends AppController {
 	}
 
 	public function home() {
-		$this->Gerente->recursive = 0;
-		$this->set('gerentes', $this->Paginator->paginate());
+		$gerente = $this->Session->read('Gerente');
+
+		$this->loadModel('Pedido');
+		
 	}
 
 	public function recuperar_senha() {

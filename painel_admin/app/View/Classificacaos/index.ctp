@@ -8,7 +8,7 @@
 						    <li><a href="gerentes/home">Início</a></li>
 						    <li class="active">Avaliações</li>
 						</ul>
-				<?php } else { ?>
+				<?php } else if($this->Session->check('Franqueado')){ ?>
 						<ul class="breadcrumb" id="bread">
 						    <li><a href="franqueados/home">Início</a></li>
 						    <li class="active">Avaliações</li>

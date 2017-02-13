@@ -158,8 +158,14 @@ class FranqueadosController extends AppController {
 	}
 
 	public function home() {
-		$this->Franqueado->recursive = 0;
-		$this->set('franqueados', $this->Paginator->paginate());
+		$this->loadModel('Restaurante');
+		$franq = $this->Session->read('Franqueado');
+		$options = array(
+			'conditions' => array(
+				'Restaurante.franqueado_id' => $franq['0']['Franqueado']['id']
+			)
+		);
+		$this->set('restaurantes', $this->Restaurante->find('all', $options));
 	}
 
 	public function recuperar_senha() {

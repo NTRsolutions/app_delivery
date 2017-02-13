@@ -39,14 +39,7 @@
 				<thead>
 					<tr>
 						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('cnpj'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('descricao'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('foto'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('horario_abre'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('horario_fecha'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('tempo_mercado'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('valor_min'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('telefone1'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('telefone2'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('gerente_id'); ?></th>
@@ -58,21 +51,14 @@
 				<?php foreach ($restaurantes as $restaurante): ?>
 					<tr>
 						<td nowrap><?php echo h($restaurante['Restaurante']['nome']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($restaurante['Restaurante']['cnpj']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($restaurante['Restaurante']['email']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($restaurante['Restaurante']['descricao']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($restaurante['Restaurante']['foto']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($restaurante['Restaurante']['horario_abre']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($restaurante['Restaurante']['horario_fecha']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($restaurante['Restaurante']['tempo_mercado']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($restaurante['Restaurante']['valor_min']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($restaurante['Restaurante']['telefone1']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($restaurante['Restaurante']['telefone2']); ?>&nbsp;</td>
 								<td>
-									<?php echo $this->Html->link($restaurante['Gerente']['id'], array('controller' => 'gerentes', 'action' => 'view', $restaurante['Gerente']['id'])); ?>
+									<?php echo $this->Html->link($restaurante['Gerente']['nome'], array('controller' => 'gerentes', 'action' => 'view', $restaurante['Gerente']['id'])); ?>
 								</td>
 								<td>
-									<?php echo $this->Html->link($restaurante['Franqueado']['id'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
+									<?php echo $this->Html->link($restaurante['Franqueado']['nome'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
 								</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $restaurante['Restaurante']['id']), array('escape' => false)); ?>

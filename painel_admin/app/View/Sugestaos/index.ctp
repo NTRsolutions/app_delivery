@@ -3,10 +3,12 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
-				<ul class="breadcrumb" id="bread">
+				<?php if($this->Session->check('Franqueado')){ ?>
+					<ul class="breadcrumb" id="bread">
 				    <li><a href="franqueados/home">Início</a></li>
 				    <li class="active">Sugestões</li>
-				</ul>
+					</ul>
+				 <?php } ?>
 				<h1><?php echo __('Sugestões'); ?></h1>
 			</div>
 		</div><!-- end col md 12 -->

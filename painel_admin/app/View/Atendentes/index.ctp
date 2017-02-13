@@ -40,24 +40,16 @@
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>
 					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('id'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('senha'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('restaurante_id'); ?></th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
 				<tbody>
 				<?php foreach ($atendentes as $atendente): ?>
 					<tr>
-						<td nowrap><?php echo h($atendente['Atendente']['id']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($atendente['Atendente']['nome']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($atendente['Atendente']['email']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($atendente['Atendente']['senha']); ?>&nbsp;</td>
-								<td>
-			<?php echo $this->Html->link($atendente['Restaurante']['id'], array('controller' => 'restaurantes', 'action' => 'view', $atendente['Restaurante']['id'])); ?>
-		</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $atendente['Atendente']['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $atendente['Atendente']['id']), array('escape' => false)); ?>

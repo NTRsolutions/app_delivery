@@ -40,30 +40,18 @@
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>
 					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('id'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('tipo'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('descricao'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('preco'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('foto'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('qtd_max_complemento'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('restaurante_id'); ?></th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
 				<tbody>
 				<?php foreach ($produtos as $produto): ?>
 					<tr>
-						<td nowrap><?php echo h($produto['Produto']['id']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($produto['Produto']['nome']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($produto['Produto']['tipo']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($produto['Produto']['descricao']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($produto['Produto']['preco']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($produto['Produto']['foto']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($produto['Produto']['qtd_max_complemento']); ?>&nbsp;</td>
-								<td>
-			<?php echo $this->Html->link($produto['Restaurante']['id'], array('controller' => 'restaurantes', 'action' => 'view', $produto['Restaurante']['id'])); ?>
-		</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $produto['Produto']['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $produto['Produto']['id']), array('escape' => false)); ?>

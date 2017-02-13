@@ -3,10 +3,12 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
-				<ul class="breadcrumb" id="bread">
+				<?php if($this->Session->check('Franqueado')){ ?>
+					<ul class="breadcrumb" id="bread">
 				    <li><a href="franqueados/home">Início</a></li>
 				    <li class="active">Gerentes</li>
-				</ul>
+					</ul>
+				<?php } ?>
 				<h1><?php echo __('Gerentes'); ?></h1>
 			</div>
 		</div><!-- end col md 12 -->
@@ -49,20 +51,16 @@
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>
 					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('id'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('senha'); ?></th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
 				<tbody>
 				<?php foreach ($gerentes as $gerente): ?>
 					<tr>
-						<td nowrap><?php echo h($gerente['Gerente']['id']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($gerente['Gerente']['nome']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($gerente['Gerente']['email']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($gerente['Gerente']['senha']); ?>&nbsp;</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $gerente['Gerente']['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $gerente['Gerente']['id']), array('escape' => false)); ?>

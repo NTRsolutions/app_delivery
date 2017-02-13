@@ -6,7 +6,7 @@
 				<ul class="breadcrumb" id="bread">
 				    <li class="active">Início</li>
 				</ul> 
-				<h1><?php echo __('Gerentes'); ?></h1>
+				<h1><?php echo __('Gerente'); ?></h1>
 			</div>
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
@@ -34,30 +34,13 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<thead>
-					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('id'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('login'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('senha'); ?></th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php foreach ($gerentes as $ger): ?>
-					<tr>
-						<td nowrap><?php echo h($ger['Gerente']['id']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($ger['Gerente']['email']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($ger['Gerente']['senha']); ?>&nbsp;</td>
-						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $ger['Gerente']['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $ger['Gerente']['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $ger['Gerente']['id']), array('escape' => false), __('Tem certeza que deseja excluir: %s?', $ger['Gerente']['nome'])); ?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-				</tbody>
-			</table>
+			<?php 
+				if (empty($pedidos)) {
+					echo '<h4>Nenhum pedido realizado até o momento!</h4>';
+				} else {
+					
+				}
+			?>
 		</div> <!-- end col md 9 -->
 	</div><!-- end row -->
 
