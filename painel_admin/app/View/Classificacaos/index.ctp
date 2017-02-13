@@ -65,20 +65,29 @@
 
 		<div class="col-md-9">
 			
-			<?php foreach ($classificacaos as $c): ?>
+			<?php foreach ($classificacaos as $c): 
 
-				<div class="jumbotron jumb">
+				if($c['Classificacao']['restaurante_id'] == $rest['0']['Restaurante']['id']) { ?>
 
-					<?php echo $c['Cliente']['nome'] . ' escreveu:' ?> <br /> <?php echo 'Nota: <b>' . $c['Classificacao']['nota'] . '</b>' ?> <br />
+					<div class="jumbotron jumb">
 
-					<?php if($this->Session->check('Admin')) {
-						echo '<br /><b>' . $c['Restaurante']['nome'] . '</b>'; 
-					} ?>
+						<?php echo $c['Cliente']['nome'] . ' escreveu:' ?> <br /> <?php echo 'Nota: <b>' . $c['Classificacao']['nota'] . '</b>' ?> <br />
 
-			        <?php echo '<h4>' . $c['Classificacao']['comentario'] . '</h4>' ?>
+						<?php if($this->Session->check('Admin')) {
+							echo '<br /><b>' . $c['Restaurante']['nome'] . '</b>'; 
+						} ?>
 
-			    </div>
-				
+				        <?php echo '<h4>' . $c['Classificacao']['comentario'] . '</h4>' ?>
+
+				    </div>
+
+
+				<?php } else { 
+
+					echo '<h4>Nenhuma avaliação realizada até o momento!</h4>'; 
+
+				} ?>
+
 			<?php endforeach; ?>
 
 		</div> <!-- end col md 9 -->

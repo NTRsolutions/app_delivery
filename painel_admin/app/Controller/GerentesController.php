@@ -166,6 +166,7 @@ class GerentesController extends AppController {
 	}
 
 	public function meu_restaurante() {
+		
 		$gerente = $this->Session->read('Gerente');
 	    $gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']); 
 		$this->set('gerente', $gerente);
@@ -179,7 +180,6 @@ class GerentesController extends AppController {
 				),
 				'recursive' => 2
 			);
-
 			array_push($rest, $this->Restaurante->find('first', $options));
 		}
 		$this->set('rest', $rest);

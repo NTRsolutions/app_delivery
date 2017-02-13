@@ -23,8 +23,25 @@ class ClassificacaosController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Classificacao->recursive = 0;
-		$this->set('classificacaos', $this->Paginator->paginate());
+		$this->loadModel('Gerente');
+		$gerente = $this->Session->read('Gerente');
+	    $gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']); 
+		$this->set('gerente', $gerente);
+
+		$this->set('classificacaos', $this->Classificacao->find('all'));
+
+		$rest = array();
+		$this->loadModel('Restaurante');
+		foreach ($gerente['Restaurante'] as $geRest) {
+			$options = array(
+				'conditions' => array(
+					'Gerente.id' => $geRest['gerente_id']
+				),
+				'recursive' => 2
+			);
+			array_push($rest, $this->Restaurante->find('first', $options));
+		}
+		$this->set('rest', $rest);
 	}
 
 /**
