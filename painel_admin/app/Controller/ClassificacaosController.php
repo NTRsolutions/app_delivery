@@ -23,25 +23,30 @@ class ClassificacaosController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->loadModel('Gerente');
-		$gerente = $this->Session->read('Gerente');
-	    $gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']); 
-		$this->set('gerente', $gerente);
 
-		$this->set('classificacaos', $this->Classificacao->find('all'));
+		if($this->Session->check('Admin')) {
 
-		$rest = array();
-		$this->loadModel('Restaurante');
-		foreach ($gerente['Restaurante'] as $geRest) {
-			$options = array(
-				'conditions' => array(
-					'Gerente.id' => $geRest['gerente_id']
-				),
-				'recursive' => 2
-			);
-			array_push($rest, $this->Restaurante->find('first', $options));
+			$this->Classificacao->recursive = 0;
+			$this->set('classificacaos', $this->Paginator->paginate());
+
+		} else if ($this->Session->check('Gerente')) {
+
+			$this->set('classificacaos', $this->Classificacao->find('all'));
+
+			$this->loadModel('Gerente');
+			$gerente = $this->Session->read('Gerente');
+		    $gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']); 
+			$this->set('gerente', $gerente);
+
+		} else {
+
+			$this->set('classificacaos', $this->Classificacao->find('all'));
+
+			$this->loadModel('Franqueado');
+			$franq = $this->Session->read('Franqueado');
+		    $franq = $this->Franqueado->findById($franq['0']['Franqueado']['id']); 
+			$this->set('franq', $franq);
 		}
-		$this->set('rest', $rest);
 	}
 
 /**

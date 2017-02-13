@@ -64,32 +64,93 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">
-			
-			<?php foreach ($classificacaos as $c): 
 
-				if($c['Classificacao']['restaurante_id'] == $rest['0']['Restaurante']['id']) { ?>
+			<?php 
 
-					<div class="jumbotron jumb">
+			$existe = false;
 
-						<?php echo $c['Cliente']['nome'] . ' escreveu:' ?> <br /> <?php echo 'Nota: <b>' . $c['Classificacao']['nota'] . '</b>' ?> <br />
+			if($this->Session->check('Admin')) {
 
-						<?php if($this->Session->check('Admin')) {
+				foreach ($classificacaos as $c): 
+
+					if(isset($c)) { ?>
+
+						<div class="jumbotron jumb">
+
+							<?php echo $c['Cliente']['nome'] . ' escreveu:' ?> <br /> <?php echo 'Nota: <b>' . $c['Classificacao']['nota'] . '</b><br />';
+
 							echo '<br /><b>' . $c['Restaurante']['nome'] . '</b>'; 
-						} ?>
 
-				        <?php echo '<h4>' . $c['Classificacao']['comentario'] . '</h4>' ?>
+					        echo '<h4>' . $c['Classificacao']['comentario'] . '</h4>' ?>
 
-				    </div>
+					    </div>
 
+					<?php $existe = true; }  
 
-				<?php } else { 
+				endforeach; 
 
+				if ($existe == false) {
 					echo '<h4>Nenhuma avaliação realizada até o momento!</h4>'; 
+				}
 
-				} ?>
+			} else if($this->Session->check('Gerente')) {
 
-			<?php endforeach; ?>
+				$existe = false;
 
+				foreach ($gerente['Restaurante'] as $g):
+
+				 	foreach ($classificacaos as $c): 
+
+						if($c['Classificacao']['restaurante_id'] == $g['id']) { ?>
+
+							<div class="jumbotron jumb">
+
+								<?php echo $c['Cliente']['nome'] . ' escreveu:' ?> <br /> <?php echo 'Nota: <b>' . $c['Classificacao']['nota'] . '</b>' ?> <br />
+
+						        <?php echo '<h4>' . $c['Classificacao']['comentario'] . '</h4>' ?>
+
+						    </div>
+
+						<?php $existe = true; } ?>
+
+					<?php endforeach;
+					
+				endforeach; 
+
+				if ($existe == false) {
+					echo '<h4>Nenhuma avaliação realizada até o momento!</h4>'; 
+				}
+
+			} else {
+
+				$existe = false;
+
+				foreach ($franq['Restaurante'] as $f):
+
+					echo '<legend>' . $f['nome'] . '</legend>';
+			
+			 		foreach ($classificacaos as $c): 
+
+						if($c['Classificacao']['restaurante_id'] == $f['id']) { ?>
+
+							<div class="jumbotron jumb">
+
+								<?php echo $c['Cliente']['nome'] . ' escreveu:' ?> <br /> <?php echo 'Nota: <b>' . $c['Classificacao']['nota'] . '</b>' ?> <br />
+
+						        <?php echo '<h4>' . $c['Classificacao']['comentario'] . '</h4>' ?>
+
+						    </div>
+
+						<?php $existe = true; } ?>
+
+					<?php endforeach; 
+
+				endforeach;
+
+				if ($existe == false) {
+					echo '<h4>Nenhuma avaliação realizada até o momento!</h4>'; 
+				}
+			} ?>
 		</div> <!-- end col md 9 -->
 	</div><!-- end row -->
 
