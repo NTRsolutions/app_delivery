@@ -444,7 +444,7 @@ CREATE TABLE IF NOT EXISTS `bd_deliverall`.`franqueado_enderecos` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_general_ci
+COLLATE = utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS `bd_deliverall`.`produto_complementos` (
   `qtd` INT(11) NOT NULL COMMENT '',
@@ -471,10 +471,23 @@ CREATE TABLE IF NOT EXISTS `bd_deliverall`.`produto_complementos` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_general_ci
+COLLATE = utf8_general_ci;
 
 ALTER TABLE `bd_deliverall`.`promocaos` 
-CHANGE COLUMN `produto_id` `produto_id` INT(11) NOT NULL COMMENT '' AFTER `desconto`
+CHANGE COLUMN `produto_id` `produto_id` INT(11) NOT NULL COMMENT '' AFTER `desconto`;
+
+ALTER TABLE `bd_deliverall`.`pedidos` 
+ADD COLUMN `endereco_id` INT(11) NOT NULL COMMENT '' AFTER `cliente_id`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`id`, `cliente_id`, `endereco_id`)  COMMENT '',
+ADD INDEX `fk_pedidos_enderecos1_idx` (`endereco_id` ASC)  COMMENT ''
+ALTER TABLE `bd_deliverall`.`pedidos` 
+ADD CONSTRAINT `fk_pedidos_enderecos1`
+  FOREIGN KEY (`endereco_id`)
+  REFERENCES `bd_deliverall`.`enderecos` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

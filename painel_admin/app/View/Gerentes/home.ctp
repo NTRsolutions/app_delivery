@@ -38,7 +38,12 @@
 				if (empty($pedidos)) {
 					echo '<h4>Nenhum pedido realizado até o momento!</h4>';
 				} else {
-					
+					foreach ($pedidos as $p) {						
+						echo '<div class="jumbotron">';
+							echo '<p>Cliente: '.$p['Cliente']['nome'].'</p>';
+						echo '</div>';
+						debug($p);
+					}
 				}
 			?>
 		</div> <!-- end col md 9 -->

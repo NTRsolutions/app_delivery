@@ -108,7 +108,10 @@ class GerentesController extends AppController {
 		$gerente = $this->Session->read('Gerente');
 
 		$this->loadModel('Pedido');
-		
+		$options = array(
+			'recursive' => 2
+		);
+		$this->set('pedidos', $this->Pedido->find('all', $options));
 	}
 
 	public function recuperar_senha() {
