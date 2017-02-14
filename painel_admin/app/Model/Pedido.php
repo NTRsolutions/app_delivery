@@ -23,6 +23,13 @@ class Pedido extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Endereco' => array(
+			'className' => 'Endereco',
+			'foreignKey' => 'endereco_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

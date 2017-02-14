@@ -25,6 +25,22 @@ class Endereco extends AppModel {
 		)
 	);
 
+	public $hasOne = array(
+		'Pedido' => array(
+			'className' => 'Pedido',
+			'foreignKey' => 'endereco_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+
 	public $hasMany = array(
 		'RestauranteEndereco' => array(
 			'className' => 'RestauranteEndereco',

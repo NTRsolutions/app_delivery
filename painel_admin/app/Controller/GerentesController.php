@@ -108,10 +108,18 @@ class GerentesController extends AppController {
 		$gerente = $this->Session->read('Gerente');
 
 		$this->loadModel('Pedido');
+		$this->loadModel('ProdutoComplemento');
 		$options = array(
 			'recursive' => 2
 		);
-		$this->set('pedidos', $this->Pedido->find('all', $options));
+
+		$pedidos = $this->Pedido->find('all', $options);
+
+		foreach ($pedidos['PedidoProduto'] as $pp) {
+			
+		}
+		
+		$this->set(compact('pedidos'));
 	}
 
 	public function recuperar_senha() {

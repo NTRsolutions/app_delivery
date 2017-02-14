@@ -488,6 +488,17 @@ ADD CONSTRAINT `fk_pedidos_enderecos1`
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
+ALTER TABLE `bd_deliverall`.`pedidos` 
+ADD COLUMN `restaurante_id` INT(11) NOT NULL COMMENT '' AFTER `endereco_id`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`id`, `cliente_id`, `endereco_id`, `restaurante_id`)  COMMENT '',
+ADD INDEX `fk_pedidos_restaurantes1_idx` (`restaurante_id` ASC)  COMMENT ''
+ALTER TABLE `bd_deliverall`.`pedidos` 
+ADD CONSTRAINT `fk_pedidos_restaurantes1`
+  FOREIGN KEY (`restaurante_id`)
+  REFERENCES `bd_deliverall`.`restaurantes` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
