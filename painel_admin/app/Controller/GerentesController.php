@@ -108,17 +108,26 @@ class GerentesController extends AppController {
 		$gerente = $this->Session->read('Gerente');
 
 		$this->loadModel('Pedido');
+		$this->loadModel('Produto');
 		$this->loadModel('ProdutoComplemento');
 		$options = array(
-			'recursive' => 2
+			'conditions' => array(
+				'Pedido.restaurante_id'	=> $gerente['0']['Restaurante']['0']['id']
+			)
 		);
 
 		$pedidos = $this->Pedido->find('all', $options);
 
-		foreach ($pedidos['PedidoProduto'] as $pp) {
-			
+		foreach ($pedidos as $p) {			
+			foreach ($p['PedidoProduto'] as $pp) {
+				$prod = $this->Produto->findAllById($pp['produto_id']);
+				$pc = $this->ProdutoComplemento->findAllByPedidoIdAndProdutoId($pp['pedido_id'], $pp['produto_id']);
+				debug($prod);
+				//array_push($pp, array('ProdutoComplemento' => array()));
+				//array_push($pp, $pc);
+			}
 		}
-		
+
 		$this->set(compact('pedidos'));
 	}
 

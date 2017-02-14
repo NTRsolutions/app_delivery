@@ -30,6 +30,13 @@ class Pedido extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Restaurante' => array(
+			'className' => 'Restaurante',
+			'foreignKey' => 'restaurante_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

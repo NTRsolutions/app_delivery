@@ -98,6 +98,19 @@ class Restaurante extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+		'Pedido' => array(
+			'className' => 'Pedido',
+			'foreignKey' => 'restaurante_id',
+			'dependent' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => true,
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Produto' => array(
 			'className' => 'Produto',
 			'foreignKey' => 'restaurante_id',
