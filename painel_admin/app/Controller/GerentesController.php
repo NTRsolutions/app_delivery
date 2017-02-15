@@ -108,8 +108,6 @@ class GerentesController extends AppController {
 		$gerente = $this->Session->read('Gerente');
 
 		$this->loadModel('Pedido');
-		$this->loadModel('Produto');
-		$this->loadModel('ProdutoComplemento');
 		$options = array(
 			'contain' => array(
 				'Endereco',

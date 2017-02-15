@@ -57,7 +57,8 @@ class EnderecosController extends AppController {
 				$this->Session->setFlash(__('The endereco could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$cidades = $this->Endereco->Cidade->find('list');
+		$options = array('fields' => 'Cidade.nome');
+		$cidades = $this->Endereco->Cidade->find('list', $options);
 		$this->set(compact('cidades'));
 	}
 
@@ -83,7 +84,8 @@ class EnderecosController extends AppController {
 			$options = array('conditions' => array('Endereco.' . $this->Endereco->primaryKey => $id));
 			$this->request->data = $this->Endereco->find('first', $options);
 		}
-		$cidades = $this->Endereco->Cidade->find('list');
+		$options = array('fields' => 'Cidade.nome');
+		$cidades = $this->Endereco->Cidade->find('list', $options);
 		$this->set(compact('cidades'));
 	}
 

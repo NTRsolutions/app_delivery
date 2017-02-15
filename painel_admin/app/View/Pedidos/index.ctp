@@ -21,7 +21,7 @@
 								<?php if($this->Session->check('Admin')){ ?>
 									<li class="active"><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Pedidos</a></li>
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;'.__('Restaurantes'), array('controller' => 'restaurantes', 'action' => 'index'), array('escape' => false)); ?></li>
-									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;'.__('Franqueados'), array('controller' => 'admins', 'action' => 'home'), array('escape' => false)); ?></li>								
+									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;'.__('Franqueados'), array('controller' => 'admins', 'action' => 'home'), array('escape' => false)); ?></li>		
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;'.__('Gerentes'), array('controller' => 'gerentes', 'action' => 'index'), array('escape' => false)); ?></li>
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;'.__('Sugestões'), array('controller' => 'sugestaos', 'action' => 'index'), array('escape' => false)); ?></li>
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-star-empty"></span>&nbsp;&nbsp;'.__('Avaliações'), array('controller' => 'classificacaos', 'action' => 'index'), array('escape' => false)); ?></li>
@@ -38,24 +38,20 @@
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>
 					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('id'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('total'); ?></th>
+						<th nowrap><?php echo $this->Paginator->sort('cliente'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('status'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('data'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('cliente_id'); ?></th>
+						<th nowrap><?php echo $this->Paginator->sort('total'); ?></th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
 				<tbody>
 				<?php foreach ($pedidos as $pedido): ?>
 					<tr>
-						<td nowrap><?php echo h($pedido['Pedido']['id']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($pedido['Pedido']['total']); ?>&nbsp;</td>
+						<td> <?php echo $this->Html->link($pedido['Cliente']['nome'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?> </td>
 						<td nowrap><?php echo h($pedido['Pedido']['status']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($pedido['Pedido']['data']); ?>&nbsp;</td>
-								<td>
-			<?php echo $this->Html->link($pedido['Cliente']['id'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>
-		</td>
+						<td nowrap><?php echo h($pedido['Pedido']['total']); ?>&nbsp;</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $pedido['Pedido']['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $pedido['Pedido']['id']), array('escape' => false)); ?>
