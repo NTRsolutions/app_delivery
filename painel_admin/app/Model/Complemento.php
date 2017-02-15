@@ -24,4 +24,20 @@ class Complemento extends AppModel {
 			'order' => ''
 		)
 	);
+
+	public $hasMany = array(
+		'ProdutoComplemento' => array(
+			'className' => 'ProdutoComplemento',
+			'foreignKey' => 'Complemento_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
 }

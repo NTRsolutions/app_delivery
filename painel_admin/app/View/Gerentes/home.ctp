@@ -43,7 +43,8 @@
 							echo '<p>Pedido nº: '.$p['Pedido']['id'].'</p>';
 							echo '<p>Cliente: '.$p['Cliente']['nome'].' - Contato: '.$p['Cliente']['telefone1'].'</p>';
 							echo '<p>Endereço de entrega: '.$p['Endereco']['rua'].','.$p['Endereco']['numero'].' - '.$p['Endereco']['complemento'].', '.$p['Endereco']['bairro'].' - '.$p['Endereco']['cep'].'</p>';
-							
+							echo '<p>Itens:</p>';
+
 							echo '<hr>';
 						echo '</div>';
 						debug($p);
