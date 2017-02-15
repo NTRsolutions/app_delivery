@@ -39,15 +39,41 @@
 					echo '<h4>Nenhum pedido realizado até o momento!</h4>';
 				} else {
 					foreach ($pedidos as $p) {						
-						echo '<div class="jumbotron">';
+						echo '<div class="col-md-6">';
 							echo '<p>Pedido nº: '.$p['Pedido']['id'].'</p>';
 							echo '<p>Cliente: '.$p['Cliente']['nome'].' - Contato: '.$p['Cliente']['telefone1'].'</p>';
 							echo '<p>Endereço de entrega: '.$p['Endereco']['rua'].','.$p['Endereco']['numero'].' - '.$p['Endereco']['complemento'].', '.$p['Endereco']['bairro'].' - '.$p['Endereco']['cep'].'</p>';
-							echo '<p>Itens:</p>';
-
-							echo '<hr>';
+							echo '<table cellpadding="0" cellspacing="0" class="table table-striped">';
+								echo '<thead>';
+									echo '<tr>';
+										echo '<th width="20%">Quantidade</th>';
+										echo '<th width="40%">Produtos</th>';
+										echo '<th width="40%">Complementos</th>';
+									echo '</tr>';
+								echo '</thead>';
+								echo '<tbody>';
+									echo '<tr>';
+										foreach ($p['PedidoProduto'] as $pp) {
+											echo '<td>';
+												echo $pp['qtd'];
+											echo '</td>';
+											echo '<td>';
+												echo $pp['Produto']['nome'];
+											echo '</td>';
+											echo '<td>';
+												foreach ($pp['Produto']['ProdutoComplemento'] as $pc) {
+													echo $pc['qtd'].' - '.$pc['Complemento']['nome'].'<br>';
+												}
+											echo '</td>';
+											
+										}
+									echo '<tr>';
+								echo '</tbody>';
+							echo '</table>';
+							echo '<div class="col-md-6" style="padding:0"><button class="btn btn-default">Teste</button></div>';
+							echo '<div class="col-md-6"><h4 class="pull-right">Valor total: R$'.$p['Pedido']['total'].'</h4></div>';
 						echo '</div>';
-						debug($p);
+						//debug($p);
 					}
 				}
 			?>
