@@ -4,18 +4,15 @@
 		<div class="col-md-12">
 			<div class="page-header">
 				<ul class="breadcrumb" id="bread">
-			    <li><a href="../gerentes/home">Início</a></li>
-			    <li class="active">Meu Restaurante</li>
+				    <li><a href="../gerentes/home">Início</a></li>
+				    <li class="active">Meu Restaurante</li>
 				</ul> 
 				<h1><?php echo __('Meu Restaurante'); ?></h1>
 			</div>
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
 
-
-
 	<div class="row">
-
 		<div class="col-md-3">
 			<div class="actions">
 				<div class="panel panel-default">

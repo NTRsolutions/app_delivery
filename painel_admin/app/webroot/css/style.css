@@ -58,6 +58,11 @@
   margin-bottom: 5px;
 }
 
+.pad {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
 /* ------------------------
 	Fim Outros
 ------------------------ */

@@ -98,6 +98,7 @@ class RestaurantesController extends AppController {
 		if (!$this->Restaurante->exists($id)) {
 			throw new NotFoundException(__('Invalid restaurante'));
 		}
+
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Restaurante->save($this->request->data)) {
 				$this->Session->setFlash(__('The restaurante has been saved.'), 'default', array('class' => 'alert alert-success'));
@@ -109,8 +110,12 @@ class RestaurantesController extends AppController {
 			$options = array('conditions' => array('Restaurante.' . $this->Restaurante->primaryKey => $id));
 			$this->request->data = $this->Restaurante->find('first', $options);
 		}
-		$gerentes = $this->Restaurante->Gerente->find('list');
-		$franqueados = $this->Restaurante->Franqueado->find('list');
+		
+		$options = array('fields' => 'Gerente.nome');
+		$gerentes = $this->Restaurante->Gerente->find('list', $options);
+
+		$options = array('fields' => 'Franqueado.nome');
+		$franqueados = $this->Restaurante->Franqueado->find('list', $options);
 		$this->set(compact('gerentes', 'franqueados'));
 	}
 
