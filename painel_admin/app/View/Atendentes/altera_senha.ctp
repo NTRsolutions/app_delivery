@@ -3,21 +3,20 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
-				<ul class="breadcrumb" id="bread">
-					<li><a href="../atendentes/home">Início</a></li>
-				    <li><a href="../../atendentes/meu_perfil">Meu Perfil</a></li>
-				    <li><?php echo $this->Html->link('Editar', array('action' => 'edit', $atendente['Atendente']['id']), array('escape' => false)); ?> </li>
-				    <li class="active">Alterar Senha</li>
-				</ul>
+				<?php if($this->Session->check('Atendente')){ ?>
+					<ul class="breadcrumb" id="bread">
+						<li><a href="../atendentes/home">Início</a></li>
+					    <li><a href="../../atendentes/meu_perfil">Meu Perfil</a></li>
+					    <li><?php echo $this->Html->link('Editar', array('action' => 'edit', $atendente['Atendente']['id']), array('escape' => false)); ?> </li>
+					    <li class="active">Alterar Senha</li>
+					</ul>
+				<?php } ?>
 				<h1><?php echo __('Alterar senha'); ?></h1>
 			</div>
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
 
-
-
 	<div class="row">
-
 		<div class="col-md-3">
 			<div class="actions">
 				<div class="panel panel-default">

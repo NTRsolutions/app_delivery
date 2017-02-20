@@ -57,7 +57,8 @@ class AtendentesController extends AppController {
 				$this->Session->setFlash(__('The atendente could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$restaurantes = $this->Atendente->Restaurante->find('list');
+		$options = array('fields' => 'Restaurante.nome');
+		$restaurantes = $this->Atendente->Restaurante->find('list', $options);
 		$this->set(compact('restaurantes'));
 	}
 
@@ -83,7 +84,8 @@ class AtendentesController extends AppController {
 			$options = array('conditions' => array('Atendente.' . $this->Atendente->primaryKey => $id));
 			$this->request->data = $this->Atendente->find('first', $options);
 		}
-		$restaurantes = $this->Atendente->Restaurante->find('list');
+		$options = array('fields' => 'Restaurante.nome');
+		$restaurantes = $this->Atendente->Restaurante->find('list', $options);
 		$this->set(compact('restaurantes'));
 	}
 
@@ -109,8 +111,28 @@ class AtendentesController extends AppController {
 	}
 
 	public function home() {
-		$this->Atendente->recursive = 0;
-		$this->set('atendentes', $this->Paginator->paginate());
+		$atendente = $this->Session->read('Atendente');
+
+		$this->loadModel('Pedido');
+		$options = array(
+			'contain' => array(
+				'Endereco',
+				'Cliente',
+				'PedidoProduto' => array(
+					'Produto' => array(
+						'ProdutoComplemento' => array(
+							'Complemento'
+						)
+					)
+				)
+			),
+			'conditions' => array(
+				'Pedido.restaurante_id'	=> $atendente['0']['Restaurante']['id']
+			)
+		);
+
+		$pedidos = $this->Pedido->find('all', $options);
+		$this->set(compact('pedidos'));
 	}
 
 	public function recuperar_senha() {

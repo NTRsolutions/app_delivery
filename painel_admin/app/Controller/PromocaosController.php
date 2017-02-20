@@ -58,7 +58,9 @@ class PromocaosController extends AppController {
 			}
 		}
 		$produtos = $this->Promocao->Produto->find('list');
-		$restaurantes = $this->Promocao->Restaurante->find('list');
+
+		$options = array('fields' => 'Restaurante.nome');
+		$restaurantes = $this->Promocao->Restaurante->find('list', $options);
 		$this->set(compact('produtos', 'restaurantes'));
 	}
 

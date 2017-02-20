@@ -12,8 +12,6 @@
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
 
-
-
 	<div class="row">
 
 		<div class="col-md-3">
@@ -51,7 +49,7 @@
 					<tr>
 						<td nowrap><?php echo h($produto['Produto']['nome']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($produto['Produto']['tipo']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($produto['Produto']['preco']); ?>&nbsp;</td>
+						<td nowrap><?php echo 'R$' . h($produto['Produto']['preco']); ?>&nbsp;</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $produto['Produto']['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $produto['Produto']['id']), array('escape' => false)); ?>

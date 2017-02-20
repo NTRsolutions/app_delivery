@@ -38,7 +38,8 @@
 				if (empty($pedidos)) {
 					echo '<h4>Nenhum pedido realizado até o momento!</h4>';
 				} else {
-					foreach ($pedidos as $p) {						
+					foreach ($pedidos as $p) {	
+
 						echo '<div class="col-md-6">';
 							echo '<p>Pedido nº: '.$p['Pedido']['id'].'</p>';
 							echo '<p>Cliente: '.$p['Cliente']['nome'].' - Contato: '.$p['Cliente']['telefone1'].'</p>';
@@ -48,12 +49,13 @@
 									echo '<tr>';
 										echo '<th width="20%">Quantidade</th>';
 										echo '<th width="40%">Produtos</th>';
-										echo '<th width="40%">Complementos</th>';
+										echo '<th width="40%">Complemento(s)</th>';
 									echo '</tr>';
 								echo '</thead>';
 								echo '<tbody>';
-									echo '<tr>';
-										foreach ($p['PedidoProduto'] as $pp) {
+									
+									foreach ($p['PedidoProduto'] as $pp) {
+										echo '<tr>';
 											echo '<td>';
 												echo $pp['qtd'];
 											echo '</td>';
@@ -62,12 +64,14 @@
 											echo '</td>';
 											echo '<td>';
 												foreach ($pp['Produto']['ProdutoComplemento'] as $pc) {
-													echo $pc['qtd'].' - '.$pc['Complemento']['nome'].'<br>';
+													if($pp['pedido_id'] == $pc['pedido_id']) { //para não pegar complemento de outro pedido
+														echo $pc['qtd'].'x &nbsp;'.$pc['Complemento']['nome'].'<br>';
+													}
 												}
 											echo '</td>';
-											
-										}
-									echo '<tr>';
+										echo '<tr>';
+									}
+									
 								echo '</tbody>';
 							echo '</table>';
 							echo '<div class="col-md-6" style="padding:0"><button class="btn btn-default">Teste</button></div>';

@@ -28,30 +28,53 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<thead>
-					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('id'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('login'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('senha'); ?></th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php foreach ($atendentes as $at): ?>
-					<tr>
-						<td nowrap><?php echo h($at['Atendente']['id']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($at['Atendente']['email']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($at['Atendente']['senha']); ?>&nbsp;</td>
-						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $at['Atendente']['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $at['Atendente']['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $at['Atendente']['id']), array('escape' => false), __('Tem certeza que deseja excluir: %s?', $at['Atendente']['nome'])); ?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-				</tbody>
-			</table>
+			<?php 
+				if (empty($pedidos)) {
+					echo '<h4>Nenhum pedido realizado até o momento!</h4>';
+				} else {
+					foreach ($pedidos as $p) {	
+
+						echo '<div class="col-md-6">';
+							echo '<p>Pedido nº: '.$p['Pedido']['id'].'</p>';
+							echo '<p>Cliente: '.$p['Cliente']['nome'].' - Contato: '.$p['Cliente']['telefone1'].'</p>';
+							echo '<p>Endereço de entrega: '.$p['Endereco']['rua'].','.$p['Endereco']['numero'].' - '.$p['Endereco']['complemento'].', '.$p['Endereco']['bairro'].' - '.$p['Endereco']['cep'].'</p>';
+							echo '<table cellpadding="0" cellspacing="0" class="table table-striped">';
+								echo '<thead>';
+									echo '<tr>';
+										echo '<th width="20%">Quantidade</th>';
+										echo '<th width="40%">Produtos</th>';
+										echo '<th width="40%">Complemento(s)</th>';
+									echo '</tr>';
+								echo '</thead>';
+								echo '<tbody>';
+									
+									foreach ($p['PedidoProduto'] as $pp) {
+										echo '<tr>';
+											echo '<td>';
+												echo $pp['qtd'];
+											echo '</td>';
+											echo '<td>';
+												echo $pp['Produto']['nome'];
+											echo '</td>';
+											echo '<td>';
+												foreach ($pp['Produto']['ProdutoComplemento'] as $pc) {
+													if($pp['pedido_id'] == $pc['pedido_id']) { //para não pegar complemento de outro pedido
+														echo $pc['qtd'].'x &nbsp;'.$pc['Complemento']['nome'].'<br>';
+													}
+												}
+											echo '</td>';
+										echo '<tr>';
+									}
+									
+								echo '</tbody>';
+							echo '</table>';
+							echo '<div class="col-md-6" style="padding:0"><button class="btn btn-default">Teste</button></div>';
+							echo '<div class="col-md-6"><h4 class="pull-right">Valor total: R$'.$p['Pedido']['total'].'</h4></div>';
+						echo '</div>';
+						//debug($p);
+					}
+				}
+			?>
 		</div> <!-- end col md 9 -->
 	</div><!-- end row -->
 

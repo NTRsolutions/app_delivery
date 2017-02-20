@@ -4,7 +4,7 @@
 		<div class="col-md-12">
 			<div class="page-header">
 				<ul class="breadcrumb" id="bread">
-					<li><a href="../gerentes/home">Início</a></li>
+					<li><a href="../../gerentes/home">Início</a></li>
 				    <li><a href="../../gerentes/meu_perfil">Meu Perfil</a></li>
 				    <li><?php echo $this->Html->link('Editar', array('action' => 'edit', $gerente['Gerente']['id']), array('escape' => false)); ?> </li>
 				    <li class="active">Alterar Senha</li>
@@ -13,8 +13,6 @@
 			</div>
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
-
-
 
 	<div class="row">
 

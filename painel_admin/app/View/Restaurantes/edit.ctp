@@ -3,11 +3,21 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
-				<ul class="breadcrumb" id="bread">
-				    <li><a href="../gerentes/home">Início</a></li>
-				    <li><a href="../../gerentes/meu_restaurante">Meu Restaurante</a></li>
-				    <li class="active">Editar Restaurante</li>
-				</ul> 
+				<?php if($this->Session->check('Gerente')) { ?>
+					<ul class="breadcrumb" id="bread">
+					    <li><a href="../gerentes/home">Início</a></li>
+					    <li><a href="../../gerentes/meu_restaurante">Meu Restaurante</a></li>
+					    <li class="active">Editar Restaurante</li>
+					</ul> 
+				<?php } ?>
+
+				<?php if($this->Session->check('Franqueado')){ ?>
+					<ul class="breadcrumb" id="bread">
+					    <li><a href="../../franqueados/home">Início</a></li>
+					    <?php echo '<li><a href="../../restaurantes/view/' . $this->Form->value('Restaurante.id') . '">Detalhe Restaurante</a></li>'; ?>
+					    <li class="active">Editar</li>
+					</ul>
+				<?php } ?>
 				<h1><?php echo __('Editar Restaurante'); ?></h1>
 			</div>
 		</div>
@@ -22,8 +32,8 @@
 							<ul class="nav nav-pills nav-stacked">
 								<?php if($this->Session->check('Gerente')) { ?>
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;'.__('Detalhes Restaurante'), array('controller' => 'gerentes', 'action' => 'meu_restaurante'), array('escape' => false)); ?> </li>
-									<li><?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;'.__('Excluir'), array('action' => 'delete', $this->Form->value('Restaurante.id')), array('escape' => false), __('Tem certeza que deseja excluir: %s?', $this->Form->value('Restaurante.nome'))); ?></li>
 								<?php } ?>
+								<li><?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;'.__('Excluir'), array('action' => 'delete', $this->Form->value('Restaurante.id')), array('escape' => false), __('Tem certeza que deseja excluir: %s?', $this->Form->value('Restaurante.nome'))); ?></li>	
 							</ul>
 						</div>
 					</div>

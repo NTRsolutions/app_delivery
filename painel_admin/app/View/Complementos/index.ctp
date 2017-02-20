@@ -8,19 +8,15 @@
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
 
-
-
 	<div class="row">
 
 		<div class="col-md-3">
 			<div class="actions">
 				<div class="panel panel-default">
-					<div class="panel-heading"><?php echo __('Actions'); ?></div>
+					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('New Complemento'), array('action' => 'add'), array('escape' => false)); ?></li>
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;List'.__('Produtos'), array('controller' => 'produtos', 'action' => 'index'), array('escape' => false)); ?> </li>
-		<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New'.__('Produto'), array('controller' => 'produtos', 'action' => 'add'), array('escape' => false)); ?> </li>
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'add'), array('escape' => false)); ?></li>
 							</ul>
 						</div><!-- end body -->
 				</div><!-- end panel -->
@@ -31,7 +27,6 @@
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>
 					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('id'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('tipo'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('descricao'); ?></th>
@@ -43,13 +38,12 @@
 				<tbody>
 				<?php foreach ($complementos as $complemento): ?>
 					<tr>
-						<td nowrap><?php echo h($complemento['Complemento']['id']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($complemento['Complemento']['nome']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($complemento['Complemento']['tipo']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($complemento['Complemento']['descricao']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($complemento['Complemento']['preco']); ?>&nbsp;</td>
+						<td nowrap><?php echo 'R$' . h($complemento['Complemento']['preco']); ?>&nbsp;</td>
 								<td>
-			<?php echo $this->Html->link($complemento['Produto']['id'], array('controller' => 'produtos', 'action' => 'view', $complemento['Produto']['id'])); ?>
+			<?php echo $this->Html->link($complemento['Produto']['nome'], array('controller' => 'produtos', 'action' => 'view', $complemento['Produto']['id'])); ?>
 		</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $complemento['Complemento']['id']), array('escape' => false)); ?>

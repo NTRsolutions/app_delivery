@@ -57,7 +57,8 @@ class ComplementosController extends AppController {
 				$this->Session->setFlash(__('The complemento could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$produtos = $this->Complemento->Produto->find('list');
+		$options = array('fields' => 'Produto.nome');
+		$produtos = $this->Complemento->Produto->find('list', $options);
 		$this->set(compact('produtos'));
 	}
 

@@ -57,7 +57,8 @@ class PagamentosController extends AppController {
 				$this->Session->setFlash(__('The pagamento could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$restaurantes = $this->Pagamento->Restaurante->find('list');
+		$options = array('fields' => 'Restaurante.nome');
+		$restaurantes = $this->Pagamento->Restaurante->find('list', $options);
 		$this->set(compact('restaurantes'));
 	}
 

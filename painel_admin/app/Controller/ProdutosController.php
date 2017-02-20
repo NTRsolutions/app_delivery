@@ -57,7 +57,8 @@ class ProdutosController extends AppController {
 				$this->Session->setFlash(__('The produto could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$restaurantes = $this->Produto->Restaurante->find('list');
+		$options = array('fields' => 'Restaurante.nome');
+		$restaurantes = $this->Produto->Restaurante->find('list', $options);
 		$this->set(compact('restaurantes'));
 	}
 
@@ -83,7 +84,8 @@ class ProdutosController extends AppController {
 			$options = array('conditions' => array('Produto.' . $this->Produto->primaryKey => $id));
 			$this->request->data = $this->Produto->find('first', $options);
 		}
-		$restaurantes = $this->Produto->Restaurante->find('list');
+		$options = array('fields' => 'Restaurante.nome');
+		$restaurantes = $this->Produto->Restaurante->find('list', $options);
 		$this->set(compact('restaurantes'));
 	}
 

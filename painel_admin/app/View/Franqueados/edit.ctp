@@ -3,18 +3,13 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
-				<ul class="breadcrumb" id="bread">
-					<?php
-					if($this->Session->check('Admin')){
-						echo '<li><a href="../../admins/home">Início</a></li>
-			    				<li class="active">Editar</li>';
-					} else {
-						echo '<li><a href="../../franqueados/home">Início</a></li>
-			    				<li><a href="../../franqueados/meu_perfil/">Meu Perfil</a></li>
-			    				<li class="active">Editar</li>';
-					}
-					?>				    
-				</ul>
+				<?php if($this->Session->check('Franqueado')){ ?>
+					<ul class="breadcrumb" id="bread">
+						<li><a href="../../franqueados/home">Início</a></li>
+			    		<li><a href="../../franqueados/meu_perfil/">Meu Perfil</a></li>
+			    		<li class="active">Editar</li>			    
+					</ul>
+				<?php } ?>
 				<h1><?php echo __('Editar Franqueado'); ?></h1>
 			</div>
 		</div>
@@ -46,42 +41,42 @@
 
 				<?php echo $this->Form->input('Franqueado.id', array('class' => 'form-control', 'placeholder' => 'Id'));?>
 				
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Franqueado.nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Franqueado.email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Franqueado.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone1'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('Franqueado.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone2'));?>
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('Franqueado.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone2')) . '<br>';?>
 				</div>
 
 				<?php if ($this->Session->check('Franqueado')) {
 
 					echo $this->Form->input('Endereco.id', array('class' => 'form-control')); ?>
 				
-					<div class="form-group">
+					<div class="col-md-9 pad form-group">
 						<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua'));?>
 					</div>
-					<div class="form-group">
+					<div class="col-md-3 pad form-group">
 						<?php echo $this->Form->input('Endereco.numero', array('class' => 'form-control', 'placeholder' => 'Número'));?>
 					</div>
-					<div class="form-group">
+					<div class="col-md-6 pad form-group">
 						<?php echo $this->Form->input('Endereco.bairro', array('class' => 'form-control', 'placeholder' => 'Bairro'));?>
 					</div>
-					<div class="form-group">
+					<div class="col-md-6 pad form-group">
 						<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento'));?>
 					</div>
-					<div class="form-group">
+					<div class="col-md-4 pad form-group">
 						<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'CEP'));?>
 					</div>
-					<div class="form-group">
+					<div class="col-md-4 pad form-group">
 						<?php echo $this->Form->input('Endereco.tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
 					</div>
-					<div class="form-group">
+					<div class="col-md-4 pad form-group">
 						<?php echo $this->Form->input('Endereco.cidade_id', array('class' => 'form-control'));?>
 					</div>
 

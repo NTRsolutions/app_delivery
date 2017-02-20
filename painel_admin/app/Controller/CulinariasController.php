@@ -57,7 +57,8 @@ class CulinariasController extends AppController {
 				$this->Session->setFlash(__('The culinaria could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$restaurantes = $this->Culinaria->Restaurante->find('list');
+		$options = array('fields' => 'Restaurante.nome');
+		$restaurantes = $this->Culinaria->Restaurante->find('list', $options);
 		$this->set(compact('restaurantes'));
 	}
 

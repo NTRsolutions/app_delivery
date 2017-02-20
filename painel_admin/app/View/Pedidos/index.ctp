@@ -50,11 +50,10 @@
 					<tr>
 						<td> <?php echo $this->Html->link($pedido['Cliente']['nome'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?> </td>
 						<td nowrap><?php echo h($pedido['Pedido']['status']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($pedido['Pedido']['data']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($pedido['Pedido']['total']); ?>&nbsp;</td>
+						<td nowrap><?php echo date("d/m/Y", strtotime(h($pedido['Pedido']['data']))); ?>&nbsp;</td>
+						<td nowrap><?php echo 'R$' . h($pedido['Pedido']['total']); ?>&nbsp;</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $pedido['Pedido']['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $pedido['Pedido']['id']), array('escape' => false)); ?>
 							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $pedido['Pedido']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $pedido['Pedido']['id'])); ?>
 						</td>
 					</tr>
