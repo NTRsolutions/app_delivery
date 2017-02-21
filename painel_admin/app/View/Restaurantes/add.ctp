@@ -3,6 +3,12 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
+				<?php if($this->Session->check('Franqueado')) { ?>
+					<ul class="breadcrumb" id="bread">
+				    	<li><a href="../franqueados/home">Início</a></li>
+				    	<li class="active">Novo Restaurante</li>
+					</ul>
+				<?php } ?>
 				<h1><?php echo __('Adicionar Restaurante'); ?></h1>
 			</div>
 		</div>
@@ -17,6 +23,8 @@
 							<ul class="nav nav-pills nav-stacked">
 								<?php if($this->Session->check('Admin')) { ?>
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('Listar Restaurantes'), array('controller' => 'restaurantes', 'action' => 'index'), array('escape' => false)); ?> </li>
+								<?php } else { ?>
+									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;'.__('Início'), array('controller' => 'franqueados', 'action' => 'home'), array('escape' => false)); ?> </li>
 								<?php } ?>
 							</ul>
 						</div>
@@ -29,10 +37,10 @@
 				<div class="form-group">
 					<?php echo $this->Form->input('Restaurante.nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Restaurante.cnpj', array('class' => 'form-control', 'placeholder' => 'Cnpj'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Restaurante.email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
 				</div>
 				<div class="form-group">

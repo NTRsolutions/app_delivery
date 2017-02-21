@@ -36,22 +36,22 @@
 	Outros
 ------------------------ */
 
- .jumb {
- 	padding-top: 20px;
- 	padding-bottom: 20px;
- }
+.jumb {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
 
- .container-fluid .jumb {
- 	padding-right: 40px;
- 	padding-left: 40px;
- }
+.container-fluid .jumb {
+	padding-right: 40px;
+	padding-left: 40px;
+}
 
- .h3 {
- 	margin-top: 0;
- }
+.h3 {
+	margin-top: 0;
+}
 
- .foto_view {
-  padding-top: 7px;
+.foto_view {
+	padding-top: 7px;
 }
 
 .img_view {

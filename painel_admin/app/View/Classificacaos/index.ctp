@@ -19,10 +19,7 @@
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
 
-
-
 	<div class="row">
-
 		<div class="col-md-3">
 			<div class="actions">
 				<div class="panel panel-default">
@@ -127,32 +124,30 @@
 
 				foreach ($franq['Restaurante'] as $f):
 
-					echo '<legend>' . $f['nome'] . '</legend>';
-			
+					$existe = false;
+
+					echo '<h3>' . $f['nome'] . '</h3><br>';
+					
 			 		foreach ($classificacaos as $c): 
 
 						if($c['Classificacao']['restaurante_id'] == $f['id']) { ?>
 
 							<div class="jumbotron jumb">
-
 								<?php echo $c['Cliente']['nome'] . ' escreveu:' ?> <br /> <?php echo 'Nota: <b>' . $c['Classificacao']['nota'] . '</b>' ?> <br />
-
 						        <?php echo '<h4>' . $c['Classificacao']['comentario'] . '</h4>' ?>
-
 						    </div>
 
-						<?php $existe = true; } ?>
+							<?php $existe = true; }
 
-					<?php endforeach; 
+					endforeach; 
 
 				endforeach;
 
 				if ($existe == false) {
-					echo '<h4>Nenhuma avaliação realizada até o momento!</h4>'; 
+					echo '<h4 style="margin: 0">Nenhuma avaliação realizada até o momento!</h4><hr>'; 
 				}
+
 			} ?>
 		</div> <!-- end col md 9 -->
 	</div><!-- end row -->
-
-
 </div><!-- end containing of content -->

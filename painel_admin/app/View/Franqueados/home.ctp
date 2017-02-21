@@ -31,6 +31,10 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">
+			<h3>Lista de Restaurantes:</h3>
+			<div class="actions">
+				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Restaurante'), array('controller' => 'restaurantes', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
+			</div><br>
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>
 					<tr>

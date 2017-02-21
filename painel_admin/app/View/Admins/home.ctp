@@ -9,7 +9,6 @@
 	</div><!-- end row -->
 
 	<div class="row">
-
 		<div class="col-md-3">
 			<div class="actions">
 				<div class="panel panel-default">
@@ -32,7 +31,11 @@
 
 		<div class="col-md-9">
 
-			<legend>Lista de Franqueados:</legend>
+			<h3>Lista de Franqueados:</h3>
+
+			<div class="actions">
+				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Franqueado'), array('controller' => 'franqueados', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
+			</div><br>
 
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>

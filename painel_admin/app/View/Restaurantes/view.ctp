@@ -21,16 +21,15 @@
 					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
+								<?php if($this->Session->check('Admin')) { ?>
+									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('controller' => 'restaurantes', 'action' => 'index'), array('escape' => false)); ?></li>
+									
+								<?php } else { ?>
+									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;'.__('Início'), array('controller' => 'franqueados', 'action' => 'home'), array('escape' => false)); ?> </li>
+								<?php } ?>
+
 								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>&nbsp&nbsp;Editar Restaurante'), array('action' => 'edit', $restaurante['Restaurante']['id']), array('escape' => false)); ?> </li>
 								<li><?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Excluir Restaurante'), array('action' => 'delete', $restaurante['Restaurante']['id']), array('escape' => false), __('Tem certeza que deseja excluir: %s?', $restaurante['Restaurante']['nome'])); ?> </li>
-								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp&nbsp;Novo Gerente'), array('controller' => 'gerentes', 'action' => 'add'), array('escape' => false)); ?> </li>
-								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp&nbsp;Novo Franqueado'), array('controller' => 'franqueados', 'action' => 'add'), array('escape' => false)); ?> </li>
-								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp&nbsp;Novo Atendente'), array('controller' => 'atendentes', 'action' => 'add'), array('escape' => false)); ?> </li>
-								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp&nbsp;Nova Culinária'), array('controller' => 'culinarias', 'action' => 'add'), array('escape' => false)); ?> </li>
-								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp&nbsp;Novo Pagamento'), array('controller' => 'pagamentos', 'action' => 'add'), array('escape' => false)); ?> </li>
-								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp&nbsp;Novo Produto'), array('controller' => 'produtos', 'action' => 'add'), array('escape' => false)); ?> </li>
-								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp&nbsp;Nova Promoção'), array('controller' => 'promocaos', 'action' => 'add'), array('escape' => false)); ?> </li>
-								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp&nbsp;Novo Restaurante Endereco'), array('controller' => 'restaurante_enderecos', 'action' => 'add'), array('escape' => false)); ?> </li>
 							</ul>
 						</div><!-- end body -->
 				</div><!-- end panel -->
@@ -174,7 +173,7 @@
 <div class="related row">
 	<div class="col-md-12">
 		<?php if (!empty($restaurante['Classificacao'])): ?>
-			<h3><?php echo __('Classificacaos'); ?></h3>
+			<h3><?php echo __('Avaliações'); ?></h3>
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 				<thead>
 				<tr>
@@ -192,7 +191,6 @@
 						<td><?php echo $classificacao['cliente_id']; ?></td>
 						<td class="actions">
 							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'classificacaos', 'action' => 'view', $classificacao['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'classificacaos', 'action' => 'edit', $classificacao['id']), array('escape' => false)); ?>
 							<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'classificacaos', 'action' => 'delete', $classificacao['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $classificacao['id'])); ?>
 						</td>
 					</tr>
@@ -270,7 +268,6 @@
 				<th><?php echo __('Tipo'); ?></th>
 				<th><?php echo __('Descricao'); ?></th>
 				<th><?php echo __('Preco'); ?></th>
-				<th><?php echo __('Foto'); ?></th>
 				<th><?php echo __('Qtd Max Complemento'); ?></th>
 				<th class="actions"></th>
 			</tr>
@@ -282,7 +279,6 @@
 					<td><?php echo $produto['tipo']; ?></td>
 					<td><?php echo $produto['descricao']; ?></td>
 					<td><?php echo $produto['preco']; ?></td>
-					<td><?php echo $produto['foto']; ?></td>
 					<td><?php echo $produto['qtd_max_complemento']; ?></td>
 					<td class="actions">
 						<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'produtos', 'action' => 'view', $produto['id']), array('escape' => false)); ?>
@@ -300,7 +296,7 @@
 <div class="related row">
 	<div class="col-md-12">
 		<?php if (!empty($restaurante['Promocao'])): ?>
-			<h3><?php echo __('Promocaos'); ?></h3>
+			<h3><?php echo __('Promoções'); ?></h3>
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 			<thead>
 			<tr>

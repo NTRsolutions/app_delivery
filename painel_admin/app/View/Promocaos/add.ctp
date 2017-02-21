@@ -8,6 +8,13 @@
 				    <li><a href="../../franqueados/home">Início</a></li>
 				    <li class="active">Nova Promoção</li>
 					</ul>
+				<?php } else { ?>
+					<ul class="breadcrumb" id="bread">
+					    <li><a href="../gerentes/home">Início</a></li>
+					    <li><a href="../produtos">Produtos</a></li>
+					    <li><a href="../produtos/add">Novo Produto</a></li>
+					    <li class="active">Nova Promoção</li>
+					</ul>
 				<?php } ?>
 				<h1><?php echo __('Adicionar Promoção'); ?></h1>
 			</div>
@@ -21,9 +28,8 @@
 					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
+								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('controller' => 'produtos', 'action' => 'add'), array('escape' => false)); ?></li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('Listar Promoções'), array('action' => 'index'), array('escape' => false)); ?></li>
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('Listar Produtos'), array('controller' => 'produtos', 'action' => 'index'), array('escape' => false)); ?> </li>
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('Listar Restaurantes'), array('controller' => 'restaurantes', 'action' => 'index'), array('escape' => false)); ?> </li>
 							</ul>
 						</div>
 					</div>

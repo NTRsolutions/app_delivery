@@ -12,14 +12,11 @@
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
 
-
-
 	<div class="row">
-
 		<div class="col-md-3">
 			<div class="actions">
 				<div class="panel panel-default">
-					<div class="panel-heading"><?php echo __('Actions'); ?></div>
+					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;'.__('Meu perfil'), array('controller' => 'gerentes', 'action' => 'meu_perfil'), array('escape' => false)); ?></li>
@@ -37,6 +34,9 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">
+			<div class="actions">
+				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Nova Promoção'), array('controller' => 'promocaos', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
+			</div><br>
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>
 					<tr>

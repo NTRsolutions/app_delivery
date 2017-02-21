@@ -5,8 +5,14 @@
 			<div class="page-header">
 				<?php if($this->Session->check('Franqueado')){ ?>
 					<ul class="breadcrumb" id="bread">
-				    <li><a href="../../franqueados/home">Início</a></li>
-				    <li class="active">Novo Produto</li>
+					    <li><a href="../../franqueados/home">Início</a></li>
+					    <li class="active">Novo Produto</li>
+					</ul>
+				<?php } else { ?>
+					<ul class="breadcrumb" id="bread">
+					    <li><a href="../gerentes/home">Início</a></li>
+					    <li><a href="../produtos">Produtos</a></li>
+					    <li class="active">Novo Produto</li>
 					</ul>
 				<?php } ?>
 				<h1><?php echo __('Adicionar Produto'); ?></h1>
@@ -21,8 +27,11 @@
 					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('controller' => 'restaurantes', 'action' => 'index'), array('escape' => false)); ?></li>
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('Listar Produtos'), array('action' => 'index'), array('escape' => false)); ?></li>
+								<?php if($this->Session->check('Admin')) { ?>
+									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('controller' => 'restaurantes', 'action' => 'index'), array('escape' => false)); ?></li>
+								<?php } else { ?>
+									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('Produtos'), array('controller' => 'produtos', 'action' => 'index'), array('escape' => false)); ?></li>
+								<?php } ?>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Novo Complemento'), array('controller' => 'complementos', 'action' => 'add'), array('escape' => false)); ?> </li>
 								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Nova Promoção'), array('controller' => 'promocaos', 'action' => 'add'), array('escape' => false)); ?> </li>
 							</ul>

@@ -5,16 +5,20 @@
 			<div class="page-header">
 				<?php if($this->Session->check('Franqueado')){ ?>
 					<ul class="breadcrumb" id="bread">
-				    <li><a href="../../franqueados/home">Início</a></li>
-				    <li class="active">Novo Atendente</li>
+					    <li><a href="../../franqueados/home">Início</a></li>
+					    <li class="active">Novo Atendente</li>
+					</ul>
+				<?php } if($this->Session->check('Gerente')) { ?>
+					<ul class="breadcrumb" id="bread">
+					    <li><a href="../gerentes/home">Início</a></li>
+					    <li><a href="../atendentes">Atendentes</a></li>
+					    <li class="active">Novo Atendente</li>
 					</ul>
 				<?php } ?>
 				<h1><?php echo __('Adicionar Atendente'); ?></h1>
 			</div>
 		</div>
 	</div>
-
-
 
 	<div class="row">
 		<div class="col-md-3">
@@ -23,7 +27,11 @@
 					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('controller' => 'restaurantes', 'action' => 'index'), array('escape' => false)); ?></li>
+								<?php if($this->Session->check('Admin')) { ?>
+									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('controller' => 'restaurantes', 'action' => 'index'), array('escape' => false)); ?></li>
+								<?php } else { ?>
+									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('Atendentes'), array('controller' => 'atendentes', 'action' => 'index'), array('escape' => false)); ?></li>
+								<?php } ?>
 							</ul>
 						</div>
 					</div>

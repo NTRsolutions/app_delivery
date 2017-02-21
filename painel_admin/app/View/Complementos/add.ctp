@@ -3,6 +3,14 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
+				<?php if($this->Session->check('Gerente')) { ?>
+					<ul class="breadcrumb" id="bread">
+					    <li><a href="../gerentes/home">Início</a></li>
+					    <li><a href="../produtos">Produtos</a></li>
+					    <li><a href="../produtos/add">Novo Produto</a></li>
+					    <li class="active">Novo Complemento</li>
+					</ul>
+				<?php } ?>
 				<h1><?php echo __('Adicionar Complemento'); ?></h1>
 			</div>
 		</div>
