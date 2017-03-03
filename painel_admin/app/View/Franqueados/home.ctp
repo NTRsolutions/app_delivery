@@ -63,7 +63,7 @@
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('controller' => 'restaurantes', 'action' => 'view', $restaurante['Restaurante']['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('controller' => 'restaurantes', 'action' => 'edit', $restaurante['Restaurante']['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $restaurante['Restaurante']['id']), array('escape' => false), __('Tem certeza que deseja excluir: %s?', $restaurante['Restaurante']['nome'])); ?>
+							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('controller' => 'restaurantes', 'action' => 'delete', $restaurante['Restaurante']['id']), array('escape' => false), __('Tem certeza que deseja excluir: %s?', $restaurante['Restaurante']['nome'])); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>
