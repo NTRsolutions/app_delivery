@@ -74,7 +74,20 @@
 									
 								echo '</tbody>';
 							echo '</table>';
-							echo '<div class="col-md-6" style="padding:0"><button class="btn btn-default">Teste</button></div>';
+							switch ($p['Pedido']['status']) {
+								case 0:
+									echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-danger">Pendente</button></div>';
+									break;
+								
+								case 1:
+									echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-warning">Em preparo</button></div>';
+									break;
+
+								case 2:
+									echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-success">Entregue</button></div>';
+									break;
+							}
+							
 							echo '<div class="col-md-6"><h4 class="pull-right">Valor total: R$'.$p['Pedido']['total'].'</h4></div>';
 						echo '</div>';
 						//debug($p);
@@ -86,3 +99,33 @@
 
 
 </div><!-- end containing of content -->
+
+<script>
+	$(document).on("click", ".status", function () {
+		var id = $(this).attr("id");
+		var status = $(this).attr("value");
+		if (status < 2) {
+			$.ajax({
+			    url: 'status/'+id+'/'+status,
+			    cache: false,
+			    type: 'GET',
+			    dataType: 'HTML',
+			    success: function (data) {
+			        $('#'+id).html(data);
+			    }
+			});
+
+			if (status == 0) {
+				$(this).removeClass("btn-danger");
+				$(this).addClass("btn-warning");
+				$(this).val(1);
+			}
+
+			if (status == 1) {
+				$(this).removeClass("btn-warning");
+				$(this).addClass("btn-success");
+				$(this).val(2);
+			}
+		}
+	});
+</script>
