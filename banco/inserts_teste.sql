@@ -28,9 +28,9 @@ insert into cliente_enderecos values (1,3);
 
 insert into produtos (nome, tipo, descricao, preco, foto, qtd_max_complemento, restaurante_id) values ('produto', 1, '<p>ratuaipnuis afhduasiofh uasio&nbsp;</p>', '10.5', NULL, '2', 1);
 
-insert into pedidos (total, status, data, cliente_id, endereco_id, restaurante_id) VALUES (21.0, 0, sysdate(), 1, 4, 1);
+insert into pedidos (total, status, data, cliente_id, endereco_id, restaurante_id) VALUES (31.5, 0, sysdate(), 1, 4, 1);
 
-INSERT INTO pedido_produtos (pedido_id, produto_id, qtd) VALUES (1, 1, 2);
+INSERT INTO pedido_produtos (pedido_id, produto_id, qtd) VALUES (2, 1, 3);
 
 
 select * from pedidos;
