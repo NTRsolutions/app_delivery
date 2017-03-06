@@ -85,7 +85,7 @@
 
 				<?php foreach ($ends as $e):
 
-					echo 'Rua ' . $e['Endereco']['rua'] . ', ' . $e['Endereco']['numero'] . ', ' . $e['Endereco']['bairro'] . ', ' . $e['Endereco']['complemento'] . ' - ' . $e['Endereco']['cep'] . ', ' . $e['Cidade']['nome'] . ', ' . $e['Cidade']['Estado']['nome'] . '<br><br>'; 
+					echo $e['Endereco']['rua'] . ', ' . $e['Endereco']['numero'] . ', ' . $e['Endereco']['bairro'] . ', ' . $e['Endereco']['complemento'] . ' - ' . $e['Endereco']['cep'] . ', ' . $e['Cidade']['nome'] . ', ' . $e['Cidade']['Estado']['nome'] . '<br><br>'; 
 
 					echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>&nbsp;Editar'), array('controller' => 'enderecos', 'action' => 'edit', $e['Endereco']['id']), array('escape' => false)) . '&nbsp;&nbsp;'; 
 					echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>&nbsp;Excluir'), array('controller' => 'enderecos', 'action' => 'delete', $e['Endereco']['id']), array('escape' => false), __('Você realmente deseja excluir este endereço?')) . '<br><hr>'; 

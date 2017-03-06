@@ -45,13 +45,13 @@ class Endereco extends AppModel {
 		'RestauranteEndereco' => array(
 			'className' => 'RestauranteEndereco',
 			'foreignKey' => 'endereco_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
-			'exclusive' => '',
+			'exclusive' => true,
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),

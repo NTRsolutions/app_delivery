@@ -117,7 +117,6 @@ class RestaurantesController extends AppController {
 					'cidade_id' => $id_city);
 				
 				$this->Endereco->create();
-
 				if ($this->Endereco->save($end)) {
 					$id_end = $this->Endereco->getLastInsertId();
 

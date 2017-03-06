@@ -32,45 +32,53 @@
 		<div class="col-md-9">
 			<?php echo $this->Form->create('Franqueado', array('role' => 'form')); ?>
 
-				<div class="form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->input('Franqueado.nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Franqueado.email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Franqueado.senha', array('class' => 'form-control', 'placeholder' => 'Senha'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Franqueado.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone1'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Franqueado.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone2'));?>
 				</div>
 
-				<div class="form-group">
-					<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua'));?>
+				
+				<div class="col-md-3 pad form-group"><br>
+					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep',  'id' => 'cep', 'label' => 'CEP (somente números)'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('Endereco.numero', array('class' => 'form-control', 'placeholder' => 'Numero'));?>
+				<div class="col-md-10 pad form-group">
+					<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua', 'id' => 'rua', 'disabled'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('Endereco.bairro', array('class' => 'form-control', 'placeholder' => 'Bairro'));?>
+				<div class="col-md-2 pad form-group">
+					<?php echo $this->Form->input('Endereco.numero', array('class' => 'form-control', 'label' => 'Número', 'placeholder' => 'Numero', 'id' => 'numero', 'disabled'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento'));?>
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('Endereco.bairro', array('class' => 'form-control', 'placeholder' => 'Bairro', 'id' => 'bairro', 'disabled'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep'));?>
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento', 'id' => 'complemento', 'disabled'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('Endereco.tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
-				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('Endereco.cidade_id', array('class' => 'form-control', 'empty' => 'Selecione a cidade', 'options' => $cidades));?>
+				<div class="col-md-2 pad form-group">
+					<?php echo $this->Form->input('Endereco.tipo', array('class' => 'form-control', 'placeholder' => 'Tipo', 'id' => 'tipo', 'disabled'));?>
 				</div>
 
-				<div class="form-group">
+
+				<div class="col-md-5 pad form-group">
+					<?php echo $this->Form->input('Cidade.nome', array('class' => 'form-control', 'id' => 'cidade', 'placeholder' => 'Cidade', 'label' => 'Cidade', 'disabled'));?>
+				</div>
+
+
+				<div class="col-md-5 pad form-group">
+					<?php echo $this->Form->input('Estado.nome', array('class' => 'form-control', 'id' => 'uf', 'placeholder' => 'Estado', 'label' => 'Estado', 'disabled'));?>
+				</div>
+
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

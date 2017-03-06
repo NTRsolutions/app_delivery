@@ -32,28 +32,37 @@
 		<div class="col-md-9">
 			<?php echo $this->Form->create('Endereco', array('role' => 'form')); ?>
 
+				<div class="col-md-4 pad form-group">
+					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep',  'id' => 'cep', 'label' => 'CEP (somente números)'));?>
+				</div>
 				<div class="col-md-9 pad form-group">
-					<?php echo $this->Form->input('rua', array('class' => 'form-control', 'placeholder' => 'Rua'));?>
+					<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua', 'id' => 'rua', 'disabled'));?>
 				</div>
 				<div class="col-md-3 pad form-group">
-					<?php echo $this->Form->input('numero', array('class' => 'form-control', 'placeholder' => 'Numero'));?>
+					<?php echo $this->Form->input('Endereco.numero', array('class' => 'form-control', 'label' => 'Número', 'placeholder' => 'Numero', 'id' => 'numero', 'disabled'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('bairro', array('class' => 'form-control', 'placeholder' => 'Bairro'));?>
+					<?php echo $this->Form->input('Endereco.bairro', array('class' => 'form-control', 'placeholder' => 'Bairro', 'id' => 'bairro', 'disabled'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('complemento', array('class' => 'form-control', 'placeholder' => 'Complemento'));?>
+					<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento', 'id' => 'complemento', 'disabled'));?>
 				</div>
-				<div class="col-md-4 pad form-group">
-					<?php echo $this->Form->input('cep', array('class' => 'form-control', 'placeholder' => 'Cep'));?>
+				<div class="col-md-2 pad form-group">
+					<?php echo $this->Form->input('Endereco.tipo', array('class' => 'form-control', 'placeholder' => 'Tipo', 'id' => 'tipo', 'disabled'));?>
 				</div>
-				<div class="col-md-4 pad form-group">
-					<?php echo $this->Form->input('tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
+
+
+				<div class="col-md-5 pad form-group">
+					<?php echo $this->Form->input('Cidade.nome', array('class' => 'form-control', 'id' => 'cidade', 'placeholder' => 'Cidade', 'label' => 'Cidade', 'disabled'));?>
 				</div>
-				<div class="col-md-4 pad form-group">
-					<?php echo $this->Form->input('cidade_id', array('class' => 'form-control', 'placeholder' => 'Cidade Id'));?>
+
+
+				<div class="col-md-5 pad form-group">
+					<?php echo $this->Form->input('Estado.nome', array('class' => 'form-control', 'id' => 'uf', 'placeholder' => 'Estado', 'label' => 'Estado', 'disabled'));?>
 				</div>
-				<div class="form-group">
+
+				
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

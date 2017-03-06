@@ -59,7 +59,7 @@
 					<tr>
 						<th><?php echo __('Endereço'); ?></th>
 						<td>
-							<?php echo 'Rua ' . $ends['0']['Endereco']['rua'] . ', ' . $ends['0']['Endereco']['numero'] . ', ' . $ends['0']['Endereco']['bairro'] . ', ' . $ends['0']['Endereco']['complemento'] . ' - ' . $ends['0']['Endereco']['cep'] . ', ' . $ends['0']['Cidade']['nome'] . ', ' . $ends['0']['Cidade']['Estado']['nome']; ?>
+							<?php echo $ends['0']['Endereco']['rua'] . ', ' . $ends['0']['Endereco']['numero'] . ', ' . $ends['0']['Endereco']['bairro'] . ', ' . $ends['0']['Endereco']['complemento'] . ' - ' . $ends['0']['Endereco']['cep'] . ', ' . $ends['0']['Cidade']['nome'] . ', ' . $ends['0']['Cidade']['Estado']['nome']; ?>
 							&nbsp;
 						</td>
 					</tr>
