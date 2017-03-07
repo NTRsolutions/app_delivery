@@ -38,7 +38,6 @@
                         document.getElementById("numero").disabled = false;
                         document.getElementById("bairro").disabled = false;
                         document.getElementById("complemento").disabled = false;
-                        document.getElementById("tipo").disabled = false;
                         document.getElementById("cidade").disabled = false;
                         document.getElementById("uf").disabled = false;
                         $("#rua").val(dados.logradouro);

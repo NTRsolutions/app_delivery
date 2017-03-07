@@ -102,7 +102,6 @@
 			<thead>
 			<tr>
 				<th><?php echo __('Nome'); ?></th>
-				<th><?php echo __('Tipo'); ?></th>
 				<th><?php echo __('Descricao'); ?></th>
 				<th><?php echo __('Preco'); ?></th>
 				<th class="actions"></th>
@@ -112,7 +111,6 @@
 			<?php foreach ($produto['Complemento'] as $complemento): ?>
 				<tr>
 					<td><?php echo $complemento['nome']; ?></td>
-					<td><?php echo $complemento['tipo']; ?></td>
 					<td><?php echo $complemento['descricao']; ?></td>
 					<td><?php echo 'R$' . $complemento['preco']; ?></td>
 					<td class="actions">

@@ -28,7 +28,6 @@
 				<thead>
 					<tr>
 						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('tipo'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('descricao'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('preco'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('produto_id'); ?></th>
@@ -39,7 +38,6 @@
 				<?php foreach ($complementos as $complemento): ?>
 					<tr>
 						<td nowrap><?php echo h($complemento['Complemento']['nome']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($complemento['Complemento']['tipo']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($complemento['Complemento']['descricao']); ?>&nbsp;</td>
 						<td nowrap><?php echo 'R$' . h($complemento['Complemento']['preco']); ?>&nbsp;</td>
 								<td>

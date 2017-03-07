@@ -499,6 +499,11 @@ ADD CONSTRAINT `fk_pedidos_restaurantes1`
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
+ALTER TABLE `bd_deliverall`.`complementos` 
+DROP COLUMN `tipo`;
+
+ALTER TABLE `bd_deliverall`.`enderecos` 
+DROP COLUMN `tipo`;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

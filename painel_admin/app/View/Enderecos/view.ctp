@@ -73,13 +73,6 @@
 		</td>
 </tr>
 <tr>
-		<th><?php echo __('Tipo'); ?></th>
-		<td>
-			<?php echo h($endereco['Endereco']['tipo']); ?>
-			&nbsp;
-		</td>
-</tr>
-<tr>
 		<th><?php echo __('Cidade'); ?></th>
 		<td>
 			<?php echo $this->Html->link($endereco['Cidade']['id'], array('controller' => 'cidades', 'action' => 'view', $endereco['Cidade']['id'])); ?>

@@ -36,10 +36,13 @@
 				<div class="form-group">
 					<?php echo $this->Form->input('id', array('class' => 'form-control', 'placeholder' => 'Id'));?>
 				</div>
-				<div class="col-md-9 pad form-group">
+				<div class="col-md-3 pad form-group">
+					<?php echo $this->Form->input('cep', array('class' => 'form-control', 'placeholder' => 'Cep'));?>
+				</div>
+				<div class="col-md-7 pad form-group">
 					<?php echo $this->Form->input('rua', array('class' => 'form-control', 'placeholder' => 'Rua'));?>
 				</div>
-				<div class="col-md-3 pad form-group">
+				<div class="col-md-2 pad form-group">
 					<?php echo $this->Form->input('numero', array('class' => 'form-control', 'placeholder' => 'Numero'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
@@ -48,16 +51,12 @@
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('complemento', array('class' => 'form-control', 'placeholder' => 'Complemento'));?>
 				</div>
-				<div class="col-md-4 pad form-group">
-					<?php echo $this->Form->input('cep', array('class' => 'form-control', 'placeholder' => 'Cep'));?>
-				</div>
-				<div class="col-md-4 pad form-group">
-					<?php echo $this->Form->input('tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
-				</div>
-				<div class="col-md-4 pad form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->input('cidade_id', array('class' => 'form-control', 'placeholder' => 'Cidade Id'));?>
 				</div>
-				<div class="form-group">
+
+
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

@@ -37,9 +37,6 @@
 					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
-				</div>
-				<div class="form-group">
 					<?php echo $this->Tinymce->input('Complemento.descricao', $options = array('label' => 'Descrição'), $tinyoptions = array(), $preset = null) ?>
 				</div>
 				<div class="form-group">

@@ -58,10 +58,13 @@
 
 					echo $this->Form->input('Endereco.id', array('class' => 'form-control')); ?>
 				
-					<div class="col-md-9 pad form-group">
+					<div class="col-md-3 pad form-group">
+						<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'CEP'));?>
+					</div>
+					<div class="col-md-7 pad form-group">
 						<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua'));?>
 					</div>
-					<div class="col-md-3 pad form-group">
+					<div class="col-md-2 pad form-group">
 						<?php echo $this->Form->input('Endereco.numero', array('class' => 'form-control', 'placeholder' => 'Número'));?>
 					</div>
 					<div class="col-md-6 pad form-group">
@@ -70,19 +73,13 @@
 					<div class="col-md-6 pad form-group">
 						<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento'));?>
 					</div>
-					<div class="col-md-4 pad form-group">
-						<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'CEP'));?>
-					</div>
-					<div class="col-md-4 pad form-group">
-						<?php echo $this->Form->input('Endereco.tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
-					</div>
-					<div class="col-md-4 pad form-group">
+					<div class="col-md-12 pad form-group">
 						<?php echo $this->Form->input('Endereco.cidade_id', array('class' => 'form-control'));?>
 					</div>
 
 				<?php } ?>
 
-				<div class="form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

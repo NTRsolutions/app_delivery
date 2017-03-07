@@ -13,7 +13,7 @@
 					<ul class="breadcrumb" id="bread">
 						<li><a href="../../gerentes/home">Início</a></li>
 					    <li><a href="../../atendentes">Atendentes</a></li>
-					    <?php echo '<li><a href="../../atendentes/view/' . $this->Form->value('Atendente.id') . '">Detalhe Atendente</a></li>'; ?>
+					    <?php //echo '<li><a href="../../atendentes/view/' . $this->Form->value('Atendente.id') . '">Detalhe Atendente</a></li>'; ?>
 					    <li class="active">Editar</li>
 					</ul>
 				<?php } ?>
@@ -33,7 +33,7 @@
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'meu_perfil', $this->Form->value('Atendente.id')), array('escape' => false)); ?> </li>
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;'.__('Alterar Senha'), array('action' => 'altera_senha', $this->Form->value('Atendente.id')), array('escape' => false)); ?> </li>
 								<?php } else { ?>
-									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'view', $this->Form->value('Atendente.id')), array('escape' => false)); ?> </li>
+									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'index'), array('escape' => false)); ?> </li>
 								<?php } ?>
 
 								<li><?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;'.__('Excluir conta'), array('action' => 'delete', $this->Form->value('Atendente.id')), array('escape' => false), __('Você realmente deseja excluir: %s?', $this->Form->value('Atendente.nome'))); ?></li>

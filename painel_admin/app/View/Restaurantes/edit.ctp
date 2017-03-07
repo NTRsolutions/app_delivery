@@ -84,7 +84,9 @@
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('franqueado_id', array('class' => 'form-control'));?>
 				</div>
-				<div class="form-group">
+
+				
+				<div class="pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

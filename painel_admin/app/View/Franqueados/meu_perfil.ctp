@@ -41,7 +41,7 @@
 	      			<b>Telefone 2:</b> <?php echo $franqueado['Franqueado']['telefone2'] . '<br /><br />';
 	      		  } 
 	      	?> 
-	      	<b>Endereço:</b>  <?php echo 'Rua ' . $ends['0']['Endereco']['rua'] . ', ' . $ends['0']['Endereco']['numero'] . ', ' . $ends['0']['Endereco']['bairro'] . ', ' . $ends['0']['Endereco']['complemento'] . ' - ' . $ends['0']['Endereco']['cep'] . ', ' . $ends['0']['Cidade']['nome'] . ', ' . $ends['0']['Cidade']['Estado']['nome']. '<br><br>'; ?>
+	      	<b>Endereço:</b>  <?php echo $ends['0']['Endereco']['rua'] . ', ' . $ends['0']['Endereco']['numero'] . ', ' . $ends['0']['Endereco']['bairro'] . ', ' . $ends['0']['Endereco']['complemento'] . ' - ' . $ends['0']['Endereco']['cep'] . ', ' . $ends['0']['Cidade']['nome'] . ', ' . $ends['0']['Cidade']['Estado']['nome']. '<br><br>'; ?>
 			
 		    <?php 
 				echo $this->Html->link('Editar Dados', 

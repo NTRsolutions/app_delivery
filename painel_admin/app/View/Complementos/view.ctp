@@ -45,13 +45,6 @@
 		</td>
 </tr>
 <tr>
-		<th><?php echo __('Tipo'); ?></th>
-		<td>
-			<?php echo h($complemento['Complemento']['tipo']); ?>
-			&nbsp;
-		</td>
-</tr>
-<tr>
 		<th><?php echo __('Descricao'); ?></th>
 		<td>
 			<?php echo h($complemento['Complemento']['descricao']); ?>

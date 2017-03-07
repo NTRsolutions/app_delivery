@@ -37,7 +37,6 @@
 						<th nowrap><?php echo $this->Paginator->sort('bairro'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('complemento'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('cep'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('tipo'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('cidade_id'); ?></th>
 						<th class="actions"></th>
 					</tr>
@@ -51,10 +50,7 @@
 						<td nowrap><?php echo h($endereco['Endereco']['bairro']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($endereco['Endereco']['complemento']); ?>&nbsp;</td>
 						<td nowrap><?php echo h($endereco['Endereco']['cep']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($endereco['Endereco']['tipo']); ?>&nbsp;</td>
-								<td>
-			<?php echo $this->Html->link($endereco['Cidade']['id'], array('controller' => 'cidades', 'action' => 'view', $endereco['Cidade']['id'])); ?>
-		</td>
+						<td><?php echo $this->Html->link($endereco['Cidade']['id'], array('controller' => 'cidades', 'action' => 'view', $endereco['Cidade']['id'])); ?></td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $endereco['Endereco']['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $endereco['Endereco']['id']), array('escape' => false)); ?>

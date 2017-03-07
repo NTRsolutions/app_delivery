@@ -75,8 +75,6 @@
 				</div>
 
 
-
-
 				<div class="col-md-4 pad form-group">
 					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep',  'id' => 'cep', 'label' => 'CEP (somente números)'));?>
 				</div>
@@ -92,19 +90,15 @@
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento', 'id' => 'complemento', 'disabled'));?>
 				</div>
-				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Endereco.tipo', array('class' => 'form-control', 'placeholder' => 'Tipo', 'id' => 'tipo', 'disabled'));?>
-				</div>
+		
 
-
-
-				<div class="col-md-5 pad form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Cidade.nome', array('class' => 'form-control', 'id' => 'cidade', 'placeholder' => 'Cidade', 'label' => 'Cidade', 'disabled'));?>
 				</div>
 
 
 
-				<div class="col-md-5 pad form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Estado.nome', array('class' => 'form-control', 'id' => 'uf', 'placeholder' => 'Estado', 'label' => 'Estado', 'disabled'));?>
 				</div>
 
