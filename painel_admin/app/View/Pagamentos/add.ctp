@@ -35,16 +35,16 @@
 			<?php echo $this->Form->create('Pagamento', array('role' => 'form')); ?>
 
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('descricao', array('options' => $tipo, 'class' => 'form-control', 'label' => 'Forma de Pagamento', 'required' => 'true'));
+					<?php //echo $this->Form->input('descricao', array('options' => $tipo, 'class' => 'form-control', 'label' => 'Forma de Pagamento', 'required' => 'true'));
 
-					/*echo $this->Form->input('Pagamento.descricao', array(
+					echo $this->Form->input('Pagamento.descricao', array(
 					    'type' => 'select',
 					    'multiple' => 'checkbox',
-					    'label' => 'Forma de Pagamento',
+					    'label' => 'Selecione as formas de Pagamento: <br><br>',
 					    'class' => 'form',
 					    'options' => $tipo
 					    )
-					);*/ ?>
+					); ?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'placeholder' => 'Restaurante Id'));?>

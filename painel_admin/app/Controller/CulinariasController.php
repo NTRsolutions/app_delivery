@@ -81,12 +81,26 @@ class CulinariasController extends AppController {
         $this->set(compact('tipo'));
 
 		if ($this->request->is('post')) {
-			$this->Culinaria->create();
-			if ($this->Culinaria->save($this->request->data)) {
-				$this->Session->setFlash(__('The culinaria has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+
+			if(!empty($this->data['Culinaria']['tipo'])){
+
+                foreach ($this->data['Culinaria']['tipo'] as $ct) {
+
+                	$save = false;
+
+                	$cln = array('tipo' => $ct, 'restaurante_id' => $this->request->data['Culinaria']['restaurante_id']); 
+                	
+                	$this->Culinaria->create();
+                	$this->Culinaria->save($cln);
+                	$save = true;
+                }
+            }
+			
+			if ($save == true) {
+				$this->Session->setFlash(__('As culinárias selecionadas foram salvas com sucesso'), 'default', array('class' => 'alert alert-success'));
+				return $this->redirect(array('controller' => 'gerentes', 'action' => 'meu_restaurante'));
 			} else {
-				$this->Session->setFlash(__('The culinaria could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('As culinárias selecionadas não foram salvas. Por favor, tente novamente.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
 

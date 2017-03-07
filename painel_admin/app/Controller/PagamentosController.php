@@ -66,14 +66,29 @@ class PagamentosController extends AppController {
         $this->set(compact('tipo'));
 
 		if ($this->request->is('post')) {
-			$this->Pagamento->create();
-			if ($this->Pagamento->save($this->request->data)) {
-				$this->Session->setFlash(__('The pagamento has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+
+			if(!empty($this->data['Pagamento']['descricao'])){
+
+                foreach ($this->data['Pagamento']['descricao'] as $pd) {
+
+                	$save = false;
+
+                	$pgto = array('descricao' => $pd, 'restaurante_id' => $this->request->data['Pagamento']['restaurante_id']); 
+                	
+                	$this->Pagamento->create();
+                	$this->Pagamento->save($pgto);
+                	$save = true;
+                }
+            }
+			
+			if ($save == true) {
+				$this->Session->setFlash(__('Os pagamentos selecionados foram salvos com sucesso'), 'default', array('class' => 'alert alert-success'));
+				return $this->redirect(array('controller' => 'gerentes', 'action' => 'meu_restaurante'));
 			} else {
-				$this->Session->setFlash(__('The pagamento could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Os pagamentos selecionados não foram salvos. Por favor, tente novamente.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
+
 		if($this->Session->check('Gerente')){
 			$gerente = $this->Session->read('Gerente');
 			$options = array('fields' => 'Restaurante.nome', 'conditions' => array('Restaurante.id' => $gerente['0']['Restaurante']['0']['id']));
