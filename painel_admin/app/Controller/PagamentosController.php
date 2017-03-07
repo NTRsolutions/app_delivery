@@ -48,6 +48,23 @@ class PagamentosController extends AppController {
  * @return void
  */
 	public function add() {
+
+		$tipo = array(
+            'Cartão de Crédito - Visa',
+            'Cartão de Crédito - MasterCard',
+            'Cartão de Crédito - American Express',
+            'Cartão de Crédito - Diners',
+            'Cartão de Crédito - HiperCard',
+            'Cartão de Crédito - Aura ',
+            'Cartão de Crédito - Elo',
+            'Cartão de Débito - Visa Electron',
+            'Cartão de Débito - MasterCard Maestro',
+            'Boleto Bancário',
+            'PayPal',
+            'PagSeguro'
+        );
+        $this->set(compact('tipo'));
+
 		if ($this->request->is('post')) {
 			$this->Pagamento->create();
 			if ($this->Pagamento->save($this->request->data)) {
@@ -57,9 +74,16 @@ class PagamentosController extends AppController {
 				$this->Session->setFlash(__('The pagamento could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$options = array('fields' => 'Restaurante.nome');
-		$restaurantes = $this->Pagamento->Restaurante->find('list', $options);
-		$this->set(compact('restaurantes'));
+		if($this->Session->check('Gerente')){
+			$gerente = $this->Session->read('Gerente');
+			$options = array('fields' => 'Restaurante.nome', 'conditions' => array('Restaurante.id' => $gerente['0']['Restaurante']['0']['id']));
+			$restaurantes = $this->Pagamento->Restaurante->find('list', $options);
+			$this->set(compact('restaurantes'));
+		} else {
+			$options = array('fields' => 'Restaurante.nome');
+			$restaurantes = $this->Pagamento->Restaurante->find('list', $options);
+			$this->set(compact('restaurantes'));
+		}
 	}
 
 /**

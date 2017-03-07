@@ -505,6 +505,12 @@ DROP COLUMN `tipo`;
 ALTER TABLE `bd_deliverall`.`enderecos` 
 DROP COLUMN `tipo`;
 
+ALTER TABLE `bd_deliverall`.`culinarias` 
+CHANGE COLUMN `tipo` `tipo` VARCHAR(45) NOT NULL ;
+
+ALTER TABLE `bd_deliverall`.`produtos` 
+CHANGE COLUMN `tipo` `tipo` VARCHAR(45) NULL DEFAULT NULL ;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

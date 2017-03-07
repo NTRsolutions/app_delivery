@@ -34,13 +34,25 @@
 		<div class="col-md-9">
 			<?php echo $this->Form->create('Culinaria', array('role' => 'form')); ?>
 
-				<div class="form-group">
-					<?php echo $this->Form->input('tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('tipo', array('options' => $tipo, 'class' => 'form-control', 'label' => 'Tipo de Culinária', 'required' => 'true'));
+
+					/*echo $this->Form->input('Culinaria.tipo', array(
+					    'type' => 'select',
+					    'multiple' => 'checkbox',
+					    'label' => 'Tipo de Culinária',
+					    'class' => 'form',
+					    //'disabled' => array('0'),
+					    'options' => $tipo
+					    )
+					);*/ ?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'placeholder' => 'Restaurante Id'));?>
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control'));?>
 				</div>
-				<div class="form-group">
+
+
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

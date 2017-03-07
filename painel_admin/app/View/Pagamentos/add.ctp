@@ -34,13 +34,24 @@
 		<div class="col-md-9">
 			<?php echo $this->Form->create('Pagamento', array('role' => 'form')); ?>
 
-				<div class="form-group">
-					<?php echo $this->Tinymce->input('Pagamento.descricao', $options = array('label' => 'Descrição'), $tinyoptions = array(), $preset = null) ?>
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('descricao', array('options' => $tipo, 'class' => 'form-control', 'label' => 'Forma de Pagamento', 'required' => 'true'));
+
+					/*echo $this->Form->input('Pagamento.descricao', array(
+					    'type' => 'select',
+					    'multiple' => 'checkbox',
+					    'label' => 'Forma de Pagamento',
+					    'class' => 'form',
+					    'options' => $tipo
+					    )
+					);*/ ?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'placeholder' => 'Restaurante Id'));?>
 				</div>
-				<div class="form-group">
+
+
+				<div class="pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

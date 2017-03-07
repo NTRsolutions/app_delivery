@@ -42,25 +42,25 @@
 		<div class="col-md-9">
 			<?php echo $this->Form->create('Produto', array('role' => 'form', 'type' => 'file')); ?>
 
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('tipo', array('options' => $tipo, 'class' => 'form-control', 'label' => 'Tipo do produto', 'required' => 'true'));?>
 				</div>
 				<div class="form-group">
 					<?php echo $this->Tinymce->input('Produto.descricao', $options = array('label' => 'Descrição'), $tinyoptions = array(), $preset = null) ?>
 				</div>
 				<div class="form-group">
+					<?php echo $this->Form->input('foto', array('class' => 'form', 'type' => 'file'));?>
+				</div><br>
+				<div class="col-md-3 pad form-group">
 					<?php echo $this->Form->input('preco', array('class' => 'form-control', 'placeholder' => 'Preco'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('foto', array('class' => 'form', 'type' => 'file'));?>
+				<div class="col-md-3 pad form-group">
+					<?php echo $this->Form->input('qtd_max_complemento', array('class' => 'form-control', 'placeholder' => 'Qtd Max Complementos'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('qtd_max_complemento', array('class' => 'form-control', 'placeholder' => 'Qtd Max Complemento'));?>
-				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'placeholder' => 'Restaurante Id'));?>
 				</div>
 				<div class="form-group">

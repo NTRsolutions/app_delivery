@@ -48,6 +48,38 @@ class CulinariasController extends AppController {
  * @return void
  */
 	public function add() {
+
+		$tipo = array(
+            'Brasileira',
+            'Japonesa',
+            'Italiana',
+            'Chinesa',
+            'Protuguesa',
+            'Mexicana',
+            'Espanhola',
+            'Francesa',
+            'Alemã',
+            'Colombiana',
+            'Grega',
+            'Irlandesa',
+            'Marroquina',
+            'Polonesa',
+            'Tailandesa',
+            'Argentina',
+            'Africana',
+            'Australiana',
+            'Americana',
+            'Chilena',
+            'Peruana',
+            'Sueca',
+            'Suíça',
+            'Uruguaia',
+            'Havaiana',
+            'Húngara',
+  			'Árabe'
+        );
+        $this->set(compact('tipo'));
+
 		if ($this->request->is('post')) {
 			$this->Culinaria->create();
 			if ($this->Culinaria->save($this->request->data)) {
@@ -57,9 +89,17 @@ class CulinariasController extends AppController {
 				$this->Session->setFlash(__('The culinaria could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$options = array('fields' => 'Restaurante.nome');
-		$restaurantes = $this->Culinaria->Restaurante->find('list', $options);
-		$this->set(compact('restaurantes'));
+
+		if($this->Session->check('Gerente')){
+			$gerente = $this->Session->read('Gerente');
+			$options = array('fields' => 'Restaurante.nome', 'conditions' => array('Restaurante.id' => $gerente['0']['Restaurante']['0']['id']));
+			$restaurantes = $this->Culinaria->Restaurante->find('list', $options);
+			$this->set(compact('restaurantes'));
+		} else {
+			$options = array('fields' => 'Restaurante.nome');
+			$restaurantes = $this->Culinaria->Restaurante->find('list', $options);
+			$this->set(compact('restaurantes'));
+		}
 	}
 
 /**
