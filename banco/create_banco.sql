@@ -506,10 +506,29 @@ ALTER TABLE `bd_deliverall`.`enderecos`
 DROP COLUMN `tipo`;
 
 ALTER TABLE `bd_deliverall`.`culinarias` 
-CHANGE COLUMN `tipo` `tipo` VARCHAR(45) NOT NULL ;
+CHANGE COLUMN `tipo` `tipo` VARCHAR(45) NOT NULL;
 
 ALTER TABLE `bd_deliverall`.`produtos` 
-CHANGE COLUMN `tipo` `tipo` VARCHAR(45) NULL DEFAULT NULL ;
+CHANGE COLUMN `tipo` `tipo` VARCHAR(45) NULL DEFAULT NULL;
+
+/* --------------------------------------------------------------------- */
+/* adição do troco e relação com forma de pagamento na tabela de pedidos */
+
+ALTER TABLE `bd_deliverall`.`pedidos` 
+ADD COLUMN `troco` DOUBLE NULL DEFAULT NULL COMMENT '' AFTER `data`,
+ADD COLUMN `pagamento_id` INT(11) NOT NULL COMMENT '' AFTER `restaurante_id`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`id`, `cliente_id`, `endereco_id`, `restaurante_id`, `pagamento_id`)  COMMENT '',
+ADD INDEX `fk_pedidos_pagamentos1_idx` (`pagamento_id` ASC)  COMMENT '';
+
+ALTER TABLE `bd_deliverall`.`pedidos` 
+ADD CONSTRAINT `fk_pedidos_pagamentos1`
+  FOREIGN KEY (`pagamento_id`)
+  REFERENCES `bd_deliverall`.`pagamentos` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+/* --------------------------------------------------------------------- */
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
