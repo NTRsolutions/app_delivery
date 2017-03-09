@@ -46,6 +46,7 @@
 								echo '<p>Pedido nº: '.$p['Pedido']['id'].'</p>';
 								echo '<p>Cliente: '.$p['Cliente']['nome'].' - Contato: '.$p['Cliente']['telefone1'].'</p>';
 								echo '<p>Endereço de entrega: '.$p['Endereco']['rua'].','.$p['Endereco']['numero'].' - '.$p['Endereco']['complemento'].', '.$p['Endereco']['bairro'].' - '.$p['Endereco']['cep'].'</p>';
+								echo '<p>Forma de pagamento: '.$tipo[$p['Pagamento']['descricao']].'</p>';
 								echo '<table cellpadding="0" cellspacing="0" class="table table-striped">';
 									echo '<thead>';
 										echo '<tr>';
@@ -78,25 +79,29 @@
 								echo '</table>';
 								switch ($p['Pedido']['status']) {
 									case 0:
-										echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-danger">Pendente</button></div>';
+										echo '<div class="col-md-3" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-danger">Pendente</button></div>';
 										break;
 									
 									case 1:
-										echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-warning">Em preparo</button></div>';
+										echo '<div class="col-md-3" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-warning">Em preparo</button></div>';
 										break;
 
 									case 2:
-										echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-info">À caminho</button></div>';
+										echo '<div class="col-md-3" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-info">À caminho</button></div>';
 										break;
 
 									case 3:
-										echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-success">Entregue</button></div>';
+										echo '<div class="col-md-3" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-success">Entregue</button></div>';
 										break;
 								}
-								
-								echo '<div class="col-md-6"><h4 class="pull-right">Valor total: R$'.$p['Pedido']['total'].'</h4></div>';
+
+								$troco  = '';
+								if (!is_null($p['Pedido']['troco'])) {
+									$troco = ' - Troco: R$' .$p['Pedido']['troco'];
+								}
+								echo '<div class="col-md-9"><h4 class="pull-right">Valor total: R$'.$p['Pedido']['total'].$troco.'</h4></div>';
 							echo '</div>';
-							
+
 							$count++;
 						}
 					echo '</div>';

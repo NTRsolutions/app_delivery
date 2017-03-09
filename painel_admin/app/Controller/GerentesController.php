@@ -112,6 +112,7 @@ class GerentesController extends AppController {
 			'contain' => array(
 				'Endereco',
 				'Cliente',
+				'Pagamento',
 				'PedidoProduto' => array(
 					'Produto' => array(
 						'ProdutoComplemento' => array(
@@ -131,6 +132,27 @@ class GerentesController extends AppController {
 
 		$pedidos = $this->Pedido->find('all', $options);
 		$this->set(compact('pedidos'));
+
+		$tipo = array(
+            0 => 'Cartão de Crédito - Visa',
+            1 => 'Cartão de Crédito - MasterCard',
+            2 => 'Cartão de Crédito - American Express',
+            3 => 'Cartão de Crédito - Diners',
+            4 => 'Cartão de Crédito - HiperCard',
+            5 => 'Cartão de Crédito - Aura ',
+            6 => 'Cartão de Crédito - Elo',
+            7 => 'Cartão de Débito - Visa Electron',
+            8 => 'Cartão de Débito - MasterCard Maestro',
+            9 => 'Cartão de Débito - Elo',
+            10 => 'Cartão Refeição - Ticket',
+            11 => 'Cartão Refeição - Sodexo',
+            12 => 'Cartão Refeição - Cabal',
+            13 => 'Dinheiro',
+            14 => 'Boleto Bancário',
+            15 => 'PayPal',
+            16 => 'PagSeguro'
+        );
+        $this->set(compact('tipo'));
 	}
 
 	public function recuperar_senha() {

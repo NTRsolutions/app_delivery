@@ -59,6 +59,11 @@ class PagamentosController extends AppController {
             'Cartão de Crédito - Elo',
             'Cartão de Débito - Visa Electron',
             'Cartão de Débito - MasterCard Maestro',
+            'Cartão de Débito - Elo',
+            'Cartão Refeição - Ticket',
+            'Cartão Refeição - Sodexo',
+            'Cartão Refeição - Cabal',
+            'Dinheiro',
             'Boleto Bancário',
             'PayPal',
             'PagSeguro'
