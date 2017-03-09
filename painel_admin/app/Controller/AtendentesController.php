@@ -128,6 +128,10 @@ class AtendentesController extends AppController {
 			),
 			'conditions' => array(
 				'Pedido.restaurante_id'	=> $atendente['0']['Restaurante']['id']
+			),
+			'order' => array(
+				'Pedido.status',
+				'Pedido.id'
 			)
 		);
 
@@ -201,6 +205,10 @@ class AtendentesController extends AppController {
 				break;
 			
 			case 1:
+				$this->set('data', 'À caminho');
+				break;
+
+			case 2:
 				$this->set('data', 'Entregue');
 				break;
 		}        

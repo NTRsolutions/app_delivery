@@ -32,60 +32,74 @@
 				if (empty($pedidos)) {
 					echo '<h4>Nenhum pedido realizado até o momento!</h4>';
 				} else {
-					foreach ($pedidos as $p) {	
+					echo '<div class="row">';
+					$count = 0;
+						foreach ($pedidos as $p) {	
 
-						echo '<div class="col-md-6">';
-							echo '<p>Pedido nº: '.$p['Pedido']['id'].'</p>';
-							echo '<p>Cliente: '.$p['Cliente']['nome'].' - Contato: '.$p['Cliente']['telefone1'].'</p>';
-							echo '<p>Endereço de entrega: '.$p['Endereco']['rua'].','.$p['Endereco']['numero'].' - '.$p['Endereco']['complemento'].', '.$p['Endereco']['bairro'].' - '.$p['Endereco']['cep'].'</p>';
-							echo '<table cellpadding="0" cellspacing="0" class="table table-striped">';
-								echo '<thead>';
-									echo '<tr>';
-										echo '<th width="20%">Quantidade</th>';
-										echo '<th width="40%">Produtos</th>';
-										echo '<th width="40%">Complemento(s)</th>';
-									echo '</tr>';
-								echo '</thead>';
-								echo '<tbody>';
-									
-									foreach ($p['PedidoProduto'] as $pp) {
-										echo '<tr>';
-											echo '<td>';
-												echo $pp['qtd'];
-											echo '</td>';
-											echo '<td>';
-												echo $pp['Produto']['nome'];
-											echo '</td>';
-											echo '<td>';
-												foreach ($pp['Produto']['ProdutoComplemento'] as $pc) {
-													if($pp['pedido_id'] == $pc['pedido_id']) { //para não pegar complemento de outro pedido
-														echo $pc['qtd'].'x &nbsp;'.$pc['Complemento']['nome'].'<br>';
-													}
-												}
-											echo '</td>';
-										echo '<tr>';
-									}
-									
-								echo '</tbody>';
-							echo '</table>';
-							switch ($p['Pedido']['status']) {
-								case 0:
-									echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-danger">Pendente</button></div>';
-									break;
-								
-								case 1:
-									echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-warning">Em preparo</button></div>';
-									break;
-
-								case 2:
-									echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-success">Entregue</button></div>';
-									break;
+							if ($count % 2 == 0 && $count > 0) {
+								echo '</div>';
+								echo '<hr>';
+								echo '<div class="row" style="margin-top:20px">';
 							}
+
+							echo '<div class="col-md-6">';
+								echo '<p>Pedido nº: '.$p['Pedido']['id'].'</p>';
+								echo '<p>Cliente: '.$p['Cliente']['nome'].' - Contato: '.$p['Cliente']['telefone1'].'</p>';
+								echo '<p>Endereço de entrega: '.$p['Endereco']['rua'].','.$p['Endereco']['numero'].' - '.$p['Endereco']['complemento'].', '.$p['Endereco']['bairro'].' - '.$p['Endereco']['cep'].'</p>';
+								echo '<table cellpadding="0" cellspacing="0" class="table table-striped">';
+									echo '<thead>';
+										echo '<tr>';
+											echo '<th width="20%">Quantidade</th>';
+											echo '<th width="40%">Produtos</th>';
+											echo '<th width="40%">Complemento(s)</th>';
+										echo '</tr>';
+									echo '</thead>';
+									echo '<tbody>';
+										
+										foreach ($p['PedidoProduto'] as $pp) {
+											echo '<tr>';
+												echo '<td>';
+													echo $pp['qtd'];
+												echo '</td>';
+												echo '<td>';
+													echo $pp['Produto']['nome'];
+												echo '</td>';
+												echo '<td>';
+													foreach ($pp['Produto']['ProdutoComplemento'] as $pc) {
+														if($pp['pedido_id'] == $pc['pedido_id']) { //para não pegar complemento de outro pedido
+															echo $pc['qtd'].'x &nbsp;'.$pc['Complemento']['nome'].'<br>';
+														}
+													}
+												echo '</td>';
+											echo '<tr>';
+										}
+										
+									echo '</tbody>';
+								echo '</table>';
+								switch ($p['Pedido']['status']) {
+									case 0:
+										echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-danger">Pendente</button></div>';
+										break;
+									
+									case 1:
+										echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-warning">Em preparo</button></div>';
+										break;
+
+									case 2:
+										echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-info">À caminho</button></div>';
+										break;
+
+									case 3:
+										echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-success">Entregue</button></div>';
+										break;
+								}
+								
+								echo '<div class="col-md-6"><h4 class="pull-right">Valor total: R$'.$p['Pedido']['total'].'</h4></div>';
+							echo '</div>';
 							
-							echo '<div class="col-md-6"><h4 class="pull-right">Valor total: R$'.$p['Pedido']['total'].'</h4></div>';
-						echo '</div>';
-						//debug($p);
-					}
+							$count++;
+						}
+					echo '</div>';
 				}
 			?>
 		</div> <!-- end col md 9 -->
@@ -98,11 +112,11 @@
 	$(document).on("click", ".status", function () {
 		var id = $(this).attr("id");
 		var status = $(this).attr("value");
-		if (status < 2) {
+		if (status < 3) {
 			$.ajax({
 			    url: 'status/'+id+'/'+status,
 			    cache: false,
-			    type: 'GET',
+			    type: 'POST',
 			    dataType: 'HTML',
 			    success: function (data) {
 			        $('#'+id).html(data);
@@ -117,8 +131,14 @@
 
 			if (status == 1) {
 				$(this).removeClass("btn-warning");
-				$(this).addClass("btn-success");
+				$(this).addClass("btn-info");
 				$(this).val(2);
+			}
+
+			if (status == 2) {
+				$(this).removeClass("btn-info");
+				$(this).addClass("btn-success");
+				$(this).val(3);
 			}
 		}
 	});

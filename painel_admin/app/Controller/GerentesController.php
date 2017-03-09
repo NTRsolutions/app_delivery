@@ -122,6 +122,10 @@ class GerentesController extends AppController {
 			),
 			'conditions' => array(
 				'Pedido.restaurante_id'	=> $gerente['0']['Restaurante']['0']['id']
+			),
+			'order' => array(
+				'Pedido.status',
+				'Pedido.id'
 			)
 		);
 
@@ -233,6 +237,10 @@ class GerentesController extends AppController {
 				break;
 			
 			case 1:
+				$this->set('data', 'À caminho');
+				break;
+
+			case 2:
 				$this->set('data', 'Entregue');
 				break;
 		}        

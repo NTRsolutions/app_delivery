@@ -84,6 +84,10 @@
 									break;
 
 								case 2:
+									echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-info">À caminho</button></div>';
+									break;
+
+								case 3:
 									echo '<div class="col-md-6" style="padding:0"><button value="'.$p['Pedido']['status'].'" id="'.$p['Pedido']['id'].'" class="status btn btn-success">Entregue</button></div>';
 									break;
 							}
@@ -104,11 +108,11 @@
 	$(document).on("click", ".status", function () {
 		var id = $(this).attr("id");
 		var status = $(this).attr("value");
-		if (status < 2) {
+		if (status < 3) {
 			$.ajax({
 			    url: 'status/'+id+'/'+status,
 			    cache: false,
-			    type: 'GET',
+			    type: 'POST',
 			    dataType: 'HTML',
 			    success: function (data) {
 			        $('#'+id).html(data);
@@ -123,8 +127,14 @@
 
 			if (status == 1) {
 				$(this).removeClass("btn-warning");
-				$(this).addClass("btn-success");
+				$(this).addClass("btn-info");
 				$(this).val(2);
+			}
+
+			if (status == 2) {
+				$(this).removeClass("btn-info");
+				$(this).addClass("btn-success");
+				$(this).val(3);
 			}
 		}
 	});
