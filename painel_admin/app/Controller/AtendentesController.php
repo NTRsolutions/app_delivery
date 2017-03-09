@@ -189,5 +189,20 @@ class AtendentesController extends AppController {
 		$atendente = $this->Session->read('Atendente');
 	    $atendente = $this->Atendente->findById($atendente['0']['Atendente']['id']); 
 		$this->set('atendente', $atendente);
-	}	
+	}
+
+	public function status($id, $status) {
+		$this->loadModel('Pedido');
+		$this->Pedido->id = $id;
+		$this->Pedido->saveField('status', $status+1);
+		switch ($status) {
+			case 0:
+				$this->set('data', 'Em preparo');
+				break;
+			
+			case 1:
+				$this->set('data', 'Entregue');
+				break;
+		}        
+    }
 }
