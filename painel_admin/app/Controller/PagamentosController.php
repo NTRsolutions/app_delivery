@@ -49,49 +49,64 @@ class PagamentosController extends AppController {
  */
 	public function add() {
 
+		$gerente = $this->Session->read('Gerente');
+		$options = array('fields' => 'Pagamento.idDescricao', 'conditions' => array('Pagamento.restaurante_id' => $gerente['0']['Restaurante']['0']['id']));
+		$pgtos = $this->Pagamento->find('list', $options);
+
 		$tipo = array(
-            'Cartão de Crédito - Visa',
-            'Cartão de Crédito - MasterCard',
-            'Cartão de Crédito - American Express',
-            'Cartão de Crédito - Diners',
-            'Cartão de Crédito - HiperCard',
-            'Cartão de Crédito - Aura ',
-            'Cartão de Crédito - Elo',
-            'Cartão de Débito - Visa Electron',
-            'Cartão de Débito - MasterCard Maestro',
-            'Cartão de Débito - Elo',
-            'Cartão Refeição - Ticket',
-            'Cartão Refeição - Sodexo',
-            'Cartão Refeição - Cabal',
-            'Dinheiro',
-            'Boleto Bancário',
-            'PayPal',
-            'PagSeguro'
+            1  => 'Cartão de Crédito - Visa',
+            2  => 'Cartão de Crédito - MasterCard',
+            3  => 'Cartão de Crédito - American Express',
+            4  => 'Cartão de Crédito - Diners',
+            5  => 'Cartão de Crédito - HiperCard',
+            6  => 'Cartão de Crédito - Aura ',
+            7  => 'Cartão de Crédito - Elo',
+            8  => 'Cartão de Débito - Visa Electron',
+            9  => 'Cartão de Débito - MasterCard Maestro',
+            10 => 'Cartão de Débito - Elo',
+            11 => 'Cartão Refeição - Ticket',
+            12 => 'Cartão Refeição - Sodexo',
+            13 => 'Cartão Refeição - Cabal',
+            14 => 'Dinheiro',
+            15 => 'Boleto Bancário',
+            16 => 'PayPal',
+            17 => 'PagSeguro'
         );
         $this->set(compact('tipo'));
 
 		if ($this->request->is('post')) {
 
 			if(!empty($this->data['Pagamento']['descricao'])){
-
-                foreach ($this->data['Pagamento']['descricao'] as $pd) {
-
-                	$save = false;
-
-                	$pgto = array('descricao' => $pd, 'restaurante_id' => $this->request->data['Pagamento']['restaurante_id']); 
                 	
-                	$this->Pagamento->create();
-                	$this->Pagamento->save($pgto);
-                	$save = true;
+                $tamPgto = count($pgtos);
+				$tamData = count($this->data['Pagamento']['descricao']);
+
+				if($tamData > $tamPgto) {
+
+					$save = $this->addPagamento($this->data['Pagamento']['descricao'], $tipo);
+
+					if ($save == true) {
+						$this->Session->setFlash(__('Os pagamentos selecionados foram salvos com sucesso!'), 'default', array('class' => 'alert alert-success'));
+						return $this->redirect(array('controller' => 'gerentes', 'action' => 'meu_restaurante'));
+					} else {
+						$this->Session->setFlash(__('Os pagamentos selecionados não foram salvos. Por favor, tente novamente.'), 'default', array('class' => 'alert alert-danger'));
+					}
+
+ 				} else if ($tamData < $tamPgto) {
+
+                	$this->excluirPagamento($this->data['Pagamento']['descricao'], $pgtos, $tipo);
+
+                } else {
+
+                	$save = $this->addPagamento($this->data['Pagamento']['descricao'], $tipo);
+                	$this->excluirPagamento($this->data['Pagamento']['descricao'], $pgtos, $tipo);
                 }
             }
-			
-			if ($save == true) {
-				$this->Session->setFlash(__('Os pagamentos selecionados foram salvos com sucesso'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('controller' => 'gerentes', 'action' => 'meu_restaurante'));
-			} else {
-				$this->Session->setFlash(__('Os pagamentos selecionados não foram salvos. Por favor, tente novamente.'), 'default', array('class' => 'alert alert-danger'));
-			}
+
+		} else {
+			$gerente = $this->Session->read('Gerente');
+			$options = array('fields' => 'Pagamento.idDescricao', 'conditions' => array('Pagamento.restaurante_id' => $gerente['0']['Restaurante']['0']['id']));
+			$this->request->data['Pagamento']['descricao'] = $this->Pagamento->find('list', $options);
 		}
 
 		if($this->Session->check('Gerente')){
@@ -104,6 +119,50 @@ class PagamentosController extends AppController {
 			$restaurantes = $this->Pagamento->Restaurante->find('list', $options);
 			$this->set(compact('restaurantes'));
 		}
+	}
+
+	public function addPagamento($data, $tipo) {
+
+		$save = false;
+
+		foreach ($data as $pd) {
+
+        	$pgtoDesc = $this->Pagamento->findByDescricao($tipo[$pd]);
+
+        	if(empty($pgtoDesc)) {
+            	$pgto = array('idDescricao' => $pd, 'descricao' => $tipo[$pd], 'restaurante_id' => $this->request->data['Pagamento']['restaurante_id']); 
+            	$this->Pagamento->create();
+            	$this->Pagamento->save($pgto);
+            	$save = true;
+            }
+        }
+
+        return $save;
+	}
+
+	public function excluirPagamento($data1, $data2, $tipo) {
+
+		$existe = false;
+
+    	foreach ($data2 as $p) {
+
+    		$existe = false;
+
+    		$type2 = $this->Pagamento->findByDescricao($tipo[$p]);
+
+    		foreach ($data1 as $pd) {
+
+        		$type = $this->Pagamento->findByDescricao($tipo[$pd]);
+
+        		if($type2['Pagamento']['descricao'] == $type['Pagamento']['descricao']) {
+        			$existe = true;
+        		} 
+        	}
+
+        	if($existe == false) {
+        		$this->delete2($type2['Pagamento']['id']);
+        	}
+        }
 	}
 
 /**
@@ -146,10 +205,24 @@ class PagamentosController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Pagamento->delete()) {
-			$this->Session->setFlash(__('The pagamento has been deleted.'), 'default', array('class' => 'alert alert-success'));
+			$this->Session->setFlash(__('O pagamento foi excluído com sucesso!'), 'default', array('class' => 'alert alert-success'));
 		} else {
 			$this->Session->setFlash(__('The pagamento could not be deleted. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function delete2($id = null) {
+		$this->Pagamento->id = $id;
+		if (!$this->Pagamento->exists()) {
+			throw new NotFoundException(__('Invalid pagamento'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->Pagamento->delete()) {
+			$this->Session->setFlash(__('O pagamento marcado e/ou desmarcado foi adicionado e/ou excluído com sucesso!'), 'default', array('class' => 'alert alert-success'));
+		} else {
+			$this->Session->setFlash(__('The pagamento could not be deleted. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+		}
+		return $this->redirect(array('controller' => 'gerentes', 'action' => 'meu_restaurante'));
 	}
 }

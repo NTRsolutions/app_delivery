@@ -530,6 +530,12 @@ ADD CONSTRAINT `fk_pedidos_pagamentos1`
 
 /* --------------------------------------------------------------------- */
 
+ALTER TABLE `bd_deliverall`.`culinarias` 
+ADD COLUMN `idTipo` INT(11) NOT NULL AFTER `id`;
+
+ALTER TABLE `bd_deliverall`.`pagamentos` 
+ADD COLUMN `idDescricao` INT(11) NOT NULL AFTER `id`;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

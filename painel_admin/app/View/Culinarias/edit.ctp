@@ -31,7 +31,7 @@
 			<?php echo $this->Form->create('Culinaria', array('role' => 'form')); ?>
 
 				<div class="form-group">
-					<?php echo $this->Form->input('id', array('class' => 'form-control', 'placeholder' => 'Id'));?>
+					<?php echo $this->Form->input('id', array('class' => 'form-control'));?>
 				</div>
 				<div class="form-group">
 					<?php echo $this->Form->input('tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>

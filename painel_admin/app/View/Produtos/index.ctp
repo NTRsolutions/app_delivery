@@ -51,7 +51,7 @@
 				<?php foreach ($produtos as $produto): ?>
 					<tr>
 						<td nowrap><?php echo h($produto['Produto']['nome']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($produto['Produto']['tipo']); ?>&nbsp;</td>
+						<td nowrap><?php echo h($tipo[$produto['Produto']['tipo']]); ?>&nbsp;</td>
 						<td nowrap><?php echo 'R$' . h($produto['Produto']['preco']); ?>&nbsp;</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $produto['Produto']['id']), array('escape' => false)); ?>

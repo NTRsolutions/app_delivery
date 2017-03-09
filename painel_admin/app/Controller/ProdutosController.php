@@ -25,6 +25,18 @@ class ProdutosController extends AppController {
 	public function index() {
 		$this->Produto->recursive = 0;
 		$this->set('produtos', $this->Paginator->paginate());
+
+		$tipo = array(
+            'Hamburguer',
+            'Pizzas',
+            'Massas',
+            'Salgados',
+            'Porções',
+            'Bebidas',
+            'Sobremesas',
+            'Doces'
+        );
+        $this->set(compact('tipo'));
 	}
 
 /**

@@ -49,16 +49,16 @@
 							}
 
 							echo '<div class="col-md-6">';
-								echo '<p>Pedido nº: '.$p['Pedido']['id'].'</p>';
-								echo '<p>Cliente: '.$p['Cliente']['nome'].' - Contato: '.$p['Cliente']['telefone1'].'</p>';
-								echo '<p>Endereço de entrega: '.$p['Endereco']['rua'].','.$p['Endereco']['numero'].' - '.$p['Endereco']['complemento'].', '.$p['Endereco']['bairro'].' - '.$p['Endereco']['cep'].'</p>';
-								echo '<p>Forma de pagamento: '.$tipo[$p['Pagamento']['descricao']].'</p>';
+								echo '<p><b>Pedido nº: '.$p['Pedido']['id'].'</b></p>';
+								echo '<p><b>Cliente:</b> '.$p['Cliente']['nome'].' - Contato: '.$p['Cliente']['telefone1'].'</p>';
+								echo '<p><b>Endereço de entrega:</b> '.$p['Endereco']['rua'].','.$p['Endereco']['numero'].' - '.$p['Endereco']['complemento'].', '.$p['Endereco']['bairro'].' - '.$p['Endereco']['cep'].'</p>';
+								echo '<p><b>Forma de pagamento:</b> '.$p['Pagamento']['descricao'].'</p>';
 								echo '<table cellpadding="0" cellspacing="0" class="table table-striped">';
 									echo '<thead>';
 										echo '<tr>';
-											echo '<th width="20%">Quantidade</th>';
-											echo '<th width="40%">Produtos</th>';
-											echo '<th width="40%">Complemento(s)</th>';
+											echo '<th width="20%">QUANTIDADE</th>';
+											echo '<th width="40%">PRODUTO(S)</th>';
+											echo '<th width="40%">COMPLEMENTO(S)</th>';
 										echo '</tr>';
 									echo '</thead>';
 									echo '<tbody>';
