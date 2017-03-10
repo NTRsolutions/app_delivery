@@ -18,7 +18,8 @@
 
     echo $this->Html->css('bootstrap.css');
     echo $this->Html->css('style.css');
-
+    echo $this->Html->css('font-awesome.min.css');
+    
     echo $this->Html->script('jquery.min.js');
     echo $this->Html->script('bootstrap.min.js');
     echo $this->Html->script('cep.js');

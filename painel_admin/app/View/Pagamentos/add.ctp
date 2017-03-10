@@ -37,11 +37,16 @@
 				<div class="col-md-6 pad form-group">
 					<?php //echo $this->Form->input('descricao', array('options' => $tipo, 'class' => 'form-control', 'label' => 'Forma de Pagamento', 'required' => 'true'));
 
+					echo '<label for="checkbox1">
+                            Selecione as formas de Pagamento: <br><br>
+                        </label>';
+
 					echo $this->Form->input('Pagamento.descricao', array(
 					    'type' => 'select',
 					    'multiple' => 'checkbox',
-					    'label' => 'Selecione as formas de Pagamento: <br><br>',
-					    'class' => 'form',
+					    'class' => 'col-md-8 checkbox checkbox-inline checkbox-primary',
+					    'label' => '',
+					    'id' => 'checkbox1',
 					    'options' => $tipo
 					    )
 					); ?>

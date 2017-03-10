@@ -37,11 +37,16 @@
 				<div class="col-md-6 pad form-group">
 					<?php //echo $this->Form->input('tipo', array('options' => $tipo, 'class' => 'form-control', 'label' => 'Tipo de Culinária', 'required' => 'true'));
 
-					echo $this->Form->input('Culinaria.tipo', array(
+					echo '<label for="checkbox1">
+                            Selecione os tipos de Culinária: <br><br>
+                        </label>';
+
+                    echo $this->Form->input('Culinaria.tipo', array(
 					    'type' => 'select',
 					    'multiple' => 'checkbox',
-					    'label' => 'Selecione os tipos de Culinária: <br><br>',
-					    'class' => 'form',
+					    'class' => 'col-md-4 checkbox checkbox-inline checkbox-primary',
+					    'label' => '', 
+					    'id' => 'checkbox1',
 					    //'disabled' => array('0'),
 					    'options' => $tipo
 					    )
