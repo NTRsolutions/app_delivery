@@ -39,10 +39,12 @@
 			<?php echo $this->Form->create('Promocao', array('role' => 'form')); ?>
 
 				<div class="form-group">
-					<?php echo $this->Form->input('data_ini', array('class' => 'form-control', 'placeholder' => 'Data Inicio'));?>
+					<label>Data de início</label>
+					<?php echo $this->Form->date('data_ini', array('class' => 'form-control', 'placeholder' => 'Data Inicio'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('data_fim', array('class' => 'form-control', 'placeholder' => 'Data Fim'));?>
+					<label>Data de término</label>
+					<?php echo $this->Form->date('data_fim', array('class' => 'form-control', 'placeholder' => 'Data Fim'));?>
 				</div>
 				<div class="form-group">
 					<?php echo $this->Form->input('desconto', array('class' => 'form-control', 'placeholder' => 'Desconto'));?>

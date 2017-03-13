@@ -1,5 +1,26 @@
 <div class="franqueados form">
 
+<script type="text/javascript">
+	jQuery(function($){
+		$("#FranqueadoTelefone1").mask("(99)99999-9999",{autoclear: false});  	
+		$("#FranqueadoTelefone2").mask("(99)99999-9999",{autoclear: false});  	
+	 
+		$('#FranqueadoTelefone1').blur(function() {
+		  if ($('#FranqueadoTelefone1').val().endsWith('_') && $(this).val().search('_') == 13) {
+		  	$("#FranqueadoTelefone1").unmask().mask("(99)9999-9999",{autoclear: false});
+		  }
+		});
+
+		$('#FranqueadoTelefone2').blur(function() {
+		  if ($("#FranqueadoTelefone2").val().endsWith('_') && $(this).val().search('_') == 13) {
+		  	$("#FranqueadoTelefone2").unmask().mask("(99)9999-9999",{autoclear: false});
+		  }
+		});
+
+		$("#EnderecoCep").mask("99999-999",{autoclear: false});
+  });
+</script>
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
@@ -42,16 +63,16 @@
 				<?php echo $this->Form->input('Franqueado.id', array('class' => 'form-control', 'placeholder' => 'Id'));?>
 				
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Franqueado.nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
+					<?php echo $this->Form->input('Franqueado.nome', array('class' => 'form-control', 'placeholder' => 'Nome Completo'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Franqueado.email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Franqueado.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone1'));?>
+					<?php echo $this->Form->input('Franqueado.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone principal'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Franqueado.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone2')) . '<br>';?>
+					<?php echo $this->Form->input('Franqueado.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone opcional')) . '<br>';?>
 				</div>
 
 				<?php if ($this->Session->check('Franqueado')) {

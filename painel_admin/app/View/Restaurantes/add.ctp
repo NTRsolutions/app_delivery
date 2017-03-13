@@ -1,5 +1,31 @@
 <div class="restaurantes form">
 
+<script type="text/javascript">
+	jQuery(function($){
+		$("#RestauranteTelefone1").mask("(99)99999-9999",{autoclear: false});  	
+		$("#RestauranteTelefone2").mask("(99)99999-9999",{autoclear: false});  	
+	 
+		$('#RestauranteTelefone1').blur(function() {
+		  if ($('#RestauranteTelefone1').val().endsWith('_') && $(this).val().search('_') == 13) {
+		  	$("#RestauranteTelefone1").unmask().mask("(99)9999-9999",{autoclear: false});
+		  }
+		});
+
+		$('#RestauranteTelefone2').blur(function() {
+		  if ($("#RestauranteTelefone2").val().endsWith('_') && $(this).val().search('_') == 13) {
+		  	$("#RestauranteTelefone2").unmask().mask("(99)9999-9999",{autoclear: false});
+		  }
+		});
+
+		$("#RestauranteCnpj").mask("99.999.999/9999-99",{autoclear: false});
+
+		$("#RestauranteHorarioAbre").mask("99:99",{autoclear: false});
+		$("#RestauranteHorarioFecha").mask("99:99",{autoclear: false});
+
+		$("#cep").mask("99999-999",{autoclear: false});
+  });
+</script>
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
@@ -38,7 +64,7 @@
 					<?php echo $this->Form->input('Restaurante.nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Restaurante.cnpj', array('class' => 'form-control', 'placeholder' => 'Cnpj'));?>
+					<?php echo $this->Form->input('Restaurante.cnpj', array('class' => 'form-control', 'placeholder' => 'CNPJ'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Restaurante.email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
@@ -50,22 +76,22 @@
 					<?php echo $this->Form->input('Restaurante.foto', array('class' => 'form', 'type' => 'file'));?>
 				</div><br>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.horario_abre', array('class' => 'form-control', 'placeholder' => 'Horario Abre'));?>
+					<?php echo $this->Form->input('Restaurante.horario_abre', array('class' => 'form-control', 'placeholder' => 'Horário Abre'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.horario_fecha', array('class' => 'form-control', 'placeholder' => 'Horario Fecha'));?>
+					<?php echo $this->Form->input('Restaurante.horario_fecha', array('class' => 'form-control', 'placeholder' => 'Horário Fecha'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.tempo_mercado', array('class' => 'form-control', 'placeholder' => 'Tempo Mercado'));?>
+					<?php echo $this->Form->input('Restaurante.tempo_mercado', array('class' => 'form-control', 'placeholder' => 'Ex: 10 anos'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.valor_min', array('class' => 'form-control', 'placeholder' => 'Valor Min'));?>
+					<?php echo $this->Form->input('Restaurante.valor_min', array('class' => 'form-control', 'placeholder' => 'Valor mín do pedido'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone1'));?>
+					<?php echo $this->Form->input('Restaurante.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone principal'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone2'));?>
+					<?php echo $this->Form->input('Restaurante.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone opcional'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Restaurante.gerente_id', array('class' => 'form-control', 'empty' => 'Selecione o gerente'));?>

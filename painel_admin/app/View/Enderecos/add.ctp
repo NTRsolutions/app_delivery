@@ -1,5 +1,11 @@
 <div class="enderecos form">
 
+<script type="text/javascript">
+	jQuery(function($){
+		$("#cep").mask("99999-999",{autoclear: false});
+  });
+</script>
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
