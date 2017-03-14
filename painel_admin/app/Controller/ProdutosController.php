@@ -82,7 +82,8 @@ class ProdutosController extends AppController {
 				$this->Session->setFlash(__('The produto could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$options = array('fields' => 'Restaurante.nome');
+		$gerente = $this->Session->read('Gerente');
+		$options = array('fields' => 'Restaurante.nome', 'conditions' => array('Restaurante.id' => $gerente['0']['Restaurante']['0']['id']));
 		$restaurantes = $this->Produto->Restaurante->find('list', $options);
 		$this->set(compact('restaurantes'));
 	}

@@ -1,5 +1,12 @@
 <div class="promocaos form">
 
+	<script type="text/javascript">
+		jQuery(function($){
+			$("#data_ini").mask("99/99/9999",{autoclear: false});  	
+			$("#data_fim").mask("99/99/9999",{autoclear: false});  	
+	  });
+	</script>
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
@@ -38,21 +45,26 @@
 		<div class="col-md-9">
 			<?php echo $this->Form->create('Promocao', array('role' => 'form')); ?>
 
-				<div class="form-group">
+				<div class="col-md-4 pad form-group">
 					<label>Data de início</label>
-					<?php echo $this->Form->date('data_ini', array('class' => 'form-control', 'placeholder' => 'Data Inicio'));?>
+					<?php echo $this->Form->date('data_ini', array('class' => 'form-control', 'placeholder' => 'Data Inicio', 'id' => 'data_ini'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-4 pad form-group">
 					<label>Data de término</label>
-					<?php echo $this->Form->date('data_fim', array('class' => 'form-control', 'placeholder' => 'Data Fim'));?>
+					<?php echo $this->Form->date('data_fim', array('class' => 'form-control', 'placeholder' => 'Data Fim', 'id' => 'data_fim'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-4 pad form-group">
 					<?php echo $this->Form->input('desconto', array('class' => 'form-control', 'placeholder' => 'Desconto'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'placeholder' => 'Restaurante Id'));?>
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('produto_id', array('options' => $produtos, 'class' => 'form-control', 'placeholder' => 'Produto'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'placeholder' => 'Restaurante', 'disabled'));?>
+				</div>
+
+
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

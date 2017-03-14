@@ -170,7 +170,7 @@
 	<div class="col-md-12">
 		<h3><?php echo __('Culinárias'); ?></h3>
 		<div class="actions">
-			<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Nova Culinária'), array('controller' => 'culinarias', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
+			<?php echo $this->Html->link(__('Nova / Editar Culinária'), array('controller' => 'culinarias', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
 		</div><br>
 		<?php if (!empty($rest['0']['Culinaria'])): ?>
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
@@ -186,7 +186,6 @@
 						<td><?php echo $culinaria['tipo']; ?></td>
 						<td class="actions">
 							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'culinarias', 'action' => 'view', $culinaria['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'culinarias', 'action' => 'edit', $culinaria['id']), array('escape' => false)); ?>
 							<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'culinarias', 'action' => 'delete', $culinaria['id']), array('escape' => false), __('Tem certeza que deseja excluir esta culinária: %s?', $culinaria['tipo'])); ?>
 						</td>
 					</tr>
@@ -203,7 +202,7 @@
 	<div class="col-md-12">
 		<h3><?php echo __('Pagamentos'); ?></h3>
 		<div class="actions">
-			<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Pagamento'), array('controller' => 'pagamentos', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
+			<?php echo $this->Html->link(__('Novo / Editar Pagamento'), array('controller' => 'pagamentos', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
 		</div><br>
 		<?php if (!empty($rest['0']['Pagamento'])): ?>
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
@@ -219,7 +218,6 @@
 						<td><?php echo $pagamento['descricao']; ?></td>
 						<td class="actions">
 							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'pagamentos', 'action' => 'view', $pagamento['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'pagamentos', 'action' => 'edit', $pagamento['id']), array('escape' => false)); ?>
 							<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'pagamentos', 'action' => 'delete', $pagamento['id']), array('escape' => false), __('Tem certeza que deseja excluir este pagamento: %s?', $pagamento['descricao'])); ?>
 						</td>
 					</tr>

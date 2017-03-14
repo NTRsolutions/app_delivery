@@ -71,7 +71,7 @@
 
 				
 				<div class="col-md-3 pad form-group"><br>
-					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep',  'id' => 'cep', 'label' => 'CEP (somente números)'));?>
+					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep',  'id' => 'cep', 'label' => 'CEP'));?>
 				</div>
 				<div class="col-md-10 pad form-group">
 					<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua', 'id' => 'rua', 'disabled'));?>

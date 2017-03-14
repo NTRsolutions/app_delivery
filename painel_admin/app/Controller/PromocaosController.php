@@ -57,11 +57,16 @@ class PromocaosController extends AppController {
 				$this->Session->setFlash(__('The promocao could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$produtos = $this->Promocao->Produto->find('list');
 
-		$options = array('fields' => 'Restaurante.nome');
+		$gerente = $this->Session->read('Gerente');
+
+		$options = array('fields' => 'Produto.nome', 'conditions' => array('Produto.restaurante_id' => $gerente['0']['Restaurante']['0']['id']));
+		$produtos = $this->Promocao->Produto->find('list', $options);
+		$this->set(compact('produtos'));
+		
+		$options = array('fields' => 'Restaurante.nome', 'conditions' => array('Restaurante.id' => $gerente['0']['Restaurante']['0']['id']));
 		$restaurantes = $this->Promocao->Restaurante->find('list', $options);
-		$this->set(compact('produtos', 'restaurantes'));
+		$this->set(compact('restaurantes'));
 	}
 
 /**
