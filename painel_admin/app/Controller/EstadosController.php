@@ -48,11 +48,21 @@ class EstadosController extends AppController {
  * @return void
  */
 	public function add() {
+
+		if($this->Session->check('Franqueado')) {
+			$this->loadModel('Franqueado');
+			$franqueado = $this->Session->read('Franqueado');
+		    $franqueado = $this->Franqueado->findById($franqueado['0']['Franqueado']['id']); 
+			$this->set('franqueado', $franqueado);
+		}
+
 		if ($this->request->is('post')) {
 			$this->Estado->create();
 			if ($this->Estado->save($this->request->data)) {
-				$this->Session->setFlash(__('The estado has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('O estado foi salvo com sucesso.'), 'default', array('class' => 'alert alert-success'));
+				if($this->Session->check('Franqueado')) {
+					return $this->redirect(array('controller' => 'cidades', 'action' => 'add'));
+				}
 			} else {
 				$this->Session->setFlash(__('The estado could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}

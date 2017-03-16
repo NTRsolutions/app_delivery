@@ -48,11 +48,21 @@ class CidadesController extends AppController {
  * @return void
  */
 	public function add() {
+
+		if($this->Session->check('Franqueado')) {
+			$this->loadModel('Franqueado');
+			$franqueado = $this->Session->read('Franqueado');
+		    $franqueado = $this->Franqueado->findById($franqueado['0']['Franqueado']['id']); 
+			$this->set('franqueado', $franqueado);
+		}
+
 		if ($this->request->is('post')) {
 			$this->Cidade->create();
 			if ($this->Cidade->save($this->request->data)) {
-				$this->Session->setFlash(__('The cidade has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('A cidade foi salva com sucesso.'), 'default', array('class' => 'alert alert-success'));
+				if($this->Session->check('Franqueado')) {
+					return $this->redirect(array('controller' => 'franqueados', 'action' => 'edit', $franqueado['Franqueado']['id']));
+				}
 			} else {
 				$this->Session->setFlash(__('The cidade could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
