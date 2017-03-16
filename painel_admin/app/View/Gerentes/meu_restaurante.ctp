@@ -277,23 +277,21 @@
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 			<thead>
 			<tr>
-				<th><?php echo __('Produto Id'); ?></th>
+				<th><?php echo __('Produto'); ?></th>
 				<th><?php echo __('Data Início'); ?></th>
 				<th><?php echo __('Data Fim'); ?></th>
-				<th><?php echo __('Desconto'); ?></th>
+				<th><?php echo __('Desconto (%)'); ?></th>
 				<th class="actions"></th>
 			</tr>
 			<thead>
 			<tbody>
 			<?php foreach ($rest['0']['Promocao'] as $promocao): ?>
 				<tr>
-					<td><?php echo $promocao['produto_id']; ?></td>
-					<td><?php echo $promocao['data_ini']; ?></td>
-					<td><?php echo $promocao['data_fim']; ?></td>
+					<td><?php echo $promocao['Produto']['nome']; ?></td>
+					<td><?php echo date("d/m/Y", strtotime(h($promocao['data_ini']))); ?></td>
+					<td><?php echo date("d/m/Y", strtotime(h($promocao['data_fim']))); ?></td>
 					<td><?php echo $promocao['desconto']; ?></td>
-					<td><?php echo $promocao['restaurante_id']; ?></td>
 					<td class="actions">
-						<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'promocaos', 'action' => 'view', $promocao['produto_id']), array('escape' => false)); ?>
 						<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'promocaos', 'action' => 'edit', $promocao['produto_id']), array('escape' => false)); ?>
 						<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'promocaos', 'action' => 'delete', $promocao['produto_id']), array('escape' => false), __('Tem certeza que deseja excluir esta promoção?')); ?>
 					</td>

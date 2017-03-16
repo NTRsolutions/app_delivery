@@ -49,12 +49,29 @@ class PromocaosController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->Promocao->create();
-			if ($this->Promocao->save($this->request->data)) {
-				$this->Session->setFlash(__('The promocao has been saved.'), 'default', array('class' => 'alert alert-success'));
+
+			if(!empty($this->data['Promocao']['produto'])){
+				
+				$save = false;
+
+				foreach ($this->data['Promocao']['produto'] as $pp) {
+
+	        		$promo = array('data_ini' => $this->request->data['Promocao']['data_ini'], 
+	        			           'data_fim' => $this->request->data['Promocao']['data_fim'], 
+	        			           'desconto' => $this->request->data['Promocao']['desconto'],
+	        			           'produto_id' => $pp,
+	        			           'restaurante_id' => $this->request->data['Promocao']['restaurante_id']);
+	            	$this->Promocao->create();
+	            	$this->Promocao->save($promo);
+	            	$save = true;
+	        	}
+	        }
+		    
+			if ($save == true) {
+				$this->Session->setFlash(__('A promoção para o(s) produto(s) selecionado(s) foi salva com sucesso.'), 'default', array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The promocao could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('A promoção para o(s) produto(s) selecionado(s) não foi salva. Por favor, tente novamente.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
 
@@ -82,17 +99,23 @@ class PromocaosController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Promocao->save($this->request->data)) {
-				$this->Session->setFlash(__('The promocao has been saved.'), 'default', array('class' => 'alert alert-success'));
+				$this->Session->setFlash(__('A promoção para o(s) produto(s) selecionado(s) foi salva com sucesso.'), 'default', array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The promocao could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('A promoção para o(s) produto(s) selecionado(s) não foi salva. Por favor, tente novamente.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Promocao.' . $this->Promocao->primaryKey => $id));
 			$this->request->data = $this->Promocao->find('first', $options);
 		}
-		$produtos = $this->Promocao->Produto->find('list');
-		$restaurantes = $this->Promocao->Restaurante->find('list');
+
+		$gerente = $this->Session->read('Gerente');
+
+		$options = array('fields' => 'Produto.nome', 'conditions' => array('Produto.restaurante_id' => $gerente['0']['Restaurante']['0']['id']));
+		$produtos = $this->Promocao->Produto->find('list', $options);
+
+		$options = array('fields' => 'Restaurante.nome', 'conditions' => array('Restaurante.id' => $gerente['0']['Restaurante']['0']['id']));
+		$restaurantes = $this->Promocao->Restaurante->find('list', $options);
 		$this->set(compact('produtos', 'restaurantes'));
 	}
 
@@ -110,7 +133,7 @@ class PromocaosController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Promocao->delete()) {
-			$this->Session->setFlash(__('The promocao has been deleted.'), 'default', array('class' => 'alert alert-success'));
+			$this->Session->setFlash(__('A promoção foi excluída com sucesso.'), 'default', array('class' => 'alert alert-success'));
 		} else {
 			$this->Session->setFlash(__('The promocao could not be deleted. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 		}

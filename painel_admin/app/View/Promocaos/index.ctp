@@ -4,8 +4,8 @@
 		<div class="col-md-12">
 			<div class="page-header">
 				<ul class="breadcrumb" id="bread">
-			    <li><a href="gerentes/home">Início</a></li>
-			    <li class="active">Promoções</li>
+			    	<li><a href="gerentes/home">Início</a></li>
+			    	<li class="active">Promoções</li>
 				</ul>
 				<h1><?php echo __('Promoções'); ?></h1>
 			</div>
@@ -40,30 +40,24 @@
 			<table cellpadding="0" cellspacing="0" class="table table-striped">
 				<thead>
 					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('produto_id'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('data_ini'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('data_fim'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('desconto'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('restaurante_id'); ?></th>
+						<th nowrap><?php echo $this->Paginator->sort('produto'); ?></th>
+						<th nowrap><?php echo $this->Paginator->sort('data início'); ?></th>
+						<th nowrap><?php echo $this->Paginator->sort('data fim'); ?></th>
+						<th nowrap><?php echo $this->Paginator->sort('desconto (%)'); ?></th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
 				<tbody>
 				<?php foreach ($promocaos as $promocao): ?>
 					<tr>
-								<td>
-			<?php echo $this->Html->link($promocao['Produto']['id'], array('controller' => 'produtos', 'action' => 'view', $promocao['Produto']['id'])); ?>
-		</td>
-						<td nowrap><?php echo h($promocao['Promocao']['data_ini']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($promocao['Promocao']['data_fim']); ?>&nbsp;</td>
+						<td nowrap><?php echo h($promocao['Produto']['nome']); ?>&nbsp;</td>
+						<td nowrap><?php echo date("d/m/Y", strtotime(h($promocao['Promocao']['data_ini']))); ?>&nbsp;</td>
+						<td nowrap><?php echo date("d/m/Y", strtotime(h($promocao['Promocao']['data_fim']))); ?>&nbsp;</td>
 						<td nowrap><?php echo h($promocao['Promocao']['desconto']); ?>&nbsp;</td>
-								<td>
-			<?php echo $this->Html->link($promocao['Restaurante']['id'], array('controller' => 'restaurantes', 'action' => 'view', $promocao['Restaurante']['id'])); ?>
-		</td>
+						
 						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $promocao['Promocao']['produto_id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $promocao['Promocao']['produto_id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $promocao['Promocao']['produto_id']), array('escape' => false), __('Are you sure you want to delete # %s?', $promocao['Promocao']['produto_id'])); ?>
+							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $promocao['Promocao']['produto_id']), array('escape' => false), __('Você realmente deseja excluir esta promoção?')); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>

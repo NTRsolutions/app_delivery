@@ -94,7 +94,7 @@
 					<?php echo $this->Form->input('Restaurante.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone opcional'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Restaurante.gerente_id', array('class' => 'form-control', 'empty' => 'Selecione o gerente'));?>
+					<?php echo $this->Form->input('Restaurante.gerente_id', array('class' => 'form-control selectpicker', 'data-live-search' => 'true', 'empty' => 'Selecione o gerente'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Restaurante.franqueado_id', array('class' => 'form-control', 'empty' => 'Selecione o franqueado')) . '<br>';?>

@@ -53,7 +53,7 @@
 					); ?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'disabled'));?>
+					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control'));?>
 				</div>
 
 
