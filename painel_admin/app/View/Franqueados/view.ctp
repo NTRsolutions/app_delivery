@@ -74,9 +74,9 @@
 <div class="related row">
 	<div class="col-md-12">
 	<br><h3><?php echo __('Restaurantes Relacionados'); ?></h3>
-	<div class="actions">
+	<!--<div class="actions">
 		<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Restaurante'), array('controller' => 'restaurantes', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
-	</div><br>
+	</div><br>  -->
 	<?php if (!empty($franqueado['Restaurante'])): ?>
 	<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 	<thead>
@@ -96,7 +96,7 @@
 			<td><?php echo $restaurante['telefone1']; ?></td>
 			<td><?php echo $restaurante['telefone2']; ?></td>
 			<td class="actions">
-				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'restaurantes', 'action' => 'view', $restaurante['id']), array('escape' => false)); ?>
+				<?php //echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'restaurantes', 'action' => 'view', $restaurante['id']), array('escape' => false)); ?>
 				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'restaurantes', 'action' => 'edit', $restaurante['id']), array('escape' => false)); ?>
 				<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'restaurantes', 'action' => 'delete', $restaurante['id']), array('escape' => false), __('Tem certeza que desaja excluir: %s?', $restaurante['nome'])); ?>
 			</td>

@@ -49,7 +49,7 @@
 				<?php foreach ($pedidos as $pedido): ?>
 					<tr>
 						<td> <?php echo $this->Html->link($pedido['Cliente']['nome'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?> </td>
-						<td nowrap><?php echo h($pedido['Pedido']['status']); ?>&nbsp;</td>
+						<td nowrap><?php echo $status[$pedido['Pedido']['status']]; ?>&nbsp;</td>
 						<td nowrap><?php echo date("d/m/Y", strtotime(h($pedido['Pedido']['data']))); ?>&nbsp;</td>
 						<td nowrap><?php echo 'R$' . h($pedido['Pedido']['total']); ?>&nbsp;</td>
 						<td class="actions">

@@ -219,7 +219,7 @@ class CulinariasController extends AppController {
 		} else {
 			$this->Session->setFlash(__('The culinaria could not be deleted. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 		}
-		return $this->redirect(array('action' => 'index'));
+		return $this->redirect(array('controller' => 'gerentes', 'action' => 'meu_restaurante'));
 	}
 
 	public function delete2($id = null) {

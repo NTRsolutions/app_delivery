@@ -25,6 +25,14 @@ class PedidosController extends AppController {
 	public function index() {
 		$this->Pedido->recursive = 0;
 		$this->set('pedidos', $this->Paginator->paginate());
+
+		$status = array(
+			0 => 'Pendente',
+			1 => 'Em preparo',
+			2 => 'À caminho',
+			3 => 'Entregue'
+		);
+		$this->set('status', $status);
 	}
 
 /**
@@ -38,8 +46,32 @@ class PedidosController extends AppController {
 		if (!$this->Pedido->exists($id)) {
 			throw new NotFoundException(__('Invalid pedido'));
 		}
-		$options = array('conditions' => array('Pedido.' . $this->Pedido->primaryKey => $id));
+		$options = array(
+			'contain' => array(
+				'Endereco',
+				'Cliente',
+				'Pagamento',
+				'PedidoProduto' => array(
+					'Produto' => array(
+						'ProdutoComplemento' => array(
+							'Complemento'
+						)
+					)
+				)
+			),
+			'conditions' => array(
+				'Pedido.' . $this->Pedido->primaryKey => $id
+			)
+		);
 		$this->set('pedido', $this->Pedido->find('first', $options));
+
+		$status = array(
+			0 => 'Pendente',
+			1 => 'Em preparo',
+			2 => 'À caminho',
+			3 => 'Entregue'
+		);
+		$this->set('status', $status);
 	}
 
 /**

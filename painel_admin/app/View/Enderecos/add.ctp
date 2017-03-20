@@ -28,7 +28,6 @@
 							<ul class="nav nav-pills nav-stacked">
 								<?php if($this->Session->check('Gerente')) { ?>
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;'.__('Detalhes Restaurante'), array('controller' => 'gerentes', 'action' => 'meu_restaurante'), array('escape' => false)); ?> </li>
-									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Nova Cidade'), array('controller' => 'cidades', 'action' => 'add'), array('escape' => false)); ?> </li>
 								<?php } ?>	
 							</ul>
 						</div>

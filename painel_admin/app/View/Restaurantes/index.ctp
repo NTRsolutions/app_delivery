@@ -61,7 +61,6 @@
 									<?php echo $this->Html->link($restaurante['Franqueado']['nome'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
 								</td>
 						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $restaurante['Restaurante']['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $restaurante['Restaurante']['id']), array('escape' => false)); ?>
 							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $restaurante['Restaurante']['id']), array('escape' => false), __('Você realmente deseja excluir: %s?', $restaurante['Restaurante']['nome'])); ?>
 						</td>

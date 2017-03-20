@@ -37,7 +37,8 @@
 
 								<?php } else { 
 
-									echo '<li>'.$this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'view', $this->Form->value('Gerente.id')), array('escape' => false)).'</li>';
+									echo '<li>'.$this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('Gerentes'), array('action' => 'index'), array('escape' => false)).'</li>';
+									echo '<li>'.$this->Html->link('<span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;'.__('Detalhes do Gerente'), array('action' => 'view', $this->Form->value('Gerente.id')), array('escape' => false)).'</li>';
 
 								} ?>
 

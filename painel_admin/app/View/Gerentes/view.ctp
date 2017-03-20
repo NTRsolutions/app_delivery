@@ -22,12 +22,7 @@
 					<div class="panel-heading"><?php echo __('Ações'); ?></div>
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-								<?php if ($this->Session->check('Franqueado')) { ?>
-									<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-home"></span>&nbsp&nbsp;Início'), array('controller' => 'franqueados', 'action' => 'home'), array('escape' => false)); ?> </li>
-								<?php } else { ?>
-									<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-home"></span>&nbsp&nbsp;Início'), array('controller' => 'admins', 'action' => 'home'), array('escape' => false)); ?> </li>
-								<?php } ?>
-
+								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-list"></span>&nbsp&nbsp;Gerentes'), array('controller' => 'gerentes', 'action' => 'index'), array('escape' => false)); ?> </li>
 								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>&nbsp&nbsp;Editar Gerente'), array('action' => 'edit', $gerente['Gerente']['id']), array('escape' => false)); ?> </li>
 								<li><?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Excluir Gerente'), array('action' => 'delete', $gerente['Gerente']['id']), array('escape' => false), __('Tem certeza que desaja excluir: %s?', $gerente['Gerente']['nome'])); ?> </li>
 							</ul>
@@ -60,7 +55,7 @@
 
 	</div>
 </div>
-
+<!--
 <div class="related row">
 	<div class="col-md-12">
 		<br><h3><?php echo __('Restaurantes Relacionados'); ?></h3>
@@ -95,5 +90,6 @@
 				</tbody>
 			</table>
 		<?php endif; ?>
-	</div><!-- end col md 12 -->
+	</div>
 </div>
+-->

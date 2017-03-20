@@ -36,7 +36,7 @@
 					<tr>
 						<th><?php echo __('Status'); ?></th>
 						<td>
-							<?php echo h($pedido['Pedido']['status']); ?>
+							<?php echo $status[$pedido['Pedido']['status']]; ?>
 							&nbsp;
 						</td>
 					</tr>
@@ -63,29 +63,22 @@
 </div>
 
 <div class="related row">
-	<div class="col-md-12">
-		<h3><?php echo __('Related Pedido Produtos'); ?></h3>
+	<div class="col-md-6">
+		<h3><?php echo __('Produtos do pedido'); ?></h3>
 		<?php if (!empty($pedido['PedidoProduto'])): ?>
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 				<thead>
 				<tr>
-					<th><?php echo __('Pedido Id'); ?></th>
-					<th><?php echo __('Produto Id'); ?></th>
 					<th><?php echo __('Qtd'); ?></th>
+					<th><?php echo __('Produto'); ?></th>
 					<th class="actions"></th>
 				</tr>
 				<thead>
 				<tbody>
 				<?php foreach ($pedido['PedidoProduto'] as $pedidoProduto): ?>
 					<tr>
-						<td><?php echo $pedidoProduto['pedido_id']; ?></td>
-						<td><?php echo $pedidoProduto['produto_id']; ?></td>
 						<td><?php echo $pedidoProduto['qtd']; ?></td>
-						<td class="actions">
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'pedido_produtos', 'action' => 'view', $pedidoProduto['pedido_id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'pedido_produtos', 'action' => 'edit', $pedidoProduto['pedido_id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'pedido_produtos', 'action' => 'delete', $pedidoProduto['pedido_id']), array('escape' => false), __('Are you sure you want to delete # %s?', $pedidoProduto['pedido_id'])); ?>
-						</td>
+						<td><?php echo $pedidoProduto['Produto']['nome']; ?></td>
 					</tr>
 				<?php endforeach; ?>
 				</tbody>

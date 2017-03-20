@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
-				<h1><?php echo __('Administrador'); ?></h1>
+				<h1><?php echo __('Franqueados'); ?></h1>
 			</div>
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
@@ -30,8 +30,6 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">
-
-			<h3>Lista de Franqueados:</h3>
 
 			<div class="actions">
 				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Franqueado'), array('controller' => 'franqueados', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
