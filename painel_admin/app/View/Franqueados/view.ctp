@@ -25,47 +25,12 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">			
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<tbody>
-					<tr>
-						<th><?php echo __('Nome'); ?></th>
-						<td>
-							<?php echo h($franqueado['Franqueado']['nome']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Email'); ?></th>
-						<td>
-							<?php echo h($franqueado['Franqueado']['email']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Telefone1'); ?></th>
-						<td>
-							<?php echo h($franqueado['Franqueado']['telefone1']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<?php if(isset($franqueado['Franqueado']['telefone2'])) { ?>
-					<tr>
-						<th><?php echo __('Telefone2'); ?></th>
-						<td>
-							<?php echo h($franqueado['Franqueado']['telefone2']); } ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Endereço'); ?></th>
-						<td>
-							<?php echo $ends['0']['Endereco']['rua'] . ', ' . $ends['0']['Endereco']['numero'] . ', ' . $ends['0']['Endereco']['bairro'] . ', ' . $ends['0']['Endereco']['complemento'] . ' - ' . $ends['0']['Endereco']['cep'] . ', ' . $ends['0']['Cidade']['nome'] . ', ' . $ends['0']['Cidade']['Estado']['nome']; ?>
-							&nbsp;
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
+			<b>Nome:</b> <?php echo h($franqueado['Franqueado']['nome']); ?><br /><br />
+			<b>Email:</b>  <?php echo h($franqueado['Franqueado']['email']); ?><br /><br />
+			<b>Telefone 1:</b> <?php echo h($franqueado['Franqueado']['telefone1']); ?><br /><br />
+			<?php if(!empty($franqueado['Franqueado']['telefone2'])) { ?>
+				<b>Telefone 2:</b> <?php echo h($franqueado['Franqueado']['telefone2']) . '<br /><br />'; } ?>
+			<b>Endereco:</b> <?php echo $ends['0']['Endereco']['rua'] . ', ' . $ends['0']['Endereco']['numero'] . ', ' . $ends['0']['Endereco']['bairro'] . ', ' . $ends['0']['Endereco']['complemento'] . ' - ' . $ends['0']['Endereco']['cep'] . ', ' . $ends['0']['Cidade']['nome'] . ', ' . $ends['0']['Cidade']['Estado']['nome']; ?>
 		</div><!-- end col md 9 -->
 
 	</div>

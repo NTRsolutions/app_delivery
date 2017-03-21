@@ -37,106 +37,22 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">			
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<tbody>
-					<tr>
-							<th><?php echo __('Nome'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['nome']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('CNPJ'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['cnpj']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Email'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['email']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Descricao'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['descricao']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Foto'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['foto']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Horário Abrir'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['horario_abre']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Horário Fechar'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['horario_fecha']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Tempo de Mercado'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['tempo_mercado']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Valor Mínimo'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['valor_min']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Telefone1'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['telefone1']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Telefone2'); ?></th>
-							<td>
-								<?php echo h($restaurante['Restaurante']['telefone2']); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Gerente'); ?></th>
-							<td>
-								<?php echo $this->Html->link($restaurante['Gerente']['nome'], array('controller' => 'gerentes', 'action' => 'view', $restaurante['Gerente']['id'])); ?>
-								&nbsp;
-							</td>
-					</tr>
-					<tr>
-							<th><?php echo __('Franqueado'); ?></th>
-							<td>
-								<?php echo $this->Html->link($restaurante['Franqueado']['nome'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
-								&nbsp;
-							</td>
-					</tr>
-				</tbody>
-			</table>
-
+			<b>Nome:</b> <?php echo h($restaurante['Restaurante']['nome']); ?><br /><br />
+			<b>CNPJ:</b> <?php echo h($restaurante['Restaurante']['cnpj']); ?><br /><br />
+			<b>Email:</b> <?php echo h($restaurante['Restaurante']['email']); ?><br /><br />
+			<b>Descrição:</b> <?php echo h($restaurante['Restaurante']['descricao']); ?><br /><br />
+			<b>Horário Abrir:</b> <?php echo h($restaurante['Restaurante']['horario_abre']); ?><br /><br />
+			<b>Horário Fechar:</b> <?php echo h($restaurante['Restaurante']['horario_fecha']); ?><br /><br />
+			<b>Tempo de Mercado:</b> <?php echo h($restaurante['Restaurante']['tempo_mercado']); ?><br /><br />
+			<b>Valor mínimo cobrado:</b> <?php echo h($restaurante['Restaurante']['valor_min']); ?><br /><br />
+			<b>Telefone 1:</b><?php echo h($restaurante['Restaurante']['telefone1']); ?><br /><br />
+			<?php if(!empty($restaurante['Restaurante']['telefone2'])) { ?>
+				<b>Telefone 2:</b> <?php echo h($restaurante['Restaurante']['telefone2']). '<br /><br />'; } ?>
+			<b>Gerente:</b> <?php echo $this->Html->link($restaurante['Gerente']['nome'], array('controller' => 'gerentes', 'action' => 'view', $restaurante['Gerente']['id'])); ?><br /><br />
+			<b>Franqueado:</b> <?php echo $this->Html->link($restaurante['Franqueado']['nome'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
 		</div><!-- end col md 9 -->
-
 	</div>
-</div>
+</div><br><hr>
 
 <div class="related row">
 	<div class="col-md-12">
@@ -147,7 +63,6 @@
 				<tr>
 					<th><?php echo __('Nome'); ?></th>
 					<th><?php echo __('Email'); ?></th>
-					<th><?php echo __('Senha'); ?></th>
 					<th class="actions"></th>
 				</tr>
 				<thead>
@@ -156,9 +71,8 @@
 					<tr>
 						<td><?php echo $atendente['nome']; ?></td>
 						<td><?php echo $atendente['email']; ?></td>
-						<td><?php echo $atendente['senha']; ?></td>
 						<td class="actions">
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'atendentes', 'action' => 'view', $atendente['id']), array('escape' => false)); ?>
+							<?php //echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'atendentes', 'action' => 'view', $atendente['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'atendentes', 'action' => 'edit', $atendente['id']), array('escape' => false)); ?>
 							<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'atendentes', 'action' => 'delete', $atendente['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $atendente['id'])); ?>
 						</td>
@@ -178,8 +92,8 @@
 				<thead>
 				<tr>
 					<th><?php echo __('Nota'); ?></th>
-					<th><?php echo __('Comentario'); ?></th>
-					<th><?php echo __('Cliente Id'); ?></th>
+					<th><?php echo __('Comentário'); ?></th>
+					<!--<th><?php echo __('Cliente'); ?></th>-->
 					<th class="actions"></th>
 				</tr>
 				<thead>
@@ -188,9 +102,9 @@
 					<tr>
 						<td><?php echo $classificacao['nota']; ?></td>
 						<td><?php echo $classificacao['comentario']; ?></td>
-						<td><?php echo $classificacao['cliente_id']; ?></td>
+						<!--<td><?php echo $classificacao['cliente_id']; ?></td>-->
 						<td class="actions">
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'classificacaos', 'action' => 'view', $classificacao['id']), array('escape' => false)); ?>
+							<?php //echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'classificacaos', 'action' => 'view', $classificacao['id']), array('escape' => false)); ?>
 							<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'classificacaos', 'action' => 'delete', $classificacao['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $classificacao['id'])); ?>
 						</td>
 					</tr>
@@ -208,7 +122,7 @@
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 				<thead>
 				<tr>
-					<th><?php echo __('Tipo'); ?></th>
+					<th><?php echo __('Tipo de Culinária'); ?></th>
 					<th class="actions"></th>
 				</tr>
 				<thead>
@@ -217,9 +131,9 @@
 					<tr>
 						<td><?php echo $culinaria['tipo']; ?></td>
 						<td class="actions">
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'culinarias', 'action' => 'view', $culinaria['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'culinarias', 'action' => 'edit', $culinaria['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'culinarias', 'action' => 'delete', $culinaria['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $culinaria['id'])); ?>
+							<?php //echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'culinarias', 'action' => 'view', $culinaria['id']), array('escape' => false)); ?>
+							<?php //echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'culinarias', 'action' => 'edit', $culinaria['id']), array('escape' => false)); ?>
+							<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'culinarias', 'action' => 'delete', $culinaria['id']), array('escape' => false), __('Tem certeza que deseja excluir esta culinária?')); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>
@@ -236,7 +150,7 @@
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 				<thead>
 				<tr>
-					<th><?php echo __('Descricao'); ?></th>
+					<th><?php echo __('Forma de Pagamento'); ?></th>
 					<th class="actions"></th>
 				</tr>
 				<thead>
@@ -245,9 +159,9 @@
 					<tr>
 						<td><?php echo $pagamento['descricao']; ?></td>
 						<td class="actions">
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'pagamentos', 'action' => 'view', $pagamento['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'pagamentos', 'action' => 'edit', $pagamento['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'pagamentos', 'action' => 'delete', $pagamento['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $pagamento['id'])); ?>
+							<?php //echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'pagamentos', 'action' => 'view', $pagamento['id']), array('escape' => false)); ?>
+							<?php //echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'pagamentos', 'action' => 'edit', $pagamento['id']), array('escape' => false)); ?>
+							<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'pagamentos', 'action' => 'delete', $pagamento['id']), array('escape' => false), __('Tem certeza que deseja excluir este pagamento?')); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>
@@ -265,9 +179,8 @@
 			<thead>
 			<tr>
 				<th><?php echo __('Nome'); ?></th>
-				<th><?php echo __('Tipo'); ?></th>
-				<th><?php echo __('Descricao'); ?></th>
-				<th><?php echo __('Preco'); ?></th>
+				<th><?php echo __('Descrição'); ?></th>
+				<th><?php echo __('Preço'); ?></th>
 				<th><?php echo __('Qtd Max Complemento'); ?></th>
 				<th class="actions"></th>
 			</tr>
@@ -276,7 +189,6 @@
 			<?php foreach ($restaurante['Produto'] as $produto): ?>
 				<tr>
 					<td><?php echo $produto['nome']; ?></td>
-					<td><?php echo $produto['tipo']; ?></td>
 					<td><?php echo $produto['descricao']; ?></td>
 					<td><?php echo $produto['preco']; ?></td>
 					<td><?php echo $produto['qtd_max_complemento']; ?></td>
@@ -300,21 +212,20 @@
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 			<thead>
 			<tr>
-				<th><?php echo __('Produto Id'); ?></th>
-				<th><?php echo __('Data Ini'); ?></th>
+				<th><?php echo __('Produto'); ?></th>
+				<th><?php echo __('Data Início'); ?></th>
 				<th><?php echo __('Data Fim'); ?></th>
-				<th><?php echo __('Desconto'); ?></th>
+				<th><?php echo __('Desconto (%)'); ?></th>
 				<th class="actions"></th>
 			</tr>
 			<thead>
 			<tbody>
 			<?php foreach ($restaurante['Promocao'] as $promocao): ?>
 				<tr>
-					<td><?php echo $promocao['produto_id']; ?></td>
-					<td><?php echo $promocao['data_ini']; ?></td>
-					<td><?php echo $promocao['data_fim']; ?></td>
+					<td><?php echo $promocao['Produto']['nome']; ?></td>
+					<td><?php echo date("d/m/Y", strtotime($promocao['data_ini'])); ?></td>
+					<td><?php echo date("d/m/Y", strtotime($promocao['data_fim'])); ?></td>
 					<td><?php echo $promocao['desconto']; ?></td>
-					<td><?php echo $promocao['restaurante_id']; ?></td>
 					<td class="actions">
 						<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'promocaos', 'action' => 'view', $promocao['produto_id']), array('escape' => false)); ?>
 						<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'promocaos', 'action' => 'edit', $promocao['produto_id']), array('escape' => false)); ?>
@@ -328,7 +239,7 @@
 	</div><!-- end col md 12 -->
 </div>
 
-<div class="related row">
+<!--<div class="related row">
 	<div class="col-md-12">
 		<?php if (!empty($restaurante['RestauranteEndereco'])): ?>
 			<h3><?php echo __('Restaurante Enderecos'); ?></h3>
@@ -353,5 +264,5 @@
 			</tbody>
 			</table>
 		<?php endif; ?>
-	</div><!-- end col md 12 -->
-</div>
+	</div>
+</div>-->

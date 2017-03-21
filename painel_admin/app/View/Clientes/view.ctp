@@ -25,39 +25,10 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">			
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<tbody>
-				<tr>
-					<th><?php echo __('Nome'); ?></th>
-					<td>
-						<?php echo h($cliente['Cliente']['nome']); ?>
-						&nbsp;
-					</td>
-				</tr>
-				<tr>
-					<th><?php echo __('Email'); ?></th>
-					<td>
-						<?php echo h($cliente['Cliente']['email']); ?>
-						&nbsp;
-					</td>
-				</tr>
-				<tr>
-					<th><?php echo __('Telefone1'); ?></th>
-					<td>
-						<?php echo h($cliente['Cliente']['telefone1']); ?>
-						&nbsp;
-					</td>
-				</tr>
-				<tr>
-					<th><?php echo __('Telefone2'); ?></th>
-					<td>
-						<?php echo h($cliente['Cliente']['telefone2']); ?>
-						&nbsp;
-					</td>
-				</tr>
-				</tbody>
-			</table>
-
+			<b>Nome:</b> <?php echo h($cliente['Cliente']['nome']); ?><br /><br />
+			<b>Email:</b> <?php echo h($cliente['Cliente']['email']); ?><br /><br />
+			<b>Telefone 1:</b> <?php echo $cliente['Cliente']['telefone1']; ?><br /><br />
+			<b>Telefone 2:</b> <?php echo $cliente['Cliente']['telefone2']; ?>
 		</div><!-- end col md 9 -->
 
 	</div>
@@ -95,7 +66,7 @@
 	</div><!-- end col md 12 -->
 </div>
 
-<div class="related row">
+<!--<div class="related row">
 	<div class="col-md-12">
 		<h3><?php echo __('Related Cliente Enderecos'); ?></h3><br>
 		<?php if (!empty($cliente['ClienteEndereco'])): ?>
@@ -122,8 +93,8 @@
 				</tbody>
 			</table>
 		<?php endif; ?>
-	</div><!-- end col md 12 -->
-</div>
+	</div>
+</div>-->
 
 <div class="related row">
 	<div class="col-md-12">
@@ -142,8 +113,8 @@
 				<?php foreach ($cliente['Pedido'] as $pedido): ?>
 					<tr>
 						<td><?php echo $pedido['status']; ?></td>
-						<td><?php echo $pedido['data']; ?></td>
-						<td><?php echo $pedido['total']; ?></td>
+						<td><?php echo date("d/m/Y", strtotime($pedido['data'])); ?></td>
+						<td><?php echo 'R$ ' . $pedido['total']; ?></td>
 						<td class="actions">
 							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'pedidos', 'action' => 'view', $pedido['id']), array('escape' => false)); ?>
 							<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'pedidos', 'action' => 'edit', $pedido['id']), array('escape' => false)); ?>
@@ -164,7 +135,7 @@
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 			<thead>
 			<tr>
-				<th><?php echo __('Nome Restaurante'); ?></th>
+				<th><?php echo __('Restaurante'); ?></th>
 				<th><?php echo __('Mensagem'); ?></th>
 				<th><?php echo __('Telefone Restaurante'); ?></th>
 				<th class="actions"></th>

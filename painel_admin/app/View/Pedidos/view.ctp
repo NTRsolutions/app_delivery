@@ -24,39 +24,10 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">			
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<tbody>
-					<tr>
-						<th><?php echo __('Cliente'); ?></th>
-						<td>
-							<?php echo $this->Html->link($pedido['Cliente']['nome'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Status'); ?></th>
-						<td>
-							<?php echo $status[$pedido['Pedido']['status']]; ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Data'); ?></th>
-						<td>
-							<?php echo date('d/m/Y', strtotime(h($pedido['Pedido']['data']))); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Total'); ?></th>
-						<td>
-							<?php echo 'R$' . h($pedido['Pedido']['total']); ?>
-							&nbsp;
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
+			<b>Cliente:</b> <?php echo $this->Html->link($pedido['Cliente']['nome'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?><br /><br />
+			<b>Status:</b> <?php echo $status[$pedido['Pedido']['status']]; ?><br /><br />
+			<b>Data:</b> <?php echo date('d/m/Y', strtotime(h($pedido['Pedido']['data']))); ?><br /><br />
+			<b>Total:</b> <?php echo 'R$' . h($pedido['Pedido']['total']); ?>
 		</div><!-- end col md 9 -->
 
 	</div>

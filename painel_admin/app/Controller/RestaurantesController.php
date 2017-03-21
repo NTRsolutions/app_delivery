@@ -38,7 +38,7 @@ class RestaurantesController extends AppController {
 		if (!$this->Restaurante->exists($id)) {
 			throw new NotFoundException(__('Invalid restaurante'));
 		}
-		$options = array('conditions' => array('Restaurante.' . $this->Restaurante->primaryKey => $id));
+		$options = array('conditions' => array('Restaurante.' . $this->Restaurante->primaryKey => $id), 'recursive' => 2);
 		$this->set('restaurante', $this->Restaurante->find('first', $options));
 	}
 

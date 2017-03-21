@@ -32,25 +32,8 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">			
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<tbody>
-				<tr>
-					<th><?php echo __('Nome'); ?></th>
-					<td>
-						<?php echo h($gerente['Gerente']['nome']); ?>
-						&nbsp;
-					</td>
-				</tr>
-				<tr>
-					<th><?php echo __('Email'); ?></th>
-					<td>
-						<?php echo h($gerente['Gerente']['email']); ?>
-						&nbsp;
-					</td>
-				</tr>
-				</tbody>
-			</table>
-
+			<b>Nome:</b> <?php echo h($gerente['Gerente']['nome']); ?><br /><br />
+			<b>Email:</b> <?php echo h($gerente['Gerente']['email']); ?>
 		</div><!-- end col md 9 -->
 
 	</div>

@@ -37,32 +37,9 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">			
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<tbody>
-					<tr>
-						<th><?php echo __('Nome'); ?></th>
-						<td>
-							<?php echo h($atendente['Atendente']['nome']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Email'); ?></th>
-						<td>
-							<?php echo h($atendente['Atendente']['email']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Restaurante'); ?></th>
-						<td>
-							<?php echo $this->Html->link($atendente['Restaurante']['nome'], array('controller' => 'restaurantes', 'action' => 'view', $atendente['Restaurante']['id'])); ?>
-							&nbsp;
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
+			<b>Nome:</b> <?php echo h($atendente['Atendente']['nome']); ?><br /><br />
+			<b>Email:</b> <?php echo h($atendente['Atendente']['email']); ?><br /><br />
+			<b>Restaurante:</b> <?php echo $this->Html->link($atendente['Restaurante']['nome'], array('controller' => 'restaurantes', 'action' => 'view', $atendente['Restaurante']['id'])); ?>
 		</div><!-- end col md 9 -->
 
 	</div>

@@ -32,60 +32,12 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">			
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<tbody>
-					<tr>
-						<th><?php echo __('Nome'); ?></th>
-						<td>
-							<?php echo h($produto['Produto']['nome']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Tipo'); ?></th>
-						<td>
-							<?php echo h($produto['Produto']['tipo']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Descricao'); ?></th>
-						<td>
-							<?php echo h($produto['Produto']['descricao']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Preco'); ?></th>
-						<td>
-							<?php echo 'R$' . h($produto['Produto']['preco']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Foto'); ?></th>
-						<td>
-							<?php echo h($produto['Produto']['foto']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Qtd Max Complemento'); ?></th>
-						<td>
-							<?php echo h($produto['Produto']['qtd_max_complemento']); ?>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<th><?php echo __('Restaurante'); ?></th>
-						<td>
-							<?php echo $this->Html->link($produto['Restaurante']['nome'], array('controller' => 'restaurantes', 'action' => 'view', $produto['Restaurante']['id'])); ?>
-							&nbsp;
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
+			<b>Nome:</b> <?php echo h($produto['Produto']['nome']); ?><br /><br />
+			<b>Tipo:</b> <?php echo h($produto['Produto']['tipo']); ?><br /><br />
+			<b>Descrição:</b> <?php echo h($produto['Produto']['descricao']); ?><br /><br />
+			<b>Preço:</b> <?php echo 'R$' . h($produto['Produto']['preco']); ?><br /><br />
+			<b>Qtd Max Complemento:</b> <?php echo h($produto['Produto']['qtd_max_complemento']); ?><br /><br />
+			<b>Restaurante:</b> <?php echo $this->Html->link($produto['Restaurante']['nome'], array('controller' => 'restaurantes', 'action' => 'view', $produto['Restaurante']['id'])); ?>
 		</div><!-- end col md 9 -->
 
 	</div>
@@ -102,8 +54,8 @@
 			<thead>
 			<tr>
 				<th><?php echo __('Nome'); ?></th>
-				<th><?php echo __('Descricao'); ?></th>
-				<th><?php echo __('Preco'); ?></th>
+				<th><?php echo __('Descrição'); ?></th>
+				<th><?php echo __('Preço'); ?></th>
 				<th class="actions"></th>
 			</tr>
 			<thead>
@@ -132,11 +84,11 @@
 			<h3><?php echo __('Promoções'); ?></h3>
 			<div class="actions">
 				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Nova Promoção'), array('controller' => 'promocaos', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
-			</div>
+			</div><br>
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 				<thead>
 				<tr>
-					<th><?php echo __('Data Ini'); ?></th>
+					<th><?php echo __('Data Início'); ?></th>
 					<th><?php echo __('Data Fim'); ?></th>
 					<th><?php echo __('Desconto'); ?></th>
 					<th><?php echo __('Restaurante Id'); ?></th>
