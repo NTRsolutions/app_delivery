@@ -34,15 +34,14 @@
 </div>
 
 <div class="related row">
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<h3><?php echo __('Produtos do pedido'); ?></h3>
 		<?php if (!empty($pedido['PedidoProduto'])): ?>
 			<table cellpadding = "0" cellspacing = "0" class="table table-striped">
 				<thead>
 				<tr>
-					<th><?php echo __('Qtd'); ?></th>
-					<th><?php echo __('Produto'); ?></th>
-					<th class="actions"></th>
+					<th width="15%"><?php echo __('Qtd'); ?></th>
+					<th width="85%"><?php echo __('Produto'); ?></th>
 				</tr>
 				<thead>
 				<tbody>
@@ -50,6 +49,14 @@
 					<tr>
 						<td><?php echo $pedidoProduto['qtd']; ?></td>
 						<td><?php echo $pedidoProduto['Produto']['nome']; ?></td>
+					</tr>
+					<tr>
+						<?php if (!empty($pedidoProduto['Produto']['ProdutoComplemento'])): ?>
+							<?php foreach ($pedidoProduto['Produto']['ProdutoComplemento'] as $pc): ?>
+								<td><?php echo $pc['qtd']; ?></td>
+								<td><?php echo $pc['Complemento']['nome'] . ' (complemento)'; ?></td>
+							<?php endforeach; ?>
+						<?php endif; ?>
 					</tr>
 				<?php endforeach; ?>
 				</tbody>
