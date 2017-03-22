@@ -43,7 +43,7 @@
 			<?php echo $this->Form->create('Produto', array('role' => 'form', 'type' => 'file')); ?>
 
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
+					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('tipo', array('options' => $tipo, 'class' => 'form-control', 'label' => 'Tipo do produto', 'required' => 'true'));?>
@@ -55,7 +55,7 @@
 					<?php echo $this->Form->input('foto', array('class' => 'form', 'type' => 'file'));?>
 				</div><br>
 				<div class="col-md-4 pad form-group">
-					<?php echo $this->Form->input('preco', array('class' => 'form-control', 'placeholder' => 'Preco'));?>
+					<?php echo $this->Form->input('preco', array('class' => 'form-control', 'placeholder' => 'Preco', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-4 pad form-group">
 					<?php echo $this->Form->input('qtd_max_complemento', array('class' => 'form-control', 'placeholder' => 'Qtd Max Complementos'));?>

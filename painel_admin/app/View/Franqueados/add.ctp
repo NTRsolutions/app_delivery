@@ -54,16 +54,16 @@
 			<?php echo $this->Form->create('Franqueado', array('role' => 'form')); ?>
 
 				<div class="col-md-12 pad form-group">
-					<?php echo $this->Form->input('Franqueado.nome', array('class' => 'form-control', 'placeholder' => 'Nome Completo'));?>
+					<?php echo $this->Form->input('Franqueado.nome', array('class' => 'form-control', 'placeholder' => 'Nome Completo', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Franqueado.email', array('class' => 'form-control', 'placeholder' => 'Ex: email@email.com'));?>
+					<?php echo $this->Form->input('Franqueado.email', array('class' => 'form-control', 'placeholder' => 'Ex: email@email.com', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Franqueado.senha', array('class' => 'form-control', 'placeholder' => 'Senha', 'type' => 'password'));?>
+					<?php echo $this->Form->input('Franqueado.senha', array('class' => 'form-control', 'placeholder' => 'Senha', 'type' => 'password', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Franqueado.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone principal'));?>
+					<?php echo $this->Form->input('Franqueado.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone principal', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Franqueado.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone opcional'));?>
@@ -71,16 +71,16 @@
 
 				
 				<div class="col-md-3 pad form-group"><br>
-					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep',  'id' => 'cep', 'label' => 'CEP'));?>
+					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep',  'id' => 'cep', 'label' => 'CEP', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-10 pad form-group">
-					<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua', 'id' => 'rua', 'disabled'));?>
+					<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua', 'id' => 'rua', 'disabled', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
 					<?php echo $this->Form->input('Endereco.numero', array('class' => 'form-control', 'label' => 'Número', 'placeholder' => 'Número', 'id' => 'numero', 'disabled'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Endereco.bairro', array('class' => 'form-control', 'placeholder' => 'Bairro', 'id' => 'bairro', 'disabled'));?>
+					<?php echo $this->Form->input('Endereco.bairro', array('class' => 'form-control', 'placeholder' => 'Bairro', 'id' => 'bairro', 'disabled', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento', 'id' => 'complemento', 'disabled'));?>
@@ -88,12 +88,12 @@
 
 
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Cidade.nome', array('class' => 'form-control', 'id' => 'cidade', 'placeholder' => 'Cidade', 'label' => 'Cidade', 'disabled'));?>
+					<?php echo $this->Form->input('Cidade.nome', array('class' => 'form-control', 'id' => 'cidade', 'placeholder' => 'Cidade', 'label' => 'Cidade', 'disabled', 'required' => 'true'));?>
 				</div>
 
 
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Estado.nome', array('class' => 'form-control', 'id' => 'uf', 'placeholder' => 'Estado', 'label' => 'Estado', 'disabled'));?>
+					<?php echo $this->Form->input('Estado.nome', array('class' => 'form-control', 'id' => 'uf', 'placeholder' => 'Estado', 'label' => 'Estado', 'disabled', 'required' => 'true'));?>
 				</div>
 
 				<div class="col-md-12 pad form-group">

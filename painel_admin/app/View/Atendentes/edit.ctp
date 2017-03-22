@@ -48,10 +48,10 @@
 				<?php echo $this->Form->input('id', array('class' => 'form-control', 'placeholder' => 'Id'));?>
 			
 				<div class="form-group">
-					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
+					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome', 'required' => 'true'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
+					<?php echo $this->Form->input('email', array('class' => 'form-control', 'placeholder' => 'Email', 'required' => 'true'));?>
 				</div>
 				<div class="form-group">
 					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'placeholder' => 'Restaurante Id'));?>

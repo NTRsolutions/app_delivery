@@ -61,13 +61,13 @@
 			<?php echo $this->Form->create('Restaurante', array('role' => 'form', 'type' => 'file', 'method' => 'post')); ?>
 
 				<div class="form-group">
-					<?php echo $this->Form->input('Restaurante.nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
+					<?php echo $this->Form->input('Restaurante.nome', array('class' => 'form-control', 'placeholder' => 'Nome', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Restaurante.cnpj', array('class' => 'form-control', 'placeholder' => 'CNPJ'));?>
+					<?php echo $this->Form->input('Restaurante.cnpj', array('class' => 'form-control', 'placeholder' => 'CNPJ', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Restaurante.email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
+					<?php echo $this->Form->input('Restaurante.email', array('class' => 'form-control', 'placeholder' => 'Email', 'required' => 'true'));?>
 				</div>
 				<div class="form-group">
 					<?php echo $this->Tinymce->input('Restaurante.descricao', $options = array('label' => 'Descrição'), $tinyoptions = array(), $preset = null) ?>
@@ -76,42 +76,42 @@
 					<?php echo $this->Form->input('Restaurante.foto', array('class' => 'form', 'type' => 'file'));?>
 				</div><br>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.horario_abre', array('class' => 'form-control', 'placeholder' => 'Horário Abre'));?>
+					<?php echo $this->Form->input('Restaurante.horario_abre', array('class' => 'form-control', 'placeholder' => 'Horário Abre', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.horario_fecha', array('class' => 'form-control', 'placeholder' => 'Horário Fecha'));?>
+					<?php echo $this->Form->input('Restaurante.horario_fecha', array('class' => 'form-control', 'placeholder' => 'Horário Fecha', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.tempo_mercado', array('class' => 'form-control', 'placeholder' => 'Ex: 10 anos'));?>
+					<?php echo $this->Form->input('Restaurante.tempo_mercado', array('class' => 'form-control', 'placeholder' => 'Ex: 10 anos', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.valor_min', array('class' => 'form-control', 'placeholder' => 'Valor mín do pedido'));?>
+					<?php echo $this->Form->input('Restaurante.valor_min', array('class' => 'form-control', 'placeholder' => 'Valor mín do pedido', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('Restaurante.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone principal'));?>
+					<?php echo $this->Form->input('Restaurante.telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone principal', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
 					<?php echo $this->Form->input('Restaurante.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone opcional'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Restaurante.gerente_id', array('class' => 'form-control selectpicker', 'data-live-search' => 'true', 'empty' => 'Selecione o gerente'));?>
+					<?php echo $this->Form->input('Restaurante.gerente_id', array('class' => 'form-control selectpicker', 'data-live-search' => 'true', 'empty' => 'Selecione o gerente', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Restaurante.franqueado_id', array('class' => 'form-control', 'empty' => 'Selecione o franqueado')) . '<br>';?>
+					<?php echo $this->Form->input('Restaurante.franqueado_id', array('class' => 'form-control', 'empty' => 'Selecione o franqueado', 'required' => 'true')) . '<br>';?>
 				</div>
 
 
 				<div class="col-md-4 pad form-group">
-					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep',  'id' => 'cep', 'label' => 'CEP'));?>
+					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep',  'id' => 'cep', 'label' => 'CEP', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-9 pad form-group">
-					<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua', 'id' => 'rua', 'disabled'));?>
+					<?php echo $this->Form->input('Endereco.rua', array('class' => 'form-control', 'placeholder' => 'Rua', 'id' => 'rua', 'disabled', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-3 pad form-group">
 					<?php echo $this->Form->input('Endereco.numero', array('class' => 'form-control', 'label' => 'Número', 'placeholder' => 'Numero', 'id' => 'numero', 'disabled'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Endereco.bairro', array('class' => 'form-control', 'placeholder' => 'Bairro', 'id' => 'bairro', 'disabled'));?>
+					<?php echo $this->Form->input('Endereco.bairro', array('class' => 'form-control', 'placeholder' => 'Bairro', 'id' => 'bairro', 'disabled', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento', 'id' => 'complemento', 'disabled'));?>
@@ -119,13 +119,13 @@
 		
 
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Cidade.nome', array('class' => 'form-control', 'id' => 'cidade', 'placeholder' => 'Cidade', 'label' => 'Cidade', 'disabled'));?>
+					<?php echo $this->Form->input('Cidade.nome', array('class' => 'form-control', 'id' => 'cidade', 'placeholder' => 'Cidade', 'label' => 'Cidade', 'disabled', 'required' => 'true'));?>
 				</div>
 
 
 
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Estado.nome', array('class' => 'form-control', 'id' => 'uf', 'placeholder' => 'Estado', 'label' => 'Estado', 'disabled'));?>
+					<?php echo $this->Form->input('Estado.nome', array('class' => 'form-control', 'id' => 'uf', 'placeholder' => 'Estado', 'label' => 'Estado', 'disabled', 'required' => 'true'));?>
 				</div>
 
 

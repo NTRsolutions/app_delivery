@@ -45,10 +45,10 @@
 			<?php echo $this->Form->create('Cidade', array('role' => 'form')); ?>
 
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome da cidade'));?>
+					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome da cidade', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('estado_id', array('class' => 'form-control'));?>
+					<?php echo $this->Form->input('estado_id', array('class' => 'form-control', 'required' => 'true'));?>
 				</div>
 
 

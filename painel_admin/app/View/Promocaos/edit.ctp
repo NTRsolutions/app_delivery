@@ -34,19 +34,19 @@
 					<?php echo $this->Form->input('produto_id', array('class' => 'form-control', 'placeholder' => 'Produto Id'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('data_ini', array('class' => 'form-control', 'placeholder' => 'Data Ini'));?>
+					<?php echo $this->Form->input('data_ini', array('class' => 'form-control', 'placeholder' => 'Data Ini', 'required' => 'true'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('data_fim', array('class' => 'form-control', 'placeholder' => 'Data Fim'));?>
+					<?php echo $this->Form->input('data_fim', array('class' => 'form-control', 'placeholder' => 'Data Fim', 'required' => 'true'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('desconto', array('class' => 'form-control', 'placeholder' => 'Desconto', 'label' => 'Desconto (%)'));?>
+					<?php echo $this->Form->input('desconto', array('class' => 'form-control', 'placeholder' => 'Desconto', 'label' => 'Desconto (%)', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('produto_id', array('options' => $produtos, 'class' => 'form-control selectpicker', 'data-live-search' => 'true',  'multiple'));?>
+					<?php echo $this->Form->input('produto_id', array('options' => $produtos, 'class' => 'form-control selectpicker', 'data-live-search' => 'true',  'multiple', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control'));?>
+					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'required' => 'true'));?>
 				</div>
 
 

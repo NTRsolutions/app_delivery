@@ -32,7 +32,7 @@
 			<?php echo $this->Form->create('Classificacao', array('role' => 'form')); ?>
 
 				<div class="form-group">
-					<?php echo $this->Form->input('nota', array('class' => 'form-control', 'placeholder' => 'Nota'));?>
+					<?php echo $this->Form->input('nota', array('class' => 'form-control', 'placeholder' => 'Nota', 'required' => 'true'));?>
 				</div>
 				<div class="form-group">
 					<?php echo $this->Form->input('comentario', array('class' => 'form-control', 'placeholder' => 'Comentario'));?>

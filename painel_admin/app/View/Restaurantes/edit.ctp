@@ -78,13 +78,13 @@
 					<?php echo $this->Form->input('id', array('class' => 'form-control', 'placeholder' => 'Id'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
+					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('cnpj', array('class' => 'form-control', 'placeholder' => 'Cnpj'));?>
+					<?php echo $this->Form->input('cnpj', array('class' => 'form-control', 'placeholder' => 'Cnpj', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('email', array('class' => 'form-control', 'placeholder' => 'Email'));?>
+					<?php echo $this->Form->input('email', array('class' => 'form-control', 'placeholder' => 'Email', 'required' => 'true'));?>
 				</div>
 				<div class="form-group">
 					<?php echo $this->Tinymce->input('Restaurante.descricao', $options = array('label' => 'Descrição'), $tinyoptions = array(), $preset = null) ?>
@@ -93,28 +93,28 @@
 					<?php echo $this->Form->input('foto', array('class' => 'form', 'type' => 'file'));?>
 				</div><br>
 				<div class="col-md-3 pad form-group">
-					<?php echo $this->Form->input('horario_abre', array('class' => 'form-control', 'label' => 'Horário Abrir', 'placeholder' => 'Horário Abrir'));?>
+					<?php echo $this->Form->input('horario_abre', array('class' => 'form-control', 'label' => 'Horário Abrir', 'placeholder' => 'Horário Abrir', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-3 pad form-group">
-					<?php echo $this->Form->input('horario_fecha', array('class' => 'form-control', 'label' => 'Horário Fechar', 'placeholder' => 'Horário Fechar'));?>
+					<?php echo $this->Form->input('horario_fecha', array('class' => 'form-control', 'label' => 'Horário Fechar', 'placeholder' => 'Horário Fechar', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-3 pad form-group">
-					<?php echo $this->Form->input('tempo_mercado', array('class' => 'form-control', 'label' => 'Tempo de Mercado (anos)', 'placeholder' => 'Ex: 10 anos'));?>
+					<?php echo $this->Form->input('tempo_mercado', array('class' => 'form-control', 'label' => 'Tempo de Mercado (anos)', 'placeholder' => 'Ex: 10 anos', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-3 pad form-group">
-					<?php echo $this->Form->input('valor_min', array('class' => 'form-control', 'label' => 'Valor mínimo de produto (R$)', 'placeholder' => 'Valor mín pedido'));?>
+					<?php echo $this->Form->input('valor_min', array('class' => 'form-control', 'label' => 'Valor mínimo de produto (R$)', 'placeholder' => 'Valor mín pedido', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone principal'));?>
+					<?php echo $this->Form->input('telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone principal', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone opcional'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('gerente_id', array('class' => 'form-control'));?>
+					<?php echo $this->Form->input('gerente_id', array('class' => 'form-control', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('franqueado_id', array('class' => 'form-control'));?>
+					<?php echo $this->Form->input('franqueado_id', array('class' => 'form-control', 'required' => 'true'));?>
 				</div>
 
 				

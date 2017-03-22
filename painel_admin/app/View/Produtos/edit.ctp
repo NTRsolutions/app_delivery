@@ -35,10 +35,10 @@
 					<?php echo $this->Form->input('id', array('class' => 'form-control', 'placeholder' => 'Id'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome'));?>
+					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('tipo', array('class' => 'form-control', 'placeholder' => 'Tipo'));?>
+					<?php echo $this->Form->input('tipo', array('class' => 'form-control', 'placeholder' => 'Tipo', 'required' => 'true'));?>
 				</div>
 				<div class="form-group">
 					<?php echo $this->Tinymce->input('Produto.descricao', $options = array('label' => 'Descrição'), $tinyoptions = array(), $preset = null) ?>
@@ -47,7 +47,7 @@
 					<?php echo $this->Form->input('foto', array('class' => 'form', 'type' => 'file'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('preco', array('class' => 'form-control', 'placeholder' => 'Preco'));?>
+					<?php echo $this->Form->input('preco', array('class' => 'form-control', 'placeholder' => 'Preco', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('qtd_max_complemento', array('class' => 'form-control', 'placeholder' => 'Qtd Max Complemento'));?>
