@@ -109,7 +109,11 @@ class PromocaosController extends AppController {
 			$this->request->data = $this->Promocao->find('first', $options);
 		}
 
-		$gerente = $this->Session->read('Gerente');
+		if($this->Session->check('Gerente')) {
+			$gerente = $this->Session->read('Gerente');
+		} else {
+			$gerente = $this->Session->read('Franqueado');
+		}
 
 		$options = array('fields' => 'Produto.nome', 'conditions' => array('Produto.restaurante_id' => $gerente['0']['Restaurante']['0']['id']));
 		$produtos = $this->Promocao->Produto->find('list', $options);

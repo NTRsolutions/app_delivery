@@ -34,7 +34,7 @@
 		<div class="col-md-9">
 			<?php echo $this->Form->create('Pagamento', array('role' => 'form')); ?>
 
-				<div class="col-md-6 pad form-group">
+				<div class="col-md-12 pad form-group">
 					<?php //echo $this->Form->input('descricao', array('options' => $tipo, 'class' => 'form-control', 'label' => 'Forma de Pagamento', 'required' => 'true'));
 
 					echo '<label for="checkbox1">
@@ -44,19 +44,19 @@
 					echo $this->Form->input('Pagamento.descricao', array(
 					    'type' => 'select',
 					    'multiple' => 'checkbox',
-					    'class' => 'col-md-8 checkbox checkbox-inline checkbox-primary',
+					    'class' => 'col-md-5 checkbox checkbox-inline checkbox-primary',
 					    'label' => '',
 					    'id' => 'checkbox1',
 					    'options' => $tipo
 					    )
 					); ?>
 				</div>
-				<div class="col-md-6 pad form-group">
+				<div class="esconde_rest form-group">
 					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control'));?>
 				</div>
 
 
-				<div class="pad form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

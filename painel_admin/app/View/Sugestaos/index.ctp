@@ -14,10 +14,7 @@
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
 
-
-
 	<div class="row">
-
 		<div class="col-md-3">
 			<div class="actions">
 				<div class="panel panel-default">
@@ -48,18 +45,30 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">
+
+			<?php 
+
+			$existe = false;
+
+			foreach ($sugestaos as $s): 
+
+				if(isset($s)) { ?>
+
+					<div class="jumbotron jumb">
+						<?php echo '<i>' . $s['Cliente']['nome'] . '</i> sugeriu:' ?> <br /><br />
+						<?php echo '<b>' . $s['Sugestao']['nome_restaurante'] . '</b>' ?> - <?php echo 'Tel: ' . $s['Sugestao']['tel_restaurante'] ?>
+				        <?php echo '<h4>' . $s['Sugestao']['mensagem'] . '</h4>' ?>
+				    </div>
+
+				<?php $existe = true; }  
+
+			endforeach; 
+
+			if ($existe == false) {
+				echo '<h4>Nenhuma sugestão enviada até o momento!</h4>'; 
+			}
 			
-			<?php foreach ($sugestaos as $s): ?>
-
-				<div class="jumbotron jumb">
-
-					<?php echo '<i>' . $s['Cliente']['nome'] . '</i> sugeriu:' ?> <br /><br />
-					<?php echo '<b>' . $s['Sugestao']['nome_restaurante'] . '</b>' ?> - <?php echo 'Tel: ' . $s['Sugestao']['tel_restaurante'] ?>
-			        <?php echo '<h4>' . $s['Sugestao']['mensagem'] . '</h4>' ?>
-
-			    </div>
-				
-			<?php endforeach; ?>
+			?>
 
 		</div> <!-- end col md 9 -->
 	</div><!-- end row -->

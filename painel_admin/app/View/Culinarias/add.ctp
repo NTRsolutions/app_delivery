@@ -52,12 +52,13 @@
 					    )
 					); ?>
 				</div>
-				<div class="col-md-6 pad form-group">
+
+				<div class="esconde_rest form-group">
 					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control'));?>
 				</div>
 
 
-				<div class="pad form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

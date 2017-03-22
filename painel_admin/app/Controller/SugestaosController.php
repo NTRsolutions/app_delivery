@@ -23,8 +23,21 @@ class SugestaosController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Sugestao->recursive = 0;
-		$this->set('sugestaos', $this->Paginator->paginate());
+
+		if($this->Session->check('Admin')) {
+
+			$this->Sugestao->recursive = 0;
+			$this->set('sugestaos', $this->Paginator->paginate());
+
+		} else {
+
+			$this->set('sugestaos', $this->Sugestao->find('all'));
+
+			$this->loadModel('Franqueado');
+			$franq = $this->Session->read('Franqueado');
+		    $franq = $this->Franqueado->findById($franq['0']['Franqueado']['id']); 
+			$this->set('franq', $franq);
+		}
 	}
 
 /**

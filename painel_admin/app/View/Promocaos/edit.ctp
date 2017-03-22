@@ -4,9 +4,15 @@
 		<div class="col-md-12">
 			<div class="page-header">
 				<ul class="breadcrumb" id="bread">
-			    	<li><a href="gerentes/home">Início</a></li>
-			    	<li><a href="../../promocaos/index">Promoções</a></li>
-			    	<li class="active">Editar Promoções</li>
+					<?php if($this->Session->check('Gerente')) { ?>
+				    	<li><a href="gerentes/home">Início</a></li>
+				    	<li><a href="../../promocaos/index">Promoções</a></li>
+				    	<li class="active">Editar Promoção</li>
+				    <?php } else { ?>
+				    	<li><a href="../../franqueados/home">Início</a></li>
+					    <li><?php echo $this->Html->link(__('Detalhe Restaurante'), array('controller' => 'restaurantes', 'action' => 'view', $this->Form->value('Promocao.restaurante_id'))); ?>
+					    <li class="active">Editar Promoção</li>
+					<?php } ?>
 				</ul>
 				<h1><?php echo __('Editar Promoção'); ?></h1>
 			</div>
@@ -33,13 +39,13 @@
 				<div class="form-group">
 					<?php echo $this->Form->input('produto_id', array('class' => 'form-control', 'placeholder' => 'Produto Id'));?>
 				</div>
-				<div class="form-group">
-					<?php echo $this->Form->input('data_ini', array('class' => 'form-control', 'placeholder' => 'Data Ini', 'required' => 'true'));?>
+				<div class="col-md-4 pad form-group">
+					<?php echo $this->Form->input('data_ini', array('class' => 'form-control', 'placeholder' => 'Data Início', 'label' => 'Data Início',  'required' => 'true'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-4 pad form-group">
 					<?php echo $this->Form->input('data_fim', array('class' => 'form-control', 'placeholder' => 'Data Fim', 'required' => 'true'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->input('desconto', array('class' => 'form-control', 'placeholder' => 'Desconto', 'label' => 'Desconto (%)', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
@@ -50,7 +56,7 @@
 				</div>
 
 
-				<div class="form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

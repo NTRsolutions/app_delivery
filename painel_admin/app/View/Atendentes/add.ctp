@@ -40,19 +40,20 @@
 		<div class="col-md-9">
 			<?php echo $this->Form->create('Atendente', array('role' => 'form')); ?>
 
-				<div class="form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->input('nome', array('class' => 'form-control', 'placeholder' => 'Nome', 'required' => 'true'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->input('email', array('class' => 'form-control', 'placeholder' => 'Email', 'required' => 'true'));?>
 				</div>
-				<div class="form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->input('senha', array('class' => 'form-control', 'placeholder' => 'Senha', 'type' => 'password', 'required' => 'true'));?>
 				</div>
 				<div class="form-group">
-					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'placeholder' => 'Restaurante Id'));?>
+					<?php echo $this->Form->input('restaurante_id', array('class' => 'esconde_rest form-control', 'label' => ''));?>
 				</div>
-				<div class="form-group">
+
+				<div class="pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

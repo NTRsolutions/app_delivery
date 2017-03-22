@@ -42,7 +42,6 @@
 						<th nowrap><?php echo $this->Paginator->sort('telefone1'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('telefone2'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('gerente_id'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('franqueado_id'); ?></th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
@@ -55,9 +54,6 @@
 						<td nowrap><?php echo h($restaurante['Restaurante']['telefone2']); ?>&nbsp;</td>
 								<td>
 									<?php echo $this->Html->link($restaurante['Gerente']['nome'], array('controller' => 'gerentes', 'action' => 'view', $restaurante['Gerente']['id'])); ?>
-								</td>
-								<td>
-									<?php echo $this->Html->link($restaurante['Franqueado']['nome'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
 								</td>
 						<td class="actions">
 							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('controller' => 'restaurantes', 'action' => 'view', $restaurante['Restaurante']['id']), array('escape' => false)); ?>

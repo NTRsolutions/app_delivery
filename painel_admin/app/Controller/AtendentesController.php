@@ -23,8 +23,9 @@ class AtendentesController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Atendente->recursive = 0;
-		$this->set('atendentes', $this->Paginator->paginate());
+		$gerente = $this->Session->read('Gerente');
+		$options = array('conditions' => array('Atendente.restaurante_id' => $gerente['0']['Restaurante']['0']['id']));
+		$this->set('atendentes', $this->Atendente->find('all', $options, $this->Paginator->paginate()));
 	}
 
 /**
@@ -51,15 +52,19 @@ class AtendentesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Atendente->create();
 			if ($this->Atendente->save($this->request->data)) {
-				$this->Session->setFlash(__('The atendente has been saved.'), 'default', array('class' => 'alert alert-success'));
+				$this->Session->setFlash(__('O atendente foi salvo com sucesso.'), 'default', array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The atendente could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('O atendente não foi salvo. Tente novamente.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$options = array('fields' => 'Restaurante.nome');
-		$restaurantes = $this->Atendente->Restaurante->find('list', $options);
-		$this->set(compact('restaurantes'));
+
+		if($this->Session->check('Gerente')){
+			$gerente = $this->Session->read('Gerente');
+			$options = array('fields' => 'Restaurante.nome', 'conditions' => array('Restaurante.id' => $gerente['0']['Restaurante']['0']['id']));
+			$restaurantes = $this->Atendente->Restaurante->find('list', $options);
+			$this->set(compact('restaurantes'));
+		}
 	}
 
 /**
@@ -75,18 +80,22 @@ class AtendentesController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Atendente->save($this->request->data)) {
-				$this->Session->setFlash(__('The atendente has been saved.'), 'default', array('class' => 'alert alert-success'));
+				$this->Session->setFlash(__('O atendente foi salvo com sucesso.'), 'default', array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The atendente could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('O atendente não foi salvo. Tente novamente.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Atendente.' . $this->Atendente->primaryKey => $id));
 			$this->request->data = $this->Atendente->find('first', $options);
 		}
-		$options = array('fields' => 'Restaurante.nome');
-		$restaurantes = $this->Atendente->Restaurante->find('list', $options);
-		$this->set(compact('restaurantes'));
+		
+		if($this->Session->check('Gerente')){
+			$gerente = $this->Session->read('Gerente');
+			$options = array('fields' => 'Restaurante.nome', 'conditions' => array('Restaurante.id' => $gerente['0']['Restaurante']['0']['id']));
+			$restaurantes = $this->Atendente->Restaurante->find('list', $options);
+			$this->set(compact('restaurantes'));
+		}
 	}
 
 /**
@@ -103,14 +112,15 @@ class AtendentesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Atendente->delete()) {
-			$this->Session->setFlash(__('The atendente has been deleted.'), 'default', array('class' => 'alert alert-success'));
+			$this->Session->setFlash(__('O atendente foi excluído com sucesso'), 'default', array('class' => 'alert alert-success'));
 		} else {
-			$this->Session->setFlash(__('The atendente could not be deleted. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+			$this->Session->setFlash(__('O atendente não foi excluído. Tente novamente.'), 'default', array('class' => 'alert alert-danger'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
 
 	public function home() {
+
 		$atendente = $this->Session->read('Atendente');
 
 		$this->loadModel('Pedido');

@@ -63,6 +63,10 @@
 	padding-right: 2px;
 }
 
+.esconde_rest {
+  display: none;
+}
+
 /* ------------------------
 	Fim Outros
 ------------------------ */

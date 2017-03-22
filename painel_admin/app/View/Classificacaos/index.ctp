@@ -101,11 +101,8 @@
 						if($c['Classificacao']['restaurante_id'] == $g['id']) { ?>
 
 							<div class="jumbotron jumb">
-
 								<?php echo $c['Cliente']['nome'] . ' escreveu:' ?> <br /> <?php echo 'Nota: <b>' . $c['Classificacao']['nota'] . '</b>' ?> <br />
-
 						        <?php echo '<h4>' . $c['Classificacao']['comentario'] . '</h4>' ?>
-
 						    </div>
 
 						<?php $existe = true; } ?>

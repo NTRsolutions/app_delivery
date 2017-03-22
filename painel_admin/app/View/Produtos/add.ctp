@@ -53,17 +53,18 @@
 				</div>
 				<div class="form-group">
 					<?php echo $this->Form->input('foto', array('class' => 'form', 'type' => 'file'));?>
-				</div><br>
-				<div class="col-md-4 pad form-group">
+				</div>
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('preco', array('class' => 'form-control', 'placeholder' => 'Preco', 'required' => 'true'));?>
 				</div>
-				<div class="col-md-4 pad form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('qtd_max_complemento', array('class' => 'form-control', 'placeholder' => 'Qtd Max Complementos'));?>
 				</div>
-				<div class="col-md-4 pad form-group">
-					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'placeholder' => 'Restaurante Id'));?>
-				</div>
 				<div class="form-group">
+					<?php echo $this->Form->input('restaurante_id', array('class' => 'esconde_rest form-control', 'label' => ''));?>
+				</div>
+
+				<div class="pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

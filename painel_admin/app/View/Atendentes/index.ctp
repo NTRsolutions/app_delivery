@@ -37,28 +37,37 @@
 			<div class="actions">
 				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Atendente'), array('controller' => 'atendentes', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
 			</div><br>
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<thead>
-					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php foreach ($atendentes as $atendente): ?>
-					<tr>
-						<td nowrap><?php echo h($atendente['Atendente']['nome']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($atendente['Atendente']['email']); ?>&nbsp;</td>
-						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $atendente['Atendente']['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $atendente['Atendente']['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $atendente['Atendente']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $atendente['Atendente']['id'])); ?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-				</tbody>
-			</table>
+
+			<?php if(!empty($atendentes)) { ?>
+
+				<table cellpadding="0" cellspacing="0" class="table table-striped">
+					<thead>
+						<tr>
+							<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
+							<th class="actions"></th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php foreach ($atendentes as $atendente): ?>
+						<tr>
+							<td nowrap><?php echo h($atendente['Atendente']['nome']); ?>&nbsp;</td>
+							<td nowrap><?php echo h($atendente['Atendente']['email']); ?>&nbsp;</td>
+							<td class="actions">
+								<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $atendente['Atendente']['id']), array('escape' => false)); ?>
+								<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $atendente['Atendente']['id']), array('escape' => false)); ?>
+								<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $atendente['Atendente']['id']), array('escape' => false), __('Tem certeza que deseja excluir: %s?', $atendente['Atendente']['nome'])); ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+
+			<?php } else { 
+
+				echo '<h4>Nenhum atendente está relacionado com o seu restaurante !</h4><br>';
+
+			} ?>
 
 			<p>
 				<small><?php echo $this->Paginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?></small>

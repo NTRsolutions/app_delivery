@@ -79,7 +79,7 @@
 					</tr>
 				<?php endforeach; ?>
 				</tbody>
-			</table>
+			</table><br><hr>
 		<?php endif; ?>
 	</div><!-- end col md 12 -->
 </div>
@@ -110,7 +110,7 @@
 					</tr>
 				<?php endforeach; ?>
 				</tbody>
-			</table>
+			</table><br><hr>
 		<?php endif; ?>
 	</div><!-- end col md 12 -->
 </div>
@@ -138,7 +138,7 @@
 					</tr>
 				<?php endforeach; ?>
 				</tbody>
-			</table>
+			</table><br><hr>
 		<?php endif; ?>
 	</div><!-- end col md 12 -->
 </div>
@@ -166,7 +166,7 @@
 					</tr>
 				<?php endforeach; ?>
 				</tbody>
-			</table>
+			</table><br><hr>
 		<?php endif; ?>
 	</div><!-- end col md 12 -->
 </div>
@@ -200,7 +200,7 @@
 				</tr>
 			<?php endforeach; ?>
 			</tbody>
-			</table>
+			</table><br><hr>
 		<?php endif; ?>
 	</div><!-- end col md 12 -->
 </div>
@@ -227,7 +227,7 @@
 					<td><?php echo date("d/m/Y", strtotime($promocao['data_fim'])); ?></td>
 					<td><?php echo $promocao['desconto']; ?></td>
 					<td class="actions">
-						<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'promocaos', 'action' => 'view', $promocao['produto_id']), array('escape' => false)); ?>
+						<?php //echo $this->Html->link(__('<span class="glyphicon glyphicon-search"></span>'), array('controller' => 'promocaos', 'action' => 'view', $promocao['produto_id']), array('escape' => false)); ?>
 						<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>'), array('controller' => 'promocaos', 'action' => 'edit', $promocao['produto_id']), array('escape' => false)); ?>
 						<?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>'), array('controller' => 'promocaos', 'action' => 'delete', $promocao['produto_id']), array('escape' => false), __('Are you sure you want to delete # %s?', $promocao['produto_id'])); ?>
 					</td>

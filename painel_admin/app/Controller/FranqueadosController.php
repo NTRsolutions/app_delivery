@@ -122,7 +122,6 @@ class FranqueadosController extends AppController {
 					'bairro' => $this->request->data['Endereco']['bairro'],
 					'complemento' => $this->request->data['Endereco']['complemento'],
 					'cep' => $this->request->data['Endereco']['cep'],
-					'tipo' => $this->request->data['Endereco']['tipo'],
 					'cidade_id' => $id_city);
 
 				$this->Endereco->create();

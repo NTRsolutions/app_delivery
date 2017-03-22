@@ -23,8 +23,9 @@ class ProdutosController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Produto->recursive = 0;
-		$this->set('produtos', $this->Paginator->paginate());
+		$gerente = $this->Session->read('Gerente');
+		$options = array('conditions' => array('Produto.restaurante_id' => $gerente['0']['Restaurante']['0']['id']));
+		$this->set('produtos', $this->Produto->find('all', $options, $this->Paginator->paginate()));
 
 		$tipo = array(
             'Hamburguer',
@@ -52,6 +53,18 @@ class ProdutosController extends AppController {
 		}
 		$options = array('conditions' => array('Produto.' . $this->Produto->primaryKey => $id));
 		$this->set('produto', $this->Produto->find('first', $options));
+
+		$tipo = array(
+            'Hamburguer',
+            'Pizzas',
+            'Massas',
+            'Salgados',
+            'Porções',
+            'Bebidas',
+            'Sobremesas',
+            'Doces'
+        );
+        $this->set(compact('tipo'));
 	}
 
 /**
@@ -96,6 +109,19 @@ class ProdutosController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+
+		$tipo = array(
+            'Hamburguer',
+            'Pizzas',
+            'Massas',
+            'Salgados',
+            'Porções',
+            'Bebidas',
+            'Sobremesas',
+            'Doces'
+        );
+        $this->set(compact('tipo'));
+        
 		if (!$this->Produto->exists($id)) {
 			throw new NotFoundException(__('Invalid produto'));
 		}
@@ -110,7 +136,8 @@ class ProdutosController extends AppController {
 			$options = array('conditions' => array('Produto.' . $this->Produto->primaryKey => $id));
 			$this->request->data = $this->Produto->find('first', $options);
 		}
-		$options = array('fields' => 'Restaurante.nome');
+		$gerente = $this->Session->read('Gerente');
+		$options = array('fields' => 'Restaurante.nome', 'conditions' => array('Restaurante.id' => $gerente['0']['Restaurante']['0']['id']));
 		$restaurantes = $this->Produto->Restaurante->find('list', $options);
 		$this->set(compact('restaurantes'));
 	}
