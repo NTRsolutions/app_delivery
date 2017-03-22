@@ -23,8 +23,9 @@ class PromocaosController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Promocao->recursive = 0;
-		$this->set('promocaos', $this->Paginator->paginate());
+		$gerente = $this->Session->read('Gerente');
+		$options = array('conditions' => array('Produto.restaurante_id' => $gerente['0']['Restaurante']['0']['id']));
+		$this->set('promocaos', $this->Promocao->find('all', $options, $this->Paginator->paginate()));
 	}
 
 /**

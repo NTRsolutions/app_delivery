@@ -23,8 +23,25 @@ class GerentesController extends AppController {
  * @return void
  */
 	public function index() {
+
 		$this->Gerente->recursive = 0;
-		$this->set('gerentes', $this->Paginator->paginate());
+		$this->set('gerentes', $this->Gerente->Restaurante->find('all', $this->Paginator->paginate()));
+
+		if($this->Session->check('Franqueado')) {	
+			$franq = $this->Session->read('Franqueado');
+
+			$options = array(
+				'contain' => array(
+					'Gerente'
+				),
+				'conditions' => array(
+					'Restaurante.franqueado_id'	=>  $franq['0']['Franqueado']['id']
+				)
+			);
+
+			$this->set('gerentes', $this->Gerente->Restaurante->find('all', $options, $this->Paginator->paginate()));
+		}
+
 	}
 
 /**

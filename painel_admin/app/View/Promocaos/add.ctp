@@ -106,22 +106,22 @@
 		<div class="col-md-9">
 			<?php echo $this->Form->create('Promocao', array('role' => 'form')); ?>
 
-				<div class="col-md-4 pad form-group">
+				<div class="col-md-6 pad form-group">
 					<label>Data de início</label>
 					<?php echo $this->Form->date('data_ini', array('class' => 'form-control', 'placeholder' => 'Data Inicio', 'id' => 'data_ini', 'required' => 'true'));?>
 				</div>
-				<div class="col-md-4 pad form-group">
+				<div class="col-md-6 pad form-group">
 					<label>Data de término</label>
 					<?php echo $this->Form->date('data_fim', array('class' => 'form-control', 'placeholder' => 'Data Fim', 'id' => 'data_fim', 'required' => 'true'));?>
 				</div>
-				<div class="col-md-4 pad form-group">
+				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('desconto', array('class' => 'form-control', 'placeholder' => 'Desconto', 'label' => 'Desconto (%)', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Promocao.produto', array('options' => $produtos, 'class' => 'form-control selectpicker', 'data-live-search' => 'true',  'multiple' => 'multiple', 'required' => 'true'));?>
 				</div>
-				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('restaurante_id', array('class' => 'form-control', 'placeholder' => 'Restaurante', 'required' => 'true'));?>
+				<div class="form-group">
+					<?php echo $this->Form->input('restaurante_id', array('class' => 'esconde_rest form-control', 'label' => ''));?>
 				</div>
 
 

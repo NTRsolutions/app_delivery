@@ -37,32 +37,41 @@
 			<div class="actions">
 				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Nova Promoção'), array('controller' => 'promocaos', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
 			</div><br>
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<thead>
-					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('produto'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('data início'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('data fim'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('desconto (%)'); ?></th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php foreach ($promocaos as $promocao): ?>
-					<tr>
-						<td nowrap><?php echo h($promocao['Produto']['nome']); ?>&nbsp;</td>
-						<td nowrap><?php echo date("d/m/Y", strtotime(h($promocao['Promocao']['data_ini']))); ?>&nbsp;</td>
-						<td nowrap><?php echo date("d/m/Y", strtotime(h($promocao['Promocao']['data_fim']))); ?>&nbsp;</td>
-						<td nowrap><?php echo h($promocao['Promocao']['desconto']); ?>&nbsp;</td>
-						
-						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $promocao['Promocao']['produto_id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $promocao['Promocao']['produto_id']), array('escape' => false), __('Você realmente deseja excluir esta promoção?')); ?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-				</tbody>
-			</table>
+
+			<?php if(!empty($promocaos)) { ?>
+
+				<table cellpadding="0" cellspacing="0" class="table table-striped">
+					<thead>
+						<tr>
+							<th nowrap><?php echo $this->Paginator->sort('produto'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('data início'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('data fim'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('desconto (%)'); ?></th>
+							<th class="actions"></th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php foreach ($promocaos as $promocao): ?>
+						<tr>
+							<td nowrap><?php echo h($promocao['Produto']['nome']); ?>&nbsp;</td>
+							<td nowrap><?php echo date("d/m/Y", strtotime(h($promocao['Promocao']['data_ini']))); ?>&nbsp;</td>
+							<td nowrap><?php echo date("d/m/Y", strtotime(h($promocao['Promocao']['data_fim']))); ?>&nbsp;</td>
+							<td nowrap><?php echo h($promocao['Promocao']['desconto']); ?>&nbsp;</td>
+							
+							<td class="actions">
+								<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $promocao['Promocao']['produto_id']), array('escape' => false)); ?>
+								<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $promocao['Promocao']['produto_id']), array('escape' => false), __('Você realmente deseja excluir esta promoção?')); ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+
+			<?php } else { 
+
+				echo '<h4>Nenhuma promoção está relacionada com os produtos do seu restaurante !</h4><br>';
+
+			} ?>
 
 			<p>
 				<small><?php echo $this->Paginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?></small>

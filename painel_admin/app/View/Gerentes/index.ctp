@@ -53,21 +53,26 @@
 					<tr>
 						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
 						<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
+						<th nowrap><?php echo $this->Paginator->sort('restaurante'); ?></th>
 						<th class="actions"></th>
 					</tr>
 				</thead>
 				<tbody>
-				<?php foreach ($gerentes as $gerente): ?>
-					<tr>
-						<td nowrap><?php echo h($gerente['Gerente']['nome']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($gerente['Gerente']['email']); ?>&nbsp;</td>
-						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $gerente['Gerente']['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $gerente['Gerente']['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $gerente['Gerente']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $gerente['Gerente']['id'])); ?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
+				<?php  
+					foreach ($gerentes as $gerente): 
+
+						if($gerente['Gerente']['nome'] )?>
+						<tr>
+							<td nowrap><?php echo h($gerente['Gerente']['nome']); ?>&nbsp;</td>
+							<td nowrap><?php echo h($gerente['Gerente']['email']); ?>&nbsp;</td>
+							<td nowrap><?php echo h($gerente['Restaurante']['nome']); ?>&nbsp;</td>
+							<td class="actions">
+								<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $gerente['Gerente']['id']), array('escape' => false)); ?>
+								<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $gerente['Gerente']['id']), array('escape' => false)); ?>
+								<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $gerente['Gerente']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $gerente['Gerente']['id'])); ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
 
