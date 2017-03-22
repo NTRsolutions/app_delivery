@@ -43,4 +43,11 @@ class Franqueado extends AppModel {
 		)
 	);
 
+	public function beforeSave($options = array()) {
+		if(isset($this->data['Franqueado']['senha'])) {
+			$this->data['Franqueado']['senha'] = md5($this->data['Franqueado']['senha']);	
+		}
+		return parent::beforeSave($options);
+	}
+
 }

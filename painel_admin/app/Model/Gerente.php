@@ -31,4 +31,11 @@ class Gerente extends AppModel {
 		)
 	);
 
+	public function beforeSave($options = array()) {
+		if(isset($this->data['Gerente']['senha'])) {
+			$this->data['Gerente']['senha'] = md5($this->data['Gerente']['senha']);	
+		}
+		return parent::beforeSave($options);
+	}
+
 }

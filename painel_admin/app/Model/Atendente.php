@@ -24,4 +24,11 @@ class Atendente extends AppModel {
 			'order' => ''
 		)
 	);
+
+	public function beforeSave($options = array()) {
+		if(isset($this->data['Atendente']['senha'])) {
+			$this->data['Atendente']['senha'] = md5($this->data['Atendente']['senha']);	
+		}
+		return parent::beforeSave($options);
+	}
 }
