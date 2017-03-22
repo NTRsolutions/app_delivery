@@ -48,33 +48,40 @@
 			<div class="actions">
 				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Gerente'), array('controller' => 'gerentes', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
 			</div><br>
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<thead>
-					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('restaurante'); ?></th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php  
-					foreach ($gerentes as $gerente): 
 
-						if($gerente['Gerente']['nome'] )?>
+			<?php if(!empty($gerentes)) { ?>
+
+				<table cellpadding="0" cellspacing="0" class="table table-striped">
+					<thead>
 						<tr>
-							<td nowrap><?php echo h($gerente['Gerente']['nome']); ?>&nbsp;</td>
-							<td nowrap><?php echo h($gerente['Gerente']['email']); ?>&nbsp;</td>
-							<td nowrap><?php echo h($gerente['Restaurante']['nome']); ?>&nbsp;</td>
-							<td class="actions">
-								<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $gerente['Gerente']['id']), array('escape' => false)); ?>
-								<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $gerente['Gerente']['id']), array('escape' => false)); ?>
-								<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $gerente['Gerente']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $gerente['Gerente']['id'])); ?>
-							</td>
+							<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('restaurante'); ?></th>
+							<th class="actions"></th>
 						</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+					<?php  
+						foreach ($gerentes as $gerente): 
+
+							if($gerente['Gerente']['nome'] )?>
+							<tr>
+								<td nowrap><?php echo h($gerente['Gerente']['nome']); ?>&nbsp;</td>
+								<td nowrap><?php echo h($gerente['Gerente']['email']); ?>&nbsp;</td>
+								<td nowrap><?php echo h($gerente['Restaurante']['nome']); ?>&nbsp;</td>
+								<td class="actions">
+									<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $gerente['Gerente']['id']), array('escape' => false)); ?>
+									<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $gerente['Gerente']['id']), array('escape' => false)); ?>
+									<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $gerente['Gerente']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $gerente['Gerente']['id'])); ?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+
+			<?php } else { 
+				echo '<h4>Nenhum gerente foi cadastrado até o momento !</h4><br>';
+			} ?>
 
 			<p>
 				<small><?php echo $this->Paginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?></small>

@@ -8,10 +8,7 @@
 		</div><!-- end col md 12 -->
 	</div><!-- end row -->
 
-
-
-	<div class="row">
-
+	<div class="row"> 
 		<div class="col-md-3">
 			<div class="actions">
 				<div class="panel panel-default">
@@ -35,31 +32,38 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<thead>
-					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('cliente'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('status'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('data'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('total'); ?></th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php foreach ($pedidos as $pedido): ?>
-					<tr>
-						<td> <?php echo $this->Html->link($pedido['Cliente']['nome'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?> </td>
-						<td nowrap><?php echo $status[$pedido['Pedido']['status']]; ?>&nbsp;</td>
-						<td nowrap><?php echo date("d/m/Y", strtotime(h($pedido['Pedido']['data']))); ?>&nbsp;</td>
-						<td nowrap><?php echo 'R$' . h($pedido['Pedido']['total']); ?>&nbsp;</td>
-						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $pedido['Pedido']['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $pedido['Pedido']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $pedido['Pedido']['id'])); ?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-				</tbody>
-			</table>
+
+			<?php if(!empty($pedidos)) { ?>
+
+				<table cellpadding="0" cellspacing="0" class="table table-striped">
+					<thead>
+						<tr>
+							<th nowrap><?php echo $this->Paginator->sort('cliente'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('status'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('data'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('total'); ?></th>
+							<th class="actions"></th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php foreach ($pedidos as $pedido): ?>
+						<tr>
+							<td> <?php echo $this->Html->link($pedido['Cliente']['nome'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?> </td>
+							<td nowrap><?php echo $status[$pedido['Pedido']['status']]; ?>&nbsp;</td>
+							<td nowrap><?php echo date("d/m/Y", strtotime(h($pedido['Pedido']['data']))); ?>&nbsp;</td>
+							<td nowrap><?php echo 'R$' . h($pedido['Pedido']['total']); ?>&nbsp;</td>
+							<td class="actions">
+								<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('action' => 'view', $pedido['Pedido']['id']), array('escape' => false)); ?>
+								<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $pedido['Pedido']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $pedido['Pedido']['id'])); ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+
+			<?php } else { 
+				echo '<h4>Nenhum pedido foi realizado até o momento !</h4><br>';
+			} ?>
 
 			<p>
 				<small><?php echo $this->Paginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?></small>

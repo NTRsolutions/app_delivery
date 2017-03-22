@@ -64,9 +64,7 @@
 				</table>
 
 			<?php } else { 
-
 				echo '<h4>Nenhum atendente está relacionado com o seu restaurante !</h4><br>';
-
 			} ?>
 
 			<p>

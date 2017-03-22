@@ -35,39 +35,46 @@
 			<div class="actions">
 				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Restaurante'), array('controller' => 'restaurantes', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
 			</div><br>
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<thead>
-					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('telefone1'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('telefone2'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('gerente_id'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('franqueado_id'); ?></th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php foreach ($restaurantes as $restaurante): ?>
-					<tr>
-						<td nowrap><?php echo h($restaurante['Restaurante']['nome']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($restaurante['Restaurante']['email']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($restaurante['Restaurante']['telefone1']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($restaurante['Restaurante']['telefone2']); ?>&nbsp;</td>
-								<td>
-									<?php echo $this->Html->link($restaurante['Gerente']['nome'], array('controller' => 'gerentes', 'action' => 'view', $restaurante['Gerente']['id'])); ?>
-								</td>
-								<td>
-									<?php echo $this->Html->link($restaurante['Franqueado']['nome'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
-								</td>
-						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $restaurante['Restaurante']['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $restaurante['Restaurante']['id']), array('escape' => false), __('Você realmente deseja excluir: %s?', $restaurante['Restaurante']['nome'])); ?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-				</tbody>
-			</table>
+
+			<?php if(!empty($restaurantes)) { ?>
+
+				<table cellpadding="0" cellspacing="0" class="table table-striped">
+					<thead>
+						<tr>
+							<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('telefone1'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('telefone2'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('gerente_id'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('franqueado_id'); ?></th>
+							<th class="actions"></th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php foreach ($restaurantes as $restaurante): ?>
+						<tr>
+							<td nowrap><?php echo h($restaurante['Restaurante']['nome']); ?>&nbsp;</td>
+							<td nowrap><?php echo h($restaurante['Restaurante']['email']); ?>&nbsp;</td>
+							<td nowrap><?php echo h($restaurante['Restaurante']['telefone1']); ?>&nbsp;</td>
+							<td nowrap><?php echo h($restaurante['Restaurante']['telefone2']); ?>&nbsp;</td>
+									<td>
+										<?php echo $this->Html->link($restaurante['Gerente']['nome'], array('controller' => 'gerentes', 'action' => 'view', $restaurante['Gerente']['id'])); ?>
+									</td>
+									<td>
+										<?php echo $this->Html->link($restaurante['Franqueado']['nome'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
+									</td>
+							<td class="actions">
+								<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('action' => 'edit', $restaurante['Restaurante']['id']), array('escape' => false)); ?>
+								<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('action' => 'delete', $restaurante['Restaurante']['id']), array('escape' => false), __('Você realmente deseja excluir: %s?', $restaurante['Restaurante']['nome'])); ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+
+			<?php } else { 
+				echo '<h4>Nenhum restaurante foi adicionado até o momento !</h4><br>';
+			} ?>
 
 			<p>
 				<small><?php echo $this->Paginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?></small>

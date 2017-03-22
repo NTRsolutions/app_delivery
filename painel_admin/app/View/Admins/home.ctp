@@ -35,59 +35,66 @@
 				<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Franqueado'), array('controller' => 'franqueados', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
 			</div><br>
 
-			<table cellpadding="0" cellspacing="0" class="table table-striped">
-				<thead>
-					<tr>
-						<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('telefone1'); ?></th>
-						<th nowrap><?php echo $this->Paginator->sort('telefone2'); ?></th>
-						<th class="actions"></th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php foreach ($franqs as $f): ?>
-					<tr>
-						<td nowrap><?php echo h($f['Franqueado']['nome']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($f['Franqueado']['email']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($f['Franqueado']['telefone1']); ?>&nbsp;</td>
-						<td nowrap><?php echo h($f['Franqueado']['telefone2']); ?>&nbsp;</td>
+			<?php if(!empty($franqs)) { ?>
 
-						<?php /*foreach ($franqEnds as $fe): 
+				<table cellpadding="0" cellspacing="0" class="table table-striped">
+					<thead>
+						<tr>
+							<th nowrap><?php echo $this->Paginator->sort('nome'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('email'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('telefone1'); ?></th>
+							<th nowrap><?php echo $this->Paginator->sort('telefone2'); ?></th>
+							<th class="actions"></th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php foreach ($franqs as $f): ?>
+						<tr>
+							<td nowrap><?php echo h($f['Franqueado']['nome']); ?>&nbsp;</td>
+							<td nowrap><?php echo h($f['Franqueado']['email']); ?>&nbsp;</td>
+							<td nowrap><?php echo h($f['Franqueado']['telefone1']); ?>&nbsp;</td>
+							<td nowrap><?php echo h($f['Franqueado']['telefone2']); ?>&nbsp;</td>
 
-							if($fe['FranqueadoEndereco']['franqueado_id'] == $f['Franqueado']['id']) {
+							<?php /*foreach ($franqEnds as $fe): 
 
-								foreach ($ends as $e):
+								if($fe['FranqueadoEndereco']['franqueado_id'] == $f['Franqueado']['id']) {
 
-									if($e['Endereco']['id'] == $fe['FranqueadoEndereco']['endereco_id']) {
+									foreach ($ends as $e):
 
-										foreach ($cidades as $c):
+										if($e['Endereco']['id'] == $fe['FranqueadoEndereco']['endereco_id']) {
 
-											if($c['Cidade']['id'] == $e['Endereco']['cidade_id']) {
+											foreach ($cidades as $c):
 
-												foreach ($estados as $est):
+												if($c['Cidade']['id'] == $e['Endereco']['cidade_id']) {
 
-													if($est['Estado']['id'] == $c['Cidade']['estado_id']) {
+													foreach ($estados as $est):
 
-														echo '<td nowrap>Rua ' . $e['Endereco']['rua'] . ', ' . $e['Endereco']['numero'] . ',<br> ' . $e['Endereco']['bairro'] . ', ' . $e['Endereco']['complemento'] . '<br>CEP: ' . $e['Endereco']['cep'] . '<br>' . $e['Cidade']['nome'] . ', ' . $est['Estado']['nome'] . '&nbsp;</td>';
-													}
-												endforeach;
-											}
-										endforeach;
-									}
-								endforeach;
-							} 
-						endforeach; */?>
+														if($est['Estado']['id'] == $c['Cidade']['estado_id']) {
 
-						<td class="actions">
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('controller' => 'franqueados', 'action' => 'view', $f['Franqueado']['id']), array('escape' => false)); ?>
-							<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('controller' => 'franqueados', 'action' => 'edit', $f['Franqueado']['id']), array('escape' => false)); ?>
-							<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('controller' => 'franqueados', 'action' => 'delete', $f['Franqueado']['id']), array('escape' => false), __('Tem certeza que deseja excluir: %s?', $f['Franqueado']['nome'])); ?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-				</tbody>
-			</table>
+															echo '<td nowrap>Rua ' . $e['Endereco']['rua'] . ', ' . $e['Endereco']['numero'] . ',<br> ' . $e['Endereco']['bairro'] . ', ' . $e['Endereco']['complemento'] . '<br>CEP: ' . $e['Endereco']['cep'] . '<br>' . $e['Cidade']['nome'] . ', ' . $est['Estado']['nome'] . '&nbsp;</td>';
+														}
+													endforeach;
+												}
+											endforeach;
+										}
+									endforeach;
+								} 
+							endforeach; */?>
+
+							<td class="actions">
+								<?php echo $this->Html->link('<span class="glyphicon glyphicon-search"></span>', array('controller' => 'franqueados', 'action' => 'view', $f['Franqueado']['id']), array('escape' => false)); ?>
+								<?php echo $this->Html->link('<span class="glyphicon glyphicon-edit"></span>', array('controller' => 'franqueados', 'action' => 'edit', $f['Franqueado']['id']), array('escape' => false)); ?>
+								<?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', array('controller' => 'franqueados', 'action' => 'delete', $f['Franqueado']['id']), array('escape' => false), __('Tem certeza que deseja excluir: %s?', $f['Franqueado']['nome'])); ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+
+			<?php } else { 
+				echo '<h4>Nenhum franqueado foi cadastrado até o momento !</h4><br>';
+			} ?>
+
 		</div> <!-- end col md 9 -->
 	</div><!-- end row -->
 
