@@ -3,8 +3,8 @@
 	<script type="text/javascript">
 		
 		jQuery(function($){	
-		  $("#data_ini").mask("99/99/9999",{autoclear: true});  	
-		  $("#data_fim").mask("99/99/9999",{autoclear: true}); 
+		  $("#data_ini").mask("99/99/9999",{autoclear: false});  	
+		  $("#data_fim").mask("99/99/9999",{autoclear: false}); 
 
 		  $("#save").click(function(){
 
@@ -107,12 +107,10 @@
 			<?php echo $this->Form->create('Promocao', array('role' => 'form')); ?>
 
 				<div class="col-md-6 pad form-group">
-					<label>Data de início</label>
-					<?php echo $this->Form->date('data_ini', array('class' => 'form-control', 'placeholder' => 'Data Inicio', 'id' => 'data_ini', 'required' => 'true'));?>
+					<?php echo $this->Form->input('data_ini', array('type' => 'text', 'class' => 'form-control', 'placeholder' => 'Data Inicio', 'label' => 'Data de início', 'id' => 'data_ini', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<label>Data de término</label>
-					<?php echo $this->Form->date('data_fim', array('class' => 'form-control', 'placeholder' => 'Data Fim', 'id' => 'data_fim', 'required' => 'true'));?>
+					<?php echo $this->Form->input('data_fim', array('type' => 'text', 'class' => 'form-control', 'placeholder' => 'Data Fim', 'label' => 'Data de término', 'id' => 'data_fim', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('desconto', array('class' => 'form-control', 'placeholder' => 'Desconto', 'label' => 'Desconto (%)', 'required' => 'true'));?>
