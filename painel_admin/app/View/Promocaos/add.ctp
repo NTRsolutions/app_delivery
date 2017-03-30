@@ -6,39 +6,41 @@
 		  $("#data_ini").mask("99/99/9999",{autoclear: false});  	
 		  $("#data_fim").mask("99/99/9999",{autoclear: false}); 
 
-		  $("#save").click(function(){
+	    $("#PromocaoAddForm").on('submit', function(event) {
+	    	var dataIni = $("#data_ini").val();
+	    	var dataFim = $("#data_fim").val();
+	    	var parts = '';
+				var day = '';
+				var month = '';
+				var year = '';
+				var d = '';
 
-		    var dataIni = $("#data_ini").val();
-		    var dataFim = $("#data_fim").val();
+    		if (!isValidDate(dataIni)) {
+    			alert("Data de início inválida");
+    		}	
 
-		    if (isValidDate(dataIni)) {
-		    	var parts = dataIni.split("/");
-				  var day = parseInt(parts[0], 10);
-				  var month = parseInt(parts[1], 10);
-				  var year = parseInt(parts[2], 10);
-				  var d1 = year + '-' + month + '-' + day;
-				  $("#data_ini").val(d1);
-		    } else {
-		    	alert("Data de início inválida");
-		    	$("#PromocaoAddForm").submit(function(event) {
-		    		return false;
-		    	});
+    		if (!isValidDate(dataFim)) {
+		    	alert("Data final inválida");
 		    }
 
-		    if (isValidDate(dataFim)) {
-		    	var parts = dataFim.split("/");
-				  var day = parseInt(parts[0], 10);
-				  var month = parseInt(parts[1], 10);
-				  var year = parseInt(parts[2], 10);
-				  var d2 = year + '-' + month + '-' + day;
-				  $("#data_fim").val(d2);
+		    if (!isValidDate(dataIni) || !isValidDate(dataFim)) {
+		    	event.preventDefault();
 		    } else {
-		    	alert("Data de fim inválida");
-		    	$("#PromocaoAddForm").submit(function(event) {
-		    		return false;
-		    	});
+		    	parts = dataIni.split("/");
+				  day = parseInt(parts[0], 10);
+				  month = parseInt(parts[1], 10);
+				  year = parseInt(parts[2], 10);
+				  d = year + '-' + month + '-' + day;
+				  $("#data_ini").val(d);
+
+				  parts = dataFim.split("/");
+				  day = parseInt(parts[0], 10);
+				  month = parseInt(parts[1], 10);
+				  year = parseInt(parts[2], 10);
+				  d = year + '-' + month + '-' + day;
+				  $("#data_fim").val(d);
 		    }
-			});
+    	});
 		});
 
 		function isValidDate(dateString) {

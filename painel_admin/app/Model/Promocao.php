@@ -39,13 +39,4 @@ class Promocao extends AppModel {
 			'order' => ''
 		)
 	);
-
-	/*public function beforeSave($options = array()) {
-
-		if((isset($this->data['Promocao']['data_ini'])) && (isset($this->data['Promocao']['data_fim']))) {
-			$this->data['Promocao']['data_ini'] = date("Y-m-d", strtotime($this->data['Promocao']['data_ini']));
-			$this->data['Promocao']['data_fim'] = date("Y-m-d", strtotime($this->data['Promocao']['data_fim']));
-		}
-		return parent::beforeSave($options);
-	}*/
 }
