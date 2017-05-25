@@ -1,0 +1,33 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-app-preferences": {
+            "PACKAGE_NAME": "com.br.deliverall"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.br.deliverall"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.br.deliverall"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.br.deliverall"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.br.deliverall"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.br.deliverall"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.br.deliverall"
+        }
+    },
+    "dependent_plugins": {}
+}

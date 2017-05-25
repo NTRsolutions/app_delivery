@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
+import { AppPreferences } from '@ionic-native/app-preferences';
 import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
@@ -33,6 +34,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   providers: [
     StatusBar,
+    AppPreferences,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

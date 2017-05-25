@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { AppPreferences } from '@ionic-native/app-preferences';
 import { CadastroPage } from '../cadastro/cadastro';
 
 import { Http } from '@angular/http';
@@ -25,8 +26,19 @@ export class LoginPage {
   email: string = '';
   senha: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    this.api_url = 'http://localhost/app_delivery/webservice/';
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private appPreferences: AppPreferences, private toastCtrl: ToastController) {
+    this.api_url = 'http://localhost/app_delivery/webservice/';    
+    this.appPreferences.fetch('key').then((res) => { 
+    	let toast = this.toastCtrl.create({
+	      message: res + 'teste',
+	      duration: 3000,
+	      position: 'top'
+	    });
+	    
+	    toast.present();
+    });
+
+    
   }
 
   ionViewDidLoad() {
@@ -43,7 +55,17 @@ export class LoginPage {
     this.http.post(this.api_url + 'clientes/login', {'Cliente': {'email': this.email, 'senha': this.senha}})
       .map(res => res.json())
       .subscribe(data => {
-        console.log(data.message);
+        //if(data.message == 'Logou'){
+        	this.appPreferences.store('key', '1').then((res) => { 
+        		let toast = this.toastCtrl.create({
+			      message: res + 'teste',
+			      duration: 3000,
+			      position: 'top'
+			    });
+			    
+			    toast.present();
+        	});
+        //}
     });
   }
 

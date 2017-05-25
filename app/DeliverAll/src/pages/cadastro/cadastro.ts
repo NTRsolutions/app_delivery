@@ -46,11 +46,7 @@ export class CadastroPage {
       duration: 3000,
       position: 'top'
     });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-
+    
     toast.present();*/
 
   }
