@@ -44704,7 +44704,7 @@ var CadastroPage = (function () {
         this.nome = '';
         this.email = '';
         this.senha = '';
-        this.api_url = 'http://localhost/app_delivery/webservice/';
+        this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
     }
     CadastroPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad Cadastro');
@@ -44715,13 +44715,6 @@ var CadastroPage = (function () {
             .subscribe(function (data) {
             console.log(data.message);
         });
-        /*let toast = this.toastCtrl.create({
-          message: this.nome,
-          duration: 3000,
-          position: 'top'
-        });
-        
-        toast.present();*/
     };
     return CadastroPage;
 }());
@@ -44730,9 +44723,10 @@ CadastroPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
         selector: 'page-cadastro',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\cadastro\cadastro.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Cadastro</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n	<ion-item>\n    <ion-label floating>Nome</ion-label>\n    <ion-input type="text" [(ngModel)]="nome"></ion-input>\n  </ion-item>\n\n	<ion-item>\n    <ion-label floating>Email</ion-label>\n    <ion-input type="text" [(ngModel)]="email"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Senha</ion-label>\n    <ion-input type="password" [(ngModel)]="senha"></ion-input>\n  </ion-item>\n	\n\n 	<div padding>\n    <button ion-button color="secondary" block (click)="usuario_add()">Cadastrar</button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\cadastro\cadastro.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ToastController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === "function" && _d || Object])
 ], CadastroPage);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=cadastro.js.map
 
 /***/ }),
@@ -57925,10 +57919,12 @@ var LoginPage = (function () {
         this.toastCtrl = toastCtrl;
         this.email = '';
         this.senha = '';
-        this.api_url = 'http://localhost/app_delivery/webservice/';
+        this.id = '';
+        this.message = '';
+        this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
         this.appPreferences.fetch('key').then(function (res) {
             var toast = _this.toastCtrl.create({
-                message: res + 'teste',
+                message: res,
                 duration: 3000,
                 position: 'top'
             });
@@ -57948,16 +57944,20 @@ var LoginPage = (function () {
         this.http.post(this.api_url + 'clientes/login', { 'Cliente': { 'email': this.email, 'senha': this.senha } })
             .map(function (res) { return res.json(); })
             .subscribe(function (data) {
-            //if(data.message == 'Logou'){
-            _this.appPreferences.store('key', '1').then(function (res) {
-                var toast = _this.toastCtrl.create({
-                    message: res + 'teste',
-                    duration: 3000,
-                    position: 'top'
+            _this.message = data.message;
+            _this.split = _this.message.split(',');
+            _this.message = _this.split[0];
+            _this.id = _this.split[1];
+            if (_this.message == 'Logou') {
+                _this.appPreferences.store('key', _this.id).then(function (res) {
+                    var toast = _this.toastCtrl.create({
+                        message: res,
+                        duration: 3000,
+                        position: 'top'
+                    });
+                    toast.present();
                 });
-                toast.present();
-            });
-            //}
+            }
         });
     };
     LoginPage.prototype.goToCadastro = function () {
@@ -57970,9 +57970,10 @@ LoginPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
         selector: 'page-login',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Login</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n	<div padding>\n    <button ion-button color="primary" block (click)="loginWithGoogle()">Entrar com Google</button>\n  </div>\n\n	<hr>\n	\n	<ion-item>\n  	<ion-label floating>Usuário</ion-label>\n  	<ion-input type="text" [(ngModel)]="email"></ion-input>\n	</ion-item>\n\n	<ion-item>\n  	<ion-label floating>Senha</ion-label>\n  	<ion-input type="password" [(ngModel)]="senha"></ion-input>\n	</ion-item>\n\n\n	  <div padding>\n    <button ion-button color="primary" block (click)="login()">Entrar</button>\n  </div>\n\n  <div padding>\n    <button ion-button color="info" block (click)="goToCadastro()">Cadastro</button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\login\login.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_app_preferences__["a" /* AppPreferences */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ToastController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_app_preferences__["a" /* AppPreferences */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_app_preferences__["a" /* AppPreferences */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ToastController */]) === "function" && _e || Object])
 ], LoginPage);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=login.js.map
 
 /***/ }),

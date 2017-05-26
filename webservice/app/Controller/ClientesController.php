@@ -21,7 +21,8 @@ class ClientesController extends AppController {
 	        	 
 	        	if ($this->validar()) {
 
-	        		$message = 'Logou';
+	        		$user = $this->Cliente->findAllByEmail($this->data['Cliente']['email']);
+	        		$message = 'Logou,' . $user['0']['Cliente']['id'];
 
 	        	} else {
 
@@ -63,21 +64,39 @@ class ClientesController extends AppController {
 	public function add() {
 		
 		$message = '';
-
+		
+		
 		if ($this->request->is('post')) {
+			
+			if ($this->user_duplicado()) {
+				$message = 'Usuário já existe!';
+			} else {
+				$this->request->data['Cliente']['senha'] = md5($this->request->data['Cliente']['senha']);
 
-			$this->request->data['Cliente']['senha'] = md5($this->request->data['Cliente']['senha']);
+				$this->Cliente->create();
+				if ($this->Cliente->save($this->request->data)) {
+		            $message = 'Saved';
+		        } else {
+		            $message = 'Error';
+		        }
+		    }
 
-			$this->Cliente->create();
-			if ($this->Cliente->save($this->request->data)) {
-	            $message = 'Saved';
-	        } else {
-	            $message = 'Error';
-	        }
 	        $this->set(array(
 	            'message' => $message,
 	            '_serialize' => array('message')
 	        ));
 	    }
+	}
+
+	public function user_duplicado(){
+		
+		$user = $this->Cliente->findAllByEmail(
+    				$this->data['Cliente']['email']);
+		
+		if (count($user) > 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

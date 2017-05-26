@@ -25,12 +25,15 @@ export class LoginPage {
 
   email: string = '';
   senha: string = '';
+  id: string = '';
+  message: string = '';
+  split: string[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private appPreferences: AppPreferences, private toastCtrl: ToastController) {
-    this.api_url = 'http://localhost/app_delivery/webservice/';    
+    this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';    
     this.appPreferences.fetch('key').then((res) => { 
     	let toast = this.toastCtrl.create({
-	      message: res + 'teste',
+	      message: res,
 	      duration: 3000,
 	      position: 'top'
 	    });
@@ -55,17 +58,22 @@ export class LoginPage {
     this.http.post(this.api_url + 'clientes/login', {'Cliente': {'email': this.email, 'senha': this.senha}})
       .map(res => res.json())
       .subscribe(data => {
-        //if(data.message == 'Logou'){
-        	this.appPreferences.store('key', '1').then((res) => { 
+      	this.message = data.message;
+      	this.split = this.message.split(',');
+      	this.message = this.split[0];
+      	this.id = this.split[1];
+
+        if(this.message == 'Logou'){
+        	this.appPreferences.store('key', this.id).then((res) => { 
         		let toast = this.toastCtrl.create({
-			      message: res + 'teste',
+			      message: res,
 			      duration: 3000,
 			      position: 'top'
 			    });
 			    
 			    toast.present();
         	});
-        //}
+        }
     });
   }
 

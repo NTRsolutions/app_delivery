@@ -44704,7 +44704,7 @@ var CadastroPage = (function () {
         this.nome = '';
         this.email = '';
         this.senha = '';
-        this.api_url = 'http://localhost/app_delivery/webservice/';
+        this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
     }
     CadastroPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad Cadastro');
@@ -57925,7 +57925,7 @@ var LoginPage = (function () {
         this.toastCtrl = toastCtrl;
         this.email = '';
         this.senha = '';
-        this.api_url = 'http://localhost/app_delivery/webservice/';
+        this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
         this.appPreferences.fetch('key').then(function (res) {
             var toast = _this.toastCtrl.create({
                 message: res + 'teste',

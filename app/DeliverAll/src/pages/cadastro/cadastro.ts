@@ -26,7 +26,7 @@ export class CadastroPage {
   senha: string = '';
 
   constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    this.api_url = 'http://localhost/app_delivery/webservice/';
+    this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
   }
 
   ionViewDidLoad() {
@@ -39,16 +39,6 @@ export class CadastroPage {
       .subscribe(data => {
         console.log(data.message);
     });
-  
-
-    /*let toast = this.toastCtrl.create({
-      message: this.nome,
-      duration: 3000,
-      position: 'top'
-    });
-    
-    toast.present();*/
-
   }
 
 }
