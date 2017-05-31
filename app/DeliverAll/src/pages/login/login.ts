@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { CadastroPage } from '../cadastro/cadastro';
+import { EnderecoPage } from '../endereco/endereco';
+import { Cliente } from '../../models/cliente';
 
 import { Http } from '@angular/http';
 
@@ -25,27 +27,21 @@ export class LoginPage {
 
   email: string = '';
   senha: string = '';
-  id: string = '';
+  id: number;
   message: string = '';
   split: string[];
+  cliente: Cliente;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private appPreferences: AppPreferences, private toastCtrl: ToastController) {
-    this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';    
-    this.appPreferences.fetch('key').then((res) => { 
-    	let toast = this.toastCtrl.create({
-	      message: res,
-	      duration: 3000,
-	      position: 'top'
-	    });
-	    
-	    toast.present();
-    });
-
-    
+    this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';      
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Login');
+    this.appPreferences.fetch('key').then((res) => { 
+      if (res != '') {
+        this.goToEndereco(res);
+      }
+    });
   }
 
   /*loginWithGoogle() {
@@ -57,28 +53,49 @@ export class LoginPage {
   login() {
     this.http.post(this.api_url + 'clientes/login', {'Cliente': {'email': this.email, 'senha': this.senha}})
       .map(res => res.json())
-      .subscribe(data => {
-      	this.message = data.message;
-      	this.split = this.message.split(',');
-      	this.message = this.split[0];
-      	this.id = this.split[1];
+      .subscribe(data => {       
+        
+        if (typeof data.message == "object") {
+          this.cliente = data.message['0'];
 
-        if(this.message == 'Logou'){
-        	this.appPreferences.store('key', this.id).then((res) => { 
-        		let toast = this.toastCtrl.create({
-			      message: res,
-			      duration: 3000,
-			      position: 'top'
-			    });
-			    
-			    toast.present();
-        	});
+          this.appPreferences.store('key', this.cliente['Cliente']['id'].toString()).then((res) => { 
+            this.goToEndereco(0);
+          });
+
+        } else {
+          this.toast(data.message);
         }
     });
   }
 
   goToCadastro() {     
   	this.navCtrl.push(CadastroPage);   
+  }
+
+  goToEndereco(id: number) {     
+    if (id != 0) {
+      this.navCtrl.setRoot(EnderecoPage, {cliente: id});
+    } else {
+  	  this.navCtrl.setRoot(EnderecoPage, {cliente: this.cliente});
+    }
+  }
+
+  toast(cod: Number) {
+    if (cod == -1) {
+      let toast = this.toastCtrl.create({
+        message: "Login/Senha incorretos!",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    } else if (cod == -10) {
+      let toast = this.toastCtrl.create({
+        message: "Ocorreu algum erro, tente novamente",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    } 
   }
 
 }
