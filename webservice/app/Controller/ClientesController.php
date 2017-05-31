@@ -19,26 +19,21 @@ class ClientesController extends AppController {
 			if (!empty($this->data['Cliente']['email']) and
 	        	!empty($this->data['Cliente']['senha'])) {
 	        	 
-	        	if ($this->validar()) {
+	        	$user = $this->Cliente->findAllByEmailAndSenha(
+    				$this->data['Cliente']['email'],
+    				md5($this->data['Cliente']['senha']));
 
-	        		$user = $this->Cliente->findAllByEmail($this->data['Cliente']['email']);
-	        		$message = 'Logou,' . $user['0']['Cliente']['id'];
+	        	if (!empty($user)) {	        		
+
+	        		$message = $user;
 
 	        	} else {
 
-	        		$message = 'Não Logou';
-
-			    	$user1 = $this->Cliente->findAllByEmail($this->data['Cliente']['email']);
-
-					if (empty($user1)) {
-						$message = 'Usuário não existe !';
-					} else {
-						$message = 'Login e/ou senha inválidos !';
-					}
+	        		$message = -1;
 			    }
 
 			} else {
-				$message = 'Ocorreu algum erro. Tente novamente.';
+				$message = -10;
 			}
 
 			$this->set(array(
@@ -48,36 +43,24 @@ class ClientesController extends AppController {
 		}
 	}
 
-	public function validar(){
-		
-		$user = $this->Cliente->findAllByEmailAndSenha(
-    				$this->data['Cliente']['email'],
-    				md5($this->data['Cliente']['senha']));
-		if (!empty($user)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 
 	public function add() {
 		
-		$message = '';
-		
+		$message = '';		
 		
 		if ($this->request->is('post')) {
 			
 			if ($this->user_duplicado()) {
-				$message = 'Usuário já existe!';
+				$message = -2;
 			} else {
 				$this->request->data['Cliente']['senha'] = md5($this->request->data['Cliente']['senha']);
 
 				$this->Cliente->create();
 				if ($this->Cliente->save($this->request->data)) {
-		            $message = 'Saved';
+					$user = $this->Cliente->findAllById($this->Cliente->getLastInsertId());
+		            $message = $user;
 		        } else {
-		            $message = 'Error';
+		            $message = -10;
 		        }
 		    }
 
@@ -98,5 +81,17 @@ class ClientesController extends AppController {
 		} else {
 			return false;
 		}
+	}
+
+	public function get($id = null) {
+		if ($this->request->is('post')) {
+			
+			$user = $this->Cliente->findAllById($this->data['id']);
+
+	        $this->set(array(
+	            'message' => $user,
+	            '_serialize' => array('message')
+	        ));
+	    }
 	}
 }

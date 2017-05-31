@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
+import { EnderecoPage } from '../pages/endereco/endereco';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,7 +19,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    EnderecoPage
   ],
   imports: [
     HttpModule,
@@ -30,7 +32,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    EnderecoPage
   ],
   providers: [
     StatusBar,

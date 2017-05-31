@@ -7,6 +7,7 @@ import { AppPreferences } from '@ionic-native/app-preferences';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
+import { EnderecoPage } from '../pages/endereco/endereco';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,7 +15,7 @@ import { CadastroPage } from '../pages/cadastro/cadastro';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -25,7 +26,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Login', component: LoginPage },
-      { title: 'Cadastro', component: CadastroPage }
+      { title: 'Cadastro', component: CadastroPage },
+      { title: 'Endereco', component: EnderecoPage }
     ];
 
   }
