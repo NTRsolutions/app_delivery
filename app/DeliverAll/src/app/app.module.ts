@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { TextMaskModule } from 'angular2-text-mask';
 
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { HttpModule } from '@angular/http';
@@ -25,6 +26,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     HttpModule,
     BrowserModule,
+    TextMaskModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -38,7 +40,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     AppPreferences,
-    SplashScreen,
+    SplashScreen,    
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Cliente } from '../../models/cliente';
 
+import { HomePage } from '../home/home';
 import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/map';
@@ -20,12 +21,20 @@ import 'rxjs/add/operator/map';
 export class EnderecoPage {
 
 	public api_url: string;
+	public cep_url_ini: string;
+	public cep_url_end: string;
 	cliente: Cliente;
-  
+  cep: string;
+  mask: any = "";
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
   	this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';      
-  
-  	this.cliente = navParams.get("cliente");  	
+  	this.cep_url_ini = 'http://viacep.com.br/ws/';
+  	this.cep_url_end = '/json/?callback=?';
+
+  	this.cliente = navParams.get("cliente");
+
+  	this.mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
   }
 
   ionViewDidLoad() {
@@ -36,7 +45,10 @@ export class EnderecoPage {
         
         if (typeof data.message == "object") {
           this.cliente = data.message['0']; 
-          console.log(this.cliente);
+          
+          if (this.cliente['ClienteEndereco'].length != 0) {
+          	this.goToHome(this.cliente);
+          }
         } else {
           let toast = this.toastCtrl.create({
 		        message: "Ocorreu algum erro, tente novamente!",
@@ -47,5 +59,18 @@ export class EnderecoPage {
         }
     	});
   	}
+  }
+
+  goToHome(cliente: Cliente){
+  	this.navCtrl.setRoot(HomePage, {cliente: this.cliente});
+  }
+
+  getEndereco() {
+  	console.log("blz");
+  	/*this.http.get(this.cep_url_ini + this.cep + this.cep_url_end)
+    .map(res => res.json())
+    .subscribe(data => {
+			      
+  	});*/
   }
 }

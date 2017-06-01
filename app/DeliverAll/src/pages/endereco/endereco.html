@@ -9,5 +9,43 @@
 
 
 <ion-content padding>
+	<div padding>
+    <button ion-button color="primary" block (click)="getLocation()">Usar minha localização</button>
+  </div>
+
+	<hr>
 	
+	<ion-item>
+  	<ion-label stacked>CEP</ion-label>
+  	<ion-input type="text" placeholder="_____-___" [textMask]="{mask: mask}" (focusout)="getEndereco()" [(ngModel)]="cep"></ion-input>
+	</ion-item>
+
+	<ion-item *ngIf="cep_informado">
+  	<ion-label floating>Logradouro</ion-label>
+  	<ion-input type="text" [(ngModel)]="rua"></ion-input>
+	</ion-item>
+
+	<ion-item *ngIf="cep_informado">
+  	<ion-label floating>Número</ion-label>
+  	<ion-input type="number" [(ngModel)]="numero"></ion-input>
+	</ion-item>
+
+	<ion-item *ngIf="cep_informado">
+  	<ion-label floating>Bairro</ion-label>
+  	<ion-input type="text" [(ngModel)]="bairro"></ion-input>
+	</ion-item>
+
+	<ion-item *ngIf="cep_informado">
+  	<ion-label floating>Cidade</ion-label>
+  	<ion-input type="text" [(ngModel)]="Cidade"></ion-input>
+	</ion-item>
+
+	<ion-item *ngIf="cep_informado">
+  	<ion-label floating>Estado</ion-label>
+  	<ion-input type="text" [(ngModel)]="Estado"></ion-input>
+	</ion-item>
+
+	<div padding>
+    <button ion-button color="primary" block (click)="goToHome()">Prosseguir</button>
+  </div>
 </ion-content>
