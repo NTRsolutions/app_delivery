@@ -24,13 +24,21 @@ export class EnderecoPage {
 	public cep_url_ini: string;
 	public cep_url_end: string;
 	cliente: Cliente;
-  cep: string;
   mask: any = "";
+  cep_informado: boolean = false;
+  
+  cep: string;
+  rua: string;
+  numero: number;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  estado: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
   	this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';      
   	this.cep_url_ini = 'http://viacep.com.br/ws/';
-  	this.cep_url_end = '/json/?callback=?';
+  	this.cep_url_end = '/json/?callback=';
 
   	this.cliente = navParams.get("cliente");
 
@@ -62,15 +70,52 @@ export class EnderecoPage {
   }
 
   goToHome(cliente: Cliente){
-  	this.navCtrl.setRoot(HomePage, {cliente: this.cliente});
+  	if (this.validar()) {
+  		this.navCtrl.setRoot(HomePage, {cliente: this.cliente});
+  	} else {
+  		let toast = this.toastCtrl.create({
+        message: "Por favor, preencha o seu endereço",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+  	}
   }
 
   getEndereco() {
-  	console.log("blz");
-  	/*this.http.get(this.cep_url_ini + this.cep + this.cep_url_end)
+  	this.cep = this.cep.replace("_","");
+  	this.http.get(this.cep_url_ini + this.cep + this.cep_url_end)
     .map(res => res.json())
     .subscribe(data => {
-			      
-  	});*/
+			 this.cep_informado = true;
+
+			 this.preencher_inputs(data);
+  	});
+  }
+
+  preencher_inputs(endereco: Object){
+  	if (endereco['logradouro'] != '') {
+  		this.rua = endereco['logradouro'];
+  	}
+
+  	if (endereco['bairro'] != '') {
+  		this.bairro = endereco['bairro'];
+  	}
+
+  	if (endereco['localidade'] != '') {
+  		this.cidade = endereco['localidade'];
+  	}
+
+  	if (endereco['uf'] != '') {
+  		this.estado = endereco['uf'];
+  	}
+  }
+
+  validar() {
+  	if (this.cep == '' || this.rua == '' || this.numero == null || this.cidade == '' || this.estado == '') {
+  		return false;
+  	}
+
+  	return true;
   }
 }

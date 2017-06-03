@@ -31,21 +31,30 @@
 	</ion-item>
 
 	<ion-item *ngIf="cep_informado">
+  	<ion-label floating>Complemento</ion-label>
+  	<ion-input type="text" [(ngModel)]="complemento"></ion-input>
+	</ion-item>
+
+	<ion-item *ngIf="cep_informado">
   	<ion-label floating>Bairro</ion-label>
   	<ion-input type="text" [(ngModel)]="bairro"></ion-input>
 	</ion-item>
 
 	<ion-item *ngIf="cep_informado">
   	<ion-label floating>Cidade</ion-label>
-  	<ion-input type="text" [(ngModel)]="Cidade"></ion-input>
+  	<ion-input type="text" [(ngModel)]="cidade"></ion-input>
 	</ion-item>
 
 	<ion-item *ngIf="cep_informado">
   	<ion-label floating>Estado</ion-label>
-  	<ion-input type="text" [(ngModel)]="Estado"></ion-input>
+  	<ion-input type="text" [(ngModel)]="estado"></ion-input>
 	</ion-item>
 
-	<div padding>
+	<div padding *ngIf="!cep_informado">
+    <button ion-button color="primary" block (click)="getEndereco()">Buscar pelo CEP</button>
+  </div>
+
+  <div padding *ngIf="cep_informado">
     <button ion-button color="primary" block (click)="goToHome()">Prosseguir</button>
   </div>
 </ion-content>
