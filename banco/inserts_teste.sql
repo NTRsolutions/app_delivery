@@ -1,6 +1,6 @@
 insert into admins (login, senha) values ('admin', md5('admin'));
 
-insert into estados (nome) values ('Minas Gerais');
+insert into estados (nome) values ('MG');
 
 insert into cidades (nome, estado_id) values ('Belo Horizonte', 1);
 

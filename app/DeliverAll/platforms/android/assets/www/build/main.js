@@ -37560,9 +37560,10 @@ var EnderecoPage = (function () {
         this.http = http;
         this.toastCtrl = toastCtrl;
         this.mask = "";
+        this.cep_informado = false;
         this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
         this.cep_url_ini = 'http://viacep.com.br/ws/';
-        this.cep_url_end = '/json/?callback=?';
+        this.cep_url_end = '/json/?callback=';
         this.cliente = navParams.get("cliente");
         this.mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
     }
@@ -37590,21 +37591,54 @@ var EnderecoPage = (function () {
         }
     };
     EnderecoPage.prototype.goToHome = function (cliente) {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */], { cliente: this.cliente });
+        if (this.validar()) {
+            this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */], { cliente: this.cliente });
+        }
+        else {
+            var toast = this.toastCtrl.create({
+                message: "Por favor, preencha o seu endereço",
+                duration: 3000,
+                position: 'top'
+            });
+            toast.present();
+        }
     };
     EnderecoPage.prototype.getEndereco = function () {
+        var _this = this;
+        this.cep = this.cep.replace("_", "");
         this.http.get(this.cep_url_ini + this.cep + this.cep_url_end)
             .map(function (res) { return res.json(); })
             .subscribe(function (data) {
-            console.log(data);
+            _this.cep_informado = true;
+            _this.preencher_inputs(data);
         });
+    };
+    EnderecoPage.prototype.preencher_inputs = function (endereco) {
+        if (endereco['logradouro'] != '') {
+            this.rua = endereco['logradouro'];
+        }
+        if (endereco['bairro'] != '') {
+            this.bairro = endereco['bairro'];
+        }
+        if (endereco['localidade'] != '') {
+            this.cidade = endereco['localidade'];
+        }
+        if (endereco['uf'] != '') {
+            this.estado = endereco['uf'];
+        }
+    };
+    EnderecoPage.prototype.validar = function () {
+        if (this.cep == '' || this.rua == '' || this.numero == null || this.cidade == '' || this.estado == '') {
+            return false;
+        }
+        return true;
     };
     return EnderecoPage;
 }());
 EnderecoPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-endereco',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\endereco\endereco.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Endereço</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n	<div padding>\n    <button ion-button color="primary" block (click)="getLocation()">Usar minha localização</button>\n  </div>\n\n	<hr>\n	\n	<ion-item>\n  	<ion-label stacked>CEP</ion-label>\n  	<ion-input type="text" placeholder="_____-___" [textMask]="{mask: mask}" (focusout)="getEndereco()" [(ngModel)]="cep"></ion-input>\n	</ion-item>\n\n	<ion-item *ngIf="cep_informado">\n  	<ion-label floating>Logradouro</ion-label>\n  	<ion-input type="text" [(ngModel)]="rua"></ion-input>\n	</ion-item>\n\n	<ion-item *ngIf="cep_informado">\n  	<ion-label floating>Número</ion-label>\n  	<ion-input type="number" [(ngModel)]="numero"></ion-input>\n	</ion-item>\n\n	<ion-item *ngIf="cep_informado">\n  	<ion-label floating>Bairro</ion-label>\n  	<ion-input type="text" [(ngModel)]="bairro"></ion-input>\n	</ion-item>\n\n	<ion-item *ngIf="cep_informado">\n  	<ion-label floating>Cidade</ion-label>\n  	<ion-input type="text" [(ngModel)]="cidade"></ion-input>\n	</ion-item>\n\n	<ion-item *ngIf="cep_informado">\n  	<ion-label floating>Estado</ion-label>\n  	<ion-input type="text" [(ngModel)]="estado"></ion-input>\n	</ion-item>\n\n	<div padding>\n    <button ion-button color="primary" block (click)="goToHome()">Prosseguir</button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\endereco\endereco.html"*/,
+        selector: 'page-endereco',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\endereco\endereco.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Endereço</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<div padding>\n\n    <button ion-button color="primary" block (click)="getLocation()">Usar minha localização</button>\n\n  </div>\n\n\n\n	<hr>\n\n	\n\n	<ion-item>\n\n  	<ion-label stacked>CEP</ion-label>\n\n  	<ion-input type="text" placeholder="_____-___" [textMask]="{mask: mask}" (focusout)="getEndereco()" [(ngModel)]="cep"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Logradouro</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="rua"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Número</ion-label>\n\n  	<ion-input type="number" [(ngModel)]="numero"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Complemento</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="complemento"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Bairro</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="bairro"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Cidade</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="cidade"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Estado</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="estado"></ion-input>\n\n	</ion-item>\n\n\n\n	<div padding *ngIf="!cep_informado">\n\n    <button ion-button color="primary" block (click)="getEndereco()">Buscar pelo CEP</button>\n\n  </div>\n\n\n\n  <div padding *ngIf="cep_informado">\n\n    <button ion-button color="primary" block (click)="goToHome()">Prosseguir</button>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\endereco\endereco.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]])
 ], EnderecoPage);
@@ -44038,7 +44072,7 @@ AppPreferences = __decorate([
         plugin: 'cordova-plugin-app-preferences',
         pluginRef: 'plugins.appPreferences',
         repo: 'https://github.com/apla/me.apla.cordova.app-preferences',
-        platforms: ['Android', 'BlackBerry 10', 'Browser', 'iOS', 'OS X', 'Windows 8', 'Windows Phone']
+        platforms: ['Android', 'BlackBerry 10', 'Browser', 'iOS', 'macOS', 'Windows 8', 'Windows Phone']
     })
 ], AppPreferences);
 
@@ -47258,7 +47292,7 @@ var CadastroPage = (function () {
 CadastroPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-cadastro',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\cadastro\cadastro.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Cadastro</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n	<ion-item>\n    <ion-label floating>Nome</ion-label>\n    <ion-input type="text" [(ngModel)]="nome"></ion-input>\n  </ion-item>\n\n	<ion-item>\n    <ion-label floating>Email</ion-label>\n    <ion-input type="text" [(ngModel)]="email"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Senha</ion-label>\n    <ion-input type="password" [(ngModel)]="senha"></ion-input>\n  </ion-item>\n	\n\n 	<div padding>\n    <button ion-button color="secondary" block (click)="usuario_add()">Cadastrar</button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\cadastro\cadastro.html"*/,
+        selector: 'page-cadastro',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\cadastro\cadastro.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Cadastro</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<ion-item>\n\n    <ion-label floating>Nome</ion-label>\n\n    <ion-input type="text" [(ngModel)]="nome"></ion-input>\n\n  </ion-item>\n\n\n\n	<ion-item>\n\n    <ion-label floating>Email</ion-label>\n\n    <ion-input type="text" [(ngModel)]="email"></ion-input>\n\n  </ion-item>\n\n\n\n  <ion-item>\n\n    <ion-label floating>Senha</ion-label>\n\n    <ion-input type="password" [(ngModel)]="senha"></ion-input>\n\n  </ion-item>\n\n	\n\n\n\n 	<div padding>\n\n    <button ion-button color="secondary" block (click)="usuario_add()">Cadastrar</button>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\cadastro\cadastro.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_app_preferences__["a" /* AppPreferences */]])
 ], CadastroPage);
@@ -47292,7 +47326,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  \n</ion-content>\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Home</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  \n\n</ion-content>\n\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
 ], HomePage);
@@ -58386,7 +58420,7 @@ var LoginPage = (function () {
 LoginPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-login',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Login</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n	<div padding>\n    <button ion-button color="primary" block (click)="loginWithGoogle()">Entrar com Google</button>\n  </div>\n\n	<hr>\n	\n	<ion-item>\n  	<ion-label floating>Usuário</ion-label>\n  	<ion-input type="text" [(ngModel)]="email"></ion-input>\n	</ion-item>\n\n	<ion-item>\n  	<ion-label floating>Senha</ion-label>\n  	<ion-input type="password" [(ngModel)]="senha"></ion-input>\n	</ion-item>\n\n\n	  <div padding>\n    <button ion-button color="primary" block (click)="login()">Entrar</button>\n  </div>\n\n  <div padding>\n    <button ion-button color="info" block (click)="goToCadastro()">Cadastro</button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\login\login.html"*/,
+        selector: 'page-login',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\login\login.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Login</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<div padding>\n\n    <button ion-button color="primary" block (click)="loginWithGoogle()">Entrar com Google</button>\n\n  </div>\n\n\n\n	<hr>\n\n	\n\n	<ion-item>\n\n  	<ion-label floating>Usuário</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="email"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item>\n\n  	<ion-label floating>Senha</ion-label>\n\n  	<ion-input type="password" [(ngModel)]="senha"></ion-input>\n\n	</ion-item>\n\n\n\n\n\n	  <div padding>\n\n    <button ion-button color="primary" block (click)="login()">Entrar</button>\n\n  </div>\n\n\n\n  <div padding>\n\n    <button ion-button color="info" block (click)="goToCadastro()">Cadastro</button>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\login\login.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_app_preferences__["a" /* AppPreferences */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]])
 ], LoginPage);
@@ -77346,7 +77380,7 @@ __decorate([
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\app\app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n      <button menuClose ion-item *ngIf="logado" (click)="logout()">Sair</button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\app\app.html"*/
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\app\app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar>\n\n      <ion-title>Menu</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n  <ion-content>\n\n    <ion-list>\n\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n        {{p.title}}\n\n      </button>\n\n      <button menuClose ion-item *ngIf="logado" (click)="logout()">Sair</button>\n\n    </ion-list>\n\n  </ion-content>\n\n\n\n</ion-menu>\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\app\app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_app_preferences__["a" /* AppPreferences */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* App */]])
 ], MyApp);
