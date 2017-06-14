@@ -17,11 +17,11 @@
 	
 	<ion-item>
   	<ion-label stacked>CEP</ion-label>
-  	<ion-input type="text" placeholder="_____-___" [textMask]="{mask: mask}" (focusout)="getEndereco()" [(ngModel)]="cep"></ion-input>
+  	<ion-input type="text" placeholder="_____-___" [textMask]="{mask: mask}" [(ngModel)]="cep"></ion-input>
 	</ion-item>
 
 	<ion-item *ngIf="cep_informado">
-  	<ion-label floating>Logradouro</ion-label>
+  	<ion-label floating>Logradouro *</ion-label>
   	<ion-input type="text" [(ngModel)]="rua"></ion-input>
 	</ion-item>
 
@@ -31,22 +31,22 @@
 	</ion-item>
 
 	<ion-item *ngIf="cep_informado">
-  	<ion-label floating>Complemento</ion-label>
+  	<ion-label floating>Complemento *</ion-label>
   	<ion-input type="text" [(ngModel)]="complemento"></ion-input>
 	</ion-item>
 
 	<ion-item *ngIf="cep_informado">
-  	<ion-label floating>Bairro</ion-label>
+  	<ion-label floating>Bairro *</ion-label>
   	<ion-input type="text" [(ngModel)]="bairro"></ion-input>
 	</ion-item>
 
 	<ion-item *ngIf="cep_informado">
-  	<ion-label floating>Cidade</ion-label>
+  	<ion-label floating>Cidade *</ion-label>
   	<ion-input type="text" [(ngModel)]="cidade"></ion-input>
 	</ion-item>
 
 	<ion-item *ngIf="cep_informado">
-  	<ion-label floating>Estado</ion-label>
+  	<ion-label floating>Estado *</ion-label>
   	<ion-input type="text" [(ngModel)]="estado"></ion-input>
 	</ion-item>
 

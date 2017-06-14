@@ -36,7 +36,7 @@ export class EnderecoPage {
   estado: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
-  	this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';      
+  	this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
   	this.cep_url_ini = 'http://viacep.com.br/ws/';
   	this.cep_url_end = '/json/?callback=';
 
@@ -71,26 +71,59 @@ export class EnderecoPage {
 
   goToHome(cliente: Cliente){
   	if (this.validar()) {
-  		this.navCtrl.setRoot(HomePage, {cliente: this.cliente});
+      this.http.post(this.api_url + 'enderecos/add', 
+                                    {'Endereco': 
+                                      {'rua': this.rua, 
+                                       'cep': this.cep, 
+                                       'numero': this.numero, 
+                                       'complemento': this.complemento, 
+                                       'bairro': this.bairro, 
+                                       'cidade': this.cidade, 
+                                       'estado': this.estado, 
+                                       'cliente_id': this.cliente['Cliente']['id']
+                                      }
+                                    })
+      .map(res => res.json())
+      .subscribe(data => {
+        //console.log(data);
+  		  this.navCtrl.setRoot(HomePage, {cliente: this.cliente});
+      });
   	} else {
   		let toast = this.toastCtrl.create({
         message: "Por favor, preencha o seu endereço",
         duration: 3000,
         position: 'top'
       });
-      toast.present();
+      toast.present()
   	}
   }
 
   getEndereco() {
-  	this.cep = this.cep.replace("_","");
-  	this.http.get(this.cep_url_ini + this.cep + this.cep_url_end)
-    .map(res => res.json())
-    .subscribe(data => {
-			 this.cep_informado = true;
-
-			 this.preencher_inputs(data);
-  	});
+    if (this.cep != undefined) {      
+    	this.cep = this.cep.replace("_","");
+    	this.http.get(this.cep_url_ini + this.cep + this.cep_url_end)
+      .map(res => res.json())
+      .subscribe(data => {
+        if (data['erro']) {
+          let toast = this.toastCtrl.create({
+            message: "Por favor, informe um CEP válido",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+        } else {
+  			  this.cep_informado = true;
+  			  this.preencher_inputs(data);
+        }
+    	});
+    } else {
+      let toast = this.toastCtrl.create({
+        message: "Por favor, informe um CEP",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
   }
 
   preencher_inputs(endereco: Object){
@@ -112,7 +145,7 @@ export class EnderecoPage {
   }
 
   validar() {
-  	if (this.cep == '' || this.rua == '' || this.numero == null || this.cidade == '' || this.estado == '') {
+  	if (this.cep == '' || this.rua == '' || this.cidade == '' || this.estado == '') {
   		return false;
   	}
 

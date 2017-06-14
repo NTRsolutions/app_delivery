@@ -37591,8 +37591,23 @@ var EnderecoPage = (function () {
         }
     };
     EnderecoPage.prototype.goToHome = function (cliente) {
+        var _this = this;
         if (this.validar()) {
-            this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */], { cliente: this.cliente });
+            this.http.post(this.api_url + 'enderecos/add', { 'Endereco': { 'rua': this.rua,
+                    'cep': this.cep,
+                    'numero': this.numero,
+                    'complemento': this.complemento,
+                    'bairro': this.bairro,
+                    'cidade': this.cidade,
+                    'estado': this.estado,
+                    'cliente_id': this.cliente['Cliente']['id']
+                }
+            })
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                //console.log(data);
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */], { cliente: _this.cliente });
+            });
         }
         else {
             var toast = this.toastCtrl.create({
@@ -37605,13 +37620,33 @@ var EnderecoPage = (function () {
     };
     EnderecoPage.prototype.getEndereco = function () {
         var _this = this;
-        this.cep = this.cep.replace("_", "");
-        this.http.get(this.cep_url_ini + this.cep + this.cep_url_end)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (data) {
-            _this.cep_informado = true;
-            _this.preencher_inputs(data);
-        });
+        if (this.cep != undefined) {
+            this.cep = this.cep.replace("_", "");
+            this.http.get(this.cep_url_ini + this.cep + this.cep_url_end)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                if (data['erro']) {
+                    var toast = _this.toastCtrl.create({
+                        message: "Por favor, informe um CEP válido",
+                        duration: 3000,
+                        position: 'top'
+                    });
+                    toast.present();
+                }
+                else {
+                    _this.cep_informado = true;
+                    _this.preencher_inputs(data);
+                }
+            });
+        }
+        else {
+            var toast = this.toastCtrl.create({
+                message: "Por favor, informe um CEP",
+                duration: 3000,
+                position: 'top'
+            });
+            toast.present();
+        }
     };
     EnderecoPage.prototype.preencher_inputs = function (endereco) {
         if (endereco['logradouro'] != '') {
@@ -37628,7 +37663,7 @@ var EnderecoPage = (function () {
         }
     };
     EnderecoPage.prototype.validar = function () {
-        if (this.cep == '' || this.rua == '' || this.numero == null || this.cidade == '' || this.estado == '') {
+        if (this.cep == '' || this.rua == '' || this.cidade == '' || this.estado == '') {
             return false;
         }
         return true;
@@ -37638,11 +37673,12 @@ var EnderecoPage = (function () {
 EnderecoPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-endereco',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\endereco\endereco.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Endereço</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<div padding>\n\n    <button ion-button color="primary" block (click)="getLocation()">Usar minha localização</button>\n\n  </div>\n\n\n\n	<hr>\n\n	\n\n	<ion-item>\n\n  	<ion-label stacked>CEP</ion-label>\n\n  	<ion-input type="text" placeholder="_____-___" [textMask]="{mask: mask}" (focusout)="getEndereco()" [(ngModel)]="cep"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Logradouro</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="rua"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Número</ion-label>\n\n  	<ion-input type="number" [(ngModel)]="numero"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Complemento</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="complemento"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Bairro</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="bairro"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Cidade</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="cidade"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Estado</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="estado"></ion-input>\n\n	</ion-item>\n\n\n\n	<div padding *ngIf="!cep_informado">\n\n    <button ion-button color="primary" block (click)="getEndereco()">Buscar pelo CEP</button>\n\n  </div>\n\n\n\n  <div padding *ngIf="cep_informado">\n\n    <button ion-button color="primary" block (click)="goToHome()">Prosseguir</button>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\endereco\endereco.html"*/,
+        selector: 'page-endereco',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\endereco\endereco.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Endereço</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<div padding>\n\n    <button ion-button color="primary" block (click)="getLocation()">Usar minha localização</button>\n\n  </div>\n\n\n\n	<hr>\n\n	\n\n	<ion-item>\n\n  	<ion-label stacked>CEP</ion-label>\n\n  	<ion-input type="text" placeholder="_____-___" [textMask]="{mask: mask}" [(ngModel)]="cep"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Logradouro *</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="rua"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Número</ion-label>\n\n  	<ion-input type="number" [(ngModel)]="numero"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Complemento *</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="complemento"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Bairro *</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="bairro"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Cidade *</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="cidade"></ion-input>\n\n	</ion-item>\n\n\n\n	<ion-item *ngIf="cep_informado">\n\n  	<ion-label floating>Estado *</ion-label>\n\n  	<ion-input type="text" [(ngModel)]="estado"></ion-input>\n\n	</ion-item>\n\n\n\n	<div padding *ngIf="!cep_informado">\n\n    <button ion-button color="primary" block (click)="getEndereco()">Buscar pelo CEP</button>\n\n  </div>\n\n\n\n  <div padding *ngIf="cep_informado">\n\n    <button ion-button color="primary" block (click)="goToHome()">Prosseguir</button>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\endereco\endereco.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _d || Object])
 ], EnderecoPage);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=endereco.js.map
 
 /***/ }),

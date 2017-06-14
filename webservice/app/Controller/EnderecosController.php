@@ -51,21 +51,20 @@ class EnderecosController extends AppController {
 
 		$this->loadModel('Cidade');
 		$this->loadModel('Estado');
-		$this->loadModel('Gerente');
-		$this->loadModel('RestauranteEndereco');
+		$this->loadModel('Cliente');
+		$this->loadModel('ClienteEndereco');
 
 		$cidades = $this->Cidade->find('all');
 		$estados = $this->Estado->find('all');
-
-		$gerente = $this->Session->read('Gerente');
-    	$gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']); 
 
 		if ($this->request->is('post')) {
 
 			$existe = false;
 
+			$cliente_id = $this->request->data['Endereco']['cliente_id'];
+
 			foreach ($estados as $e) {
-				if($e['Estado']['nome'] == $this->request->data['Estado']['nome']) {
+				if($e['Estado']['nome'] == $this->request->data['Endereco']['estado']) {
 					$id_est = $e['Estado']['id'];
 					$existe = true;
 				}
@@ -73,7 +72,7 @@ class EnderecosController extends AppController {
 
 			if($existe == false) {
 
-				$est = array('nome' => $this->request->data['Estado']['nome']); 
+				$est = array('nome' => $this->request->data['Endereco']['estado']); 
 
 				$this->Estado->create();
 				if ($this->Estado->save($est)) {
@@ -85,7 +84,7 @@ class EnderecosController extends AppController {
 			$existe = false;
 
 			foreach ($cidades as $c) {
-				if($c['Cidade']['nome'] == $this->request->data['Cidade']['nome']) {
+				if($c['Cidade']['nome'] == $this->request->data['Endereco']['cidade']) {
 					$id_city = $c['Cidade']['id'];
 					$existe = true;
 				}
@@ -93,7 +92,7 @@ class EnderecosController extends AppController {
 
 			if($existe == false) {
 
-				$city = array('nome' => $this->request->data['Cidade']['nome'], 'estado_id' => $id_est); 
+				$city = array('nome' => $this->request->data['Endereco']['cidade'], 'estado_id' => $id_est); 
 
 				$this->Cidade->create();
 				if ($this->Cidade->save($city)) {
@@ -106,7 +105,6 @@ class EnderecosController extends AppController {
 				'bairro' => $this->request->data['Endereco']['bairro'],
 				'complemento' => $this->request->data['Endereco']['complemento'],
 				'cep' => $this->request->data['Endereco']['cep'],
-				'tipo' => $this->request->data['Endereco']['tipo'],
 				'cidade_id' => $id_city);
 
 			$this->Endereco->create();
@@ -114,27 +112,23 @@ class EnderecosController extends AppController {
 
 				$id_end = $this->Endereco->getLastInsertId();
 
-				$existe = false;
+				$cliente_end = array('endereco_id' => $id_end, 'cliente_id' => $cliente_id);
 
-				foreach ($cidades as $c) {
-					if($c['Cidade']['nome'] == $this->request->data['Cidade']['nome']) {
-						$id_city = $c['Cidade']['id'];
-						$existe = true;
-					}
-				}
-
-				$rest_end = array('endereco_id' => $id_end, 'restaurante_id' => $gerente['Restaurante']['0']['id']);
-
-				$this->RestauranteEndereco->create();
-				if ($this->RestauranteEndereco->save($rest_end)) {
-					$this->Session->setFlash(__('O endereço foi salvo com sucesso.'), 'default', array('class' => 'alert alert-success'));
-					return $this->redirect(array('controller' => 'gerentes', 'action' => 'meu_restaurante'));
+				$this->ClienteEndereco->create();
+				if ($this->ClienteEndereco->save($cliente_end)) {
+					$message = 1;	
+				} else {
+					$message = -10;	
 				}
 			} else {
-				$this->Session->setFlash(__('The endereco could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+				$message = -10;
 			}
-		}
-		
+
+			$this->set(array(
+	            'message' => $message,
+	            '_serialize' => array('message')
+	        ));
+		}		
 	}
 
 /**
