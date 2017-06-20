@@ -77,8 +77,7 @@ class EnderecosController extends AppController {
 				$this->Estado->create();
 				if ($this->Estado->save($est)) {
 					$id_est = $this->Estado->getLastInsertId();
-				}
-			
+				}			
 			}
 
 			$existe = false;

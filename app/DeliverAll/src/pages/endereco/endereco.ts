@@ -70,52 +70,41 @@ export class EnderecoPage {
   }
 
   goToHome(cliente: Cliente){
-  	if (this.validar()) {
-      this.http.post(this.api_url + 'enderecos/add', 
-                                    {'Endereco': 
-                                      {'rua': this.rua, 
-                                       'cep': this.cep, 
-                                       'numero': this.numero, 
-                                       'complemento': this.complemento, 
-                                       'bairro': this.bairro, 
-                                       'cidade': this.cidade, 
-                                       'estado': this.estado, 
-                                       'cliente_id': this.cliente['Cliente']['id']
-                                      }
-                                    })
-      .map(res => res.json())
-      .subscribe(data => {
-        //console.log(data);
-  		  this.navCtrl.setRoot(HomePage, {cliente: this.cliente});
-      });
-  	} else {
-  		let toast = this.toastCtrl.create({
-        message: "Por favor, preencha o seu endereço",
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present()
-  	}
+    this.navCtrl.setRoot(HomePage, {cliente: this.cliente});  	
   }
 
   getEndereco() {
-    if (this.cep != undefined) {      
-    	this.cep = this.cep.replace("_","");
+    if (this.cep != undefined) {
+      this.cep = this.cep.replace("_","");
+    }
+
+    if (this.cep != undefined && this.cep.length != 1 && this.cep.indexOf('_') == -1) {
+      this.limpar_inputs();
+
     	this.http.get(this.cep_url_ini + this.cep + this.cep_url_end)
       .map(res => res.json())
-      .subscribe(data => {
-        if (data['erro']) {
+      .subscribe(
+        data => {
+          if (data['erro'] == true) {
+            let toast = this.toastCtrl.create({
+              message: "Desculpe, não encontramos este CEP. Informe um válido",
+              duration: 5000,
+              position: 'top'
+            });
+            toast.present();
+          } else {
+    			  this.cep_informado = true;
+    			  this.preencher_inputs(data);
+          }
+    	  },
+        err => {
           let toast = this.toastCtrl.create({
-            message: "Por favor, informe um CEP válido",
-            duration: 3000,
+            message: "Desculpe, não encontramos este CEP. Informe um válido",
+            duration: 5000,
             position: 'top'
           });
           toast.present();
-        } else {
-  			  this.cep_informado = true;
-  			  this.preencher_inputs(data);
-        }
-    	});
+        });
     } else {
       let toast = this.toastCtrl.create({
         message: "Por favor, informe um CEP",
@@ -144,11 +133,49 @@ export class EnderecoPage {
   	}
   }
 
+  limpar_inputs() {
+    this.rua = '';
+    this.numero = null;
+    this.complemento = '';
+    this.bairro = '';
+    this.cidade = '';
+    this.estado = '';
+  }
+
   validar() {
   	if (this.cep == '' || this.rua == '' || this.cidade == '' || this.estado == '') {
   		return false;
   	}
 
   	return true;
+  }
+
+  valida_endereco(){
+    if (this.validar()) {
+      this.http.post(this.api_url + 'enderecos/add', 
+                                    {'Endereco': 
+                                      {'rua': this.rua, 
+                                       'cep': this.cep, 
+                                       'numero': this.numero, 
+                                       'complemento': this.complemento, 
+                                       'bairro': this.bairro, 
+                                       'cidade': this.cidade, 
+                                       'estado': this.estado, 
+                                       'cliente_id': this.cliente['Cliente']['id']
+                                      }
+                                    })
+      .map(res => res.json())
+      .subscribe(data => {
+        console.log(data);
+        //this.goToHome(this.cliente);
+      });
+    } else {
+      let toast = this.toastCtrl.create({
+        message: "Por favor, preencha o seu endereço",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present()
+    }
   }
 }

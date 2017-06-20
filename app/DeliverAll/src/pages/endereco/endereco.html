@@ -20,6 +20,10 @@
   	<ion-input type="text" placeholder="_____-___" [textMask]="{mask: mask}" [(ngModel)]="cep"></ion-input>
 	</ion-item>
 
+  <div padding *ngIf="cep_informado">
+    <button ion-button color="primary" block (click)="getEndereco()">Buscar outro CEP</button>
+  </div>
+
 	<ion-item *ngIf="cep_informado">
   	<ion-label floating>Logradouro *</ion-label>
   	<ion-input type="text" [(ngModel)]="rua"></ion-input>
@@ -55,6 +59,6 @@
   </div>
 
   <div padding *ngIf="cep_informado">
-    <button ion-button color="primary" block (click)="goToHome()">Prosseguir</button>
+    <button ion-button color="primary" block (click)="valida_endereco()">Prosseguir</button>
   </div>
 </ion-content>

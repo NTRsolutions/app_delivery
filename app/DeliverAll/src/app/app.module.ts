@@ -5,6 +5,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { HttpModule } from '@angular/http';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -40,7 +41,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     AppPreferences,
-    SplashScreen,    
+    SplashScreen,
+    Geolocation,  
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
