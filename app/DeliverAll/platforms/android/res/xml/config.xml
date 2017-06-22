@@ -25,6 +25,9 @@
     <feature name="Geolocation">
         <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
     </feature>
+    <feature name="NativeGeocoder">
+        <param name="android-package" value="cordova.plugin.nativegeocoder.NativeGeocoder" />
+    </feature>
     <name>DeliverAll</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -33,6 +36,11 @@
     <allow-navigation href="http://ionic.local/*" />
     <allow-navigation href="http://192.168.22.2:8100" />
     <allow-navigation href="http://192.168.110.2:8100" />
+    <allow-navigation href="http://100.77.21.145:8100" />
+    <allow-navigation href="http://192.168.56.1:8100" />
+    <allow-navigation href="http://192.168.241.1:8100" />
+    <allow-navigation href="http://192.168.137.1:8100" />
+    <allow-navigation href="http://192.168.0.13:8100" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

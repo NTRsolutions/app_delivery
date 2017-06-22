@@ -6,6 +6,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { HttpModule } from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -42,7 +43,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     AppPreferences,
     SplashScreen,
-    Geolocation,  
+    Geolocation,
+    NativeGeocoder,  
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

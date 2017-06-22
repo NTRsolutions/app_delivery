@@ -51,7 +51,12 @@
 
 	<ion-item *ngIf="cep_informado">
   	<ion-label floating>Estado *</ion-label>
-  	<ion-input type="text" [(ngModel)]="estado"></ion-input>
+  	<ion-input type="text" [(ngModel)]="estado" (ionInput)="getEstados($event)"></ion-input>
+    <ion-list *ngIf="showList">
+      <ion-item *ngFor="let item of items">
+        {{ item }}
+      </ion-item>
+    </ion-list>
 	</ion-item>
 
 	<div padding *ngIf="!cep_informado">
@@ -61,4 +66,5 @@
   <div padding *ngIf="cep_informado">
     <button ion-button color="primary" block (click)="valida_endereco()">Prosseguir</button>
   </div>
+  
 </ion-content>

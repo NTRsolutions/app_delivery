@@ -30,6 +30,9 @@
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.br.deliverall"
+        },
+        "cordova-plugin-nativegeocoder": {
+            "PACKAGE_NAME": "com.br.deliverall"
         }
     },
     "dependent_plugins": {
