@@ -17,7 +17,7 @@
 	
 	<ion-item>
   	<ion-label stacked>CEP</ion-label>
-  	<ion-input type="text" placeholder="_____-___" [textMask]="{mask: mask}" [(ngModel)]="cep"></ion-input>
+  	<ion-input type="text" placeholder="_____-___" [textMask]="{mask: mask}" [(ngModel)]="cep" required></ion-input>
 	</ion-item>
 
   <div padding *ngIf="cep_informado">
@@ -51,13 +51,10 @@
 
 	<ion-item *ngIf="cep_informado">
   	<ion-label floating>Estado *</ion-label>
-  	<ion-input type="text" [(ngModel)]="estado" (ionInput)="getEstados($event)"></ion-input>
-    <ion-list *ngIf="showList">
-      <ion-item *ngFor="let item of items">
-        {{ item }}
-      </ion-item>
-    </ion-list>
-	</ion-item>
+    <ion-select [(ngModel)]="estado" okText="Ok" cancelText="Cancelar">
+      <ion-option *ngFor="let estado of estados">{{estado}}</ion-option>
+    </ion-select>
+  </ion-item>
 
 	<div padding *ngIf="!cep_informado">
     <button ion-button color="primary" block (click)="getEndereco()">Buscar pelo CEP</button>

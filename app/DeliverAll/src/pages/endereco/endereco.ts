@@ -37,8 +37,8 @@ export class EnderecoPage {
   bairro: string;
   cidade: string;
   estado: string;
-  items: string[];
-  showList: boolean;
+  estados: string[];
+  showList: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController, public geolocation: Geolocation, public geocoder: NativeGeocoder) {
   	this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
@@ -128,6 +128,7 @@ export class EnderecoPage {
   }
 
   getLocation() {
+    this.limpar_inputs();
     this.geolocation.getCurrentPosition().then(
       (position) => { 
          //console.log(position.coords.latitude + ' - ' + position.coords.longitude); 
@@ -147,6 +148,7 @@ export class EnderecoPage {
   getAddress(pos) {
     this.geocoder.reverseGeocode(pos.coords.latitude, pos.coords.longitude).then((res: NativeGeocoderReverseResult) => {
       this.cep_informado = true;
+      this.cep = res.postalCode;
       this.rua = res.street;
       this.bairro = res.district;
       this.cidade = res.city;
@@ -226,7 +228,7 @@ export class EnderecoPage {
   }
 
   initializeItems() {
-    this.items = [
+    this.estados = [
       'AC',   
       'AL',   
       'AP',   
@@ -255,29 +257,5 @@ export class EnderecoPage {
       'SE',   
       'TO'
     ];
-  }
-
-  getEstados(ev: any) {
-    // Reset items back to all of the items
-    this.initializeItems();
-
-    // set val to the value of the searchbar
-    let val = ev.target.value;
-
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      
-      // Filter the items
-      this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      });
-      
-      // Show the results
-      this.showList = true;
-    } else {
-      
-      // hide the results when the query is empty
-      this.showList = false;
-    }
   }
 }
