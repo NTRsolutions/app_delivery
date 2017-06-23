@@ -49,8 +49,6 @@ export class EnderecoPage {
   	this.cliente = navParams.get("cliente");
 
   	this.mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
-
-    this.initializeItems();
   }
 
   ionViewDidLoad() {
@@ -131,7 +129,6 @@ export class EnderecoPage {
     this.limpar_inputs();
     this.geolocation.getCurrentPosition().then(
       (position) => { 
-         //console.log(position.coords.latitude + ' - ' + position.coords.longitude); 
          this.getAddress(position);
       }, 
       (err) => {
@@ -147,11 +144,8 @@ export class EnderecoPage {
 
   getAddress(pos) {
     this.geocoder.reverseGeocode(pos.coords.latitude, pos.coords.longitude).then((res: NativeGeocoderReverseResult) => {
-      this.cep_informado = true;
       this.cep = res.postalCode;
-      this.rua = res.street;
-      this.bairro = res.district;
-      this.cidade = res.city;
+      this.getEndereco();
     },
     (err) => {
       let toast = this.toastCtrl.create({
@@ -225,37 +219,5 @@ export class EnderecoPage {
       });
       toast.present()
     }
-  }
-
-  initializeItems() {
-    this.estados = [
-      'AC',   
-      'AL',   
-      'AP',   
-      'AM',   
-      'BA',   
-      'CE',   
-      'DF',   
-      'ES',   
-      'GO',   
-      'MA',   
-      'MT',   
-      'MS',   
-      'MG',   
-      'PA',   
-      'PB',   
-      'PR',   
-      'PE',   
-      'PI',   
-      'RJ',   
-      'RN',   
-      'RS',   
-      'RO',   
-      'RR',   
-      'SC',   
-      'SP',   
-      'SE',   
-      'TO'
-    ];
   }
 }

@@ -51,9 +51,7 @@
 
 	<ion-item *ngIf="cep_informado">
   	<ion-label floating>Estado *</ion-label>
-    <ion-select [(ngModel)]="estado" okText="Ok" cancelText="Cancelar">
-      <ion-option *ngFor="let estado of estados">{{estado}}</ion-option>
-    </ion-select>
+    <ion-input type="text"  [(ngModel)]="estado"></ion-input>
   </ion-item>
 
 	<div padding *ngIf="!cep_informado">
