@@ -181,4 +181,18 @@ class EnderecosController extends AppController {
 			return $this->redirect(array('action' => 'index'));	
 		}
 	}
+
+	public function get() {
+		$ids = $this->request->data['ids'];
+		$enderecos = array();
+		foreach ($ids as $id) {
+			$e = $this->Endereco->findById($id['endereco_id']);
+			array_push($enderecos, $e);
+		}
+
+		$this->set(array(
+            'message' => $enderecos,
+            '_serialize' => array('message')
+        ));
+	}
 }

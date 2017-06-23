@@ -22,7 +22,25 @@ export class HomePage {
   	this.cliente = navParams.get("cliente");
   }
 
-  ionViewDidLoad() {
-  	console.log(this.cliente);
+  ionViewDidLoad() {  	
+    this.getEnderecos();    
+  }
+
+  getEnderecos() {
+    this.http.post(this.api_url + 'enderecos/get', {'ids': this.cliente['ClienteEndereco']})
+      .map(res => res.json())
+      .subscribe(
+        data => {
+          console.log(data.message);
+        },
+        err => {
+          let toast = this.toastCtrl.create({
+            message: "Ocorreu algum erro, tente novamente!",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+        }
+      );
   }
 }
