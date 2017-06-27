@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { Cliente } from '../../models/cliente';
 import { Endereco } from '../../models/endereco';
 import { Distancia } from '../../models/distancia';
+import { Restaurante } from '../../models/restaurante';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -21,7 +22,14 @@ export class HomePage {
   enderecos_id: Array<number>;
   restaurantes: Array<any>;
   restaurantes_aux: Array<any>;
+  restaurantes_list: Array<Restaurante>;
   distancias: Array<Distancia>;
+
+  rests_carregados: boolean = false;
+
+  /* Variáveis de filtro */
+  raio: number = 8;
+  /* ------------------- */
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
   	this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
@@ -31,6 +39,7 @@ export class HomePage {
     this.distancias = new Array();
     this.restaurantes = new Array();
     this.restaurantes_aux = new Array();
+    this.restaurantes_list = new Array();
   }
 
   ionViewDidLoad() {  	
@@ -72,11 +81,12 @@ export class HomePage {
         data => {
           this.restaurantes = data.message;
           this.restaurantes_aux = this.restaurantes;
-          console.log(end);
-          console.log(this.restaurantes);
 
           this.calcDistancias(end);
-          console.log(this.distancias);
+          this.filterRestaurantes();
+          this.full_rest_list();
+          console.log(this.restaurantes_list);
+          this.rests_carregados = true;
         },
         err => {
           let toast = this.toastCtrl.create({
@@ -120,5 +130,33 @@ export class HomePage {
     dist = dist * 60 * 1.1515
     if (unit=="K") { dist = dist * 1.609344 }
     return dist
+  }
+
+  filterRestaurantes() {
+    for (var i = 0; i < this.distancias.length; i++) {
+      let d = this.distancias[i];
+      if (d['distancia'] >= this.raio) {
+        let index = this.findRestaurante(d['rest_id']);
+        this.restaurantes_aux.splice(index, 1);
+        this.distancias.splice(i, 1);
+      }
+    }
+  }
+
+  findRestaurante(id: number) {    
+    for (var i = 0; i < this.restaurantes_aux.length; i++) {
+      let r = this.restaurantes_aux[i]['Restaurante'];
+      if (r['id'] == id) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  full_rest_list() {
+    for (var i = 0; i < this.restaurantes_aux.length; i++) {
+      let r = this.restaurantes_aux[i]['Restaurante'];
+      this.restaurantes_list.push(r);
+    }
   }
 }

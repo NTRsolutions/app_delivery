@@ -9,5 +9,13 @@
 
 
 <ion-content padding>
-
+	<ion-list *ngIf="rests_carregados">
+	  <ion-item ng-repeat="rest in restaurantes_list">
+	    <ion-avatar item-start>
+	      <img>
+	    </ion-avatar>
+	    <h2>{{rest}}</h2>
+	    <p>Ugh. As if.</p>
+	  </ion-item>
+</ion-list>
 </ion-content>

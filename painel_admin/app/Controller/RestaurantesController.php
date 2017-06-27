@@ -68,6 +68,8 @@ class RestaurantesController extends AppController {
 			$this->Restaurante->create();
 			if ($this->Restaurante->save($this->request->data['Restaurante'])) {
 				$id_rest = $this->Restaurante->getLastInsertId();
+				
+				debug($this->request->data);
 
 				$existe = false;
 
@@ -113,7 +115,6 @@ class RestaurantesController extends AppController {
 					'bairro' => $this->request->data['Endereco']['bairro'],
 					'complemento' => $this->request->data['Endereco']['complemento'],
 					'cep' => $this->request->data['Endereco']['cep'],
-					'tipo' => $this->request->data['Endereco']['tipo'],
 					'cidade_id' => $id_city);
 				
 				$this->Endereco->create();
