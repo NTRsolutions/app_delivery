@@ -199,4 +199,42 @@ class RestaurantesController extends AppController {
 		$this->Restaurante->updateAll(array('foto' => null), array('Restaurante.id' => $id));
 		return $this->redirect(array('controller' => 'gerentes', 'action' => 'meu_restaurante'));
 	}
+
+	public function get() {
+		$this->loadModel('Endereco');
+
+		$cidade_id = $this->request->data['cidade_id'];
+		$restaurantes = array();
+
+		$endereços = $this->Endereco->findAllByCidadeId($cidade_id);
+		foreach ($endereços as $e) {
+			if (count($e['RestauranteEndereco']) > 0) {
+				$id = $e['RestauranteEndereco']['0']['restaurante_id'];
+				$options = array(
+					'contain' => array(
+						'Classificacao',
+						'Culinaria',
+						'Franqueado',
+						'Gerente',
+						'Pagamento',
+						'Produto',
+						'Promocao',
+						'RestauranteEndereco' => array(
+							'Endereco'
+						)
+					),
+					'conditions' => array(
+						'Restaurante.' . $this->Restaurante->primaryKey => $id
+					)
+				);
+				$r = $this->Restaurante->find('first', $options);
+				array_push($restaurantes, $r);
+			}
+		}
+
+		$this->set(array(
+            'message' => $restaurantes,
+            '_serialize' => array('message')
+        ));
+	}
 }

@@ -185,8 +185,8 @@ class EnderecosController extends AppController {
 	public function get() {
 		$ids = $this->request->data['ids'];
 		$enderecos = array();
-		foreach ($ids as $id) {
-			$e = $this->Endereco->findById($id['endereco_id']);
+		for ($i=0; $i < count($ids); $i++) {
+			$e = $this->Endereco->findById($ids[$i]);
 			array_push($enderecos, $e);
 		}
 
