@@ -36,7 +36,7 @@
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;'.__('Voltar'), array('action' => 'index'), array('escape' => false)); ?> </li>
 								<?php } ?>
 
-								<li><?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;'.__('Excluir conta'), array('action' => 'delete', $this->Form->value('Atendente.id')), array('escape' => false), __('Você realmente deseja excluir: %s?', $this->Form->value('Atendente.nome'))); ?></li>
+								<li><?php //echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;'.__('Excluir conta'), array('action' => 'delete', $this->Form->value('Atendente.id')), array('escape' => false), __('Você realmente deseja excluir: %s?', $this->Form->value('Atendente.nome'))); ?></li>
 							</ul>
 						</div>
 					</div>

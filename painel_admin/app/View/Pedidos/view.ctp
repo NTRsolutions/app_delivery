@@ -16,7 +16,6 @@
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
 								<li><?php echo $this->Html->link(__('<span class="glyphicon glyphicon-menu-left"></span>&nbsp&nbsp;Voltar'), array('action' => 'index'), array('escape' => false)); ?> </li>
-								<li><?php echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Excluir Pedido'), array('action' => 'delete', $pedido['Pedido']['id']), array('escape' => false), __('Você realmente deseja excluir este pedido?')); ?> </li>
 							</ul>
 						</div><!-- end body -->
 				</div><!-- end panel -->

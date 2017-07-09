@@ -35,7 +35,8 @@ class ProdutosController extends AppController {
             'Porções',
             'Bebidas',
             'Sobremesas',
-            'Doces'
+            'Doces',
+            'Combos'
         );
         $this->set(compact('tipo'));
 	}
@@ -62,7 +63,8 @@ class ProdutosController extends AppController {
             'Porções',
             'Bebidas',
             'Sobremesas',
-            'Doces'
+            'Doces',
+            'Combos'
         );
         $this->set(compact('tipo'));
 	}
@@ -82,7 +84,8 @@ class ProdutosController extends AppController {
             'Porções',
             'Bebidas',
             'Sobremesas',
-            'Doces'
+            'Doces',
+            'Combos'
         );
         $this->set(compact('tipo'));
 
@@ -118,7 +121,8 @@ class ProdutosController extends AppController {
             'Porções',
             'Bebidas',
             'Sobremesas',
-            'Doces'
+            'Doces',
+            'Combos'
         );
         $this->set(compact('tipo'));
         

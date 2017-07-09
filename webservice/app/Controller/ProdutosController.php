@@ -28,14 +28,15 @@ class ProdutosController extends AppController {
 		$this->set('produtos', $this->Produto->find('all', $options, $this->Paginator->paginate()));
 
 		$tipo = array(
-            'Hamburguer',
+            'Hambúrguer',
             'Pizzas',
             'Massas',
             'Salgados',
             'Porções',
             'Bebidas',
             'Sobremesas',
-            'Doces'
+            'Doces',
+            'Combo'
         );
         $this->set(compact('tipo'));
 	}
@@ -62,7 +63,8 @@ class ProdutosController extends AppController {
             'Porções',
             'Bebidas',
             'Sobremesas',
-            'Doces'
+            'Doces',
+            'Combo'
         );
         $this->set(compact('tipo'));
 	}
@@ -82,7 +84,8 @@ class ProdutosController extends AppController {
             'Porções',
             'Bebidas',
             'Sobremesas',
-            'Doces'
+            'Doces',
+            'Combo'
         );
         $this->set(compact('tipo'));
 
@@ -118,7 +121,8 @@ class ProdutosController extends AppController {
             'Porções',
             'Bebidas',
             'Sobremesas',
-            'Doces'
+            'Doces',
+            'Combo'
         );
         $this->set(compact('tipo'));
         

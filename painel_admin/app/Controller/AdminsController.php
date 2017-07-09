@@ -58,6 +58,10 @@ class AdminsController extends AppController {
         
     }
 
+    public function gera_relatorio() {
+        
+    }
+
 	public function login() {
 		if (!empty($this->data['Admin']['login']) and
         	!empty($this->data['Admin']['senha'])) {

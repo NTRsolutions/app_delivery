@@ -38,7 +38,7 @@
 					array('action' => 'edit', $atendente['Atendente']['id']),
 					array('class' => 'btn btn-primary', 'target' => '_self')) . ' ';
 			  
-				echo $this->Form->button('Excluir Conta', array('class' => 'btn btn-danger', 'data-toggle' => 'modal', 'data-target' => '#modalExcluir', 'label' => ''));
+				//echo $this->Form->button('Excluir Conta', array('class' => 'btn btn-danger', 'data-toggle' => 'modal', 'data-target' => '#modalExcluir', 'label' => ''));
 
 				echo '<br /><br />';
 					
