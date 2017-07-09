@@ -65,12 +65,17 @@ class RestaurantesController extends AppController {
 		
 		if ($this->request->is('post')) {
 
+			//debug($this->request->data);
+
+			if ($this->Session->check('Franqueado')) {
+				$f = $this->Session->read('Franqueado');
+				$this->request->data['Restaurante']['franqueado_id'] = $f['0']['Franqueado']['id'];
+			}
+
 			$this->Restaurante->create();
 			if ($this->Restaurante->save($this->request->data['Restaurante'])) {
 				$id_rest = $this->Restaurante->getLastInsertId();
 				
-				debug($this->request->data);
-
 				$existe = false;
 
 				foreach ($estados as $e) {
@@ -115,6 +120,8 @@ class RestaurantesController extends AppController {
 					'bairro' => $this->request->data['Endereco']['bairro'],
 					'complemento' => $this->request->data['Endereco']['complemento'],
 					'cep' => $this->request->data['Endereco']['cep'],
+					'lat' => $this->request->data['Endereco']['lat'],
+					'lng' => $this->request->data['Endereco']['lng'],
 					'cidade_id' => $id_city);
 				
 				$this->Endereco->create();
@@ -135,7 +142,7 @@ class RestaurantesController extends AppController {
 				}
 			} else {
 				$this->Session->setFlash(__('The restaurante could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
-			}	
+			}
 		}
 	}
 
@@ -152,9 +159,15 @@ class RestaurantesController extends AppController {
 		}
 
 		if ($this->request->is(array('post', 'put'))) {
+			
+			if ($this->Session->check('Franqueado')) {
+				$f = $this->Session->read('Franqueado');
+				$this->request->data['Restaurante']['franqueado_id'] = $f['0']['Franqueado']['id'];
+			}
+
 			if ($this->Restaurante->save($this->request->data)) {
 				$this->Session->setFlash(__('The restaurante has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('controller' => 'franqueados', 'action' => 'home'));
 			} else {
 				$this->Session->setFlash(__('The restaurante could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}

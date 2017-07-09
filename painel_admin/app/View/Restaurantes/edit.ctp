@@ -110,13 +110,19 @@
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone opcional'));?>
 				</div>
-				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('gerente_id', array('class' => 'form-control', 'required' => 'true'));?>
-				</div>
-				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('franqueado_id', array('class' => 'form-control', 'required' => 'true'));?>
-				</div>
 
+				<?php if($this->Session->check('Admin')) { ?>
+					<div class="col-md-6 pad form-group">
+						<?php echo $this->Form->input('gerente_id', array('class' => 'form-control', 'required' => 'true'));?>
+					</div>
+					<div class="col-md-6 pad form-group">
+						<?php echo $this->Form->input('franqueado_id', array('class' => 'form-control', 'required' => 'true'));?>
+					</div>
+				<?php } else { ?>
+					<div class="col-md-12 pad form-group">
+						<?php echo $this->Form->input('gerente_id', array('class' => 'form-control', 'required' => 'true'));?>
+					</div>
+				<?php } ?>
 				
 				<div class="pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>

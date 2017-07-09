@@ -44,7 +44,6 @@
                         $("#bairro").val(dados.bairro);
                         $("#cidade").val(dados.localidade);
                         $("#uf").val(dados.uf);
-
                         $('#numero').focus();
                     } //end if.
                     else {
@@ -52,17 +51,32 @@
                         limpa_formulário_cep();
                         alert("CEP não encontrado.");
                     }
-                });
+                });                
             } //end if.
             else {
                 //cep é inválido.
                 limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
             }
         } //end if.
         else {
             //cep sem valor, limpa formulário.
             limpa_formulário_cep();
         }
+    });
+
+    //Quando o campo numero perde o foco.
+    $("#numero").blur(function() {
+        //Consulta webservice maps para pegar coordenadas geográficas/  
+        var end = $("#rua").val() + ", numero " + 
+                    $("#numero").val() + " - " + 
+                    $("#bairro").val() + ", " +                     
+                    $("#cidade").val() + " - " + 
+                    $("#uf").val();
+        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+end+"&key=AIzaSyAcSWtNDWRyJ_DERHgP5yWv2QkacKeqaYU", function(dados) {
+            var latitude = dados.results[0].geometry.location.lat;
+            var longitude = dados.results[0].geometry.location.lng;
+            $("#lat").val(parseFloat(latitude));
+            $("#lng").val(parseFloat(longitude));
+        });
     });
 });

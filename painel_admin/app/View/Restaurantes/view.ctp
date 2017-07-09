@@ -37,17 +37,17 @@
 		</div><!-- end col md 3 -->
 
 		<div class="col-md-9">			
-			<b>Nome:</b> <?php echo h($restaurante['Restaurante']['nome']); ?><br /><br />
-			<b>CNPJ:</b> <?php echo h($restaurante['Restaurante']['cnpj']); ?><br /><br />
-			<b>Email:</b> <?php echo h($restaurante['Restaurante']['email']); ?><br /><br />
-			<b>Descrição:</b> <?php echo h($restaurante['Restaurante']['descricao']); ?><br /><br />
-			<b>Horário Abrir:</b> <?php echo h($restaurante['Restaurante']['horario_abre']); ?><br /><br />
-			<b>Horário Fechar:</b> <?php echo h($restaurante['Restaurante']['horario_fecha']); ?><br /><br />
-			<b>Tempo de Mercado:</b> <?php echo h($restaurante['Restaurante']['tempo_mercado']); ?><br /><br />
-			<b>Valor mínimo cobrado:</b> <?php echo h($restaurante['Restaurante']['valor_min']); ?><br /><br />
-			<b>Telefone 1:</b><?php echo h($restaurante['Restaurante']['telefone1']); ?><br /><br />
+			<b>Nome:</b> <?php echo ($restaurante['Restaurante']['nome']); ?><br /><br />
+			<b>CNPJ:</b> <?php echo ($restaurante['Restaurante']['cnpj']); ?><br /><br />
+			<b>Email:</b> <?php echo ($restaurante['Restaurante']['email']); ?><br /><br />
+			<b>Descrição:</b> <?php echo ($restaurante['Restaurante']['descricao']); ?><br /><br />
+			<b>Horário Abrir:</b> <?php echo ($restaurante['Restaurante']['horario_abre']); ?><br /><br />
+			<b>Horário Fechar:</b> <?php echo ($restaurante['Restaurante']['horario_fecha']); ?><br /><br />
+			<b>Tempo de Mercado:</b> <?php echo ($restaurante['Restaurante']['tempo_mercado']); ?><br /><br />
+			<b>Valor mínimo cobrado:</b> <?php echo ($restaurante['Restaurante']['valor_min']); ?><br /><br />
+			<b>Telefone 1:</b><?php echo ($restaurante['Restaurante']['telefone1']); ?><br /><br />
 			<?php if(!empty($restaurante['Restaurante']['telefone2'])) { ?>
-				<b>Telefone 2:</b> <?php echo h($restaurante['Restaurante']['telefone2']). '<br /><br />'; } ?>
+				<b>Telefone 2:</b> <?php echo ($restaurante['Restaurante']['telefone2']). '<br /><br />'; } ?>
 			<b>Gerente:</b> <?php echo $this->Html->link($restaurante['Gerente']['nome'], array('controller' => 'gerentes', 'action' => 'view', $restaurante['Gerente']['id'])); ?><br /><br />
 			<b>Franqueado:</b> <?php echo $this->Html->link($restaurante['Franqueado']['nome'], array('controller' => 'franqueados', 'action' => 'view', $restaurante['Franqueado']['id'])); ?>
 		</div><!-- end col md 9 -->

@@ -93,13 +93,19 @@
 				<div class="col-md-2 pad form-group">
 					<?php echo $this->Form->input('Restaurante.telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone opcional'));?>
 				</div>
-				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Restaurante.gerente_id', array('class' => 'form-control selectpicker', 'data-live-search' => 'true', 'empty' => 'Selecione o gerente', 'required' => 'true'));?>
-				</div>
-				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('Restaurante.franqueado_id', array('class' => 'form-control', 'empty' => 'Selecione o franqueado', 'required' => 'true')) . '<br>';?>
-				</div>
-
+				
+				<?php if($this->Session->check('Admin')) { ?>
+					<div class="col-md-6 pad form-group">
+						<?php echo $this->Form->input('gerente_id', array('class' => 'form-control', 'required' => 'true'));?>
+					</div>
+					<div class="col-md-6 pad form-group">
+						<?php echo $this->Form->input('franqueado_id', array('class' => 'form-control', 'required' => 'true'));?>
+					</div>
+				<?php } else { ?>
+					<div class="col-md-12 pad form-group">
+						<?php echo $this->Form->input('gerente_id', array('class' => 'form-control', 'required' => 'true'));?>
+					</div>
+				<?php } ?>
 
 				<div class="col-md-4 pad form-group">
 					<?php echo $this->Form->input('Endereco.cep', array('class' => 'form-control', 'placeholder' => 'Cep',  'id' => 'cep', 'label' => 'CEP', 'required' => 'true'));?>
@@ -116,19 +122,22 @@
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Endereco.complemento', array('class' => 'form-control', 'placeholder' => 'Complemento', 'id' => 'complemento', 'disabled'));?>
 				</div>
-		
+
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('Endereco.lat', array('type' => 'hidden', 'placeholder' => 'Complemento', 'id' => 'lat'));?>
+				</div>
+
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('Endereco.lng', array('type' => 'hidden', 'placeholder' => 'Complemento', 'id' => 'lng'));?>
+				</div>	
 
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Cidade.nome', array('class' => 'form-control', 'id' => 'cidade', 'placeholder' => 'Cidade', 'label' => 'Cidade', 'disabled', 'required' => 'true'));?>
 				</div>
 
-
-
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('Estado.nome', array('class' => 'form-control', 'id' => 'uf', 'placeholder' => 'Estado', 'label' => 'Estado', 'disabled', 'required' => 'true'));?>
 				</div>
-
-
 
 				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>

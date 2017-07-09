@@ -11,4 +11,6 @@ export interface Restaurante {
   horario_fecha: string;
   cnpj: string;
   descricao: string;
+
+  /* criar construtor */
 }
