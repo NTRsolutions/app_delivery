@@ -5,13 +5,13 @@ import { Cliente } from '../../models/cliente';
 import { HomePage } from '../home/home';
 import { Http } from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation';
-import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 
 import 'rxjs/add/operator/map';
 
 /**
  * Generated class for the Endereco page.
- *
+ *z'
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
@@ -23,12 +23,14 @@ import 'rxjs/add/operator/map';
 export class EnderecoPage {
 
 	public api_url: string;
-  public maps_url: string;
+  public maps_url_ini: string;
+  public maps_url_end: string;
 	public cep_url_ini: string;
 	public cep_url_end: string;
 	cliente: Cliente;
   mask: any = "";
   cep_informado: boolean = false;
+  rodou_geolocation: boolean = false;
   
   cep: string;
   rua: string;
@@ -38,11 +40,13 @@ export class EnderecoPage {
   cidade: string;
   estado: string;
   estados: string[];
-  showList: boolean = false;
+  lat: number;
+  lng: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController, public geolocation: Geolocation, public geocoder: NativeGeocoder) {
   	this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
-    this.maps_url = 'http://maps.google.com/maps/api/js?key=AIzaSyBSmyP1-LsT1xk072vjsPcB-yyBUWrdD3A';
+    this.maps_url_ini = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+    this.maps_url_end = '&key=AIzaSyAcSWtNDWRyJ_DERHgP5yWv2QkacKeqaYU';
   	this.cep_url_ini = 'http://viacep.com.br/ws/';
   	this.cep_url_end = '/json/?callback=';
 
@@ -71,7 +75,15 @@ export class EnderecoPage {
 		      });
 		      toast.present();
         }
-    	});
+    	},
+      err => {
+        let toast = this.toastCtrl.create({
+          message: "Erro, por favor tente novamente",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present()
+      });
   	} else {
       if (this.cliente['ClienteEndereco'].length != 0) {
         this.goToHome(this.cliente);
@@ -104,7 +116,7 @@ export class EnderecoPage {
             toast.present();
           } else {
     			  this.cep_informado = true;
-    			  this.preencher_inputs(data);
+    			  this.preencher_inputs(data);            
           }
     	  },
         err => {
@@ -125,7 +137,7 @@ export class EnderecoPage {
     }
   }
 
-  getLocation() {
+  getLocation() {    
     this.limpar_inputs();
     this.geolocation.getCurrentPosition().then(
       (position) => { 
@@ -145,7 +157,28 @@ export class EnderecoPage {
   getAddress(pos) {
     this.geocoder.reverseGeocode(pos.coords.latitude, pos.coords.longitude).then((res: NativeGeocoderReverseResult) => {
       this.cep = res.postalCode;
+      this.lat = pos.coords.latitude;
+      this.lng = pos.coords.longitude;
+      console.log(this.lat + ', ' + this.lng);
+      this.rodou_geolocation = true;
       this.getEndereco();
+    },
+    (err) => {
+      let toast = this.toastCtrl.create({
+        message: "Erro, por favor tente novamente",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present()
+    })
+  }
+
+  getLatLong(address: string) {
+    console.log(address);
+    this.geocoder.forwardGeocode(address).then((res: NativeGeocoderForwardResult) => {
+      this.lat = +res.latitude;
+      this.lng = +res.longitude;
+      console.log(this.lat + ', ' + this.lng);
     },
     (err) => {
       let toast = this.toastCtrl.create({
@@ -194,6 +227,10 @@ export class EnderecoPage {
 
   valida_endereco(){
     if (this.validar()) {
+      if (!this.rodou_geolocation) {
+        let address = this.rua + ' ' + this.numero + ' ' + this.bairro + ' ' + this.cidade + ' ' + this.estado;
+        this.getLatLong(address);
+      }
       this.http.post(this.api_url + 'enderecos/add', 
                                     {'Endereco': 
                                       {'rua': this.rua, 
@@ -202,14 +239,16 @@ export class EnderecoPage {
                                        'complemento': this.complemento, 
                                        'bairro': this.bairro, 
                                        'cidade': this.cidade, 
-                                       'estado': this.estado, 
+                                       'estado': this.estado,
+                                       'lat': this.lat,
+                                       'lng': this.lng,
+                                       'ativo': 1,
                                        'cliente_id': this.cliente['Cliente']['id']
                                       }
                                     })
       .map(res => res.json())
       .subscribe(data => {
-        console.log(data);
-        //this.goToHome(this.cliente);
+        this.goToHome(this.cliente);
       });
     } else {
       let toast = this.toastCtrl.create({
