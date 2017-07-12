@@ -4,6 +4,12 @@ import { Cliente } from '../../models/cliente';
 import { Endereco } from '../../models/endereco';
 import { Distancia } from '../../models/distancia';
 import { Restaurante } from '../../models/restaurante';
+import { Classificacao } from '../../models/classificacao';
+import { Culinaria } from '../../models/culinaria';
+import { Pagamento } from '../../models/pagamento';
+import { Produto } from '../../models/produto';
+import { Promocao } from '../../models/promocao';
+import { RestauranteEndereco } from '../../models/restaurante_endereco';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -24,6 +30,13 @@ export class HomePage {
   restaurantes_aux: Array<any>;
   restaurantes_list: Array<Restaurante>;
   distancias: Array<Distancia>;
+
+  classificacaos: Classificacao[];
+  culinarias: Culinaria[];
+  pagamentos: Pagamento[];
+  produtos: Produto[];
+  promocaos: Promocao[];
+  restaurante_enderecos: RestauranteEndereco[];
 
   rests_carregados: boolean = false;
 
@@ -79,13 +92,14 @@ export class HomePage {
       .map(res => res.json())
       .subscribe(
         data => {
+
           this.restaurantes = data.message;
           this.restaurantes_aux = this.restaurantes;
 
           this.calcDistancias(end);
           this.filterRestaurantes();
           this.full_rest_list();
-          console.log(this.restaurantes_list);
+          console.log(this.restaurantes);
           this.rests_carregados = true;
         },
         err => {
