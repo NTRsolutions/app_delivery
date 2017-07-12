@@ -51,21 +51,37 @@ export class LoginPage {
   }*/
 
   login() {
-    this.http.post(this.api_url + 'clientes/login', {'Cliente': {'email': this.email, 'senha': this.senha}})
-      .map(res => res.json())
-      .subscribe(data => {       
-        
-        if (typeof data.message == "object") {
-          this.cliente = data.message['0'];
+    if(this.validaCampos()){
+      this.http.post(this.api_url + 'clientes/login', {'Cliente': {'email': this.email, 'senha': this.senha}})
+        .map(res => res.json())
+        .subscribe(data => {       
+          
+          if (typeof data.message == "object") {
+            this.cliente = data.message['0'];
 
-          this.appPreferences.store('key', this.cliente['Cliente']['id'].toString()).then((res) => { 
-            this.goToEndereco(0);
-          });
+            this.appPreferences.store('key', this.cliente['Cliente']['id'].toString()).then((res) => { 
+              this.goToEndereco(0);
+            });
 
-        } else {
-          this.toast(data.message);
-        }
-    });
+          } else {
+            this.toast(data.message);
+          }
+      });
+     } else {
+       let toast = this.toastCtrl.create({
+        message: "Preencha os campos, por gentileza",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+     }
+  }
+
+  validaCampos() {
+    if (this.email == "" || this.senha == "") {
+      return false;
+    }
+    return true;
   }
 
   goToCadastro() {     
