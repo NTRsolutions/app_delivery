@@ -104,6 +104,9 @@ class EnderecosController extends AppController {
 				'bairro' => $this->request->data['Endereco']['bairro'],
 				'complemento' => $this->request->data['Endereco']['complemento'],
 				'cep' => $this->request->data['Endereco']['cep'],
+				'lat' => $this->request->data['Endereco']['lat'],
+				'lng' => $this->request->data['Endereco']['lng'],
+				'ativo' => $this->request->data['Endereco']['ativo'],
 				'cidade_id' => $id_city);
 
 			$this->Endereco->create();

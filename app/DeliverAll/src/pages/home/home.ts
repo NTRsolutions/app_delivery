@@ -26,9 +26,8 @@ export class HomePage {
   cliente: Cliente;
 	enderecos: Endereco[];
   enderecos_id: Array<number>;
-  restaurantes: Array<any>;
-  restaurantes_aux: Array<any>;
-  restaurantes_list: Array<Restaurante>;
+  restaurantes: Array<Restaurante>;
+  restaurantes_aux: Array<Restaurante>;
   distancias: Array<Distancia>;
 
   classificacaos: Classificacao[];
@@ -52,7 +51,13 @@ export class HomePage {
     this.distancias = new Array();
     this.restaurantes = new Array();
     this.restaurantes_aux = new Array();
-    this.restaurantes_list = new Array();
+
+    this.classificacaos = new Array();
+    this.culinarias = new Array();
+    this.pagamentos = new Array();
+    this.produtos = new Array();
+    this.promocaos = new Array();
+    this.restaurante_enderecos = new Array();
   }
 
   ionViewDidLoad() {  	
@@ -92,15 +97,45 @@ export class HomePage {
       .map(res => res.json())
       .subscribe(
         data => {
+          for (var i = 0; i < data.message.length; i++) {
+            if (data.message[i]['Culinaria'].length > 0) {              
+              this.setCulinarias(data.message[i]['Culinaria']);
+            }
 
-          this.restaurantes = data.message;
+            if (data.message[i]['Classificacao'].length > 0) {              
+              this.setClassificacaos(data.message[i]['Classificacao']);
+            }
+
+            if (data.message[i]['Pagamento'].length > 0) {              
+              this.setPagamentos(data.message[i]['Pagamento']);
+            }
+
+            if (data.message[i]['Produto'].length > 0) {              
+              this.setProdutos(data.message[i]['Produto']);
+            }
+
+            if (data.message[i]['Promocao'].length > 0) {              
+              this.setPromocaos(data.message[i]['Promocao']);
+            }
+
+            if (data.message[i]['RestauranteEndereco'].length > 0) {              
+              this.setRestauranteEnderecos(data.message[i]['RestauranteEndereco']);
+            }
+
+            if (data.message[i]['Restaurante'].length > 0) {              
+              this.setRestaurantes(data.message[i]['Restaurante']);
+            }
+          }
+          
           this.restaurantes_aux = this.restaurantes;
 
           this.calcDistancias(end);
           this.filterRestaurantes();
-          this.full_rest_list();
-          console.log(this.restaurantes);
-          this.rests_carregados = true;
+          for (var i = 0; i < this.restaurantes_aux.length; i++) {
+            console.log(this.restaurantes_aux[i]);
+          }
+          console.log(this.cliente);
+          //this.rests_carregados = true;
         },
         err => {
           let toast = this.toastCtrl.create({
@@ -167,10 +202,101 @@ export class HomePage {
     return -1;
   }
 
-  full_rest_list() {
-    for (var i = 0; i < this.restaurantes_aux.length; i++) {
-      let r = this.restaurantes_aux[i]['Restaurante'];
-      this.restaurantes_list.push(r);
+  setCulinarias(culinarias: any[]) {
+    for (var j = 0; j < culinarias.length; j++) {
+      let c = new Culinaria(
+          culinarias[j]['id'],
+          culinarias[j]['idTipo'],
+          culinarias[j]['tipo'],
+          culinarias[j]['restaurante_id']);
+      this.culinarias.push(c);
+    }
+  }
+
+  setClassificacaos(classificacaos: any[]) {
+    for (var j = 0; j < classificacaos.length; j++) {
+      let c = new Classificacao(
+          classificacaos[j]['id'],
+          classificacaos[j]['nota'],
+          classificacaos[j]['comentario'],
+          classificacaos[j]['restaurante_id'],
+          classificacaos[j]['cliente_id']);
+      this.classificacaos.push(c);
+    }
+  }
+
+  setPagamentos(pagamentos: any[]) {
+    for (var j = 0; j < pagamentos.length; j++) {
+      let p = new Pagamento(
+          pagamentos[j]['id'],
+          pagamentos[j]['idDescricao'],
+          pagamentos[j]['descricao'],
+          pagamentos[j]['restaurante_id']);
+      this.pagamentos.push(p);
+    }
+  }
+
+  setProdutos(produtos: any[]) {
+    for (var j = 0; j < produtos.length; j++) {
+      let p = new Produto(
+          produtos[j]['id'],
+          produtos[j]['nome'],
+          produtos[j]['tipo'],
+          produtos[j]['descricao'],
+          produtos[j]['preco'],
+          produtos[j]['foto'],
+          produtos[j]['qtd_max_complemento'],
+          produtos[j]['restaurante_id']);
+      this.produtos.push(p);
+    }
+  }
+
+  setPromocaos(promocaos: any[]) {
+    for (var j = 0; j < promocaos.length; j++) {
+      let p = new Promocao(
+          promocaos[j]['id'],
+          promocaos[j]['data_ini'],
+          promocaos[j]['data_fim'],
+          promocaos[j]['desconto'],
+          promocaos[j]['produto_id'],
+          promocaos[j]['restaurante_id']);
+      this.promocaos.push(p);
+    }
+  }
+
+  setRestaurantes(restaurantes: any[]) {
+    for (var j = 0; j < restaurantes.length; j++) {
+      let r = new Restaurante(
+          restaurantes[j]['id'],
+          restaurantes[j]['nome'],
+          restaurantes[j]['cnpj'],
+          restaurantes[j]['email'],
+          restaurantes[j]['descricao'],
+          restaurantes[j]['foto'],
+          restaurantes[j]['telefone1'],
+          restaurantes[j]['telefone2'],
+          restaurantes[j]['tempo_mercado'],
+          restaurantes[j]['valor_min'],
+          restaurantes[j]['horario_abre'],
+          restaurantes[j]['horario_fecha'],
+          restaurantes[j]['gerente_id'],
+          restaurantes[j]['franqueado_id'],
+          this.classificacaos,
+          this.culinarias,
+          this.pagamentos,
+          this.produtos,
+          this.promocaos,
+          this.restaurante_enderecos);
+      this.restaurantes.push(r);
+    }
+  }
+
+  setRestauranteEnderecos(rest_ends: any[]) {
+    for (var j = 0; j < rest_ends.length; j++) {
+      let re = new RestauranteEndereco(
+          rest_ends[j]['restaurante_id'],
+          rest_ends[j]['endereco_id']);                
+      this.restaurante_enderecos.push(re);
     }
   }
 }

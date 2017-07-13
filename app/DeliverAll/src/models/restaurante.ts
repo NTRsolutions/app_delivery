@@ -1,3 +1,12 @@
+import { Endereco } from '../../models/endereco';
+import { Distancia } from '../../models/distancia';
+import { Classificacao } from '../../models/classificacao';
+import { Culinaria } from '../../models/culinaria';
+import { Pagamento } from '../../models/pagamento';
+import { Produto } from '../../models/produto';
+import { Promocao } from '../../models/promocao';
+import { RestauranteEndereco } from '../../models/restaurante_endereco';
+
 export class Restaurante {
   id: number;
   nome: string;
@@ -21,7 +30,7 @@ export class Restaurante {
   restaurante_enderecos: any[];
 
   /* criar construtor */
-  constructor(id: number, nome: string, cnpj: string, email: string, descricao: string, foto: string, telefone1: string, telefone2: string, tempo_mercado: string, valor_min: string, horario_abre: string, horario_fecha: string, gerente_id: number, franqueado_id: number, classificacaos: any[], culinarias: any[], franqueados: any[], gerentes: any[], pagamentos: any[], produtos: any[], promocaos: any[], restaurante_enderecos: any[]) {
+  constructor(id: number, nome: string, cnpj: string, email: string, descricao: string, foto: string, telefone1: string, telefone2: string, tempo_mercado: string, valor_min: string, horario_abre: string, horario_fecha: string, gerente_id: number, franqueado_id: number, classificacaos: any[], culinarias: any[], pagamentos: any[], produtos: any[], promocaos: any[], restaurante_enderecos: any[]) {
     this.id = id;
     this.nome = nome;
     this.cnpj = cnpj;
@@ -42,5 +51,5 @@ export class Restaurante {
     this.produtos = produtos;
     this.promocaos = promocaos;
     this.restaurante_enderecos = restaurante_enderecos;
-  }
+  }  
 }
