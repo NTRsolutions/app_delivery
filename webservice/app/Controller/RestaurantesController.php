@@ -218,7 +218,6 @@ class RestaurantesController extends AppController {
 						'Gerente',
 						'Pagamento',
 						'Produto',
-						'Promocao',
 						'RestauranteEndereco' => array(
 							'Endereco'
 						)

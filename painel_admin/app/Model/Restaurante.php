@@ -124,19 +124,6 @@ class Restaurante extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Promocao' => array(
-			'className' => 'Promocao',
-			'foreignKey' => 'restaurante_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => true,
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'RestauranteEndereco' => array(
 			'className' => 'RestauranteEndereco',
 			'foreignKey' => 'restaurante_id',

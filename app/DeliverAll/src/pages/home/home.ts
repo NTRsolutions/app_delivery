@@ -8,7 +8,6 @@ import { Classificacao } from '../../models/classificacao';
 import { Culinaria } from '../../models/culinaria';
 import { Pagamento } from '../../models/pagamento';
 import { Produto } from '../../models/produto';
-import { Promocao } from '../../models/promocao';
 import { RestauranteEndereco } from '../../models/restaurante_endereco';
 
 import { Http } from '@angular/http';
@@ -34,7 +33,6 @@ export class HomePage {
   culinarias: Culinaria[];
   pagamentos: Pagamento[];
   produtos: Produto[];
-  promocaos: Promocao[];
   restaurante_enderecos: RestauranteEndereco[];
 
   rests_carregados: boolean = false;
@@ -56,7 +54,6 @@ export class HomePage {
     this.culinarias = new Array();
     this.pagamentos = new Array();
     this.produtos = new Array();
-    this.promocaos = new Array();
     this.restaurante_enderecos = new Array();
   }
 
@@ -113,11 +110,7 @@ export class HomePage {
             if (data.message[i]['Produto'].length > 0) {              
               this.setProdutos(data.message[i]['Produto']);
             }
-
-            if (data.message[i]['Promocao'].length > 0) {              
-              this.setPromocaos(data.message[i]['Promocao']);
-            }
-
+            
             if (data.message[i]['RestauranteEndereco'].length > 0) {              
               this.setRestauranteEnderecos(data.message[i]['RestauranteEndereco']);
             }
@@ -251,19 +244,6 @@ export class HomePage {
     }
   }
 
-  setPromocaos(promocaos: any[]) {
-    for (var j = 0; j < promocaos.length; j++) {
-      let p = new Promocao(
-          promocaos[j]['id'],
-          promocaos[j]['data_ini'],
-          promocaos[j]['data_fim'],
-          promocaos[j]['desconto'],
-          promocaos[j]['produto_id'],
-          promocaos[j]['restaurante_id']);
-      this.promocaos.push(p);
-    }
-  }
-
   setRestaurantes(restaurantes: any[]) {
     for (var j = 0; j < restaurantes.length; j++) {
       let r = new Restaurante(
@@ -285,7 +265,6 @@ export class HomePage {
           this.culinarias,
           this.pagamentos,
           this.produtos,
-          this.promocaos,
           this.restaurante_enderecos);
       this.restaurantes.push(r);
     }

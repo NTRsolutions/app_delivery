@@ -46,19 +46,6 @@ class Produto extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Promocao' => array(
-			'className' => 'Promocao',
-			'foreignKey' => 'produto_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'ProdutoComplemento' => array(
 			'className' => 'ProdutoComplemento',
 			'foreignKey' => 'produto_id',
