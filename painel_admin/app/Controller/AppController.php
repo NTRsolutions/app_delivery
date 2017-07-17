@@ -31,11 +31,28 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public $components = array('RequestHandler');
+	public $components = array('RequestHandler','Session');
+	public $helpers = array('Tinymce');
 
 	public function beforeFilter() {         
-		$this->layout = 'bootstrap';     
+		$this->layout = 'bootstrap';
 	}
 
-	public $helpers = array('Tinymce');
+	/*public function afterFilter() {
+        if (($this->action != 'index_login' and
+            $this->action != 'recuperar_senha') ||
+            $this->params['controller'] != 'admins') {
+            $this->autenticar();
+        }
+    }
+
+    public function autenticar() {        
+        if (empty($this->Session->check('Admin')) &&
+        	empty($this->Session->check('Franqueado')) &&
+	       	empty($this->Session->check('Gerente')) &&
+        	empty($this->Session->check('Atendente'))) {
+            $this->redirect(array('controller' => 'admins',
+                                    'action' => 'index_login'));
+        } 
+    }*/
 }

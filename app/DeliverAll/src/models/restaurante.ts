@@ -34,7 +34,7 @@ export class Restaurante {
     this.cnpj = cnpj;
     this.email = email;
     this.descricao = descricao;
-    this.foto = foto;
+    this.foto = 'http://deliverall-com-br.umbler.net/site/img/'+foto;
     this.telefone1 = telefone1;
     this.telefone2 = telefone2;
     this.tempo_mercado = tempo_mercado;

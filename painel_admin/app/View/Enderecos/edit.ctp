@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
 	jQuery(function($){
-		$("#EnderecoCep").mask("99999-999",{autoclear: false});
+		$("#cep").mask("99999-999",{autoclear: false});
   });
 </script>
 
@@ -43,22 +43,32 @@
 					<?php echo $this->Form->input('id', array('class' => 'form-control', 'placeholder' => 'Id'));?>
 				</div>
 				<div class="col-md-3 pad form-group">
-					<?php echo $this->Form->input('cep', array('class' => 'form-control', 'placeholder' => 'Cep'));?>
+					<?php echo $this->Form->input('cep', array('class' => 'form-control', 'placeholder' => 'Cep', 'id' => 'cep', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-7 pad form-group">
-					<?php echo $this->Form->input('rua', array('class' => 'form-control', 'placeholder' => 'Rua'));?>
+					<?php echo $this->Form->input('rua', array('class' => 'form-control', 'placeholder' => 'Rua', 'id' => 'rua', 'disabled', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-2 pad form-group">
-					<?php echo $this->Form->input('numero', array('class' => 'form-control', 'placeholder' => 'Numero'));?>
+					<?php echo $this->Form->input('numero', array('class' => 'form-control', 'placeholder' => 'Numero', 'id' => 'numero', 'disabled'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('bairro', array('class' => 'form-control', 'placeholder' => 'Bairro'));?>
+					<?php echo $this->Form->input('bairro', array('class' => 'form-control', 'placeholder' => 'Bairro', 'id' => 'bairro', 'disabled', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('complemento', array('class' => 'form-control', 'placeholder' => 'Complemento'));?>
+					<?php echo $this->Form->input('complemento', array('class' => 'form-control', 'placeholder' => 'Complemento', 'id' => 'complemento', 'disabled'));?>
 				</div>
-				<div class="col-md-12 pad form-group">
-					<?php echo $this->Form->input('cidade_id', array('class' => 'form-control', 'placeholder' => 'Cidade Id'));?>
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('lat', array('type' => 'hidden', 'placeholder' => 'Complemento', 'id' => 'lat'));?>
+				</div>
+
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('lng', array('type' => 'hidden', 'placeholder' => 'Complemento', 'id' => 'lng'));?>
+				</div>	
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('Cidade.nome', array('class' => 'form-control', 'placeholder' => 'Cidade Id', 'id' => 'cidade', 'disabled', 'required' => 'true'));?>
+				</div>
+				<div class="col-md-6 pad form-group">
+					<?php echo $this->Form->input('Estado.nome', array('class' => 'form-control', 'id' => 'uf', 'placeholder' => 'Estado', 'label' => 'Estado', 'disabled', 'required' => 'true'));?>
 				</div>
 
 

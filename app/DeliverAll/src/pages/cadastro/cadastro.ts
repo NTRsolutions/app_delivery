@@ -4,6 +4,7 @@ import { AppPreferences } from '@ionic-native/app-preferences';
 
 import { Cliente } from '../../models/cliente';
 import { EnderecoPage } from '../endereco/endereco';
+import { Link } from '../../models/link';
 
 import { Http } from '@angular/http';
 
@@ -23,7 +24,7 @@ import 'rxjs/add/operator/map';
 export class CadastroPage {
 
   public data: any;
-  public api_url: string;
+  public link: Link;
 
   nome: string = '';
   email: string = '';
@@ -31,7 +32,7 @@ export class CadastroPage {
   cliente: Cliente;
 
   constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public http: Http, private appPreferences: AppPreferences) {
-    this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
+    this.link = new Link();
   }
 
   ionViewDidLoad() {
@@ -39,7 +40,7 @@ export class CadastroPage {
   }
 
   usuario_add() {
-    this.http.post(this.api_url + 'clientes/add', {'Cliente': {'nome': this.nome, 'email': this.email, 'senha': this.senha}})
+    this.http.post(this.link.api_url + 'clientes/add', {'Cliente': {'nome': this.nome, 'email': this.email, 'senha': this.senha}})
       .map(res => res.json())
       .subscribe(data => {
         if (typeof data.message == "object") {

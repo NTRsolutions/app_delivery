@@ -9,14 +9,14 @@
 
 
 <ion-content padding>
-	<p>{{enderecos}}</p>
-	<!-- <ion-list *ngIf="rests_carregados">
-	  <ion-item ng-repeat="rest in restaurantes_list">
+	<ion-list *ngIf="rests_carregados">
+		<!--<p>{{restaurantes_aux[0]["nome"]}}</p>-->
+	  <ion-item *ngFor="let rest of restaurantes_aux">
 	    <ion-avatar item-start>
-	      <img>
+	      <img src="{{rest['foto']}}">
 	    </ion-avatar>
-	    <h2>{{rest}}</h2>
-	    <p>Ugh. As if.</p>
+	    <h2>{{rest['nome']}}</h2>
+	    <p>tstes</p>
 	  </ion-item>
-	</ion-list> -->
+	</ion-list>
 </ion-content>

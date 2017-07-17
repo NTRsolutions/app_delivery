@@ -58,7 +58,7 @@ class EnderecosController extends AppController {
 		$estados = $this->Estado->find('all');
 
 		$gerente = $this->Session->read('Gerente');
-    	$gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']); 
+    $gerente = $this->Gerente->findById($gerente['0']['Gerente']['id']); 
 
 		if ($this->request->is('post')) {
 
@@ -102,12 +102,13 @@ class EnderecosController extends AppController {
 			}
 
 			$end = array('rua' => $this->request->data['Endereco']['rua'], 
-				'numero' => $this->request->data['Endereco']['numero'], 
-				'bairro' => $this->request->data['Endereco']['bairro'],
-				'complemento' => $this->request->data['Endereco']['complemento'],
-				'cep' => $this->request->data['Endereco']['cep'],
-				'tipo' => $this->request->data['Endereco']['tipo'],
-				'cidade_id' => $id_city);
+					'numero' => $this->request->data['Endereco']['numero'], 
+					'bairro' => $this->request->data['Endereco']['bairro'],
+					'complemento' => $this->request->data['Endereco']['complemento'],
+					'cep' => $this->request->data['Endereco']['cep'],
+					'lat' => $this->request->data['Endereco']['lat'],
+					'lng' => $this->request->data['Endereco']['lng'],
+					'cidade_id' => $id_city);
 
 			$this->Endereco->create();
 			if ($this->Endereco->save($end)) {
@@ -148,20 +149,72 @@ class EnderecosController extends AppController {
 		if (!$this->Endereco->exists($id)) {
 			throw new NotFoundException(__('Invalid endereco'));
 		}
+
+		$this->loadModel('Cidade');
+		$this->loadModel('Estado');
+
+		$cidades = $this->Cidade->find('all');
+		$estados = $this->Estado->find('all');
+
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Endereco->save($this->request->data)) {
-				$this->Session->setFlash(__('The endereco has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+			$existe = false;
+
+			foreach ($estados as $e) {
+				if($e['Estado']['nome'] == $this->request->data['Estado']['nome']) {
+					$id_est = $e['Estado']['id'];
+					$existe = true;
+				}
+			}
+
+			if($existe == false) {
+
+				$est = array('nome' => $this->request->data['Estado']['nome']); 
+
+				$this->Estado->create();
+				if ($this->Estado->save($est)) {
+					$id_est = $this->Estado->getLastInsertId();
+				}
+			
+			}
+
+			$existe = false;
+
+			foreach ($cidades as $c) {
+				if($c['Cidade']['nome'] == $this->request->data['Cidade']['nome']) {
+					$id_city = $c['Cidade']['id'];
+					$existe = true;
+				}
+			}
+
+			if($existe == false) {
+
+				$city = array('nome' => $this->request->data['Cidade']['nome'], 'estado_id' => $id_est); 
+
+				$this->Cidade->create();
+				if ($this->Cidade->save($city)) {
+					$id_city = $this->Cidade->getLastInsertId();
+				}
+			}
+
+			$end = array('rua' => $this->request->data['Endereco']['rua'], 
+					'numero' => $this->request->data['Endereco']['numero'], 
+					'bairro' => $this->request->data['Endereco']['bairro'],
+					'complemento' => $this->request->data['Endereco']['complemento'],
+					'cep' => $this->request->data['Endereco']['cep'],
+					'lat' => $this->request->data['Endereco']['lat'],
+					'lng' => $this->request->data['Endereco']['lng'],
+					'cidade_id' => $id_city);
+
+			if ($this->Endereco->save($end)) {
+				$this->Session->setFlash(__('O endereço foi salvo com sucesso.'), 'default', array('class' => 'alert alert-success'));
+				return $this->redirect(array('controller' => 'gerentes', 'action' => 'meu_restaurante'));
 			} else {
 				$this->Session->setFlash(__('The endereco could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Endereco.' . $this->Endereco->primaryKey => $id));
-			$this->request->data = $this->Endereco->find('first', $options);
+			$this->request->data = $this->Endereco->find('first', $options);		
 		}
-		$options = array('fields' => 'Cidade.nome');
-		$cidades = $this->Endereco->Cidade->find('list', $options);
-		$this->set(compact('cidades'));
 	}
 
 /**

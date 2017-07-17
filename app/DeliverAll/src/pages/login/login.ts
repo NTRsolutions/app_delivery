@@ -4,6 +4,7 @@ import { AppPreferences } from '@ionic-native/app-preferences';
 import { CadastroPage } from '../cadastro/cadastro';
 import { EnderecoPage } from '../endereco/endereco';
 import { Cliente } from '../../models/cliente';
+import { Link } from '../../models/link';
 
 import { Http } from '@angular/http';
 
@@ -23,7 +24,7 @@ import 'rxjs/add/operator/map';
 export class LoginPage {
 
   public data: any;
-  public api_url: string;
+  public link: Link;
 
   email: string = '';
   senha: string = '';
@@ -33,7 +34,7 @@ export class LoginPage {
   cliente: Cliente;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private appPreferences: AppPreferences, private toastCtrl: ToastController) {
-    this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';      
+    this.link = new Link();
   }
 
   ionViewDidLoad() {
@@ -52,7 +53,7 @@ export class LoginPage {
 
   login() {
     if(this.validaCampos()){
-      this.http.post(this.api_url + 'clientes/login', {'Cliente': {'email': this.email, 'senha': this.senha}})
+      this.http.post(this.link.api_url + 'clientes/login', {'Cliente': {'email': this.email, 'senha': this.senha}})
         .map(res => res.json())
         .subscribe(data => {       
           

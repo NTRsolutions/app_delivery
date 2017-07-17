@@ -5,11 +5,14 @@
         $("#rua").val("");
         $("#bairro").val("");
         $("#cidade").val("");
+        $("#numero").val(0);
+        $("#complemento").val("");
         $("#uf").val("");
     }
     
     //Quando o campo cep perde o foco.
     $("#cep").blur(function() {
+        limpa_formulário_cep()
 
         //Nova variável "cep" somente com dígitos.
         var cep = $(this).val().replace(/\D/g, '');
@@ -77,6 +80,7 @@
             var longitude = dados.results[0].geometry.location.lng;
             $("#lat").val(parseFloat(latitude));
             $("#lng").val(parseFloat(longitude));
+            console.log(latitude + " / " + longitude);
         });
     });
 });

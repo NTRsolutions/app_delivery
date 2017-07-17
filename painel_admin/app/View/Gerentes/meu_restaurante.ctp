@@ -42,6 +42,8 @@
 						echo $this->Html->image($rest['0']['Restaurante']['foto'], array('class' => 'img-responsive img_view')); 
 						echo $this->Form->postLink('<span class="btn btn-danger btn-xs" role="button">Excluir foto</span>', array('controller' => 'restaurantes', 'action' => 'delete_foto', $rest['0']['Restaurante']['id']), array('escape' => false), __('Deseja apagar a foto?')); 
 						echo '</div>';
+					} else {
+						echo '<p style="margin-top:20px">Insira uma foto em "Editar restaurante"</p>';
 					}
 				?>
 
@@ -76,18 +78,12 @@
 
 			<div class="col-md-5">
 
-				<h3>Endereços:</h3><br>
-
-				<div class="actions">
-						<?php echo $this->Html->link(__('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Novo Endereço'), array('controller' => 'enderecos', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
-					</div><br>
+				<h3>Endereço:</h3><br>
 
 				<?php foreach ($ends as $e):
+					echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>&nbsp;Editar Endereço'), array('controller' => 'enderecos', 'action' => 'edit', $e['Endereco']['id']), array('escape' => false, 'class' => 'btn btn-primary btn-sm')) . '&nbsp;&nbsp;<br><br>';
 
 					echo $e['Endereco']['rua'] . ', ' . $e['Endereco']['numero'] . ', ' . $e['Endereco']['bairro'] . ', ' . $e['Endereco']['complemento'] . ' - ' . $e['Endereco']['cep'] . ', ' . $e['Cidade']['nome'] . ', ' . $e['Cidade']['Estado']['nome'] . '<br><br>'; 
-
-					echo $this->Html->link(__('<span class="glyphicon glyphicon-edit"></span>&nbsp;Editar'), array('controller' => 'enderecos', 'action' => 'edit', $e['Endereco']['id']), array('escape' => false)) . '&nbsp;&nbsp;'; 
-					echo $this->Form->postLink(__('<span class="glyphicon glyphicon-remove"></span>&nbsp;Excluir'), array('controller' => 'enderecos', 'action' => 'delete', $e['Endereco']['id']), array('escape' => false), __('Você realmente deseja excluir este endereço?')) . '<br><hr>'; 
 					
 				endforeach; ?>	
 			</div>	
@@ -98,7 +94,7 @@
 <hr>
 
 <div class="related row">
-	<div class="col-md-12">
+	<div class="col-md-6">
 		<h3><?php echo __('Culinárias'); ?></h3>
 		<div class="actions">
 			<?php echo $this->Html->link(__('Nova / Editar Culinária'), array('controller' => 'culinarias', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 
@@ -124,12 +120,8 @@
 			</table>
 		<?php endif; ?>
 	</div><!-- end col md 12 -->
-</div>
 
-<hr>
-
-<div class="related row">
-	<div class="col-md-12">
+	<div class="col-md-6">
 		<h3><?php echo __('Pagamentos'); ?></h3>
 		<div class="actions">
 			<?php echo $this->Html->link(__('Novo / Editar Pagamento'), array('controller' => 'pagamentos', 'action' => 'add'), array('escape' => false, 'class' => 'btn btn-primary btn-sm')); ?> 

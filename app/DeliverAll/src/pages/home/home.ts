@@ -9,6 +9,7 @@ import { Culinaria } from '../../models/culinaria';
 import { Pagamento } from '../../models/pagamento';
 import { Produto } from '../../models/produto';
 import { RestauranteEndereco } from '../../models/restaurante_endereco';
+import { Link } from '../../models/link';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -21,7 +22,7 @@ import 'rxjs/add/operator/map';
 
 export class HomePage {
 
-	public api_url: string;
+	public link: Link;
   cliente: Cliente;
 	enderecos: Endereco[];
   enderecos_id: Array<number>;
@@ -42,19 +43,13 @@ export class HomePage {
   /* ------------------- */
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
-  	this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
+  	this.link = new Link();
 
   	this.cliente = navParams.get("cliente");
     this.enderecos_id = new Array();
     this.distancias = new Array();
     this.restaurantes = new Array();
     this.restaurantes_aux = new Array();
-
-    this.classificacaos = new Array();
-    this.culinarias = new Array();
-    this.pagamentos = new Array();
-    this.produtos = new Array();
-    this.restaurante_enderecos = new Array();
   }
 
   ionViewDidLoad() {  	
@@ -66,7 +61,7 @@ export class HomePage {
       this.enderecos_id.push(this.cliente['ClienteEndereco'][i]['endereco_id']);
     }
 
-    this.http.post(this.api_url + 'enderecos/get', {'ids': this.enderecos_id})
+    this.http.post(this.link.api_url + 'enderecos/get', {'ids': this.enderecos_id})
       .map(res => res.json())
       .subscribe(
         data => {
@@ -90,11 +85,17 @@ export class HomePage {
   }
 
   getRestaurantes(end: Endereco) {
-    this.http.post(this.api_url + 'restaurantes/get', {'cidade_id': end['cidade_id']})
+    this.http.post(this.link.api_url + 'restaurantes/get', {'cidade_id': end['cidade_id']})
       .map(res => res.json())
       .subscribe(
         data => {
           for (var i = 0; i < data.message.length; i++) {
+            this.classificacaos = new Array();
+            this.culinarias = new Array();
+            this.pagamentos = new Array();
+            this.produtos = new Array();
+            this.restaurante_enderecos = new Array();
+
             if (data.message[i]['Culinaria'].length > 0) {              
               this.setCulinarias(data.message[i]['Culinaria']);
             }
@@ -103,32 +104,31 @@ export class HomePage {
               this.setClassificacaos(data.message[i]['Classificacao']);
             }
 
-            if (data.message[i]['Pagamento'].length > 0) {              
+            if (data.message[i]['Pagamento'].length > 0) {
               this.setPagamentos(data.message[i]['Pagamento']);
             }
 
             if (data.message[i]['Produto'].length > 0) {              
               this.setProdutos(data.message[i]['Produto']);
             }
-            
+
             if (data.message[i]['RestauranteEndereco'].length > 0) {              
               this.setRestauranteEnderecos(data.message[i]['RestauranteEndereco']);
             }
 
-            if (data.message[i]['Restaurante'].length > 0) {              
-              this.setRestaurantes(data.message[i]['Restaurante']);
-            }
+            this.setRestaurantes(data.message[i]['Restaurante']);
           }
           
           this.restaurantes_aux = this.restaurantes;
 
           this.calcDistancias(end);
           this.filterRestaurantes();
-          for (var i = 0; i < this.restaurantes_aux.length; i++) {
-            console.log(this.restaurantes_aux[i]);
-          }
-          console.log(this.cliente);
-          //this.rests_carregados = true;
+
+          //console.log(data.message);
+          console.log(this.restaurantes_aux);
+          //console.log(JSON.stringify(this.restaurantes_aux,undefined,2));
+          //console.log(this.distancias);
+          this.rests_carregados = true;
         },
         err => {
           let toast = this.toastCtrl.create({
@@ -153,11 +153,15 @@ export class HomePage {
   calcDistancias(end: Endereco) {
     for (var i = 0; i < this.restaurantes_aux.length; i++) {
       let r = this.restaurantes_aux[i];
-      let e = r['RestauranteEndereco']['0']['Endereco']
-      let d: Distancia = {'rest_id': 0, 'distancia': 0};
-      d.rest_id = r['Restaurante']['id'];      
-      d.distancia = this.getDistancia(end['lat'], end['lng'], e['lat'], e['lng']);
-      this.distancias.push(d);
+      let ends = r['restaurante_enderecos'];
+
+      for (var j = 0; j < ends.length; j++) {
+        let d: Distancia = {'rest_id': 0, 'distancia': 0};
+        let e = ends[j]['endereco'];
+        d.rest_id = r['id'];      
+        d.distancia = this.getDistancia(end['lat'], end['lng'], e['lat'], e['lng']);
+        this.distancias.push(d);
+      }
     }
   }
 
@@ -187,7 +191,7 @@ export class HomePage {
 
   findRestaurante(id: number) {    
     for (var i = 0; i < this.restaurantes_aux.length; i++) {
-      let r = this.restaurantes_aux[i]['Restaurante'];
+      let r = this.restaurantes_aux[i];
       if (r['id'] == id) {
         return i;
       }
@@ -244,37 +248,36 @@ export class HomePage {
     }
   }
 
-  setRestaurantes(restaurantes: any[]) {
-    for (var j = 0; j < restaurantes.length; j++) {
-      let r = new Restaurante(
-          restaurantes[j]['id'],
-          restaurantes[j]['nome'],
-          restaurantes[j]['cnpj'],
-          restaurantes[j]['email'],
-          restaurantes[j]['descricao'],
-          restaurantes[j]['foto'],
-          restaurantes[j]['telefone1'],
-          restaurantes[j]['telefone2'],
-          restaurantes[j]['tempo_mercado'],
-          restaurantes[j]['valor_min'],
-          restaurantes[j]['horario_abre'],
-          restaurantes[j]['horario_fecha'],
-          restaurantes[j]['gerente_id'],
-          restaurantes[j]['franqueado_id'],
-          this.classificacaos,
-          this.culinarias,
-          this.pagamentos,
-          this.produtos,
-          this.restaurante_enderecos);
-      this.restaurantes.push(r);
-    }
+  setRestaurantes(restaurantes: any) {
+    let r = new Restaurante(
+        restaurantes['id'],
+        restaurantes['nome'],
+        restaurantes['cnpj'],
+        restaurantes['email'],
+        restaurantes['descricao'],
+        restaurantes['foto'],
+        restaurantes['telefone1'],
+        restaurantes['telefone2'],
+        restaurantes['tempo_mercado'],
+        restaurantes['valor_min'],
+        restaurantes['horario_abre'],
+        restaurantes['horario_fecha'],
+        restaurantes['gerente_id'],
+        restaurantes['franqueado_id'],
+        this.classificacaos,
+        this.culinarias,
+        this.pagamentos,
+        this.produtos,
+        this.restaurante_enderecos);
+    this.restaurantes.push(r);
   }
 
   setRestauranteEnderecos(rest_ends: any[]) {
     for (var j = 0; j < rest_ends.length; j++) {
       let re = new RestauranteEndereco(
           rest_ends[j]['restaurante_id'],
-          rest_ends[j]['endereco_id']);                
+          rest_ends[j]['endereco_id'],
+          rest_ends[j]['Endereco']);                
       this.restaurante_enderecos.push(re);
     }
   }

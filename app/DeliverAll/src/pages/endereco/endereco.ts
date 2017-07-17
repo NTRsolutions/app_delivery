@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Cliente } from '../../models/cliente';
+import { Link } from '../../models/link';
 
 import { HomePage } from '../home/home';
 import { Http } from '@angular/http';
@@ -22,11 +23,9 @@ import 'rxjs/add/operator/map';
 })
 export class EnderecoPage {
 
-	public api_url: string;
-  public maps_url_ini: string;
-  public maps_url_end: string;
-	public cep_url_ini: string;
-	public cep_url_end: string;
+	public link: Link;
+  /*public maps_url_ini: string;
+  public maps_url_end: string;*/
 	cliente: Cliente;
   mask: any = "";
   cep_informado: boolean = false;
@@ -44,11 +43,7 @@ export class EnderecoPage {
   lng: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController, public geolocation: Geolocation, public geocoder: NativeGeocoder) {
-  	this.api_url = 'http://192.168.0.13:80/app_delivery/webservice/';
-    this.maps_url_ini = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-    this.maps_url_end = '&key=AIzaSyAcSWtNDWRyJ_DERHgP5yWv2QkacKeqaYU';
-  	this.cep_url_ini = 'http://viacep.com.br/ws/';
-  	this.cep_url_end = '/json/?callback=';
+  	this.link = new Link();
 
   	this.cliente = navParams.get("cliente");
 
@@ -57,7 +52,7 @@ export class EnderecoPage {
 
   ionViewDidLoad() {
     if(typeof this.cliente == 'string'){
-  		this.http.post(this.api_url + 'clientes/get', {'id': this.cliente})
+  		this.http.post(this.link.api_url + 'clientes/get', {'id': this.cliente})
       .map(res => res.json())
       .subscribe(data => {       
         
@@ -103,7 +98,7 @@ export class EnderecoPage {
     if (this.cep != undefined && this.cep.length != 1 && this.cep.indexOf('_') == -1) {
       this.limpar_inputs();
 
-    	this.http.get(this.cep_url_ini + this.cep + this.cep_url_end)
+    	this.http.get(this.link.cep_url_ini + this.cep + this.link.cep_url_end)
       .map(res => res.json())
       .subscribe(
         data => {
@@ -231,7 +226,7 @@ export class EnderecoPage {
         let address = this.rua + ' ' + this.numero + ' ' + this.bairro + ' ' + this.cidade + ' ' + this.estado;
         this.getLatLong(address);
       }
-      this.http.post(this.api_url + 'enderecos/add', 
+      this.http.post(this.link.api_url + 'enderecos/add', 
                                     {'Endereco': 
                                       {'rua': this.rua, 
                                        'cep': this.cep, 
