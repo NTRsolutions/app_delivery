@@ -214,6 +214,10 @@ class FranqueadosController extends AppController {
 	}
 
 	public function home() {
+		if (!empty($this->Session->check('Franqueado'))) {
+			$this->Session->write('redirectUrl', $this->params['controller'].'/'.$this->action);
+		}
+
 		$this->loadModel('Restaurante');
 		$franq = $this->Session->read('Franqueado');
 		$options = array(

@@ -17,6 +17,14 @@ class ProdutosController extends AppController {
  */
 	public $components = array('Paginator', 'Flash', 'Session');
 
+	public function afterFilter() {
+		if ($this->params['controller'] == 'produtos' and empty($this->Session->check('Gerente'))) {
+			$this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));	
+		}
+    }
+
 /**
  * index method
  *

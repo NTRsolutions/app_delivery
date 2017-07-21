@@ -17,6 +17,20 @@ class ClassificacaosController extends AppController {
  */
 	public $components = array('Paginator', 'Flash', 'Session');
 
+	public function afterFilter() {
+        $this->autenticar();
+    }
+
+    public function autenticar() {        
+        if (empty($this->Session->check('Admin')) &&
+        	empty($this->Session->check('Franqueado')) &&
+	       	empty($this->Session->check('Gerente'))) {
+			$this->Session->setFlash(__('Erro de permissão!'), 'default',
+			    array('class' => 'text-center alert alert-danger'));
+			$this->redirect('../'.$this->Session->read('redirectUrl'));;
+        } 
+    }
+
 /**
  * index method
  *

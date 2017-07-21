@@ -38,7 +38,7 @@ class AppController extends Controller {
 		$this->layout = 'bootstrap';
 	}
 
-	/*public function afterFilter() {
+	public function afterFilter() {
         if (($this->action != 'index_login' and
             $this->action != 'recuperar_senha') ||
             $this->params['controller'] != 'admins') {
@@ -54,5 +54,5 @@ class AppController extends Controller {
             $this->redirect(array('controller' => 'admins',
                                     'action' => 'index_login'));
         } 
-    }*/
+    }
 }

@@ -18,8 +18,26 @@ class AdminsController extends AppController {
  */
 	public $components = array('Paginator', 'Flash', 'Session');
 
+    public function afterFilter() {
+        if ($this->action != 'index_login' and
+            $this->action != 'recuperar_senha') {
+            $this->autenticar();
+        }
+    }
+
+    public function autenticar() {        
+        if (empty($this->Session->check('Admin'))) {
+            $this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));
+        } 
+    }
+
 
     public function home() {
+        if (!empty($this->Session->check('Admin'))) {
+            $this->Session->write('redirectUrl', $this->params['controller'].'/'.$this->action);
+        }
 
         $this->loadModel('Franqueado');
         $this->loadModel('Endereco');

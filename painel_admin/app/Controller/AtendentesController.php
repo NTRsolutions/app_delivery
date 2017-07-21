@@ -17,6 +17,34 @@ class AtendentesController extends AppController {
  */
 	public $components = array('Paginator', 'Flash', 'Session');
 
+	public function afterFilter() {
+        if ($this->action == 'meu_perfil' or
+            ($this->params['controller'] == 'atendentes' and $this->action == 'home') or
+            $this->action == 'altera_senha') {
+            $this->autenticar();
+        }
+
+        if ($this->action == 'edit' and empty($this->Session->check('Gerente')) and empty($this->Session->check('Atendente'))) {
+			$this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));
+		}
+
+		if ($this->params['controller'] == 'atendentes' and empty($this->Session->check('Gerente')) and empty($this->Session->check('Atendente'))) {
+			$this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));	
+		}
+    }
+
+    public function autenticar() {     	
+        if (empty($this->Session->check('Atendente'))) {
+            $this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));
+        } 
+    }
+
 /**
  * index method
  *
@@ -120,6 +148,9 @@ class AtendentesController extends AppController {
 	}
 
 	public function home() {
+		if (!empty($this->Session->check('Atendente'))) {
+			$this->Session->write('redirectUrl', $this->params['controller'].'/'.$this->action);
+		}
 
 		$atendente = $this->Session->read('Atendente');
 
