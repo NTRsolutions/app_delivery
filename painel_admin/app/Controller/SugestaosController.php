@@ -10,6 +10,19 @@ App::uses('AppController', 'Controller');
  */
 class SugestaosController extends AppController {
 
+	public function afterFilter() {
+        $this->autenticar();
+    }
+
+    public function autenticar() {     	
+        if (empty($this->Session->check('Franqueado')) and
+        	empty($this->Session->check('Admin'))) {
+            $this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));
+        } 
+    }
+
 /**
  * Components
  *

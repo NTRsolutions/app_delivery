@@ -17,6 +17,43 @@ class FranqueadosController extends AppController {
  */
 	public $components = array('Paginator', 'Flash', 'Session');
 
+	public function afterFilter() {
+        if ($this->action == 'meu_perfil' or
+            ($this->params['controller'] == 'franqueados' and $this->action == 'home') or
+            $this->action == 'altera_senha') {
+            $this->autenticar();
+        }
+
+        if ($this->action == 'edit' and empty($this->Session->check('Franqueado')) and empty($this->Session->check('Admin'))) {
+			$this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));
+		}
+
+		if ($this->action == 'view' or
+            $this->action == 'edit' or
+            $this->action == 'add' or
+            $this->action == 'delete') {
+            $this->autenticarAdmin();
+        }
+    }
+
+    public function autenticar() {     	
+        if (empty($this->Session->check('Franqueado'))) {
+            $this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));
+        } 
+    }
+
+    public function autenticarAdmin() {
+        if (empty($this->Session->check('Admin'))) {
+            $this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));
+        } 
+    }
+
 /**
  * index method
  *

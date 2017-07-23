@@ -30,6 +30,12 @@ class GerentesController extends AppController {
                 array('class' => 'text-center alert alert-danger'));
             $this->redirect('../'.$this->Session->read('redirectUrl'));
 		}
+
+		if ($this->params['controller'] == 'gerentes' and $this->action != 'home' and empty($this->Session->check('Franqueado')) and empty($this->Session->check('Admin'))) {
+         	$this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));   
+        }
     }
 
     public function autenticar() {     	
