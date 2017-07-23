@@ -31,7 +31,6 @@ class FranqueadosController extends AppController {
 		}
 
 		if ($this->action == 'view' or
-            $this->action == 'edit' or
             $this->action == 'add' or
             $this->action == 'delete') {
             $this->autenticarAdmin();
