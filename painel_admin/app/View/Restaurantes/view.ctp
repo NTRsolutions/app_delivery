@@ -41,10 +41,7 @@
 			<b>CNPJ:</b> <?php echo ($restaurante['Restaurante']['cnpj']); ?><br /><br />
 			<b>Email:</b> <?php echo ($restaurante['Restaurante']['email']); ?><br /><br />
 			<b>Descrição:</b> <?php echo ($restaurante['Restaurante']['descricao']); ?><br /><br />
-			<b>Horário Abrir:</b> <?php echo ($restaurante['Restaurante']['horario_abre']); ?><br /><br />
-			<b>Horário Fechar:</b> <?php echo ($restaurante['Restaurante']['horario_fecha']); ?><br /><br />
 			<b>Tempo de Mercado:</b> <?php echo ($restaurante['Restaurante']['tempo_mercado']); ?><br /><br />
-			<b>Valor mínimo cobrado:</b> <?php echo ($restaurante['Restaurante']['valor_min']); ?><br /><br />
 			<b>Telefone 1:</b><?php echo ($restaurante['Restaurante']['telefone1']); ?><br /><br />
 			<?php if(!empty($restaurante['Restaurante']['telefone2'])) { ?>
 				<b>Telefone 2:</b> <?php echo ($restaurante['Restaurante']['telefone2']). '<br /><br />'; } ?>

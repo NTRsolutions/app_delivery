@@ -19,9 +19,6 @@
 
 		$("#RestauranteCnpj").mask("99.999.999/9999-99",{autoclear: false});
 
-		$("#RestauranteHorarioAbre").mask("99:99",{autoclear: false});
-		$("#RestauranteHorarioFecha").mask("99:99",{autoclear: false});
-
 		$("#cep").mask("99999-999",{autoclear: false});
   });
 </script>
@@ -93,16 +90,7 @@
 					<?php echo $this->Form->input('foto', array('class' => 'form', 'type' => 'file'));?>
 				</div><br>
 				<div class="col-md-3 pad form-group">
-					<?php echo $this->Form->input('horario_abre', array('class' => 'form-control', 'label' => 'Horário Abrir', 'placeholder' => 'Horário Abrir', 'required' => 'true'));?>
-				</div>
-				<div class="col-md-3 pad form-group">
-					<?php echo $this->Form->input('horario_fecha', array('class' => 'form-control', 'label' => 'Horário Fechar', 'placeholder' => 'Horário Fechar', 'required' => 'true'));?>
-				</div>
-				<div class="col-md-3 pad form-group">
 					<?php echo $this->Form->input('tempo_mercado', array('class' => 'form-control', 'label' => 'Tempo de Mercado (anos)', 'placeholder' => 'Ex: 10 anos', 'required' => 'true'));?>
-				</div>
-				<div class="col-md-3 pad form-group">
-					<?php echo $this->Form->input('valor_min', array('class' => 'form-control', 'label' => 'Valor mínimo de produto (R$)', 'placeholder' => 'Valor mín pedido', 'required' => 'true'));?>
 				</div>
 				<div class="col-md-6 pad form-group">
 					<?php echo $this->Form->input('telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone principal', 'required' => 'true'));?>
