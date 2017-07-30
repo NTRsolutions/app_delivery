@@ -11,6 +11,8 @@ import { Produto } from '../../models/produto';
 import { RestauranteEndereco } from '../../models/restaurante_endereco';
 import { Link } from '../../models/link';
 
+import { RestaurantePage } from '../restaurante/restaurante';
+
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -280,5 +282,9 @@ export class HomePage {
           rest_ends[j]['Endereco']);                
       this.restaurante_enderecos.push(re);
     }
+  }
+
+  goToRestaurante(rest: Restaurante){
+    this.navCtrl.push(RestaurantePage, {restaurante: rest, cliente: this.cliente});    
   }
 }

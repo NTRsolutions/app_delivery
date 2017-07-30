@@ -26,6 +26,5 @@ class ProdutosController extends AppController {
 	            '_serialize' => array('message')
 	        ));
 		}
-
 	}
 }
