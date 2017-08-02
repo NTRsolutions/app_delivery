@@ -25,7 +25,7 @@
 		<div class="col-md-9">			
 			<b>Cliente:</b> <?php echo $this->Html->link($pedido['Cliente']['nome'], array('controller' => 'clientes', 'action' => 'view', $pedido['Cliente']['id'])); ?><br /><br />
 			<b>Status:</b> <?php echo $status[$pedido['Pedido']['status']]; ?><br /><br />
-			<b>Data:</b> <?php echo date('d/m/Y', strtotime(h($pedido['Pedido']['data']))); ?><br /><br />
+			<b>Data:</b> <?php echo date('d/m/Y H:i:s', strtotime(h($pedido['Pedido']['data']))); ?><br /><br />
 			<b>Total:</b> <?php echo 'R$' . h($pedido['Pedido']['total']); ?>
 		</div><!-- end col md 9 -->
 
