@@ -4,7 +4,6 @@ import { Cliente } from '../../models/cliente';
 import { Endereco } from '../../models/endereco';
 import { Distancia } from '../../models/distancia';
 import { Restaurante } from '../../models/restaurante';
-import { Classificacao } from '../../models/classificacao';
 import { Culinaria } from '../../models/culinaria';
 import { Pagamento } from '../../models/pagamento';
 import { Produto } from '../../models/produto';
@@ -32,7 +31,6 @@ export class HomePage {
   restaurantes_aux: Array<Restaurante>;
   distancias: Array<Distancia>;
 
-  classificacaos: Classificacao[];
   culinarias: Culinaria[];
   pagamentos: Pagamento[];
   produtos: Produto[];
@@ -92,7 +90,6 @@ export class HomePage {
       .subscribe(
         data => {
           for (var i = 0; i < data.message.length; i++) {
-            this.classificacaos = new Array();
             this.culinarias = new Array();
             this.pagamentos = new Array();
             this.produtos = new Array();
@@ -100,10 +97,6 @@ export class HomePage {
 
             if (data.message[i]['Culinaria'].length > 0) {              
               this.setCulinarias(data.message[i]['Culinaria']);
-            }
-
-            if (data.message[i]['Classificacao'].length > 0) {              
-              this.setClassificacaos(data.message[i]['Classificacao']);
             }
 
             if (data.message[i]['Pagamento'].length > 0) {
@@ -212,18 +205,6 @@ export class HomePage {
     }
   }
 
-  setClassificacaos(classificacaos: any[]) {
-    for (var j = 0; j < classificacaos.length; j++) {
-      let c = new Classificacao(
-          classificacaos[j]['id'],
-          classificacaos[j]['nota'],
-          classificacaos[j]['comentario'],
-          classificacaos[j]['restaurante_id'],
-          classificacaos[j]['cliente_id']);
-      this.classificacaos.push(c);
-    }
-  }
-
   setPagamentos(pagamentos: any[]) {
     for (var j = 0; j < pagamentos.length; j++) {
       let p = new Pagamento(
@@ -244,7 +225,6 @@ export class HomePage {
           produtos[j]['descricao'],
           produtos[j]['preco'],
           produtos[j]['foto'],
-          produtos[j]['qtd_max_complemento'],
           produtos[j]['restaurante_id']);
       this.produtos.push(p);
     }
@@ -261,12 +241,8 @@ export class HomePage {
         restaurantes['telefone1'],
         restaurantes['telefone2'],
         restaurantes['tempo_mercado'],
-        restaurantes['valor_min'],
-        restaurantes['horario_abre'],
-        restaurantes['horario_fecha'],
         restaurantes['gerente_id'],
         restaurantes['franqueado_id'],
-        this.classificacaos,
         this.culinarias,
         this.pagamentos,
         this.produtos,

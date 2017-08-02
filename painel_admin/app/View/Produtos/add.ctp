@@ -32,7 +32,6 @@
 								<?php } else { ?>
 									<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;'.__('Produtos'), array('controller' => 'produtos', 'action' => 'index'), array('escape' => false)); ?></li>
 								<?php } ?>
-								<li><?php echo $this->Html->link('<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;'.__('Novo Complemento'), array('controller' => 'complementos', 'action' => 'add'), array('escape' => false)); ?> </li>
 							</ul>
 						</div>
 					</div>
@@ -53,11 +52,8 @@
 				<div class="form-group">
 					<?php echo $this->Form->input('foto', array('class' => 'form', 'type' => 'file'));?>
 				</div>
-				<div class="col-md-6 pad form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->input('preco', array('class' => 'form-control', 'placeholder' => 'Preco', 'required' => 'true'));?>
-				</div>
-				<div class="col-md-6 pad form-group">
-					<?php echo $this->Form->input('qtd_max_complemento', array('class' => 'form-control', 'placeholder' => 'Qtd Max Complementos'));?>
 				</div>
 				<div class="form-group">
 					<?php echo $this->Form->input('restaurante_id', array('class' => 'esconde_rest form-control', 'label' => ''));?>

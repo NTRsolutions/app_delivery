@@ -49,14 +49,6 @@
 						<td><?php echo $pedidoProduto['qtd']; ?></td>
 						<td><?php echo $pedidoProduto['Produto']['nome']; ?></td>
 					</tr>
-					<tr>
-						<?php if (!empty($pedidoProduto['Produto']['ProdutoComplemento'])): ?>
-							<?php foreach ($pedidoProduto['Produto']['ProdutoComplemento'] as $pc): ?>
-								<td><?php echo $pc['qtd']; ?></td>
-								<td><?php echo $pc['Complemento']['nome'] . ' (complemento)'; ?></td>
-							<?php endforeach; ?>
-						<?php endif; ?>
-					</tr>
 				<?php endforeach; ?>
 				</tbody>
 			</table>

@@ -25,13 +25,13 @@ class GerentesController extends AppController {
             $this->autenticar();
         }
 
-        if ($this->action == 'edit' and empty($this->Session->check('Gerente')) and empty($this->Session->check('Franqueado')) and empty($this->Session->check('Admin'))) {
+        else if ($this->action == 'edit' and empty($this->Session->check('Gerente')) and empty($this->Session->check('Franqueado')) and empty($this->Session->check('Admin'))) {
 			$this->Session->setFlash(__('Erro de permissão!'), 'default',
                 array('class' => 'text-center alert alert-danger'));
             $this->redirect('../'.$this->Session->read('redirectUrl'));
 		}
 
-		if ($this->params['controller'] == 'gerentes' and $this->action != 'home' and empty($this->Session->check('Franqueado')) and empty($this->Session->check('Admin'))) {
+		else if ($this->params['controller'] == 'gerentes' and $this->action != 'home' and $this->action != 'edit' and empty($this->Session->check('Franqueado')) and empty($this->Session->check('Admin'))) {
          	$this->Session->setFlash(__('Erro de permissão!'), 'default',
                 array('class' => 'text-center alert alert-danger'));
             $this->redirect('../'.$this->Session->read('redirectUrl'));   
@@ -70,7 +70,6 @@ class GerentesController extends AppController {
 
 			$this->set('gerentes', $this->Gerente->Restaurante->find('all', $options, $this->Paginator->paginate()));
 		}
-
 	}
 
 /**
@@ -164,11 +163,7 @@ class GerentesController extends AppController {
 				'Cliente',
 				'Pagamento',
 				'PedidoProduto' => array(
-					'Produto' => array(
-						'ProdutoComplemento' => array(
-							'Complemento'
-						)
-					)
+					'Produto'
 				)
 			),
 			'conditions' => array(

@@ -18,11 +18,25 @@ class RestaurantesController extends AppController {
 	public $components = array('Paginator', 'Flash', 'Session');
 
 	public function afterFilter() {
-        $this->autenticar();
+		if ($this->action == 'edit') {
+			$this->autenticar2();		
+		} else {
+        	$this->autenticar();
+        }
     }
 
-    public function autenticar() {     	
+    public function autenticar() {
         if (empty($this->Session->check('Franqueado')) and
+        	empty($this->Session->check('Admin'))) {
+            $this->Session->setFlash(__('Erro de permissão!'), 'default',
+                array('class' => 'text-center alert alert-danger'));
+            $this->redirect('../'.$this->Session->read('redirectUrl'));
+        } 
+    }
+
+    public function autenticar2() {
+        if (empty($this->Session->check('Franqueado')) and
+        	empty($this->Session->check('Gerente')) and
         	empty($this->Session->check('Admin'))) {
             $this->Session->setFlash(__('Erro de permissão!'), 'default',
                 array('class' => 'text-center alert alert-danger'));
@@ -180,7 +194,12 @@ class RestaurantesController extends AppController {
 
 			if ($this->Restaurante->save($this->request->data)) {
 				$this->Session->setFlash(__('The restaurante has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('controller' => 'franqueados', 'action' => 'home'));
+
+				if ($this->Session->read("Admin")) {
+					return $this->redirect(array('action' => 'index'));
+				} else {
+					return $this->redirect(array('controller' => 'franqueados', 'action' => 'home'));
+				}
 			} else {
 				$this->Session->setFlash(__('The restaurante could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}

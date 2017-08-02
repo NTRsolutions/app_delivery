@@ -30,7 +30,6 @@ class RestaurantesController extends AppController {
 				$id = $e['RestauranteEndereco']['0']['restaurante_id'];
 				$options = array(
 					'contain' => array(
-						'Classificacao',
 						'Culinaria',
 						'Franqueado',
 						'Gerente',

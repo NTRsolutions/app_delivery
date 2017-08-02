@@ -44,28 +44,7 @@
 					
 			?>
 		    
-		    <div id="modalExcluir" class="modal fade" role="dialog">
-			  	<div class="modal-dialog">
-			   		<div class="modal-content">
-			      		<div class="modal-header">
-			        		<button type="button" class="close" data-dismiss="modal">&times;</button>
-			       			<h4 class="modal-title">Atenção</h4>
-				     	</div>
-			      		<div class="modal-body">
-			        		<p>Tem certeza que deseja EXCLUIR sua conta?</p>
-			      		</div>
-				      	<div class="modal-footer">
-					      	<?php 
-								  	echo $this->Html->link("Sim, desejo excluir minha conta", 
-				  							array('controller' => 'alunos', 
-				  									'action' => 'delete', $atendente['Atendente']['id']),
-				  							array('class' => 'btn btn-default', 'target' => '_self'));
-									?>
-					        <button type="button" class="btn btn-primary" data-dismiss="modal">Não, vou ficar com a conta!</button>
-				      	</div>
-			    	</div>
-				</div>
-			</div>
+		   
 			<br /><br />
 		</div> <!-- end col md 9 -->
 	</div><!-- end row -->

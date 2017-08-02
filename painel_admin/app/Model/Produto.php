@@ -27,40 +27,6 @@ class Produto extends AppModel {
 		)
 	);
 
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
-		'Complemento' => array(
-			'className' => 'Complemento',
-			'foreignKey' => 'produto_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'ProdutoComplemento' => array(
-			'className' => 'ProdutoComplemento',
-			'foreignKey' => 'produto_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
-
 	public function beforeSave($options = array()) {
 		//debug($this->data);
 		if(!empty($this->data['Produto']['foto']['name'])) {

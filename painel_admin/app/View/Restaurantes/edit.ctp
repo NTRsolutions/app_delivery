@@ -92,10 +92,10 @@
 				<div class="col-md-3 pad form-group">
 					<?php echo $this->Form->input('tempo_mercado', array('class' => 'form-control', 'label' => 'Tempo de Mercado (anos)', 'placeholder' => 'Ex: 10 anos', 'required' => 'true'));?>
 				</div>
-				<div class="col-md-6 pad form-group">
+				<div class="col-md-3 pad form-group">
 					<?php echo $this->Form->input('telefone1', array('class' => 'form-control', 'placeholder' => 'Telefone principal', 'required' => 'true'));?>
 				</div>
-				<div class="col-md-6 pad form-group">
+				<div class="col-md-3 pad form-group">
 					<?php echo $this->Form->input('telefone2', array('class' => 'form-control', 'placeholder' => 'Telefone opcional'));?>
 				</div>
 
@@ -112,7 +112,7 @@
 					</div>
 				<?php } ?>
 				
-				<div class="pad form-group">
+				<div class="col-md-12 pad form-group">
 					<?php echo $this->Form->submit(__('Salvar'), array('class' => 'btn btn-primary')); ?>
 				</div>
 

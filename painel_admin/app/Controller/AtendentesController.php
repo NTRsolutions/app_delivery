@@ -161,11 +161,7 @@ class AtendentesController extends AppController {
 				'Cliente',
 				'Pagamento',
 				'PedidoProduto' => array(
-					'Produto' => array(
-						'ProdutoComplemento' => array(
-							'Complemento'
-						)
-					)
+					'Produto'
 				)
 			),
 			'conditions' => array(

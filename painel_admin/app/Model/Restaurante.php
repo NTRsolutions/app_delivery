@@ -59,19 +59,6 @@ class Restaurante extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Classificacao' => array(
-			'className' => 'Classificacao',
-			'foreignKey' => 'restaurante_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => true,
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'Culinaria' => array(
 			'className' => 'Culinaria',
 			'foreignKey' => 'restaurante_id',
