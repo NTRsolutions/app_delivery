@@ -120,7 +120,7 @@ export class HomePage {
           this.filterRestaurantes();
 
           //console.log(data.message);
-          console.log(this.restaurantes_aux);
+          //console.log(this.restaurantes_aux);
           //console.log(JSON.stringify(this.restaurantes_aux,undefined,2));
           //console.log(this.distancias);
           this.rests_carregados = true;

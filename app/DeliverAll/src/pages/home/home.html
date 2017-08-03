@@ -12,7 +12,8 @@
 	<ion-list *ngIf="rests_carregados">
 	  <ion-item *ngFor="let rest of restaurantes_aux" (click)="goToRestaurante(rest)">
 	    <ion-avatar item-start>
-	      <img src="{{rest['foto']}}">
+	      <img *ngIf="rest['foto']" src="{{rest['foto']}}">
+	      <img *ngIf="!rest['foto']" src="{{rest['foto']}}">
 	    </ion-avatar>
 	    <h2>{{rest['nome']}}</h2>
 	  </ion-item>

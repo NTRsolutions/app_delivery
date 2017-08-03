@@ -4,7 +4,6 @@ import { Cliente } from '../../models/cliente';
 import { Endereco } from '../../models/endereco';
 import { Distancia } from '../../models/distancia';
 import { Restaurante } from '../../models/restaurante';
-import { Classificacao } from '../../models/classificacao';
 import { Culinaria } from '../../models/culinaria';
 import { Pagamento } from '../../models/pagamento';
 import { Produto } from '../../models/produto';
@@ -30,19 +29,29 @@ export class RestaurantePage {
 	public link: Link;
   cliente: Cliente;
   restaurante: Restaurante;
+  produtos: Produto[];
+  foto: boolean;
 	
   /* Variáveis de filtro */
   raio: number = 8;
   /* ------------------- */
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
-  	this.link = new Link();
-
-  	this.restaurante = navParams.get("restaurante");
+    this.link = new Link();
+    this.produtos = new Array();
+    this.restaurante = navParams.get("restaurante");
   }
 
   ionViewDidLoad() {
-    
+    console.log(this.restaurante);
+    this.produtos = this.restaurante.produtos;
   }
 
+  goToCarrinho() {
+
+  }
+
+  checkFoto() {
+    
+  }
 }

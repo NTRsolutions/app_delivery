@@ -10,9 +10,10 @@
 
 <ion-content padding>
 	<ion-list>
-	  <ion-item *ngFor="let p of produtos" (click)="goToComplemento(p)">
+	  <ion-item *ngFor="let p of produtos" (click)="goToCarrinho(p)">
 	    <ion-avatar item-start>
-	      <img src="{{p['foto']}}">
+	      <img *ngIf="p['foto']" src="{{p['foto']}}">
+	      <img *ngIf="!p['foto']" src="{{p['foto']}}">
 	    </ion-avatar>
 	    <h2>{{p['nome']}}</h2>
 	  </ion-item>

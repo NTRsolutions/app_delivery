@@ -1,14 +1,14 @@
 webpackJsonp([4],{
 
-/***/ 284:
+/***/ 279:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pedidos__ = __webpack_require__(293);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PedidosPageModule", function() { return PedidosPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__carrinho__ = __webpack_require__(289);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarrinhoPageModule", function() { return CarrinhoPageModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,36 +18,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var PedidosPageModule = (function () {
-    function PedidosPageModule() {
+var CarrinhoPageModule = (function () {
+    function CarrinhoPageModule() {
     }
-    return PedidosPageModule;
+    return CarrinhoPageModule;
 }());
-PedidosPageModule = __decorate([
+CarrinhoPageModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__pedidos__["a" /* PedidosPage */],
+            __WEBPACK_IMPORTED_MODULE_2__carrinho__["a" /* CarrinhoPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__pedidos__["a" /* PedidosPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__carrinho__["a" /* CarrinhoPage */]),
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__pedidos__["a" /* PedidosPage */]
+            __WEBPACK_IMPORTED_MODULE_2__carrinho__["a" /* CarrinhoPage */]
         ]
     })
-], PedidosPageModule);
+], CarrinhoPageModule);
 
-//# sourceMappingURL=pedidos.module.js.map
+//# sourceMappingURL=carrinho.module.js.map
 
 /***/ }),
 
-/***/ 293:
+/***/ 289:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(28);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarrinhoPage; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,30 +60,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the PedidosPage page.
+ * Generated class for the CarrinhoPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var PedidosPage = (function () {
-    function PedidosPage(navCtrl, navParams) {
+var CarrinhoPage = (function () {
+    function CarrinhoPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
-    PedidosPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad PedidosPage');
+    CarrinhoPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad CarrinhoPage');
     };
-    return PedidosPage;
+    return CarrinhoPage;
 }());
-PedidosPage = __decorate([
+CarrinhoPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-pedidos',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\pedidos\pedidos.html"*/'<!--\n  Generated template for the PedidosPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>pedidos</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\pedidos\pedidos.html"*/,
+        selector: 'page-carrinho',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\carrinho\carrinho.html"*/'<!--\n  Generated template for the CarrinhoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>carrinho</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\carrinho\carrinho.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-], PedidosPage);
+], CarrinhoPage);
 
-//# sourceMappingURL=pedidos.js.map
+//# sourceMappingURL=carrinho.js.map
 
 /***/ })
 

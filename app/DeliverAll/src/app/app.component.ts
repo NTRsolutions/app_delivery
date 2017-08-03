@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { EnderecoPage } from '../pages/endereco/endereco';
+import { RestaurantePage } from '../pages/restaurante/restaurante';
 
 @Component({
   templateUrl: 'app.html'

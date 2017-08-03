@@ -13,6 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { EnderecoPage } from '../pages/endereco/endereco';
+import { RestaurantePage } from '../pages/restaurante/restaurante';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,7 +24,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     LoginPage,
     CadastroPage,
-    EnderecoPage
+    EnderecoPage,
+    RestaurantePage
   ],
   imports: [
     HttpModule,
@@ -37,7 +39,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     LoginPage,
     CadastroPage,
-    EnderecoPage
+    EnderecoPage,
+    RestaurantePage
   ],
   providers: [
     StatusBar,
