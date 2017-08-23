@@ -50,8 +50,4 @@ export class RestaurantePage {
   goToCarrinho() {
 
   }
-
-  checkFoto() {
-    
-  }
 }
