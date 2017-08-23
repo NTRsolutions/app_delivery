@@ -118,7 +118,7 @@ class GerentesController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Gerente->save($this->request->data)) {
 				$this->Session->setFlash(__('The gerente has been saved.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'edit', $id));
 			} else {
 				$this->Session->setFlash(__('The gerente could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
 			}

@@ -109,7 +109,7 @@ class AtendentesController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Atendente->save($this->request->data)) {
 				$this->Session->setFlash(__('O atendente foi salvo com sucesso.'), 'default', array('class' => 'alert alert-success'));
-				return $this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'edit', $id));
 			} else {
 				$this->Session->setFlash(__('O atendente não foi salvo. Tente novamente.'), 'default', array('class' => 'alert alert-danger'));
 			}
