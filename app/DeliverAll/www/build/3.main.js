@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 283:
+/***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meu_perfil__ = __webpack_require__(290);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeuPerfilPageModule", function() { return MeuPerfilPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__carrinho__ = __webpack_require__(292);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarrinhoPageModule", function() { return CarrinhoPageModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,36 +18,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MeuPerfilPageModule = (function () {
-    function MeuPerfilPageModule() {
+var CarrinhoPageModule = (function () {
+    function CarrinhoPageModule() {
     }
-    return MeuPerfilPageModule;
+    return CarrinhoPageModule;
 }());
-MeuPerfilPageModule = __decorate([
+CarrinhoPageModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__meu_perfil__["a" /* MeuPerfilPage */],
+            __WEBPACK_IMPORTED_MODULE_2__carrinho__["a" /* CarrinhoPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meu_perfil__["a" /* MeuPerfilPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__carrinho__["a" /* CarrinhoPage */]),
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__meu_perfil__["a" /* MeuPerfilPage */]
+            __WEBPACK_IMPORTED_MODULE_2__carrinho__["a" /* CarrinhoPage */]
         ]
     })
-], MeuPerfilPageModule);
+], CarrinhoPageModule);
 
-//# sourceMappingURL=meu-perfil.module.js.map
+//# sourceMappingURL=carrinho.module.js.map
 
 /***/ }),
 
-/***/ 290:
+/***/ 292:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeuPerfilPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarrinhoPage; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,30 +60,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the MeuPerfilPage page.
+ * Generated class for the CarrinhoPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var MeuPerfilPage = (function () {
-    function MeuPerfilPage(navCtrl, navParams) {
+var CarrinhoPage = (function () {
+    function CarrinhoPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
-    MeuPerfilPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MeuPerfilPage');
+    CarrinhoPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad CarrinhoPage');
     };
-    return MeuPerfilPage;
+    return CarrinhoPage;
 }());
-MeuPerfilPage = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
+CarrinhoPage = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-meu-perfil',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\meu-perfil\meu-perfil.html"*/'<!--\n  Generated template for the MeuPerfilPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>meu_perfil</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\meu-perfil\meu-perfil.html"*/,
+        selector: 'page-carrinho',template:/*ion-inline-start:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\carrinho\carrinho.html"*/'<!--\n  Generated template for the CarrinhoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>carrinho</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"C:\wamp\www\app_delivery\app\DeliverAll\src\pages\carrinho\carrinho.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-], MeuPerfilPage);
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
+], CarrinhoPage);
 
-//# sourceMappingURL=meu-perfil.js.map
+//# sourceMappingURL=carrinho.js.map
 
 /***/ })
 

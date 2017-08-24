@@ -6,11 +6,16 @@
   </ion-header>
 
   <ion-content>
+    <div padding menuClose *ngIf="cliente_carregado" (click)="meu_perfil()">
+      <h2>Olá, {{cliente.nome}}</h2>
+      <p>{{cliente.email}}</p>
+    </div><hr *ngIf="logado">
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
-      <button menuClose ion-item *ngIf="logado" (click)="logout()">Sair</button>
+      <button menuClose ion-item *ngIf="logado" (click)="meu_perfil()">Meu Perfil</button>
+      <button menuClose ion-item *ngIf="logado" (click)="logout()">Sair</button>      
     </ion-list>
   </ion-content>
 

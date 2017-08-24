@@ -24,8 +24,6 @@ import 'rxjs/add/operator/map';
 export class EnderecoPage {
 
 	public link: Link;
-  /*public maps_url_ini: string;
-  public maps_url_end: string;*/
 	cliente: Cliente;
   mask: any = "";
   cep_informado: boolean = false;

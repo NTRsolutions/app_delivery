@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, Events } from 'ionic-angular';
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { CadastroPage } from '../cadastro/cadastro';
 import { EnderecoPage } from '../endereco/endereco';
+
 import { Cliente } from '../../models/cliente';
 import { Link } from '../../models/link';
+
+import { LogineventProvider } from '../../providers/loginevent/loginevent';
 
 import { Http } from '@angular/http';
 
@@ -33,7 +36,7 @@ export class LoginPage {
   split: string[];
   cliente: Cliente;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private appPreferences: AppPreferences, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private appPreferences: AppPreferences, private toastCtrl: ToastController, public loginevent: LogineventProvider) {
     this.link = new Link();
   }
 
@@ -61,6 +64,7 @@ export class LoginPage {
             this.cliente = data.message['0'];
 
             this.appPreferences.store('key', this.cliente['Cliente']['id'].toString()).then((res) => { 
+              this.loginevent.login();
               this.goToEndereco(0);
             });
 

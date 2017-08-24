@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, Events } from 'ionic-angular';
 import { AppPreferences } from '@ionic-native/app-preferences';
 
 import { Cliente } from '../../models/cliente';
 import { EnderecoPage } from '../endereco/endereco';
 import { Link } from '../../models/link';
+
+import { LogineventProvider } from '../../providers/loginevent/loginevent';
 
 import { Http } from '@angular/http';
 
@@ -31,7 +33,7 @@ export class CadastroPage {
   senha: string = '';
   cliente: Cliente;
 
-  constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public http: Http, private appPreferences: AppPreferences) {
+  constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public http: Http, private appPreferences: AppPreferences, public loginevent: LogineventProvider) {
     this.link = new Link();
   }
 
@@ -46,6 +48,7 @@ export class CadastroPage {
         if (typeof data.message == "object") {
           this.cliente = data.message['0'];
           this.appPreferences.store('key', this.cliente['Cliente']['id'].toString()).then((res) => { 
+            this.loginevent.cadastro();
             this.goToEndereco(0);
           });
         } else {

@@ -14,9 +14,11 @@ import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { EnderecoPage } from '../pages/endereco/endereco';
 import { RestaurantePage } from '../pages/restaurante/restaurante';
+import { MeuPerfilPage } from '../pages/meu-perfil/meu-perfil';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LogineventProvider } from '../providers/loginevent/loginevent';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     CadastroPage,
     EnderecoPage,
-    RestaurantePage
+    RestaurantePage,
+    MeuPerfilPage
   ],
   imports: [
     HttpModule,
@@ -40,7 +43,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     CadastroPage,
     EnderecoPage,
-    RestaurantePage
+    RestaurantePage,
+    MeuPerfilPage
   ],
   providers: [
     StatusBar,
@@ -48,7 +52,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     Geolocation,
     NativeGeocoder,  
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    LogineventProvider,
+    LogineventProvider
   ]
 })
 export class AppModule {}
