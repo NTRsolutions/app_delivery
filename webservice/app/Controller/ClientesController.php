@@ -94,4 +94,18 @@ class ClientesController extends AppController {
 	        ));
 	    }
 	}
+
+	public function check_senha() {
+		$message = "0";
+		if ($this->request->is('post')) {
+			if (md5($this->data['senha1']) == $this->data['senha2']) {
+				$message = "1";
+			}
+
+	        $this->set(array(
+	        	'message' => $message,
+	            '_serialize' => array('message')
+	        ));
+	    }
+	}
 }

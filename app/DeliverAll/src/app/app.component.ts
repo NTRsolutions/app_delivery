@@ -35,6 +35,7 @@ export class MyApp {
   id: any;
 
   cliente: Cliente;
+  cliente_parametro: Cliente;
   link: Link;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private appPreferences: AppPreferences, private app: App, public events: Events, public loginevent: LogineventProvider, public http: Http, private toastCtrl: ToastController) {
@@ -111,13 +112,18 @@ export class MyApp {
     this.app.getActiveNav().setRoot(MeuPerfilPage, {id: this.id});
   }
 
+  goToHome() {
+    console.log(this.cliente_parametro)
+    this.app.getActiveNav().setRoot(HomePage, {cliente: this.cliente_parametro});
+  }
+
   getCliente() {
     this.http.post(this.link.api_url + 'clientes/get', {'id': this.id})
       .map(res => res.json())
-      .subscribe(data => {       
-        
+      .subscribe(data => { 
         if (typeof data.message == "object") {
-          this.setCliente(data.message['0']['Cliente']); 
+          this.setCliente(data.message['0']['Cliente']);
+          this.cliente_parametro = data.message['0'];
         } else {
           let toast = this.toastCtrl.create({
             message: "Ocorreu algum erro, tente novamente!",

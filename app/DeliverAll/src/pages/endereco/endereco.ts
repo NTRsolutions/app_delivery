@@ -28,6 +28,8 @@ export class EnderecoPage {
   mask: any = "";
   cep_informado: boolean = false;
   rodou_geolocation: boolean = false;
+  novo_end: boolean = false;
+  edit_end: boolean = false;
   
   cep: string;
   rua: string;
@@ -44,6 +46,8 @@ export class EnderecoPage {
   	this.link = new Link();
 
   	this.cliente = navParams.get("cliente");
+    this.novo_end = navParams.get("novo_end");
+    this.edit_end = navParams.get("edit_end");
 
   	this.mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
   }
@@ -53,7 +57,6 @@ export class EnderecoPage {
   		this.http.post(this.link.api_url + 'clientes/get', {'id': this.cliente})
       .map(res => res.json())
       .subscribe(data => {       
-        
         if (typeof data.message == "object") {
           this.cliente = data.message['0']; 
           
@@ -77,10 +80,10 @@ export class EnderecoPage {
         });
         toast.present()
       });
-  	} else {
-      if (this.cliente['ClienteEndereco'].length != 0) {
-        this.goToHome(this.cliente);
-      }
+  	} else if (this.cliente['ClienteEndereco'].length != 0 && this.novo_end == false) {
+      this.goToHome(this.cliente);
+    } else if (this.edit_end == true) { /* para editar endereço */
+      
     }
   }
 

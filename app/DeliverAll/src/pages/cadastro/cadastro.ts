@@ -42,19 +42,28 @@ export class CadastroPage {
   }
 
   usuario_add() {
-    this.http.post(this.link.api_url + 'clientes/add', {'Cliente': {'nome': this.nome, 'email': this.email, 'senha': this.senha}})
-      .map(res => res.json())
-      .subscribe(data => {
-        if (typeof data.message == "object") {
-          this.cliente = data.message['0'];
-          this.appPreferences.store('key', this.cliente['Cliente']['id'].toString()).then((res) => { 
-            this.loginevent.cadastro();
-            this.goToEndereco(0);
-          });
-        } else {
-          this.toast(data.message);
-        }
-    });
+    if (this.validaCampos()) {
+      this.http.post(this.link.api_url + 'clientes/add', {'Cliente': {'nome': this.nome, 'email': this.email, 'senha': this.senha}})
+        .map(res => res.json())
+        .subscribe(data => {
+          if (typeof data.message == "object") {
+            this.cliente = data.message['0'];
+            this.appPreferences.store('key', this.cliente['Cliente']['id'].toString()).then((res) => { 
+              this.loginevent.cadastro();
+              this.goToEndereco(0);
+            });
+          } else {
+            this.toast(data.message);
+          }
+      });
+    } else {
+       let toast = this.toastCtrl.create({
+        message: "Preencha os campos, por gentileza",
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
   }
 
   toast(cod: Number) {
@@ -85,5 +94,12 @@ export class CadastroPage {
     } else {
       this.navCtrl.setRoot(EnderecoPage, {cliente: this.cliente});
     }
+  }
+
+  validaCampos() {
+    if (this.nome == "" || this.email == "" || this.senha == "") {
+      return false;
+    }
+    return true;
   }
 }

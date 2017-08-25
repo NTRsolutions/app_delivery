@@ -14,7 +14,9 @@
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
+      <button menuClose ion-item *ngIf="logado" (click)="goToHome()">Home</button>
       <button menuClose ion-item *ngIf="logado" (click)="meu_perfil()">Meu Perfil</button>
+      <div padding *ngIf="logado"></div>
       <button menuClose ion-item *ngIf="logado" (click)="logout()">Sair</button>      
     </ion-list>
   </ion-content>
