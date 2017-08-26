@@ -108,4 +108,30 @@ class ClientesController extends AppController {
 	        ));
 	    }
 	}
+
+	public function edit() {
+		$message = "0";
+		if ($this->request->is('post')) {
+			$this->Cliente->create();
+			$this->Cliente->id = $this->data['id'];
+			if ($this->data['senha'] == "") {
+				if($this->Cliente->saveField('nome', $this->data['nome']) &&
+					$this->Cliente->saveField('email', $this->data['email']) &&
+					$this->Cliente->saveField('telefone1', $this->data['telefone1']) &&
+					$this->Cliente->saveField('telefone2', $this->data['telefone2'])) {
+					$message = "1";
+				}
+			} else {
+				$this->request->data['senha'] = md5($this->data['senha']);
+				if($this->Cliente->save($this->request->data)){
+					$message = "1";
+				}
+			}
+
+	        $this->set(array(
+	        	'message' => $message,
+	            '_serialize' => array('message')
+	        ));
+	    }
+	}
 }

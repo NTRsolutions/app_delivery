@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import { Cliente } from '../../models/cliente';
 import { ClienteEndereco } from '../../models/cliente_endereco';
+import { Endereco } from '../../models/endereco';
 import { Link } from '../../models/link';
 
 import { EnderecoPage } from '../endereco/endereco';
@@ -25,7 +26,9 @@ export class MeuPerfilPage {
 
 	id: any;
 	cliente: Cliente;
-	cliente_ends: ClienteEndereco;
+	cliente_ends: ClienteEndereco[];
+	ends: Endereco[];
+	enderecos_id: Array<number>;
 	link: Link;
 	edit_block: boolean = true;
 	nome: string;
@@ -37,6 +40,9 @@ export class MeuPerfilPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
   	this.link = new Link();
+  	this.cliente_ends = new Array();
+  	this.enderecos_id = new Array();
+  	this.ends = new Array();
 
   	this.id = navParams.get("id");
   }
@@ -51,8 +57,9 @@ export class MeuPerfilPage {
       .subscribe(data => {               
         if (typeof data.message == "object") {
           this.cliente = data.message['0']; 
-          this.cliente_ends = this.cliente['ClienteEndereco'];
-          console.log(this.cliente_ends);
+          this.setEnderecos(this.cliente['ClienteEndereco']);
+          this.getEnderecos();
+
           this.setInputs();
         } else {
           let toast = this.toastCtrl.create({
@@ -80,7 +87,43 @@ export class MeuPerfilPage {
   salvar() {
   	if (this.validaCampos()) {
 	  	if (this.senha == "") { /* salva sem senha */
-	  		
+	  		this.http.post(this.link.api_url + 'clientes/edit', 
+	  											{'id': this.id,
+	  											 'nome': this.nome, 
+	  											 'email': this.email,
+	  											 'telefone1': this.telefone1,
+	  											 'telefone2': this.telefone2,
+	  											 'senha': ""
+	  											})
+		      .map(res => res.json())
+		      .subscribe(data => {
+		      	if (data.message == "1") { 
+		      		let toast = this.toastCtrl.create({
+			          message: "Dados salvos com sucesso!",
+			          duration: 3000,
+			          position: 'top'
+			        });
+			        toast.present()
+			        this.edit_block = true;
+			        this.senha = "";
+  						this.nova_senha = "";
+		      	} else {
+		      		let toast = this.toastCtrl.create({
+			          message: "Erro ao salvar, por favor tente novamente",
+			          duration: 3000,
+			          position: 'top'
+			        });
+			        toast.present()
+		      	}
+		    	},
+		      err => {
+		        let toast = this.toastCtrl.create({
+		          message: "Erro, por favor tente novamente",
+		          duration: 3000,
+		          position: 'top'
+		        });
+		        toast.present()
+		      });
 	  	} else {
 	  		this.validaSenha();
 	  	} 
@@ -112,8 +155,8 @@ export class MeuPerfilPage {
   	this.navCtrl.push(EnderecoPage, {cliente: this.cliente, novo_end: true});
   }
 
-  editEndereco() {
-  	this.navCtrl.push(EnderecoPage, {cliente: this.cliente, edit_end: true});
+  editEndereco(end: Endereco) {
+  	this.navCtrl.push(EnderecoPage, {cliente: this.cliente, end: end, edit_end: true});
   }
 
   validaCampos() {
@@ -136,7 +179,43 @@ export class MeuPerfilPage {
       .map(res => res.json())
       .subscribe(data => {
       	if (data.message == "1") { /* salva com senha */
-      		
+      		this.http.post(this.link.api_url + 'clientes/edit', 
+	  											{'id': this.id,
+	  											 'nome': this.nome, 
+	  											 'email': this.email,
+	  											 'telefone1': this.telefone1,
+	  											 'telefone2': this.telefone2,
+	  											 'senha': this.nova_senha
+	  											})
+		      .map(res => res.json())
+		      .subscribe(data => {
+		      	if (data.message == "1") {
+		      		let toast = this.toastCtrl.create({
+			          message: "Dados salvos com sucesso!",
+			          duration: 3000,
+			          position: 'top'
+			        });
+			        toast.present()
+			        this.edit_block = true;
+			        this.senha = "";
+  						this.nova_senha = "";	        
+		      	} else {
+		      		let toast = this.toastCtrl.create({
+			          message: "Erro ao salvar, por favor tente novamente",
+			          duration: 3000,
+			          position: 'top'
+			        });
+			        toast.present()
+		      	}
+		    	},
+		      err => {
+		        let toast = this.toastCtrl.create({
+		          message: "Erro, por favor tente novamente",
+		          duration: 3000,
+		          position: 'top'
+		        });
+		        toast.present()
+		      });
       	} else {
       		let toast = this.toastCtrl.create({
 	          message: "Erro, senha inserida não bate com senha atual",
@@ -157,7 +236,41 @@ export class MeuPerfilPage {
   	}
   }
 
-  getEnderecos() {
+  setEnderecos(ends: any[]) {
+  	for (var j = 0; j < ends.length; j++) {
+      let ce = new ClienteEndereco(
+          ends[j]['cliente_id'],
+          ends[j]['endereco_id']);
+      this.cliente_ends.push(ce);
+    }
+  }
 
+  getEnderecos() {
+  	for (var j = 0; j < this.cliente_ends.length; j++) {
+  		this.enderecos_id.push(this.cliente_ends[j].endereco_id);
+  	}
+
+		this.http.post(this.link.api_url + 'enderecos/get', {'ids': this.enderecos_id})
+    .map(res => res.json())
+    .subscribe(data => { 
+    	console.log(data.message);
+    	for (var j = 0; j < data.message.length; j++) {
+				let e = new Endereco(
+					data.message[j]['Endereco']['id'],
+					data.message[j]['Endereco']['numero'],
+					data.message[j]['Endereco']['rua'],
+					data.message[j]['Endereco']['bairro'],
+					data.message[j]['Cidade']['nome'],
+					data.message[j]['Cidade']['estado_id'],
+					data.message[j]['Endereco']['complemento'],
+					data.message[j]['Endereco']['cep'],
+					data.message[j]['Endereco']['lat'],
+					data.message[j]['Endereco']['lng'],
+					data.message[j]['Endereco']['ativo'],
+				);
+				this.ends.push(e);
+			}
+			console.log(this.ends);
+  	});  	
   }
 }

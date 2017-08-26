@@ -56,10 +56,10 @@
     <button ion-button color="default" block (click)="addEndereco()">Novo Endereço</button>
   </div>
   <ion-list>
-	  <ion-item *ngFor="let e of enderecos" (click)="editEndereco(e)">
-	    <h2>{{e['nome']}}</h2>
-	    <p item-right>{{e['preco']}}</p>
-	    <p>{{e['descricao']}}</p>
+	  <ion-item *ngFor="let e of ends" (click)="editEndereco(e)">
+	    <h2>{{e['cidade']}}</h2>	    
+	    <p>{{e['rua']}} {{e['numero']}}</p>
+	    <p>{{e['bairro']}} - {{e['cep']}}</p>
 	  </ion-item>
 	</ion-list>
 </ion-content>

@@ -18,31 +18,6 @@ class EnderecosController extends AppController {
 	public $components = array('Paginator', 'Flash', 'Session');
 
 /**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Endereco->recursive = 0;
-		$this->set('enderecos', $this->Paginator->paginate());
-	}
-
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->Endereco->exists($id)) {
-			throw new NotFoundException(__('Invalid endereco'));
-		}
-		$options = array('conditions' => array('Endereco.' . $this->Endereco->primaryKey => $id));
-		$this->set('endereco', $this->Endereco->find('first', $options));
-	}
-
-/**
  * add method
  *
  * @return void

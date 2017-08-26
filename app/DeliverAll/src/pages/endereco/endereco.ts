@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Cliente } from '../../models/cliente';
+import { Endereco } from '../../models/endereco';
 import { Link } from '../../models/link';
 
 import { HomePage } from '../home/home';
@@ -25,6 +26,7 @@ export class EnderecoPage {
 
 	public link: Link;
 	cliente: Cliente;
+  end: Endereco;
   mask: any = "";
   cep_informado: boolean = false;
   rodou_geolocation: boolean = false;
@@ -48,6 +50,7 @@ export class EnderecoPage {
   	this.cliente = navParams.get("cliente");
     this.novo_end = navParams.get("novo_end");
     this.edit_end = navParams.get("edit_end");
+    this.end = navParams.get("end");
 
   	this.mask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
   }
@@ -83,7 +86,7 @@ export class EnderecoPage {
   	} else if (this.cliente['ClienteEndereco'].length != 0 && this.novo_end == false) {
       this.goToHome(this.cliente);
     } else if (this.edit_end == true) { /* para editar endereço */
-      
+      console.log(this.end);
     }
   }
 
