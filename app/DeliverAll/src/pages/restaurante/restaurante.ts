@@ -10,6 +10,8 @@ import { Produto } from '../../models/produto';
 import { RestauranteEndereco } from '../../models/restaurante_endereco';
 import { Link } from '../../models/link';
 
+import { AddProdutoCarrinhoPage } from '../add-produto-carrinho/add-produto-carrinho';
+
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -32,10 +34,6 @@ export class RestaurantePage {
   produtos: Produto[];
   foto: boolean;
 	
-  /* Variáveis de filtro */
-  raio: number = 8;
-  /* ------------------- */
-
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
     this.link = new Link();
     this.produtos = new Array();
@@ -47,7 +45,7 @@ export class RestaurantePage {
     this.produtos = this.restaurante.produtos;
   }
 
-  goToCarrinho() {
-
+  addToCarrinho(p: Produto) {
+    this.navCtrl.push(AddProdutoCarrinhoPage, {'produto': p})
   }
 }

@@ -1,6 +1,7 @@
 export class PedidoProduto {
   qtd: number;
   produto_id: number;
+  produto: any;
   pedido_id: number;
 
   constructor(qtd: number, produto_id: number, pedido_id: number) {

@@ -10,6 +10,8 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { PedidosPage } from '../pages/pedidos/pedidos';
+import { AddProdutoCarrinhoPage } from '../pages/add-produto-carrinho/add-produto-carrinho';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { EnderecoPage } from '../pages/endereco/endereco';
@@ -28,7 +30,9 @@ import { LogineventProvider } from '../providers/loginevent/loginevent';
     CadastroPage,
     EnderecoPage,
     RestaurantePage,
-    MeuPerfilPage
+    MeuPerfilPage,
+    PedidosPage,
+    AddProdutoCarrinhoPage
   ],
   imports: [
     HttpModule,
@@ -44,7 +48,9 @@ import { LogineventProvider } from '../providers/loginevent/loginevent';
     CadastroPage,
     EnderecoPage,
     RestaurantePage,
-    MeuPerfilPage
+    MeuPerfilPage,
+    PedidosPage,
+    AddProdutoCarrinhoPage
   ],
   providers: [
     StatusBar,

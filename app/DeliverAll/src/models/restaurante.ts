@@ -21,6 +21,7 @@ export class Restaurante {
   pagamentos: any[];
   produtos: any[];
   restaurante_enderecos: any[];
+  distancia: any;
 
   /* criar construtor */
   constructor(id: number, nome: string, cnpj: string, email: string, descricao: string, foto: string, telefone1: string, telefone2: string, tempo_mercado: string, gerente_id: number, franqueado_id: number, culinarias: any[], pagamentos: any[], produtos: any[], restaurante_enderecos: any[]) {

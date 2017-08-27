@@ -46,12 +46,12 @@
 
 	<ion-item *ngIf="cep_informado">
   	<ion-label floating>Cidade *</ion-label>
-  	<ion-input type="text" [(ngModel)]="cidade"></ion-input>
+  	<ion-input type="text" disabled="true" [(ngModel)]="cidade"></ion-input>
 	</ion-item>
 
 	<ion-item *ngIf="cep_informado">
   	<ion-label floating>Estado *</ion-label>
-    <ion-input type="text"  [(ngModel)]="estado"></ion-input>
+    <ion-input type="text" disabled="true" [(ngModel)]="estado"></ion-input>
   </ion-item>
 
 	<div padding *ngIf="!cep_informado">

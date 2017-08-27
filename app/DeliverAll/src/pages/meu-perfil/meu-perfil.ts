@@ -72,7 +72,7 @@ export class MeuPerfilPage {
     	},
       err => {
         let toast = this.toastCtrl.create({
-          message: "Erro, por favor tente novamente",
+          message: "Erro ao recuperar dados do usuário, por favor tente novamente",
           duration: 3000,
           position: 'top'
         });
@@ -118,7 +118,7 @@ export class MeuPerfilPage {
 		    	},
 		      err => {
 		        let toast = this.toastCtrl.create({
-		          message: "Erro, por favor tente novamente",
+		          message: "Erro ao salvar, por favor tente novamente",
 		          duration: 3000,
 		          position: 'top'
 		        });
@@ -149,10 +149,6 @@ export class MeuPerfilPage {
   	this.telefone2 = this.cliente['Cliente']['telefone2'];
   	this.senha = "";
   	this.nova_senha = "";
-  }
-
-  addEndereco() {
-  	this.navCtrl.push(EnderecoPage, {cliente: this.cliente, novo_end: true});
   }
 
   editEndereco(end: Endereco) {
@@ -210,7 +206,7 @@ export class MeuPerfilPage {
 		    	},
 		      err => {
 		        let toast = this.toastCtrl.create({
-		          message: "Erro, por favor tente novamente",
+		          message: "Erro ao salvar, por favor tente novamente",
 		          duration: 3000,
 		          position: 'top'
 		        });
@@ -227,7 +223,7 @@ export class MeuPerfilPage {
     	},
       err => {
         let toast = this.toastCtrl.create({
-          message: "Erro, por favor tente novamente",
+          message: "Erro ao validar senha, por favor tente novamente",
           duration: 3000,
           position: 'top'
         });
@@ -252,8 +248,7 @@ export class MeuPerfilPage {
 
 		this.http.post(this.link.api_url + 'enderecos/get', {'ids': this.enderecos_id})
     .map(res => res.json())
-    .subscribe(data => { 
-    	console.log(data.message);
+    .subscribe(data => {
     	for (var j = 0; j < data.message.length; j++) {
 				let e = new Endereco(
 					data.message[j]['Endereco']['id'],
@@ -265,12 +260,10 @@ export class MeuPerfilPage {
 					data.message[j]['Endereco']['complemento'],
 					data.message[j]['Endereco']['cep'],
 					data.message[j]['Endereco']['lat'],
-					data.message[j]['Endereco']['lng'],
-					data.message[j]['Endereco']['ativo'],
+					data.message[j]['Endereco']['lng']
 				);
 				this.ends.push(e);
 			}
-			console.log(this.ends);
   	});  	
   }
 }

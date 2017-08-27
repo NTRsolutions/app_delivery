@@ -17,12 +17,12 @@ class ProdutosController extends AppController {
  */
 	public $components = array('Paginator', 'Flash', 'Session');
 
-	public function get($id = null) {
-		if ($id != null) {
-			$produtos = $this->Produto->findById($id);
+	public function get() {
+		if ($this-$request->is('post')) {
+			$produto = $this->Produto->findById($this->data['id']);
 			
 			$this->set(array(
-	            'message' => $produtos,
+	            'message' => $produto,
 	            '_serialize' => array('message')
 	        ));
 		}

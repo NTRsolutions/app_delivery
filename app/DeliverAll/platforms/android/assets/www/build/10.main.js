@@ -1,14 +1,14 @@
 webpackJsonp([10],{
 
-/***/ 283:
+/***/ 286:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cadastro__ = __webpack_require__(106);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CadastroModule", function() { return CadastroModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_produto_carrinho__ = __webpack_require__(106);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddProdutoCarrinhoPageModule", function() { return AddProdutoCarrinhoPageModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,26 +18,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CadastroModule = (function () {
-    function CadastroModule() {
+var AddProdutoCarrinhoPageModule = (function () {
+    function AddProdutoCarrinhoPageModule() {
     }
-    return CadastroModule;
+    return AddProdutoCarrinhoPageModule;
 }());
-CadastroModule = __decorate([
+AddProdutoCarrinhoPageModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__cadastro__["a" /* CadastroPage */],
+            __WEBPACK_IMPORTED_MODULE_2__add_produto_carrinho__["a" /* AddProdutoCarrinhoPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__cadastro__["a" /* CadastroPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_produto_carrinho__["a" /* AddProdutoCarrinhoPage */]),
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__cadastro__["a" /* CadastroPage */]
+            __WEBPACK_IMPORTED_MODULE_2__add_produto_carrinho__["a" /* AddProdutoCarrinhoPage */]
         ]
     })
-], CadastroModule);
+], AddProdutoCarrinhoPageModule);
 
-//# sourceMappingURL=cadastro.module.js.map
+//# sourceMappingURL=add-produto-carrinho.module.js.map
 
 /***/ })
 

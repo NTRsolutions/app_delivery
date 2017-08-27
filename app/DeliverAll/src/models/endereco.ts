@@ -9,9 +9,8 @@ export class Endereco {
   cep: string;
   lat: number;
   lng: number;
-  ativo: boolean;
 
-  constructor(id: number, numero: number, rua: string, bairro: string, cidade: string, estado: string, complemento: string, cep: string, lat: number, lng: number, ativo: boolean) {
+  constructor(id: number, numero: number, rua: string, bairro: string, cidade: string, estado: string, complemento: string, cep: string, lat: number, lng: number) {
   	this.id = id;
     this.numero = numero;
     this.rua = rua;
@@ -22,6 +21,5 @@ export class Endereco {
     this.cep = cep;
     this.lat = lat;
     this.lng = lng;
-    this.ativo = ativo;
   }
 }

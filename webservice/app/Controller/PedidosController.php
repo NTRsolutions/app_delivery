@@ -17,21 +17,14 @@ class PedidosController extends AppController {
  */
 	public $components = array('Paginator', 'Flash', 'Session');
 
-	public function get($cliente_id = null) {
-		if ($cliente_id != null) {
+	public function get() {
+		if ($this-$request->is('post')) {
 			$options = array(
-				'contain' => array(
-					'Endereco',
-					'Cliente',
-					'Pagamento',
-					'PedidoProduto' => array(
-						'Produto'
-					)
-				),
 				'conditions' => array(
-					'Pedido.cliente_id' => $cliente_id
+					'Pedido.cliente_id' => $this->data['cliente_id'];
 				)
 			);
+			
 			$pedidos = $this->Pedido->find('all', $options);
 
 			$this->set(array(

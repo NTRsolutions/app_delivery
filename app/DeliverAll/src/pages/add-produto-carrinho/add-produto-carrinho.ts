@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Cliente } from '../../models/cliente';
+import { Endereco } from '../../models/endereco';
+import { Distancia } from '../../models/distancia';
+import { Restaurante } from '../../models/restaurante';
+import { Culinaria } from '../../models/culinaria';
+import { Pagamento } from '../../models/pagamento';
+import { Produto } from '../../models/produto';
+
 /**
  * Generated class for the AddProdutoCarrinhoPage page.
  *
@@ -14,11 +22,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddProdutoCarrinhoPage {
 
+	produto: Produto;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  	
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddProdutoCarrinhoPage');
+    
   }
 
 }

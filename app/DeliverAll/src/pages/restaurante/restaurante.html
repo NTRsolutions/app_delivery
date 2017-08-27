@@ -10,7 +10,7 @@
 
 <ion-content padding>
 	<ion-list>
-	  <ion-item *ngFor="let p of produtos" (click)="goToCarrinho(p)">
+	  <ion-item *ngFor="let p of produtos" (click)="addToCarrinho(p)">
 	    <ion-avatar item-start>
 	      <img *ngIf="p['foto']" src="{{p['foto']}}">
 	      <img *ngIf="!p['foto']" src="http://deliverall-com-br.umbler.net/site/img/padrao.png">

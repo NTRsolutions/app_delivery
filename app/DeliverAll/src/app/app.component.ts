@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AppPreferences } from '@ionic-native/app-preferences';
 
 import { HomePage } from '../pages/home/home';
+import { PedidosPage } from '../pages/pedidos/pedidos';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { EnderecoPage } from '../pages/endereco/endereco';
@@ -113,8 +114,11 @@ export class MyApp {
   }
 
   goToHome() {
-    console.log(this.cliente_parametro)
     this.app.getActiveNav().setRoot(HomePage, {cliente: this.cliente_parametro});
+  }
+
+  pedidos() {
+    this.app.getActiveNav().setRoot(PedidosPage, {id: this.id});
   }
 
   getCliente() {

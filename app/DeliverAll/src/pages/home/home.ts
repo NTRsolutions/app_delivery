@@ -39,7 +39,7 @@ export class HomePage {
   rests_carregados: boolean = false;
 
   /* Variáveis de filtro */
-  raio: number = 8;
+  raio: number = 15;
   /* ------------------- */
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
@@ -66,12 +66,7 @@ export class HomePage {
       .subscribe(
         data => {
           this.enderecos = data.message;
-          if (this.enderecos.length == 1) {
-            this.getRestaurantes(this.enderecos[0]['Endereco']);
-          } else {
-            let index = this.getEnderecoAtivo(this.enderecos)
-            this.getRestaurantes(this.enderecos[index]['Endereco']);
-          }
+          this.getRestaurantes(this.enderecos[0]['Endereco']);
         },
         err => {
           let toast = this.toastCtrl.create({
@@ -117,7 +112,7 @@ export class HomePage {
           this.restaurantes_aux = this.restaurantes;
 
           this.calcDistancias(end);
-          this.filterRestaurantes();
+          //this.filterRestaurantes();
 
           //console.log(data.message);
           //console.log(this.restaurantes_aux);
@@ -136,15 +131,6 @@ export class HomePage {
       );
   }
 
-  getEnderecoAtivo(ends: Endereco[]) {
-    for (var i = 0; i < ends.length; i++) {
-      if(ends[i]['Endereco']['ativo'] == true) {
-        return i;
-      }
-    }
-    return 0;
-  }
-
   calcDistancias(end: Endereco) {
     for (var i = 0; i < this.restaurantes_aux.length; i++) {
       let r = this.restaurantes_aux[i];
@@ -155,6 +141,7 @@ export class HomePage {
         let e = ends[j]['endereco'];
         d.rest_id = r['id'];      
         d.distancia = this.getDistancia(end['lat'], end['lng'], e['lat'], e['lng']);
+        this.restaurantes_aux[i].distancia = d.distancia.toFixed(1);
         this.distancias.push(d);
       }
     }

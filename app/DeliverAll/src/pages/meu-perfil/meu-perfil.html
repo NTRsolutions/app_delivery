@@ -43,7 +43,7 @@
   </div>
 
   <div padding *ngIf="!edit_block">
-    <button ion-button color="secondary" block (click)="salvar()">Salvar</button>
+    <button ion-button color="secondary" block (click)="salvar()">Salvar Dados</button>
   </div>
 
   <div padding *ngIf="!edit_block">
@@ -51,10 +51,7 @@
   </div>
 
   <hr>
-  <h4>Meus Endereços</h4>
-  <div padding>
-    <button ion-button color="default" block (click)="addEndereco()">Novo Endereço</button>
-  </div>
+  <h4>Meu Endereço</h4>
   <ion-list>
 	  <ion-item *ngFor="let e of ends" (click)="editEndereco(e)">
 	    <h2>{{e['cidade']}}</h2>	    

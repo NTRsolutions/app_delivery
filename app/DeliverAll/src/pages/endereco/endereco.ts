@@ -30,7 +30,6 @@ export class EnderecoPage {
   mask: any = "";
   cep_informado: boolean = false;
   rodou_geolocation: boolean = false;
-  novo_end: boolean = false;
   edit_end: boolean = false;
   
   cep: string;
@@ -48,7 +47,6 @@ export class EnderecoPage {
   	this.link = new Link();
 
   	this.cliente = navParams.get("cliente");
-    this.novo_end = navParams.get("novo_end");
     this.edit_end = navParams.get("edit_end");
     this.end = navParams.get("end");
 
@@ -57,6 +55,8 @@ export class EnderecoPage {
 
   ionViewDidLoad() {
     if(typeof this.cliente == 'string'){
+      console.log("id: " + this.cliente);
+
   		this.http.post(this.link.api_url + 'clientes/get', {'id': this.cliente})
       .map(res => res.json())
       .subscribe(data => {       
@@ -77,15 +77,16 @@ export class EnderecoPage {
     	},
       err => {
         let toast = this.toastCtrl.create({
-          message: "Erro, por favor tente novamente",
+          message: "Erro ao recuperar dados do usuário, por favor tente novamente",
           duration: 3000,
           position: 'top'
         });
         toast.present()
       });
-  	} else if (this.cliente['ClienteEndereco'].length != 0 && this.novo_end == false) {
+  	} else if (this.cliente['ClienteEndereco'].length != 0 && this.edit_end == false) {
       this.goToHome(this.cliente);
-    } else if (this.edit_end == true) { /* para editar endereço */
+    } else {
+      console.log(this.cliente);
       console.log(this.end);
     }
   }
@@ -144,7 +145,7 @@ export class EnderecoPage {
       }, 
       (err) => {
         let toast = this.toastCtrl.create({
-          message: "Erro, por favor tente novamente",
+          message: "Erro ao recuperar localização, por favor tente novamente",
           duration: 3000,
           position: 'top'
         });
@@ -164,7 +165,7 @@ export class EnderecoPage {
     },
     (err) => {
       let toast = this.toastCtrl.create({
-        message: "Erro, por favor tente novamente",
+        message: "Erro ao converter latitude e longitude, por favor tente novamente",
         duration: 3000,
         position: 'top'
       });
@@ -181,7 +182,7 @@ export class EnderecoPage {
     },
     (err) => {
       let toast = this.toastCtrl.create({
-        message: "Erro, por favor tente novamente",
+        message: "Erro ao converter endereço, por favor tente novamente",
         duration: 3000,
         position: 'top'
       });
@@ -230,25 +231,63 @@ export class EnderecoPage {
         let address = this.rua + ' ' + this.numero + ' ' + this.bairro + ' ' + this.cidade + ' ' + this.estado;
         this.getLatLong(address);
       }
-      this.http.post(this.link.api_url + 'enderecos/add', 
-                                    {'Endereco': 
-                                      {'rua': this.rua, 
-                                       'cep': this.cep, 
-                                       'numero': this.numero, 
-                                       'complemento': this.complemento, 
-                                       'bairro': this.bairro, 
-                                       'cidade': this.cidade, 
-                                       'estado': this.estado,
-                                       'lat': this.lat,
-                                       'lng': this.lng,
-                                       'ativo': 1,
-                                       'cliente_id': this.cliente['Cliente']['id']
-                                      }
-                                    })
-      .map(res => res.json())
-      .subscribe(data => {
-        this.goToHome(this.cliente);
-      });
+
+      if (this.edit_end) {
+        this.http.post(this.link.api_url + 'enderecos/edit', 
+                                      {'Endereco': 
+                                        {'id': this.end.id,
+                                         'rua': this.rua, 
+                                         'cep': this.cep, 
+                                         'numero': this.numero, 
+                                         'complemento': this.complemento, 
+                                         'bairro': this.bairro, 
+                                         'cidade': this.cidade, 
+                                         'estado': this.estado,
+                                         'lat': this.lat,
+                                         'lng': this.lng,
+                                         'cliente_id': this.cliente['Cliente']['id']
+                                        }
+                                      })
+        
+        .subscribe(data => {
+          this.goToHome(this.cliente);
+        }, 
+        err =>{
+          let toast = this.toastCtrl.create({
+            message: "Erro ao salvar endereço, por favor tente novamente",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present()
+        });
+      } else {
+        this.http.post(this.link.api_url + 'enderecos/add', 
+                                      {'Endereco': 
+                                        {'rua': this.rua, 
+                                         'cep': this.cep, 
+                                         'numero': this.numero, 
+                                         'complemento': this.complemento, 
+                                         'bairro': this.bairro, 
+                                         'cidade': this.cidade, 
+                                         'estado': this.estado,
+                                         'lat': this.lat,
+                                         'lng': this.lng,
+                                         'cliente_id': this.cliente['Cliente']['id']
+                                        }
+                                      })
+        .map(res => res.json())
+        .subscribe(data => {
+          this.goToHome(this.cliente);
+        }, 
+        err =>{
+          let toast = this.toastCtrl.create({
+            message: "Erro ao inserir endereço, por favor tente novamente",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present()
+        });
+      }
     } else {
       let toast = this.toastCtrl.create({
         message: "Por favor, preencha o seu endereço",

@@ -53,4 +53,15 @@ class RestaurantesController extends AppController {
             '_serialize' => array('message')
         ));
 	}
+
+	public function get_by_id() {
+		if ($this-$request->is('post')) {
+			$restaurantes = $this->Restaurante->findById($this->data['id']);
+
+			$this->set(array(
+	            'message' => $restaurantes,
+	            '_serialize' => array('message')
+	        ));
+		}
+	}
 }

@@ -7,7 +7,9 @@ export class Pedido {
   cliente_id: number;
   endereco_id: number;
   restaurante_id: number;
+  restaurante: string;
   pagamento_id: number;
+  pedido_produto: any[];
 
   constructor(id: number, total: number, status: number, data: Date, troco: number, cliente_id: number, endereco_id: number, restaurante_id: number, pagamento_id: number) {
   	this.id = id;
