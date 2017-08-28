@@ -17,10 +17,14 @@ import { CadastroPage } from '../pages/cadastro/cadastro';
 import { EnderecoPage } from '../pages/endereco/endereco';
 import { RestaurantePage } from '../pages/restaurante/restaurante';
 import { MeuPerfilPage } from '../pages/meu-perfil/meu-perfil';
+import { CarrinhoPage } from '../pages/carrinho/carrinho';
+import { SenhaPage } from '../pages/senha/senha';
+import { TipoPagamentoPage } from '../pages/tipo-pagamento/tipo-pagamento';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LogineventProvider } from '../providers/loginevent/loginevent';
+import { CarrinhoProvider } from '../providers/carrinho/carrinho';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,10 @@ import { LogineventProvider } from '../providers/loginevent/loginevent';
     RestaurantePage,
     MeuPerfilPage,
     PedidosPage,
-    AddProdutoCarrinhoPage
+    AddProdutoCarrinhoPage,
+    CarrinhoPage,
+    TipoPagamentoPage,
+    SenhaPage
   ],
   imports: [
     HttpModule,
@@ -50,7 +57,10 @@ import { LogineventProvider } from '../providers/loginevent/loginevent';
     RestaurantePage,
     MeuPerfilPage,
     PedidosPage,
-    AddProdutoCarrinhoPage
+    AddProdutoCarrinhoPage,
+    CarrinhoPage,
+    TipoPagamentoPage,
+    SenhaPage
   ],
   providers: [
     StatusBar,
@@ -60,7 +70,7 @@ import { LogineventProvider } from '../providers/loginevent/loginevent';
     NativeGeocoder,  
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LogineventProvider,
-    LogineventProvider
+    CarrinhoProvider
   ]
 })
 export class AppModule {}

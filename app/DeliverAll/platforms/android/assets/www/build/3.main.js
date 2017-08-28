@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 294:
+/***/ 298:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__restaurante__ = __webpack_require__(111);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RestaurantePageModule", function() { return RestaurantePageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pedidos__ = __webpack_require__(112);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PedidosPageModule", function() { return PedidosPageModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,26 +18,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var RestaurantePageModule = (function () {
-    function RestaurantePageModule() {
+var PedidosPageModule = (function () {
+    function PedidosPageModule() {
     }
-    return RestaurantePageModule;
+    return PedidosPageModule;
 }());
-RestaurantePageModule = __decorate([
+PedidosPageModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__restaurante__["a" /* RestaurantePage */],
+            __WEBPACK_IMPORTED_MODULE_2__pedidos__["a" /* PedidosPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__restaurante__["a" /* RestaurantePage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__pedidos__["a" /* PedidosPage */]),
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__restaurante__["a" /* RestaurantePage */]
+            __WEBPACK_IMPORTED_MODULE_2__pedidos__["a" /* PedidosPage */]
         ]
     })
-], RestaurantePageModule);
+], PedidosPageModule);
 
-//# sourceMappingURL=restaurante.module.js.map
+//# sourceMappingURL=pedidos.module.js.map
 
 /***/ })
 

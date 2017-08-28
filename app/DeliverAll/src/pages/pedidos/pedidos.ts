@@ -27,18 +27,22 @@ export class PedidosPage {
 
 	public link: Link;
   cliente: Cliente;
-  restaurantes: Restaurante[];
+  restaurantes: string[];
   produtos: Produto[];
   pedido_produtos: PedidoProduto[];
   pedido_produtos_aux: Array<any>;
   pedidos: Pedido[];
+  pedidos_abertos: Pedido[];
+  pedidos_fechados: Pedido[];
   id: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
   	this.link = new Link();
     //this.produtos = new Array();    
-    //this.restaurantes = new Array();
+    this.restaurantes = new Array();
     this.pedidos = new Array();
+    this.pedidos_abertos = new Array();
+    this.pedidos_fechados = new Array();
     this.id = navParams.get("id");
   }
 
@@ -54,12 +58,11 @@ export class PedidosPage {
           this.cliente = data.message['0']; 
           
           this.setPedidos(this.cliente['Pedido']);
-          this.getRests();
-          this.getPedidoProdutos();
-          this.setPedidoProdutos(this.pedido_produtos);
-          this.getProdutos();
+          //console.log(this.pedidos);
+          this.getRests();          
+          /*this.getProdutos();
           console.log(this.pedidos);
-					console.log(this.pedido_produtos);
+					console.log(this.pedido_produtos);*/
         } else {
           let toast = this.toastCtrl.create({
 		        message: "Ocorreu algum erro, tente novamente!",
@@ -83,36 +86,45 @@ export class PedidosPage {
   	this.pedido_produtos = new Array();
   	for (var j = 0; j < pp.length; j++) {
       let p = new PedidoProduto(
-          pp[j]['qtd'],
-          pp[j]['produto_id'],
-          pp[j]['pedido_id']);
-      //p.produto = this.getProduto(pp[j]['produto_id']);
+        pp[j]['PedidoProduto']['qtd'],
+        pp[j]['PedidoProduto']['produto_id'],
+        pp[j]['PedidoProduto']['pedido_id']);
+      p.produto = pp[j]['Produto']['nome'];
+      p.preco = pp[j]['Produto']['preco'];
       this.pedido_produtos.push(p);
     }
   }
 
   getPedidoProdutos() {
-  	for (var i = 0; i < this.pedidos.length; i++) {
-	  	this.http.post(this.link.api_url + 'pedidoProdutos/get', {'id': this.pedidos[i].id})
-	      .map(res => res.json())
-	      .subscribe(data => {               
-	        let pp = data.message['0'];
-	        this.setPedidoProdutos(pp);
-	        this.pedidos[i].pedido_produto = this.pedido_produtos;
-	    	},
-	      err => {
-	        let toast = this.toastCtrl.create({
-	          message: "Erro ao recuperar produto, por favor tente novamente",
-	          duration: 3000,
-	          position: 'top'
-	        });
-	        toast.present()
-	      });  		
-  	}
+  	let ids = new Array();
+		for (var i = 0; i < this.pedidos.length; i++) {
+			ids.push(this.pedidos[i].id);
+		}
+
+  	this.http.post(this.link.api_url + 'pedidoProdutos/get', {'ids': ids})
+      .map(res => res.json())
+      .subscribe(data => {               
+        let pp = data.message;              
+        this.setPedidoProdutos(pp);
+        //console.log(this.pedido_produtos);
+        this.addPPToPedidos();
+        this.splitStatus();
+        //console.log(this.pedidos_abertos);
+        //console.log(this.pedidos_fechados);
+    	},
+      err => {
+        let toast = this.toastCtrl.create({
+          message: "Erro ao recuperar produtos, por favor tente novamente",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present()
+      });
   }
 
   setPedidos(pedidos: any[]) {
-  	for (var j = 0; j < pedidos.length; j++) {
+    for (var j = 0; j < pedidos.length; j++) {
+      let status = this.setStatus(pedidos[j]['status'])
       let p = new Pedido(
           pedidos[j]['id'],
           pedidos[j]['total'],
@@ -123,46 +135,74 @@ export class PedidosPage {
           pedidos[j]['endereco_id'],
           pedidos[j]['restaurante_id'],
           pedidos[j]['pagamento_id']);
-      //p.restaurante = this.getRest(pedidos[j]['restaurante_id']);
+      p.status_nome = status;
       this.pedidos.push(p);
+    }    
+  }
+
+  setStatus(id: any) {
+    switch (id) {
+      case "0":
+        return "Pendente"
+      case "1":
+        return "Em preparo"
+      case "2":
+        return "À caminho"
+      case "3":
+        return "Entregue"
+      default:
+        // code...
+        break;
     }
   }
 
-  getProdutos() {
-  	for (var i = 0; i < this.pedido_produtos.length; i++) {
-	  	this.http.post(this.link.api_url + 'produtos/get', {'id': this.pedido_produtos[i].produto_id})
-	      .map(res => res.json())
-	      .subscribe(data => {               
-	        let r = data.message['0'];
-	        this.pedido_produtos[i].produto = r['Produto']['nome'];
-	    	},
-	      err => {
-	        let toast = this.toastCtrl.create({
-	          message: "Erro ao recuperar produto, por favor tente novamente",
-	          duration: 3000,
-	          position: 'top'
-	        });
-	        toast.present()
-	      });  		
+  getRests() {
+		let ids = new Array();
+		for (var i = 0; i < this.pedidos.length; i++) {
+			ids.push(this.pedidos[i].restaurante_id);
+		}
+
+  	this.http.post(this.link.api_url + 'restaurantes/getById', {'ids': ids})
+      .map(res => res.json())
+      .subscribe(data => {
+        let r = data.message;
+        this.setRestsNames(r);
+        this.getPedidoProdutos();
+    	},
+      err => {
+        let toast = this.toastCtrl.create({
+          message: "Erro ao recuperar restaurantes, por favor tente novamente",
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present()
+      });
+  }
+
+  setRestsNames(r: any[]) {
+  	for (var i = 0; i < r.length; i++) {
+  		this.pedidos[i].restaurante = r[i]['Restaurante']['nome'];
   	}
   }
 
-  getRests() {
+  addPPToPedidos() {
   	for (var i = 0; i < this.pedidos.length; i++) {
-	  	this.http.post(this.link.api_url + 'restaurantes/getById', {'id': this.pedidos[i].restaurante_id})
-	      .map(res => res.json())
-	      .subscribe(data => {               
-	        let r = data.message['0'];
-	        this.pedidos[i].restaurante = r['Restaurante']['nome'];
-	    	},
-	      err => {
-	        let toast = this.toastCtrl.create({
-	          message: "Erro ao recuperar restaurante, por favor tente novamente",
-	          duration: 3000,
-	          position: 'top'
-	        });
-	        toast.present()
-	      });  		
+    	this.pedidos[i].pedido_produto = new Array<PedidoProduto>();
+    	for (var j = 0; j < this.pedido_produtos.length; j++) {    		
+	    	if (this.pedidos[i].id == this.pedido_produtos[j].pedido_id) {
+	    		this.pedidos[i].pedido_produto.push(this.pedido_produtos[j]);
+	    	}
+    	}
+    }
+  }
+
+  splitStatus() {
+  	for (var i = 0; i < this.pedidos.length; i++) {
+  		if (this.pedidos[i].status == 3) {
+  			this.pedidos_fechados.push(this.pedidos[i]);
+  		} else {
+  			this.pedidos_abertos.push(this.pedidos[i]);
+  		}
   	}
   }
 }

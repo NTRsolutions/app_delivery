@@ -18,7 +18,7 @@ class ProdutosController extends AppController {
 	public $components = array('Paginator', 'Flash', 'Session');
 
 	public function get() {
-		if ($this-$request->is('post')) {
+		if ($this->request->is('post')) {
 			$produto = $this->Produto->findById($this->data['id']);
 			
 			$this->set(array(

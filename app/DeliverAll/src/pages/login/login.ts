@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, Events } from 'io
 import { AppPreferences } from '@ionic-native/app-preferences';
 import { CadastroPage } from '../cadastro/cadastro';
 import { EnderecoPage } from '../endereco/endereco';
+import { SenhaPage } from '../senha/senha';
 
 import { Cliente } from '../../models/cliente';
 import { Link } from '../../models/link';
@@ -99,6 +100,10 @@ export class LoginPage {
     } else {
   	  this.navCtrl.setRoot(EnderecoPage, {cliente: this.cliente});
     }
+  }
+
+  recuperarSenha() {
+    this.navCtrl.push(SenhaPage);
   }
 
   toast(cod: Number) {

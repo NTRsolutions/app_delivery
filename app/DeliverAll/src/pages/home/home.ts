@@ -11,6 +11,9 @@ import { RestauranteEndereco } from '../../models/restaurante_endereco';
 import { Link } from '../../models/link';
 
 import { RestaurantePage } from '../restaurante/restaurante';
+import { CarrinhoPage } from '../carrinho/carrinho';
+
+import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -37,12 +40,13 @@ export class HomePage {
   restaurante_enderecos: RestauranteEndereco[];
 
   rests_carregados: boolean = false;
+  carrinho: boolean = false;
 
   /* Variáveis de filtro */
   raio: number = 15;
   /* ------------------- */
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController, public cProv: CarrinhoProvider) {
   	this.link = new Link();
 
   	this.cliente = navParams.get("cliente");
@@ -52,8 +56,8 @@ export class HomePage {
     this.restaurantes_aux = new Array();
   }
 
-  ionViewDidLoad() {  	
-    this.getEnderecos();    
+  ionViewDidLoad() {    
+    this.getEnderecos(); 
   }
 
   getEnderecos() {
@@ -119,6 +123,7 @@ export class HomePage {
           //console.log(JSON.stringify(this.restaurantes_aux,undefined,2));
           //console.log(this.distancias);
           this.rests_carregados = true;
+          this.getCarrinho();
         },
         err => {
           let toast = this.toastCtrl.create({
@@ -249,5 +254,17 @@ export class HomePage {
 
   goToRestaurante(rest: Restaurante){
     this.navCtrl.push(RestaurantePage, {restaurante: rest, cliente: this.cliente});    
+  }
+
+  getCarrinho() {
+    if (this.cProv.getCarrinho() != undefined) {
+      this.carrinho = true;
+    } else {
+      this.carrinho = false;
+    }
+  }
+
+  goToCarrinho() {
+    this.navCtrl.setRoot(CarrinhoPage, {cliente: this.cliente}); 
   }
 }

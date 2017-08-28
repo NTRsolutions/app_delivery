@@ -14,5 +14,25 @@
 
 
 <ion-content padding>
-	
+	<ion-item>
+		<h2>{{produto.nome}} - R$ {{produto.preco}}</h2>
+		<div [innerHtml]="produto.descricao"></div>
+	</ion-item>
+	<ion-list>
+		<ion-list-header class="header">
+      Ajustar Quantidade
+      <ion-badge item-end>{{qtd}}</ion-badge>
+    </ion-list-header>	    
+		<ion-item>
+	    <ion-range min="1" max="15" step="1" pin="true" snaps="true" [(ngModel)]="qtd" (ionChange)="change($event)">
+	      <ion-label range-left>1</ion-label>
+	      <ion-label range-right>15</ion-label>
+	    </ion-range>
+    </ion-item>
+  </ion-list><hr>
+  <h3 padding>Total: R$ {{total}}</h3>
+
+  <div padding>
+    <button ion-button color="secondary" block (click)="addToCarrinho()">Adicionar ao carrinho</button>
+  </div>
 </ion-content>

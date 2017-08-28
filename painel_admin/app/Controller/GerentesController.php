@@ -21,7 +21,8 @@ class GerentesController extends AppController {
         if ($this->action == 'meu_perfil' or
             ($this->params['controller'] == 'gerentes' and $this->action == 'home') or
             $this->action == 'altera_senha' or
-            $this->action == 'meu_restaurante') {
+            $this->action == 'meu_restaurante' or
+            $this->action == 'status') {
             $this->autenticar();
         }
 

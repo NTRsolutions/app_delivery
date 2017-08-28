@@ -9,6 +9,10 @@
 
 
 <ion-content padding>
+	<div padding *ngIf="carrinho">
+    <button ion-button color="secondary" block (click)="goToCarrinho()">Ir para carrinho</button>
+  </div>
+
 	<ion-list>
 	  <ion-item *ngFor="let p of produtos" (click)="addToCarrinho(p)">
 	    <ion-avatar item-start>
@@ -16,8 +20,8 @@
 	      <img *ngIf="!p['foto']" src="http://deliverall-com-br.umbler.net/site/img/padrao.png">
 	    </ion-avatar>
 	    <h2>{{p['nome']}}</h2>
+	    <div [innerHtml]="p['descricao']"></div>
 	    <p item-right>R$ {{p['preco']}}</p>
-	    <p>{{p['descricao']}}</p>
 	  </ion-item>
 	</ion-list>
 </ion-content>

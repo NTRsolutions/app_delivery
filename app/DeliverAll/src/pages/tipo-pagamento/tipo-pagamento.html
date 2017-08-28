@@ -7,12 +7,23 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>tipo_pagamento</ion-title>
+    <ion-title>Forma de pagamento</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+	<ion-list radio-group *ngIf="pags_carregados">
+	  <ion-item *ngFor="let p of pags">
+	    <ion-label>{{p.descricao}}</ion-label>
+    	<ion-radio value="{{p.id}}"></ion-radio>
+	  </ion-item>
+	</ion-list>
 
+	<h3 padding *ngIf="pags_carregados">Total: R$ {{carrinho.total}}</h3>
+
+  <div padding *ngIf="pags_carregados">
+    <button ion-button color="secondary" block (click)="goToPagamento()">Confirmar pedido</button>
+  </div>
 </ion-content>

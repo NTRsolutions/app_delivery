@@ -9,5 +9,50 @@
 
 
 <ion-content padding>
+	<h4>Pedidos abertos</h4>
+	<ion-list>
+	  <ion-item *ngFor="let p of pedidos_abertos">	    
+	    <h2>Local: {{p['restaurante']}}</h2><br>
+	    <h2>Status: {{p['status_nome']}}</h2><br>
+	    <p>Pedido: {{p['id']}} - {{p['data'] | date: 'dd/MM/yyyy'}}</p>
+	    <ion-grid>
+	    	<ion-row>
+			    <ion-col col-6><p>Produto</p></ion-col>
+			    <ion-col col-3><p>Preço</p></ion-col>
+			    <ion-col col-3><p>Qtd</p></ion-col>
+			  </ion-row>
+			  <ion-row *ngFor="let prod of p.pedido_produto">
+			    <ion-col col-6><p>{{prod.produto}}</p></ion-col>
+			    <ion-col col-3><p>R$ {{prod.preco}}</p></ion-col>
+			    <ion-col col-3><p>{{prod.qtd}}</p></ion-col>
+			  </ion-row>
+			</ion-grid>
+      <h2>Total: R$ {{p['total']}}</h2>
+	  </ion-item>
+	</ion-list>
 
+	<hr>
+
+	<h4>Pedidos fechados</h4>
+	<ion-list>
+	  <ion-item *ngFor="let p of pedidos_fechados">
+	    <h2>Local: {{p['restaurante']}}</h2><br>
+	    <h2>Status: {{p['status_nome']}}</h2><br>
+	    <p>Pedido: {{p['id']}} - {{p['data'] | date: 'dd/MM/yyyy'}}</p>
+	    <ion-grid>
+	    	<ion-row>
+			    <ion-col col-6><p>Produto</p></ion-col>
+			    <ion-col col-3><p>Preço</p></ion-col>
+			    <ion-col col-3><p>Qtd</p></ion-col>
+			  </ion-row>
+			  <ion-row *ngFor="let prod of p.pedido_produto">
+			    <ion-col col-6><p>{{prod.produto}}</p></ion-col>
+			    <ion-col col-3><p>R$ {{prod.preco}}</p></ion-col>
+			    <ion-col col-3><p>{{prod.qtd}}</p></ion-col>
+			  </ion-row>
+			</ion-grid>
+         
+      <h2>Total: R$ {{p['total']}}</h2>
+	  </ion-item>
+	</ion-list>
 </ion-content>

@@ -18,14 +18,19 @@ class PedidoProdutosController extends AppController {
 	public $components = array('Paginator', 'Flash', 'Session');
 
 	public function get() {
-		if ($this-$request->is('post')) {
-			$options = array(
-				'conditions' => array(
-					'Pedido.cliente_id' => $this->data['id'];
-				)
-			);
-			
-			$pedidos = $this->Pedido->find('all', $options);
+		if ($this->request->is('post')) {
+			$pedidos = array();
+			$ids = $this->data['ids'];
+
+			foreach ($ids as $id) {
+				$options = array(
+					'conditions' => array(
+						'PedidoProduto.pedido_id' => $id
+					)
+				);
+				$r = $this->PedidoProduto->find('first', $options);
+				array_push($pedidos, $r);
+			}
 
 			$this->set(array(
 	            'message' => $pedidos,

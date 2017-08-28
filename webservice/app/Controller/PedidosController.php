@@ -18,10 +18,10 @@ class PedidosController extends AppController {
 	public $components = array('Paginator', 'Flash', 'Session');
 
 	public function get() {
-		if ($this-$request->is('post')) {
+		if ($this->request->is('post')) {
 			$options = array(
 				'conditions' => array(
-					'Pedido.cliente_id' => $this->data['cliente_id'];
+					'Pedido.cliente_id' => $this->data['cliente_id']
 				)
 			);
 			

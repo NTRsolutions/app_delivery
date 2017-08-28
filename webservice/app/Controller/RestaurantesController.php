@@ -54,9 +54,20 @@ class RestaurantesController extends AppController {
         ));
 	}
 
-	public function get_by_id() {
-		if ($this-$request->is('post')) {
-			$restaurantes = $this->Restaurante->findById($this->data['id']);
+	public function getById() {
+		if ($this->request->is('post')) {
+			$restaurantes = array();
+			$ids = $this->data['ids'];
+
+			foreach ($ids as $id) {
+				$options = array(
+					'conditions' => array(
+						'Restaurante.' . $this->Restaurante->primaryKey => $id
+					)
+				);
+				$r = $this->Restaurante->find('first', $options);
+				array_push($restaurantes, $r);
+			}
 
 			$this->set(array(
 	            'message' => $restaurantes,

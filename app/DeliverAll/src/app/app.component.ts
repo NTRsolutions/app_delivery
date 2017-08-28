@@ -6,6 +6,7 @@ import { AppPreferences } from '@ionic-native/app-preferences';
 
 import { HomePage } from '../pages/home/home';
 import { PedidosPage } from '../pages/pedidos/pedidos';
+import { CarrinhoPage } from '../pages/carrinho/carrinho';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { EnderecoPage } from '../pages/endereco/endereco';
@@ -119,6 +120,10 @@ export class MyApp {
 
   pedidos() {
     this.app.getActiveNav().setRoot(PedidosPage, {id: this.id});
+  }
+
+  carrinho() {
+    this.app.getActiveNav().setRoot(CarrinhoPage, {cliente: this.cliente_parametro});
   }
 
   getCliente() {

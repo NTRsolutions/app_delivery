@@ -52,7 +52,7 @@
 										echo '<li>'. $this->Html->link('<span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;'.__('Alterar senha'), array('action' => 'altera_senha', $this->Form->value('Franqueado.id')), array('escape' => false)).'</li>';
 									}
 									?>
-								<li><?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;'.__('Excluir conta'), array('action' => 'delete', $this->Form->value('Franqueado.id')), array('escape' => false), __('Você realmente deseja excluir: %s?', $this->Form->value('Franqueado.nome'))); ?></li>
+								<li><?php //echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;'.__('Excluir conta'), array('action' => 'delete', $this->Form->value('Franqueado.id')), array('escape' => false), __('Você realmente deseja excluir: %s?', $this->Form->value('Franqueado.nome'))); ?></li>
 							</ul>
 						</div>
 					</div>

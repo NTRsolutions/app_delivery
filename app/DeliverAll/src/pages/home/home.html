@@ -9,6 +9,10 @@
 
 
 <ion-content padding>
+	<div padding *ngIf="carrinho">
+    <button ion-button color="secondary" block (click)="goToCarrinho()">Ir para carrinho</button>
+  </div>
+  
 	<ion-list *ngIf="rests_carregados">
 	  <ion-item *ngFor="let rest of restaurantes_aux" (click)="goToRestaurante(rest)">
 	    <ion-avatar item-start>

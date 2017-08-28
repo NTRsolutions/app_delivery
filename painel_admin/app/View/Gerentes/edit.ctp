@@ -42,7 +42,7 @@
 
 								} ?>
 
-								<li><?php echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;'.__('Excluir conta'), array('action' => 'delete', $this->Form->value('Gerente.id')), array('escape' => false), __('Você realmente deseja excluir: %s?', $this->Form->value('Gerente.nome'))); ?></li>
+								<li><?php //echo $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;'.__('Excluir conta'), array('action' => 'delete', $this->Form->value('Gerente.id')), array('escape' => false), __('Você realmente deseja excluir: %s?', $this->Form->value('Gerente.nome'))); ?></li>
 							</ul>
 						</div>
 				</div>
