@@ -59,23 +59,16 @@ export class EnderecoPage {
 
   		this.http.post(this.link.api_url + 'clientes/get', {'id': this.cliente})
       .map(res => res.json())
-      .subscribe(data => {       
-        if (typeof data.message == "object") {
-          this.cliente = data.message['0']; 
-          
-          if (this.cliente['ClienteEndereco'].length != 0) {
-          	this.goToHome(this.cliente);
-          }
-        } else {
-          let toast = this.toastCtrl.create({
-		        message: "Ocorreu algum erro, tente novamente!",
-		        duration: 3000,
-		        position: 'top'
-		      });
-		      toast.present();
+      .subscribe(data => {
+        console.log('pegou cliente');
+        this.cliente = data.message['0']; 
+        
+        if (this.cliente['ClienteEndereco'].length != 0) {
+        	this.goToHome(this.cliente);
         }
     	},
       err => {
+        console.log(err);
         let toast = this.toastCtrl.create({
           message: "Erro ao recuperar dados do usuário, por favor tente novamente",
           duration: 3000,

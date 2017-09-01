@@ -47,8 +47,8 @@ export class RestaurantePage {
 
   ionViewDidLoad() {
     this.produtos = this.restaurante.produtos;
+    this.cProv.existCarrinho();
     this.listenCarrinho();
-    this.getCarrinho();
   }
 
   addToCarrinho(p: Produto) {
@@ -77,14 +77,18 @@ export class RestaurantePage {
       });
       toast.present();
     });
-  }
 
-  getCarrinho() {
-    if (this.cProv.getCarrinho() != undefined) {
+    this.events.subscribe('carrinho:found', () => {
       this.carrinho = true;
-    } else {
+    });
+
+    this.events.subscribe('carrinho:not_found', () => {
       this.carrinho = false;
-    }
+    });
+
+    this.events.subscribe('carrinho:empty', () => {
+      this.carrinho = false;
+    });
   }
 
   goToCarrinho() {

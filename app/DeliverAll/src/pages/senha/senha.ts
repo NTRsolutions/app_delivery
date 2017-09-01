@@ -14,11 +14,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SenhaPage {
 
+	email: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  	
   }
 
   ionViewDidLoad() {
     
   }
 
+  recuperar() {
+
+  }
 }

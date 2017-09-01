@@ -10,16 +10,25 @@
 
 <ion-content padding>
 	<ion-list *ngIf="carrinho_cheio">
-	  <ion-item *ngFor="let p of carrinho['produtos']">
-	    <h2>{{p['nome']}}</h2>
-	    <p>R$ {{p['preco']}}</p>
-	    <button ion-button clear item-right color="danger" (click)="removeProduto(p)">
-      	<ion-icon name="trash"></ion-icon>
-      </button>
-	  </ion-item>
+		<ion-item-sliding *ngFor="let p of carrinho.produtos; let i = index">
+		  <ion-item>
+		    <h2>{{ p?.nome }}</h2>
+		    <p>Valor und: R$ {{ p?.preco }}</p>		    
+		    <p>Quantidade: {{ carrinho.qtd[i] }}</p>
+		    <p item-right>Subtotal: R$ {{ p?.preco * carrinho.qtd[i] }}</p>
+		  </ion-item>
+		  <ion-item-options side="right">
+		  	<button ion-button color="danger" (click)="revomeProduto(i)">
+		    	<ion-icon name="trash"></ion-icon>
+		    	Remover
+		    </button>    
+		  </ion-item-options>
+		</ion-item-sliding>
 	</ion-list>
 
-	<h3 padding *ngIf="carrinho_cheio">Total: R$ {{carrinho.total}}</h3>
+	<h3 padding *ngIf="carrinho_cheio">Total: R$ {{ carrinho?.total }}</h3>
+
+	<h4 padding *ngIf="!carrinho_cheio">Você ainda não possui itens no carrinho :/</h4>
 
   <div padding *ngIf="carrinho_cheio">
     <button ion-button color="secondary" block (click)="goToPagamento()">Selecionar forma de pagamento</button>

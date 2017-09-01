@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, Events } from 'ionic-angular';
 import { Cliente } from '../../models/cliente';
 import { Endereco } from '../../models/endereco';
 import { Distancia } from '../../models/distancia';
@@ -46,7 +46,7 @@ export class HomePage {
   raio: number = 15;
   /* ------------------- */
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController, public cProv: CarrinhoProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController, public cProv: CarrinhoProvider, public events: Events) {
   	this.link = new Link();
 
   	this.cliente = navParams.get("cliente");
@@ -57,7 +57,9 @@ export class HomePage {
   }
 
   ionViewDidLoad() {    
-    this.getEnderecos(); 
+    this.cProv.existCarrinho();
+    this.listenCarrinho();
+    this.getEnderecos();
   }
 
   getEnderecos() {
@@ -123,7 +125,6 @@ export class HomePage {
           //console.log(JSON.stringify(this.restaurantes_aux,undefined,2));
           //console.log(this.distancias);
           this.rests_carregados = true;
-          this.getCarrinho();
         },
         err => {
           let toast = this.toastCtrl.create({
@@ -256,15 +257,17 @@ export class HomePage {
     this.navCtrl.push(RestaurantePage, {restaurante: rest, cliente: this.cliente});    
   }
 
-  getCarrinho() {
-    if (this.cProv.getCarrinho() != undefined) {
-      this.carrinho = true;
-    } else {
-      this.carrinho = false;
-    }
-  }
-
   goToCarrinho() {
     this.navCtrl.setRoot(CarrinhoPage, {cliente: this.cliente}); 
+  }
+
+  listenCarrinho() {
+    this.events.subscribe('carrinho:found', () => {
+      this.carrinho = true;
+    });
+
+    this.events.subscribe('carrinho:not_found', () => {
+      this.carrinho = false;
+    });
   }
 }

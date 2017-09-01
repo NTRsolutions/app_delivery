@@ -44,6 +44,7 @@ export class LoginPage {
   ionViewDidLoad() {
     this.appPreferences.fetch('key').then((res) => { 
       if (res != '') {
+        console.log('res: ' + res);
         this.goToEndereco(res);
       }
     });

@@ -29,6 +29,7 @@ export class AddProdutoCarrinhoPage {
 	produto: Produto;
 	cliente: Cliente;
 	carrinho: Carrinho;
+  carrinho_cheio: boolean = false;
 	qtd: number = 1;
 	total: number;
 
@@ -39,6 +40,8 @@ export class AddProdutoCarrinhoPage {
 
   ionViewDidLoad() {
     this.total = this.qtd * this.produto.preco;
+    this.cProv.existCarrinho();
+    this.listenCarrinho();
   }
 
   change(event) {
@@ -46,10 +49,22 @@ export class AddProdutoCarrinhoPage {
     this.total = this.qtd * this.produto.preco;
   }
 
-  addToCarrinho() {
-  	if (this.cProv.getCarrinho() != undefined) {
+  listenCarrinho() {
+    this.events.subscribe('carrinho:found', () => {
+      this.carrinho_cheio = true;
+    });
+
+    this.events.subscribe('carrinho:not_found', () => {
+      this.carrinho_cheio = false;
+    });
+  }
+
+  addToCarrinho() {    
+  	if (this.carrinho_cheio) {
+      console.log('cheio');
   		this.cProv.add_produto(this.produto, this.qtd);	
   	} else {
+      console.log('vazio');
 	  	this.cProv.create(this.produto, this.qtd, this.cliente['Cliente']['id'], this.produto.restaurante_id);	  	
     }
   	this.navCtrl.pop();

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
 import { Cliente } from '../../models/cliente';
 import { Carrinho } from '../../models/carrinho';
@@ -16,6 +16,7 @@ import { TipoPagamentoPage } from '../tipo-pagamento/tipo-pagamento';
 import { Link } from '../../models/link';
 
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
+import { AppPreferences } from '@ionic-native/app-preferences';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -37,40 +38,45 @@ export class CarrinhoPage {
 	carrinho_cheio: boolean = false;
 	carrinho: Carrinho;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public cProv: CarrinhoProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public cProv: CarrinhoProvider, public events: Events, public appPrefs: AppPreferences) {
   	this.cliente = navParams.get("cliente");
   }
 
   ionViewDidLoad() {
     this.getCarrinho();
-    if (this.carrinho_cheio) {
-    	this.calcTotal();
-    }
-  }
 
-  removeProduto() {
-
+    this.listenCarrinho();
   }
 
   calcTotal() {
   	this.cProv.calc_total(this.carrinho);
   }
 
-  getCarrinho() {
-  	this.carrinho = this.cProv.getCarrinho();
-  	if (this.carrinho != undefined) {
-			this.carrinho_cheio = true;
-		} else {
-			this.carrinho_cheio = false;
-		}
+  listenCarrinho() { 
+    this.events.subscribe('carrinho:empty', () => {
+    	this.carrinho_cheio = false;
+    });
   }
 
-  revomeProduto(p: Produto) {
+  revomeProduto(index: any) {
   	console.log('ativou remover');
-  	this.cProv.remove_produto(p, this.carrinho);
+  	this.cProv.remove_produto(index, this.carrinho);
+  	this.calcTotal();
   }
 
   goToPagamento() {
   	this.navCtrl.push(TipoPagamentoPage, {carrinho: this.carrinho});
+  }
+
+  getCarrinho(): any {
+  	this.appPrefs.fetch('car', 'carrinho').then((res) => {
+      let c: Carrinho = JSON.parse(res);
+      this.carrinho = new Carrinho(c.restaurante_id, c.cliente_id);
+      this.carrinho.produtos = c.produtos;
+      this.carrinho.qtd = c.qtd;      
+
+    	this.calcTotal();
+      this.carrinho_cheio = true;
+    });
   }
 }

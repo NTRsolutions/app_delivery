@@ -134,4 +134,74 @@ class ClientesController extends AppController {
 	        ));
 	    }
 	}
+
+	function geraSenha($tamanho, $maiusculas, $numeros, $simbolos) {
+        $lmin = 'abcdefghijklmnopqrstuvwxyz';
+        $lmai = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $num = '1234567890';
+        $simb = '!@#$%*-';
+
+        $retorno = '';
+        $caracteres = '';
+        $caracteres .= $lmin;
+
+        if ($maiusculas) 
+            $caracteres .= $lmai;
+        if ($numeros) 
+            $caracteres .= $num;
+        if ($simbolos) 
+            $caracteres .= $simb;
+
+        $len = strlen($caracteres);
+        for ($n = 1; $n <= $tamanho; $n++) {
+            $rand = mt_rand(1, $len);
+            $retorno .= $caracteres[$rand-1];
+        }
+
+        return $retorno;
+    }
+
+    public function verifica_email() {
+
+        if ($this->request->is('post')) {
+
+            $user = $this->Cliente->findAllByEmail($this->data['email']);
+
+            if (!empty($user)) {
+                $this->recupera($user);
+
+                $this->set(array(
+		        	'message' => 1,
+		            '_serialize' => array('message')
+		        ));
+                exit();
+            } else { 
+                $this->set(array(
+		        	'message' => -1,
+		            '_serialize' => array('message')
+		        ));
+                exit();
+            }
+        }
+    }
+
+    public function recupera($user = null) {
+        $senha;
+        $nome;
+
+        $senha = $this->geraSenha(6,true,true,true);
+        $nome = $user['0']['Cliente']['nome'];
+
+        $data = array('id' => $user['0']['Cliente']['id'], 'senha' => $senha);
+        $this->Cliente->save($data);
+
+        $Email = new CakeEmail('smtp');
+        $Email->emailFormat('html');   
+        $Email->to($user['0']['Cliente']['email']);
+        $Email->subject('Solicitação de troca de senha');
+        $Email->send('Olá, ' . $nome . ', <br><br>
+        Sua senha provisória é : ' . $senha . ' <br><br>
+        Por segurança, acesse o app e altere esta senha! <br><br>
+        <i>Sistema deliveryAll.<i><br>');
+    }
 }
