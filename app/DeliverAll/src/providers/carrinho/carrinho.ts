@@ -24,22 +24,30 @@ export class CarrinhoProvider {
   }
 
   create(produto: Produto, qtd: number, idc: any, idr: any) {
-  	this.carrinho = new Carrinho(idr, idc);
-  	this.add_produto(produto, qtd);
+    this.carrinho = new Carrinho(idr, idc);
+    this.add_produto(produto, qtd);
+    console.log('criou car: ');
   	this.appPrefs.store('car', 'carrinho', JSON.stringify(this.carrinho));
   	this.events.publish('carrinho:create');
   }
 
   add_produto(produto: Produto, qtd: number) {
   	this.appPrefs.fetch('car', 'carrinho').then((res) => {
-      this.carrinho = JSON.parse(res);
-      if (this.carrinho.restaurante_id != null && produto.restaurante_id != this.carrinho.restaurante_id) {
-        this.events.publish('carrinho:addProdutoErrado');
+      if (res != '') {        
+        this.carrinho = JSON.parse(res);
+        if (produto.restaurante_id != this.carrinho.restaurante_id) {
+          this.events.publish('carrinho:addProdutoErrado');
+        } else {
+    	  	this.carrinho.produtos.push(produto);
+    	  	this.carrinho.qtd.push(qtd);
+    	  	this.appPrefs.store('car', 'carrinho', JSON.stringify(this.carrinho));
+    	  	this.events.publish('carrinho:addProduto');
+        }
       } else {
-  	  	this.carrinho.produtos.push(produto);
-  	  	this.carrinho.qtd.push(qtd);
-  	  	this.appPrefs.store('car', 'carrinho', JSON.stringify(this.carrinho));
-  	  	this.events.publish('carrinho:addProduto');
+        this.carrinho.produtos.push(produto);
+        this.carrinho.qtd.push(qtd);
+        this.appPrefs.store('car', 'carrinho', JSON.stringify(this.carrinho));
+        this.events.publish('carrinho:addProduto');
       }
     });
   }
@@ -51,8 +59,7 @@ export class CarrinhoProvider {
   	this.appPrefs.store('car', 'carrinho', JSON.stringify(carrinho));
 
     if(carrinho.produtos.length == 0) {
-      carrinho.restaurante_id = null;
-      carrinho.cliente_id = null;
+      carrinho = undefined;
       this.appPrefs.remove('car', 'carrinho').then((res) => {
         if (res != '') {
           this.events.publish('carrinho:empty');
@@ -65,26 +72,43 @@ export class CarrinhoProvider {
 
   getCarrinho(): any {
   	this.appPrefs.fetch('car', 'carrinho').then((res) => {
-      let c: Carrinho = JSON.parse(res);
-      this.carrinho = new Carrinho(c.restaurante_id, c.cliente_id);
-      this.carrinho.produtos = c.produtos;
-      this.carrinho.qtd = c.qtd;      
+      if (res != '') {
+        let c: Carrinho = JSON.parse(res);
+        this.carrinho = new Carrinho(c.restaurante_id, c.cliente_id);
+        this.carrinho.produtos = c.produtos;
+        this.carrinho.qtd = c.qtd;      
+      }
     });
 	  return this.carrinho;
   }
 
   existCarrinho() {
     this.appPrefs.fetch('car', 'carrinho').then((res) => {
-      if (res != undefined) {
+      if (res != '') {
         res = JSON.parse(res);
-        console.log(res);        
         if (res.produtos.length > 0) {
           this.events.publish('carrinho:found');
+          console.log('carrinho defined:');
+          console.log(res);
         } else {
-          this.events.publish('carrinho:not_found');
+          this.appPrefs.remove('car', 'carrinho').then((res) => {
+            if (res != '') {
+              console.log('carrinho undefined 0:');
+              console.log(res);
+              this.appPrefs.store('car', 'carrinho', undefined);
+              this.events.publish('carrinho:not_found');
+            }
+          });
         }
       } else {
-        this.events.publish('carrinho:not_found');
+        this.appPrefs.remove('car', 'carrinho').then((res) => {
+            if (res != '') {
+              console.log('carrinho undefined 1:');
+              console.log(res);
+              this.appPrefs.store('car', 'carrinho', undefined);
+              this.events.publish('carrinho:not_found');
+            }
+          });
       }
     });
   }

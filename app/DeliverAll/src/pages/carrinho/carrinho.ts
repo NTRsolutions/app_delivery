@@ -70,13 +70,16 @@ export class CarrinhoPage {
 
   getCarrinho(): any {
   	this.appPrefs.fetch('car', 'carrinho').then((res) => {
-      let c: Carrinho = JSON.parse(res);
-      this.carrinho = new Carrinho(c.restaurante_id, c.cliente_id);
-      this.carrinho.produtos = c.produtos;
-      this.carrinho.qtd = c.qtd;      
+  		if (res != '') {  			
+	  		console.log('car: ', res);
+	      let c: Carrinho = JSON.parse(res);
+	      this.carrinho = new Carrinho(c.restaurante_id, c.cliente_id);
+	      this.carrinho.produtos = c.produtos;
+	      this.carrinho.qtd = c.qtd;      
 
-    	this.calcTotal();
-      this.carrinho_cheio = true;
+	    	this.calcTotal();
+	      this.carrinho_cheio = true;
+  		}
     });
   }
 }
