@@ -161,7 +161,7 @@ class ClientesController extends AppController {
         return $retorno;
     }
 
-    public function verifica_email() {
+    public function recupera() {
 
         if ($this->request->is('post')) {
 
@@ -185,7 +185,7 @@ class ClientesController extends AppController {
         }
     }
 
-    public function recupera($user = null) {
+    public function envia_email($user = null) {
         $senha;
         $nome;
 

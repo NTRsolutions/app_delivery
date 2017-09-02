@@ -76,11 +76,11 @@ export class EnderecoPage {
         });
         toast.present()
       });
-  	} else if (this.cliente['ClienteEndereco'].length != 0 && this.edit_end == false) {
+  	} else if (this.cliente['ClienteEndereco'].length != 0 && (this.edit_end == false || this.edit_end == undefined)) {
       this.goToHome(this.cliente);
     } else {
       console.log(this.cliente);
-      console.log(this.end);
+      console.log('edit_end', this.edit_end);
     }
   }
 
