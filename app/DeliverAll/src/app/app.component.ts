@@ -99,6 +99,10 @@ export class MyApp {
       this.logado = true;
       this.setId();
     });
+
+    this.events.subscribe('user:salvar', () => {
+      this.setId();
+    });
   }
 
   setId() {

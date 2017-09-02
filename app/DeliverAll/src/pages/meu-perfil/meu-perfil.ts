@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, Events} from 'ionic-angular';
 import { Cliente } from '../../models/cliente';
 import { ClienteEndereco } from '../../models/cliente_endereco';
 import { Endereco } from '../../models/endereco';
@@ -38,7 +38,7 @@ export class MeuPerfilPage {
 	senha: string;
 	nova_senha: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController, public events: Events) {
   	this.link = new Link();
   	this.cliente_ends = new Array();
   	this.enderecos_id = new Array();
@@ -107,6 +107,9 @@ export class MeuPerfilPage {
 			        this.edit_block = true;
 			        this.senha = "";
   						this.nova_senha = "";
+
+              /* evento de salvar */
+              this.events.publish('user:salvar');
 		      	} else {
 		      		let toast = this.toastCtrl.create({
 			          message: "Erro ao salvar, por favor tente novamente",
@@ -194,7 +197,10 @@ export class MeuPerfilPage {
 			        toast.present()
 			        this.edit_block = true;
 			        this.senha = "";
-  						this.nova_senha = "";	        
+  						this.nova_senha = "";	
+
+              /* evento de salvar */
+              this.events.publish('user:salvar');        
 		      	} else {
 		      		let toast = this.toastCtrl.create({
 			          message: "Erro ao salvar, por favor tente novamente",
