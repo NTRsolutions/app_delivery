@@ -218,7 +218,7 @@ class AdminsController extends AppController {
                 $senha = $this->geraSenha(6,true,true,true);
                 $nome = $user['0']['Franqueado']['nome'];
 
-                $data = array('id' => $user['0']['Franqueado']['id'], 'senha' => $senha);
+                $data = array('id' => $user['0']['Franqueado']['id'], 'senha' => md5($senha));
                 $this->Franqueado->save($data);
 
                 $Email = new CakeEmail('smtp');
@@ -268,7 +268,7 @@ class AdminsController extends AppController {
                 $senha = $this->geraSenha(6,true,true,true);
                 $nome = $user['0']['Atendente']['nome'];
 
-                $data = array('id' => $user['0']['Atendente']['id'], 'senha' => $senha);
+                $data = array('id' => $user['0']['Atendente']['id'], 'senha' => md5($senha));
                 $this->Atendente->save($data);
 
                 $Email = new CakeEmail('smtp');

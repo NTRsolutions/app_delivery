@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
 /**
  * Clientes Controller
  *
@@ -168,19 +169,23 @@ class ClientesController extends AppController {
             $user = $this->Cliente->findAllByEmail($this->data['email']);
 
             if (!empty($user)) {
-                $this->recupera($user);
+                if($this->envia_email($user)){                	
+	                $this->set(array(
+			        	'message' => 1,
+			            '_serialize' => array('message')
+			        ));
+                } else {
+                	$this->set(array(
+			        	'message' => -10,
+			            '_serialize' => array('message')
+			        ));	
+                }
 
-                $this->set(array(
-		        	'message' => 1,
-		            '_serialize' => array('message')
-		        ));
-                exit();
             } else { 
                 $this->set(array(
 		        	'message' => -1,
 		            '_serialize' => array('message')
 		        ));
-                exit();
             }
         }
     }
@@ -192,16 +197,21 @@ class ClientesController extends AppController {
         $senha = $this->geraSenha(6,true,true,true);
         $nome = $user['0']['Cliente']['nome'];
 
-        $data = array('id' => $user['0']['Cliente']['id'], 'senha' => $senha);
+        $data = array('id' => $user['0']['Cliente']['id'], 'senha' => md5($senha));
         $this->Cliente->save($data);
 
         $Email = new CakeEmail('smtp');
         $Email->emailFormat('html');   
         $Email->to($user['0']['Cliente']['email']);
         $Email->subject('Solicitação de troca de senha');
-        $Email->send('Olá, ' . $nome . ', <br><br>
+        if($Email->send('Olá, ' . $nome . ', <br><br>
         Sua senha provisória é : ' . $senha . ' <br><br>
         Por segurança, acesse o app e altere esta senha! <br><br>
-        <i>Sistema deliveryAll.<i><br>');
+        <i>Sistema deliveryAll.<i><br>')){
+        	return 1;
+        } else {
+        	return 0;
+        }
+
     }
 }

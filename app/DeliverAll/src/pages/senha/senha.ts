@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+
+import { Link } from '../../models/link';
 
 /**
  * Generated class for the SenhaPage page.
@@ -15,9 +20,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class SenhaPage {
 
 	email: string;
+	link: Link;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
+  	this.link = new Link();
   }
 
   ionViewDidLoad() {
@@ -25,6 +31,41 @@ export class SenhaPage {
   }
 
   recuperar() {
-
+  	this.http.post(this.link.api_url + 'clientes/recupera', {'email': this.email})
+      .map(res => res.json())
+      .subscribe(
+        data => {
+        	if (data.message == '1') {
+        		let toast = this.toastCtrl.create({
+	            message: "Uma nova senha foi enviada neste email.",
+	            duration: 5000,
+	            position: 'bottom'
+	          });
+	          toast.present();
+        	} else if (data.message == '-1') {
+        		let toast = this.toastCtrl.create({
+	            message: "Email não encontrado, favor inserir um email válido!",
+	            duration: 3000,
+	            position: 'top'
+	          });
+	          toast.present();
+        	} else {
+        		let toast = this.toastCtrl.create({
+	            message: "Erro ao recuperar senha, tente novamente!",
+	            duration: 3000,
+	            position: 'top'
+	          });
+	          toast.present();
+        	}
+        }, 
+        err => {
+        	console.log(err)
+        	let toast = this.toastCtrl.create({
+            message: "Erro ao recuperar senha, tente novamente!",
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+        });
   }
 }

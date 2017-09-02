@@ -9,6 +9,12 @@
 
 
 <ion-content padding>
+	<div padding *ngIf="rests_carregados">
+	  <p>
+	    Restaurantes em: {{enderecos[0]['Cidade']['nome']}}
+	  </p>
+	</div>
+
 	<div padding *ngIf="carrinho">
     <button ion-button color="secondary" block (click)="goToCarrinho()">Ir para carrinho</button>
   </div>

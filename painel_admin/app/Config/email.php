@@ -45,12 +45,12 @@ class EmailConfig {
 
 	public $smtp = array(
 		'transport' => 'Smtp',
-		'from' => array('site@localhost' => 'My Site'),
-		'host' => 'localhost',
-		'port' => 25,
+		'from' => array('jose.toledo@deliverall.com.br' => 'DeliverAll'),
+		'host' => 'smtp.umbler.com',
+		'port' => 587,
 		'timeout' => 30,
-		'username' => 'user',
-		'password' => 'secret',
+		'username' => 'jose.toledo@deliverall.com.br',
+		'password' => 'Sjm1218271',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',

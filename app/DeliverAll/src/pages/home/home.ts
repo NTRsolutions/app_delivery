@@ -72,6 +72,8 @@ export class HomePage {
       .subscribe(
         data => {
           this.enderecos = data.message;
+          console.log("endereço: ");
+          console.log(this.enderecos);
           this.getRestaurantes(this.enderecos[0]['Endereco']);
         },
         err => {
