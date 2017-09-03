@@ -65,14 +65,12 @@ export class CarrinhoPage {
   }
 
   goToPagamento() {
-  	this.navCtrl.push(TipoPagamentoPage, {carrinho: this.carrinho});
+  	this.navCtrl.push(TipoPagamentoPage, {carrinho: this.carrinho, cliente: this.cliente});
   }
 
   getCarrinho(): any {
   	this.appPrefs.fetch('car', 'carrinho').then((res) => {
   		if (res != '') {
-        console.log('car: ');
-	  		console.log(res);
 	      let c: Carrinho = JSON.parse(res);
 	      this.carrinho = new Carrinho(c.restaurante_id, c.cliente_id);
 	      this.carrinho.produtos = c.produtos;

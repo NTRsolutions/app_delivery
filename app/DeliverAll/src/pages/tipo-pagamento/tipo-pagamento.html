@@ -17,13 +17,13 @@
 	<ion-list radio-group *ngIf="pags_carregados">
 	  <ion-item *ngFor="let p of pags">
 	    <ion-label>{{p.descricao}}</ion-label>
-    	<ion-radio value="{{p.id}}"></ion-radio>
+    	<ion-radio value="{{p.id}}" (ionSelect)="select(p.id, p.descricao)"></ion-radio>
 	  </ion-item>
 	</ion-list>
 
 	<h3 padding *ngIf="pags_carregados">Total: R$ {{carrinho.total}}</h3>
 
   <div padding *ngIf="pags_carregados">
-    <button ion-button color="secondary" block (click)="goToPagamento()">Confirmar pedido</button>
+    <button ion-button color="secondary" block (click)="confirmaPedido()">Confirmar pedido</button>
   </div>
 </ion-content>

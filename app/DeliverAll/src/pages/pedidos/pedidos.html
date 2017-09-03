@@ -9,8 +9,9 @@
 
 
 <ion-content padding>
-	<h4>Pedidos abertos</h4>
-	<ion-list>
+	<h4 padding *ngIf="!tem_pedidos">Você ainda não possui pedidos :/</h4>
+	<h4 *ngIf="tem_pedidos">Pedidos abertos</h4>
+	<ion-list *ngIf="tem_pedidos">
 	  <ion-item *ngFor="let p of pedidos_abertos">	    
 	    <h2>Local: {{p['restaurante']}}</h2><br>
 	    <h2>Status: {{p['status_nome']}}</h2><br>
@@ -31,10 +32,10 @@
 	  </ion-item>
 	</ion-list>
 
-	<hr>
+	<hr *ngIf="tem_pedidos">
 
-	<h4>Pedidos fechados</h4>
-	<ion-list>
+	<h4 *ngIf="tem_pedidos">Pedidos fechados</h4>
+	<ion-list *ngIf="tem_pedidos">
 	  <ion-item *ngFor="let p of pedidos_fechados">
 	    <h2>Local: {{p['restaurante']}}</h2><br>
 	    <h2>Status: {{p['status_nome']}}</h2><br>

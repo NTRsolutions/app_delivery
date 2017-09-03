@@ -60,7 +60,6 @@ export class EnderecoPage {
   		this.http.post(this.link.api_url + 'clientes/get', {'id': this.cliente})
       .map(res => res.json())
       .subscribe(data => {
-        console.log('pegou cliente');
         this.cliente = data.message['0']; 
         
         if (this.cliente['ClienteEndereco'].length != 0) {

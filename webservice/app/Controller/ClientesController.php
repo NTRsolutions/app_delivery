@@ -84,10 +84,15 @@ class ClientesController extends AppController {
 		}
 	}
 
-	public function get($id = null) {
+	public function get() {
 		if ($this->request->is('post')) {
+			$options = array(
+				'conditions' => array(
+					'Cliente.id' => $this->data['id']
+				)
+			);
 			
-			$user = $this->Cliente->findAllById($this->data['id']);
+			$user = $this->Cliente->find('all', $options);
 
 	        $this->set(array(
 	            'message' => $user,

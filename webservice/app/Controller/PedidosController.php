@@ -38,16 +38,45 @@ class PedidosController extends AppController {
 		if ($this->request->is('post')) {
 			$this->loadModel('PedidoProduto');
 
-			$pedido = $this->data['pedido'];
+			$pedido = array(
+						'cliente_id' => $this->data['Pedido']['cliente_id'],
+						'pagamento_id' => $this->data['Pedido']['pagamento_id'],
+						'restaurante_id' => $this->data['Pedido']['restaurante_id'],
+						'status' => $this->data['Pedido']['status'],
+						'total' => $this->data['Pedido']['total'],
+						'troco' => $this->data['Pedido']['troco'],
+						'endereco_id' => $this->data['Pedido']['endereco_id'],
+						'data' =>  date("Y-m-d H:i:s")
+					);
 
-			if($this->Pedido->save($pedido['Pedido'])) {
+			$ped = $this->data['Pedido'];
+			
+			$this->Pedido->create();
+
+			if($this->Pedido->save($pedido)) {
 				$id_ped = $this->Pedido->getLastInsertId();
 
-				foreach ($pedido['produtos'] as $p) {
-					$pp = array('pedido_id' => $id_ped, 'produto_id' => $p['id'], 'qtd' => $p['qtd']);
+				$x = array();
+				for ($i = 0; $i < sizeof($ped['produtos']); $i++) {
+					$p = $ped['produtos'][$i];
+					$qtd = $ped['qtd'][$i];
+
+					$pp = array('pedido_id' => $id_ped, 'produto_id' => $p['id'], 'qtd' => $qtd);
+
+					$this->PedidoProduto->create();
+					$this->PedidoProduto->save($pp);
 				}
+
+				$this->set(array(
+		            'message' => 1,
+		            '_serialize' => array('message')
+		        ));
+			} else {				
+				$this->set(array(
+		            'message' => -10,
+		            '_serialize' => array('message')
+		        ));
 			}
 		}
-
 	}
 }

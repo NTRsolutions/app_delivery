@@ -35,6 +35,7 @@ export class PedidosPage {
   pedidos_abertos: Pedido[];
   pedidos_fechados: Pedido[];
   id: number;
+  tem_pedidos: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController) {
   	this.link = new Link();
@@ -84,15 +85,21 @@ export class PedidosPage {
 
   setPedidoProdutos(pp: any[]) {
   	this.pedido_produtos = new Array();
+
   	for (var j = 0; j < pp.length; j++) {
       let p = new PedidoProduto(
         pp[j]['PedidoProduto']['qtd'],
         pp[j]['PedidoProduto']['produto_id'],
-        pp[j]['PedidoProduto']['pedido_id']);
+        pp[j]['PedidoProduto']['pedido_id']
+      );
+      
       p.produto = pp[j]['Produto']['nome'];
       p.preco = pp[j]['Produto']['preco'];
+
       this.pedido_produtos.push(p);
     }
+
+    console.log(this.pedido_produtos);
   }
 
   getPedidoProdutos() {
@@ -103,8 +110,9 @@ export class PedidosPage {
 
   	this.http.post(this.link.api_url + 'pedidoProdutos/get', {'ids': ids})
       .map(res => res.json())
-      .subscribe(data => {               
-        let pp = data.message;              
+      .subscribe(data => {
+      console.log(data.message);
+        let pp = data.message;            
         this.setPedidoProdutos(pp);
         //console.log(this.pedido_produtos);
         this.addPPToPedidos();
@@ -123,6 +131,14 @@ export class PedidosPage {
   }
 
   setPedidos(pedidos: any[]) {
+    if (pedidos.length == 0) {
+      this.tem_pedidos = false;
+    } else {
+      this.tem_pedidos = true;
+    }
+
+    console.log(pedidos);
+
     for (var j = 0; j < pedidos.length; j++) {
       let status = this.setStatus(pedidos[j]['status'])
       let p = new Pedido(
@@ -137,7 +153,9 @@ export class PedidosPage {
           pedidos[j]['pagamento_id']);
       p.status_nome = status;
       this.pedidos.push(p);
-    }    
+    }  
+
+    console.log(this.pedidos);
   }
 
   setStatus(id: any) {

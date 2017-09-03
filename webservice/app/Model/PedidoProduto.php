@@ -13,7 +13,7 @@ class PedidoProduto extends AppModel {
  *
  * @var string
  */
-	public $primaryKey = 'pedido_id';
+	public $primaryKey = 'id';
 
 
 	// The Associations below have been created with all possible keys, those that are not needed can be removed

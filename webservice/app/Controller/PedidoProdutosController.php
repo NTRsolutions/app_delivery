@@ -28,8 +28,10 @@ class PedidoProdutosController extends AppController {
 						'PedidoProduto.pedido_id' => $id
 					)
 				);
-				$r = $this->PedidoProduto->find('first', $options);
-				array_push($pedidos, $r);
+				$r = $this->PedidoProduto->find('all', $options);
+				foreach ($r as $pp) {
+					array_push($pedidos, $pp);
+				}
 			}
 
 			$this->set(array(
