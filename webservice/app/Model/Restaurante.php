@@ -58,7 +58,7 @@ class Restaurante extends AppModel {
 			'exclusive' => true,
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
 		'Culinaria' => array(
 			'className' => 'Culinaria',
 			'foreignKey' => 'restaurante_id',

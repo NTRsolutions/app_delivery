@@ -214,4 +214,20 @@ class ClientesController extends AppController {
         }
 
     }
+
+    public function delete() {
+    	$this->Cliente->id = $this->data['id'];
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->Cliente->delete()) {
+			$this->set(array(
+	        	'message' => 1,
+	            '_serialize' => array('message')
+	        ));
+		} else {
+			$this->set(array(
+	        	'message' => -10,
+	            '_serialize' => array('message')
+	        ));
+		}
+    }
 }

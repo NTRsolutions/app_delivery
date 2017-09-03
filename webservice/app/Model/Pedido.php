@@ -56,7 +56,7 @@ class Pedido extends AppModel {
 		'PedidoProduto' => array(
 			'className' => 'PedidoProduto',
 			'foreignKey' => 'pedido_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

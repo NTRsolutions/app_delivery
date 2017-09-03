@@ -57,7 +57,6 @@ export class TipoPagamentoPage {
       		let p = new Pagamento(data.message[i]['Pagamento']['id'], data.message[i]['Pagamento']['idDescricao'], data.message[i]['Pagamento']['descricao'], data.message[i]['Pagamento']['restaurante_id']);
       		this.pags.push(p);
       	}
-      	console.log(this.pags);
       	this.pags_carregados = true;
     	},
       err => {

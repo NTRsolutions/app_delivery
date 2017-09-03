@@ -270,6 +270,8 @@ export class EnderecoPage {
                                       })
         .map(res => res.json())
         .subscribe(data => {
+          this.cliente['ClienteEndereco'] = new Array();
+          this.cliente['ClienteEndereco'].push({endereco_id: data.message});
           this.goToHome(this.cliente);
         }, 
         err =>{

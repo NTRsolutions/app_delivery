@@ -63,6 +63,8 @@ export class HomePage {
   }
 
   getEnderecos() {
+    console.log("cliente: ");
+    console.log(this.cliente);
     for (var i = 0; i < this.cliente['ClienteEndereco'].length; i++) {
       this.enderecos_id.push(this.cliente['ClienteEndereco'][i]['endereco_id']);
     }

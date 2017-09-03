@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, Events} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, Events, AlertController } from 'ionic-angular';
 import { Cliente } from '../../models/cliente';
 import { ClienteEndereco } from '../../models/cliente_endereco';
 import { Endereco } from '../../models/endereco';
@@ -38,7 +38,7 @@ export class MeuPerfilPage {
 	senha: string;
 	nova_senha: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController, public events: Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController, public events: Events, public alertCtrl: AlertController) {
   	this.link = new Link();
   	this.cliente_ends = new Array();
   	this.enderecos_id = new Array();
@@ -271,5 +271,57 @@ export class MeuPerfilPage {
 				this.ends.push(e);
 			}
   	});  	
+  }
+
+  excluir_conta() {
+    let confirm = this.alertCtrl.create({
+      title: 'Alerta',
+      message: 'Tem certeza que deseja excluir sua conta?',
+      buttons: [
+        {
+          text: 'Não',
+          handler: () => {
+            
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            console.log(this.cliente['Cliente']['id'])
+            this.http.post(this.link.api_url + 'clientes/delete', {'id': this.cliente['Cliente']['id']})
+              .map(res => res.json())
+              .subscribe(
+                data => {
+                  if (data.message == '1') {
+                    let toast = this.toastCtrl.create({
+                      message: "Conta excluída com sucesso!",
+                      duration: 3000,
+                      position: 'top'
+                    });
+                    toast.present() 
+                    this.events.publish('user:logout');
+                  } else {
+                    let toast = this.toastCtrl.create({
+                    message: "Erro ao exlcuir conta do usuário, por favor tente novamente",
+                      duration: 3000,
+                      position: 'top'
+                    });
+                    toast.present()
+                  }
+                },
+                err => {
+                  let toast = this.toastCtrl.create({
+                    message: "Erro ao exlcuir conta do usuário, por favor tente novamente",
+                    duration: 3000,
+                    position: 'top'
+                  });
+                  toast.present()
+                }
+              );
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

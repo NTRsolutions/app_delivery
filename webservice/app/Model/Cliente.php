@@ -22,7 +22,7 @@ class Cliente extends AppModel {
 		'ClienteEndereco' => array(
 			'className' => 'ClienteEndereco',
 			'foreignKey' => 'cliente_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -35,7 +35,7 @@ class Cliente extends AppModel {
 		'Pedido' => array(
 			'className' => 'Pedido',
 			'foreignKey' => 'cliente_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

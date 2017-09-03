@@ -33,4 +33,21 @@ class PedidosController extends AppController {
 	        ));
 		}
 	}
+
+	public function add() {
+		if ($this->request->is('post')) {
+			$this->loadModel('PedidoProduto');
+
+			$pedido = $this->data['pedido'];
+
+			if($this->Pedido->save($pedido['Pedido'])) {
+				$id_ped = $this->Pedido->getLastInsertId();
+
+				foreach ($pedido['produtos'] as $p) {
+					$pp = array('pedido_id' => $id_ped, 'produto_id' => $p['id'], 'qtd' => $p['qtd']);
+				}
+			}
+		}
+
+	}
 }

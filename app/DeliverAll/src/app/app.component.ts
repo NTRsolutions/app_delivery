@@ -95,6 +95,10 @@ export class MyApp {
       this.setId();
     });
 
+    this.events.subscribe('user:logout', () => {
+      this.logout();
+    });
+
     this.events.subscribe('user:cadastro', () => {
       this.logado = true;
       this.setId();

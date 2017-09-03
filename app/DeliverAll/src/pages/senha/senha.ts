@@ -42,6 +42,7 @@ export class SenhaPage {
 	            position: 'bottom'
 	          });
 	          toast.present();
+            this.navCtrl.pop();
         	} else if (data.message == '-1') {
         		let toast = this.toastCtrl.create({
 	            message: "Email não encontrado, favor inserir um email válido!",

@@ -92,7 +92,7 @@ class EnderecosController extends AppController {
 
 				$this->ClienteEndereco->create();
 				if ($this->ClienteEndereco->save($cliente_end)) {
-					$message = 1;	
+					$message = $id_end;
 				} else {
 					$message = -10;	
 				}
